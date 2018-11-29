@@ -1,0 +1,4 @@
+GemsCraft Changelog
+Alpha 0.0
+- Moved fCraftGUI to fCraft
+- Moved ConfigGUI to fCraft

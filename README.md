@@ -1,57 +1,61 @@
-2.4.0
+﻿Alpha 0.0
+#GemsCraft
+![GemsCraft](https://imgur.com/a/qnBScf6 "Shining Gems")<br />
 
-All bugs and glitches randomly found in the game are meant to happen.
-
-Here lies LegendCraft. After a year of inactivity, it's time to finally let it rest. LegendCraft, along with DingusBungus, was my software for Minecraft Classic and early Classicube. With the loss of interest in these games, LegendCraft too has fallen. Thank you to everyone for making what was once my daily routine possible. Special thanks to Jonty800, fragmer, Eeyle, and especially DingusBungus. Shout outs to ThunderCraft, RisingEmbers, Un1Craft, and so many other servers. Programming in LegendCraft has taught me nearly everything I now know about programming. I have learned so much, and LegendCraft will always be with me wherever I go. 
-
-Long Live Classicube<br />
-Long Live Minecraft Classic
-
-#LegendCraft
-![LegendCraft](http://i.imgur.com/YNPR6p0.png "Ya it's a logo deal with it")<br />
-
-Dowload the latest LegendCraft release here: 
-https://github.com/LeChosenOne/LegendCraft/releases/tag/2.4.0
+Dowload the latest GemsCraft release here: 
+https://gemscraft.net/
 
 View all LegendCraft releases:
-https://github.com/LeChosenOne/LegendCraft/releases
+https://gemscraft.net/downloads.html
 
-Thank you for downloading LegendCraft, a custom Minecraft/ClassiCube server based on fCraft and 800craft.
+Thank you for downloading GemsCraft, a custom Minecraft/ClassiCube server based on fCraft, 800Craft, and LegendCraft.
 
 Special thanks to fragmer, for creating fCraft! Special thanks to Jonty800, GlennMR and LaoTszy for their hard work with
-800Craft! LegendCraft is a modified version of 800Craft. 
+800Craft! Special thanks to DingusBungus and LeChosenOne for their dedication to LegendCraft! 
+GemsCraft is a modified version of LegendCraft. 
 
 
 ##Installation 
 ####(Windows) 
 
-LegendCraft requires Microsoft .NET Framework 4.0. Your system may already have it
-installed, and you can download it from  http://www.microsoft.com/en-us/download/details.aspx?id=17851
+GemsCraft requires Microsoft .NET Framework 4.6.1. Your system may already have it
+installed, and you can download it from  https://www.microsoft.com/en-us/download/details.aspx?id=49982
 Plugins not working? Getting plugin errors?
 Go to your plugins folder and right click on all the plugin.dll's. Select unblock for all of them.
 
 ####(Linux, Unix, MacOS X)
 
-LegendCraft requires Mono 2.10 (recommended). You can
-download it from www.mono-project.org, or (on some Linux distributions) install
-it through your package manager.
+GemsCraft is currently not available for Linux, Unix, MacOS X.
+GemsCraft at one point was available through the use of Mono, or Wine.
+I am instead working on a java port of GemsCraft, that will be much easier to setup.
+As the developer of GemsCraft, my goal is to make the process a lot easier. 
 
-To be able to use graphical LegendCraft components (ServerGUI and ConfigGUI) you
-will also need GDI+ library (libgdiplus). Before starting LegendCraft, make sure
-that it has read/write permissions in the LegendCraft directory.
+##Licensing
+ 
+####GemsCraft license
+GemsCraft code and binaries are licensed and distributed under the permissive MIT License, reproduced here: <br />
 
-To run ".exe" files with Mono, use the following syntax:
-Mono 2.6.4: "mono SomeFile.exe"
-Mono 2.8+:  "mono --gc=sgen SomeFile.exe"
+Copyright < 2018 > apotter96
 
-If you're intending to run a public server that appears on minecraft.net's server list, 	
-you need to import https certificates to tell mono you trust them, this can be done by 
-running "sudo mozroots --import --ask-remove" as the LegendCraft user on your system.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-You may also have to run "sudo certmgr -ssl -m https://minecraft.net" in order for heartbeats to work 
-properly.
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the software.
 
-##Licensing 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+--------------------------------------------------------------
 
 ####LegendCraft license
 LegendCraft code and binaries are licensed and distributed under the permissive MIT License, reproduced here: <br />
@@ -135,12 +139,10 @@ or any other files from Minecraft... neither does 800Craft or LegendCraft.
 
 
 ##Credits 
+GemsCraft was developed by apotter96.
 
 LegendCraft was developed by LeChosenOne, and DingusBungus <br />
--With code contribution by fragmer (the great), Jonty800 (who lifts) and Eeyle (who dissappeared randomly).
-
-LegendCraft webend was developed by Liam Stanley <br />
-
+Special thanks to LegendCraft Servers: Rising Embers and Revallion that introduced me to the software.
 Thanks to 800Craft code contributers:<br />
 -Rebelliousdude, boblol0909, WaterGod469 and Maicke98 for trying. 
 
@@ -164,5 +166,4 @@ Thanks to Minecraft servers and players that helped test and improve LegendCraft
 
 Special Thanks to Pure2K12 for inspiration and getting me started in this mess!<br />
 Special Thanks to Jonty800 being exceptionally awesome!
-
-And thank You for using LegendCraft!
+And a very special thanks to all server owners who decide to use GemsCraft or any server guests who play on GemsCraft servers!
