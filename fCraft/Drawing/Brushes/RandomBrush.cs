@@ -1,11 +1,13 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using fCraft.Commands;
 using JetBrains.Annotations;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.Brushes {
     public sealed class RandomBrushFactory : IBrushFactory {
         public static readonly RandomBrushFactory Instance = new RandomBrushFactory();
 

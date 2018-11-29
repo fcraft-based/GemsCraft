@@ -17,12 +17,10 @@
 
 using System;
 using System.Collections.Concurrent;
-using System.Linq;
-using System.Text;
-using fCraft.Events;
 using System.Threading;
+using fCraft.Events;
 
-namespace fCraft
+namespace fCraft.Commands.Command_Handlers
 {
     public class GunGlassTimer
     {

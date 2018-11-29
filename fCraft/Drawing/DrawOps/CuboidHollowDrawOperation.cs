@@ -1,8 +1,9 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.DrawOps {
     public sealed class CuboidHollowDrawOperation : DrawOperation {
         bool fillInner;
 

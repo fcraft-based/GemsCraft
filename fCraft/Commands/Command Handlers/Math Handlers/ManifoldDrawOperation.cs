@@ -15,15 +15,10 @@
 
 //Copyright (C) <2012> Lao Tszy (lao_tszy@yahoo.co.uk)
 
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using fCraft;
 using fCraft.Drawing;
 
-namespace fCraft
+namespace fCraft.Commands.Command_Handlers.Math_Handlers
 {
 	public class ManifoldDrawOperation : DrawOperation
 	{

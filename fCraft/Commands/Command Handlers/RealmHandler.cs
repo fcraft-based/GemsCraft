@@ -17,18 +17,12 @@
 
 //Modified 6/10/13 LegendCraft Team
 
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Linq;
 using fCraft.MapConversion;
-using JetBrains.Annotations;
-using fCraft.Drawing;
-using System.Collections;
-using System.Text;
-using System.Threading;
 
-namespace fCraft
+namespace fCraft.Commands.Command_Handlers
 {
     class RealmHandler
     {

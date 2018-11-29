@@ -1,6 +1,7 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using fCraft.Commands;
 
 namespace fCraft.Drawing
 {

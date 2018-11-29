@@ -27,6 +27,7 @@ using System.Diagnostics;
 //AStarPathFinder - A* algorithm encoded in C# (c) http://www.csharpcity.com/reusable-code/a-path-finding-library/
 using DeenGames.Utils;
 using DeenGames.Utils.AStarPathFinder;
+using fCraft.Commands;
 
 namespace fCraft
 {

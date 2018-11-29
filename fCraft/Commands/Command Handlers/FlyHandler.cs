@@ -16,14 +16,9 @@
 //Copyright (C) <2012> Glenn Mariën (http://project-vanilla.com) and Jon Baker (http://au70.net)
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections;
 using System.Collections.Concurrent;
-using System.Threading;
 
-namespace fCraft.Utils
+namespace fCraft.Commands.Command_Handlers
 {
     class FlyHandler
     {

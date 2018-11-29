@@ -17,10 +17,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace fCraft.Utils
+namespace fCraft.Commands.Command_Handlers
 {
     class BroMode
     {

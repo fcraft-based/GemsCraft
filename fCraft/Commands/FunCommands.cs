@@ -16,11 +16,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
+using fCraft.Commands.Command_Handlers;
 using RandomMaze;
 
-namespace fCraft
+namespace fCraft.Commands
 {
     internal static class FunCommands
     {

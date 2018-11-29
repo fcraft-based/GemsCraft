@@ -1,14 +1,13 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using fCraft.AutoRank;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Commands {
     /// <summary> Several yet-undocumented commands, mostly related to AutoRank. </summary>
     static class MaintenanceCommands {
 

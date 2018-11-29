@@ -14,9 +14,10 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //Copyright (C) <2012> Jon Baker (http://au70.net)
+
 using System;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.DrawOps {
     public class CylinderDrawOperation : DrawOperation {
 
         public override string Name {

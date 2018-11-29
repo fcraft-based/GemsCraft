@@ -1,4 +1,6 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
+using fCraft.Commands;
 using JetBrains.Annotations;
 
 // ReSharper disable UnusedMemberInSuper.Global

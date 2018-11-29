@@ -1,4 +1,5 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Commands {
     /// <summary> Contains commands that don't do anything besides displaying some information or text.
     /// Includes several chat commands. </summary>
     static class InfoCommands {

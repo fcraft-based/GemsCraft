@@ -1,6 +1,6 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.DrawOps {
     public sealed class CuboidDrawOperation : DrawOperation {
         public override string Name {
             get { return "Cuboid"; }

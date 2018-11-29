@@ -15,13 +15,10 @@
 
 //Copyright (C) <2012> Jon Baker (http://au70.net)
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
-namespace fCraft
+namespace fCraft.Commands.Command_Handlers
 {
     public class VoteHandler
     {

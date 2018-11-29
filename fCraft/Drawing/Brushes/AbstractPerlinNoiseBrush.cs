@@ -1,9 +1,10 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.Brushes {
     public abstract class AbstractPerlinNoiseBrush : IBrushInstance {
         public int Seed { get; set; }
         public float Coverage { get; set; }

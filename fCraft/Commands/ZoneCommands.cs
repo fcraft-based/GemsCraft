@@ -1,11 +1,12 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
-using System;
-using System.Linq;
-using fCraft.MapConversion;
-using System.Collections.Generic;
-using fCraft.Events;
 
-namespace fCraft {
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using fCraft.Events;
+using fCraft.MapConversion;
+
+namespace fCraft.Commands {
     /// <summary> Contains commands related to zone management. </summary>
     static class ZoneCommands {
 

@@ -1,9 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
+using fCraft.Commands;
 using JetBrains.Annotations;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.Brushes {
     public sealed class ReplaceNotBrushFactory : IBrushFactory {
         public static readonly ReplaceNotBrushFactory Instance = new ReplaceNotBrushFactory();
 

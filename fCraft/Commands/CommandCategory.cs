@@ -1,7 +1,8 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 
-namespace fCraft {
+namespace fCraft.Commands {
     /// <summary> Command categories. A command may belong to more than one category.
     /// Use binary flag logic (value & flag == flag) to test whether a command belongs to a particular category. </summary>
     [Flags]

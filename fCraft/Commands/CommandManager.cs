@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using fCraft.Commands;
 using fCraft.Events;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Commands {
     /// <summary> Static class that allows registration and parsing of all text commands. </summary>
     public static class CommandManager {
         static readonly SortedList<string, string> Aliases = new SortedList<string, string>();

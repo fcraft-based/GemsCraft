@@ -1,10 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Commands {
 
     /// <summary> Delegate for command handlers/callbacks. </summary>
     /// <param name="source"> Player who called the command. </param>

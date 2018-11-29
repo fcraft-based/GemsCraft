@@ -1,21 +1,19 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using ServiceStack.Text;
 using System.Text;
-using System.Threading;
-using System.Diagnostics;
-using System.Media;
-using JetBrains.Annotations;
-using fCraft.MapConversion;
+using fCraft.Commands.Command_Handlers;
 using fCraft.Drawing;
+using fCraft.Drawing.Brushes;
+using fCraft.Drawing.DrawOps;
+using fCraft.MapConversion;
 using fCraft.Portals;
-using fCraft.Events;
+using JetBrains.Annotations;
 
-
-namespace fCraft
+namespace fCraft.Commands
 {
     /// <summary> Contains commands related to world management. </summary>
     static class WorldCommands

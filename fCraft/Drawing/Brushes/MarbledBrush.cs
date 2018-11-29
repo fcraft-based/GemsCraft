@@ -1,10 +1,12 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 using System.Text;
+using fCraft.Commands;
 using JetBrains.Annotations;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.Brushes {
     public sealed class MarbledBrushFactory : IBrushFactory {
         public static readonly MarbledBrushFactory Instance = new MarbledBrushFactory();
 

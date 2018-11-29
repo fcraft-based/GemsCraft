@@ -18,6 +18,9 @@ using fCraft.Drawing;
 using fCraft.Events;
 using fCraft.MapConversion;
 using System.Runtime;
+using fCraft.Commands;
+using fCraft.Commands.Command_Handlers;
+using fCraft.Drawing.Brushes;
 using JetBrains.Annotations;
 
 namespace fCraft
@@ -484,7 +487,7 @@ namespace fCraft
                     // Remove old blocks
                     foreach (Vector3I block in FlyCache.Values)
                     {
-                        if (fCraft.Utils.FlyHandler.CanRemoveBlock(this, block, newPosi))
+                        if (FlyHandler.CanRemoveBlock(this, block, newPosi))
                         {
                             SendNow(PacketWriter.MakeSetBlock(block, Block.Air));
                             Vector3I removed;

@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using LibNbt;
-using LibNbt.Exceptions;
-using LibNbt.Queries;
 using LibNbt.Tags;
 
-namespace fCraft
+namespace fCraft.Commands
 {
     static class DevCommands {
 

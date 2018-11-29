@@ -1,13 +1,13 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.IO;
 using fCraft.Events;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Commands {
     /// <summary>
     /// Most commands for server moderation - kick, ban, rank change, etc - are here.
     /// </summary>

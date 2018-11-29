@@ -118,6 +118,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Speech" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
@@ -268,6 +269,18 @@
     </Compile>
     <Compile Include="GUI\ConfigGUI\WorldListEntry.cs" />
     <Compile Include="GUI\IsoCat.cs" />
+    <Compile Include="GUI\ServerGUI\ConsoleBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\ServerGUI\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ServerGUI\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ServerGUI\PlayerViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MapConversion\MapFCMv3.cs" />
     <Compile Include="Network\CPE.cs" />
     <Compile Include="Network\GlobalChat.cs" />
@@ -330,7 +343,7 @@
     </Compile>
     <Compile Include="Utils\HeartbeatSaverUtil.cs" />
     <Compile Include="Utils\Paths.cs" />
-    <Compile Include="System\Scheduler.cs" />
+    <Compile Include="fSystem\Scheduler.cs" />
     <Compile Include="Games\PlayerProximityTracker.cs" />
     <Compile Include="Utils\RWLSExtension.cs" />
     <Compile Include="Utils\Vector3F.cs" />
@@ -352,13 +365,13 @@
     <Compile Include="MapConversion\MapUtility.cs" />
     <Compile Include="MapConversion\NBTag.cs" />
     <Compile Include="Utils\BoundingBox.cs" />
-    <Compile Include="System\ConfigKey.cs" />
+    <Compile Include="fSystem\ConfigKey.cs" />
     <Compile Include="Utils\Noise.cs" />
     <Compile Include="Utils\Updater.cs" />
     <Compile Include="Utils\Color.cs" />
-    <Compile Include="System\Server.cs" />
-    <Compile Include="System\Config.cs" />
-    <Compile Include="System\Logger.cs" />
+    <Compile Include="fSystem\Server.cs" />
+    <Compile Include="fSystem\Config.cs" />
+    <Compile Include="fSystem\Logger.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Trie.cs" />
@@ -444,16 +457,16 @@
     <Compile Include="MapConversion\MapFormatException.cs" />
     <Compile Include="MapConversion\MapOpticraft.cs" />
     <Compile Include="MapConversion\MapFCMv4.cs" />
-    <Compile Include="System\ArgKey.cs" />
-    <Compile Include="System\ConfigKey.Metadata.cs" />
-    <Compile Include="System\ConfigSection.cs" />
+    <Compile Include="fSystem\ArgKey.cs" />
+    <Compile Include="fSystem\ConfigKey.Metadata.cs" />
+    <Compile Include="fSystem\ConfigSection.cs" />
     <Compile Include="Utils\Vector3I.cs" />
     <Compile Include="World\BlockChangeContext.cs" />
     <Compile Include="World\BlockDB.cs" />
     <Compile Include="Utils\EventInterfaces.cs" />
-    <Compile Include="System\SchedulerTask.cs" />
+    <Compile Include="fSystem\SchedulerTask.cs" />
     <Compile Include="Utils\IClassy.cs" />
-    <Compile Include="System\Server.Events.cs" />
+    <Compile Include="fSystem\Server.Events.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
     <Compile Include="Utils\LogRecorder.cs" />
     <Compile Include="Utils\PerlinNoise3D.cs" />
@@ -502,6 +515,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ConfigGUI\UpdaterSettingsPopup.resx">
       <DependentUpon>UpdaterSettingsPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ServerGUI\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ServerGUI\PlayerViewer.resx">
+      <DependentUpon>PlayerViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

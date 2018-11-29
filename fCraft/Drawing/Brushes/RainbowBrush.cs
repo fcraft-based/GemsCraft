@@ -1,8 +1,10 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
+using fCraft.Commands;
 using JetBrains.Annotations;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.Brushes {
     public sealed class RainbowBrush : IBrushFactory, IBrush, IBrushInstance {
         public static readonly RainbowBrush Instance = new RainbowBrush();
 

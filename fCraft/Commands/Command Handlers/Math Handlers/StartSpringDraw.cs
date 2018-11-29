@@ -18,15 +18,10 @@
 //LegendCraft Edit: Copy and Pasted Handler From 800craft modified for /spring and later similar cmds to follow. This handler was made by 800craft so proper credit shall be given.
 //This handler was made to use in those cmds specifically so that no messages would be displayed to the user when doing them.
 
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using fCraft;
 using fCraft.Drawing;
 
-namespace fCraft
+namespace fCraft.Commands.Command_Handlers.Math_Handlers
 {
     public class StartSpringDraw : DrawOperation
     {

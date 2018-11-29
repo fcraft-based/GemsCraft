@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using fCraft.Drawing;
+using fCraft.Drawing.Brushes;
 using fCraft.Events;
 using JetBrains.Annotations;
 

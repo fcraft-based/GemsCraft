@@ -1,6 +1,8 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
 using System.Collections.Generic;
+using fCraft.Commands;
+using fCraft.Drawing.Brushes;
 using JetBrains.Annotations;
 
 namespace fCraft.Drawing {

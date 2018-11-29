@@ -20,6 +20,8 @@ using System.Linq;
 using System.Text;
 using fCraft.Drawing;
 using System.Threading;
+using fCraft.Drawing.Brushes;
+using fCraft.Drawing.DrawOps;
 
 namespace fCraft.Portals
 {

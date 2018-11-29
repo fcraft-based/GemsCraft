@@ -1,14 +1,17 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
-using System.Linq;
-using fCraft.Drawing;
-using fCraft.MapConversion;
-using JetBrains.Annotations;
-using System.IO;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using fCraft.Commands.Command_Handlers;
+using fCraft.Drawing;
+using fCraft.Drawing.Brushes;
+using fCraft.Drawing.DrawOps;
+using fCraft.MapConversion;
+using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Commands {
     /// <summary> Commands for placing specific blocks (solid, water, grass),
     /// and switching block placement modes (paint, bind). </summary>
     static class BuildingCommands {
@@ -934,7 +937,7 @@ THE SOFTWARE.*/
         {
             if (player.IsFlying)
             {
-                fCraft.Utils.FlyHandler.GetInstance().StopFlying(player);
+                FlyHandler.GetInstance().StopFlying(player);
                 player.Message("You are no longer flying.");
                 return;
             }
@@ -945,7 +948,7 @@ THE SOFTWARE.*/
                     player.Message("You cannot use /fly when using WOM");
                     return;
                 }
-                fCraft.Utils.FlyHandler.GetInstance().StartFlying(player);
+                FlyHandler.GetInstance().StartFlying(player);
                 player.Message("You are now flying, jump!");
             }
         }

@@ -1,9 +1,12 @@
 ﻿// Copyright (C) <2012> <Jon Baker> (http://au70.net)
 // Copyright 2009 - 2012 Matvei Stefarov <me@matvei.org>
+
 using System;
-using JetBrains.Annotations;
 using System.Collections.Generic;
-namespace fCraft.Drawing
+using fCraft.Commands;
+using JetBrains.Annotations;
+
+namespace fCraft.Drawing.Brushes
 {
     public sealed class DiagonalBrushFactory : IBrushFactory
     {

@@ -1,9 +1,10 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Diagnostics;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Commands {
     /// <summary> A text scanner that aids parsing chat commands and their arguments.
     /// Breaks up a message into tokens at spaces. Treats quoted strings as whole tokens. </summary>
     public sealed class Command : ICloneable {

@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace fCraft
+namespace fCraft.Commands.Command_Handlers
 {
 	public class LifeHandler
 	{

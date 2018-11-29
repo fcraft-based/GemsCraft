@@ -1,7 +1,9 @@
 ﻿// Part of fCraft | Copyright 2009-2013 Matvei Stefarov <me@matvei.org> | BSD-3 | See LICENSE.txt //Copyright (c) 2011-2013 Jon Baker, Glenn Marien and Lao Tszy <Jonty800@gmail.com> //Copyright (c) <2012-2014> <LeChosenOne, DingusBungus> | Copyright 2014 123DMWM <shmo1joe2@gmail.com>
-using System;
 
-namespace fCraft.Drawing
+using System;
+using fCraft.Commands;
+
+namespace fCraft.Drawing.DrawOps
 {
     /// <summary> Draw operation that applies changes from a given BlockDBEntry array. </summary>
     public sealed class BlockDBDrawOperation : DrawOpWithBrush

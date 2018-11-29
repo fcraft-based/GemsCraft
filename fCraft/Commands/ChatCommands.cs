@@ -1,11 +1,10 @@
 // Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Diagnostics;
-using System.Threading;
 
-namespace fCraft
+namespace fCraft.Commands
 {
     static class ChatCommands
     {
@@ -431,7 +430,7 @@ THE SOFTWARE.*/
 
         static void VoteHandler(Player player, Command cmd)
         {
-            fCraft.VoteHandler.VoteParams(player, cmd);
+            Commands.Command_Handlers.VoteHandler.VoteParams(player, cmd);
         }                                                                
 
         static readonly CommandDescriptor CdGPS = new CommandDescriptor
@@ -1170,13 +1169,13 @@ THE SOFTWARE.*/
 
         static void BroMode(Player player, Command command)
         {
-            if (!fCraft.Utils.BroMode.Active)
+            if (!Commands.Command_Handlers.BroMode.Active)
             {
                 foreach (Player p in Server.Players)
                 {
-                    fCraft.Utils.BroMode.GetInstance().RegisterPlayer(p);
+                    Commands.Command_Handlers.BroMode.GetInstance().RegisterPlayer(p);
                 }
-                fCraft.Utils.BroMode.Active = true;
+                Commands.Command_Handlers.BroMode.Active = true;
                 Server.Players.Message("{0}&S turned Bro mode on.", player.Info.Rank.Color + player.Name);
 
                 IRC.SendAction(player.Name + " turned Bro mode on.");
@@ -1185,10 +1184,10 @@ THE SOFTWARE.*/
             {
                 foreach (Player p in Server.Players)
                 {
-                    fCraft.Utils.BroMode.GetInstance().UnregisterPlayer(p);
+                    Commands.Command_Handlers.BroMode.GetInstance().UnregisterPlayer(p);
                 }
 
-                fCraft.Utils.BroMode.Active = false;
+                Commands.Command_Handlers.BroMode.Active = false;
                 Server.Players.Message("{0}&S turned Bro Mode off.", player.Info.Rank.Color + player.Name);
                 IRC.SendAction(player.Name + " turned Bro mode off");
             }

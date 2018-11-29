@@ -1,7 +1,9 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
-using System;
 
-namespace fCraft.Drawing {
+using System;
+using fCraft.Drawing.Brushes;
+
+namespace fCraft.Drawing.DrawOps {
     public sealed class CutDrawOperation : DrawOperation {
         public override string Name {
             get { return "Cut"; }
