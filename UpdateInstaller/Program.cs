@@ -31,7 +31,6 @@ using System.Linq;
 using System.Xml.Linq;
 using fCraft.UpdateInstaller.Properties;
 
-
 namespace fCraft.UpdateInstaller {
     static class Program {
         const string ConfigFileNameDefault = "config.xml",

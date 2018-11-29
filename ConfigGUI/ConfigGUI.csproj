@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,11 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>fCraft.ConfigGUI</RootNamespace>
     <AssemblyName>ConfigGUI</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>LegendCraftLogoIcon.ico</ApplicationIcon>
     <StartupObject>fCraft.ConfigGUI.Program</StartupObject>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -45,6 +46,7 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <ErrorReport>prompt</ErrorReport>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\bin\Release\</OutputPath>
@@ -55,6 +57,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <ErrorReport>prompt</ErrorReport>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -72,125 +75,80 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorPicker.cs">
+    <Compile Include="AddWorldPopup - Copy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ColorPicker.Designer.cs">
-      <DependentUpon>ColorPicker.cs</DependentUpon>
+    <Compile Include="AddWorldPopup - Copy.Designer.cs">
+      <DependentUpon>AddWorldPopup - Copy.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="ChatPreview - Copy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChatPreview - Copy.Designer.cs">
+      <DependentUpon>ChatPreview - Copy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ColorPicker - Copy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="ColorPicker - Copy.Designer.cs">
+      <DependentUpon>ColorPicker - Copy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomPictureBox - Copy.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DeleteRankPopup - Copy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteRankPopup - Copy.Designer.cs">
+      <DependentUpon>DeleteRankPopup - Copy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KeywordPicker - Copy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KeywordPicker - Copy.Designer.cs">
+      <DependentUpon>KeywordPicker - Copy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm - Copy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm - Copy.Designer.cs">
+      <DependentUpon>MainForm - Copy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.Adapter - Copy.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Report.Designer.cs">
-      <DependentUpon>Report.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TextEditorPopup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TextEditorPopup.Designer.cs">
-      <DependentUpon>TextEditorPopup.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="ChatPreview.resx">
-      <DependentUpon>ChatPreview.cs</DependentUpon>
+    <EmbeddedResource Include="AddWorldPopup - Copy.resx">
+      <DependentUpon>AddWorldPopup - Copy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ColorPicker.resx">
-      <DependentUpon>ColorPicker.cs</DependentUpon>
+    <EmbeddedResource Include="ChatPreview - Copy.resx">
+      <DependentUpon>ChatPreview - Copy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KeywordPicker.resx">
-      <DependentUpon>KeywordPicker.cs</DependentUpon>
+    <EmbeddedResource Include="ColorPicker - Copy.resx">
+      <DependentUpon>ColorPicker - Copy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="DeleteRankPopup - Copy.resx">
+      <DependentUpon>DeleteRankPopup - Copy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddWorldPopup.resx">
-      <DependentUpon>AddWorldPopup.cs</DependentUpon>
+    <EmbeddedResource Include="KeywordPicker - Copy.resx">
+      <DependentUpon>KeywordPicker - Copy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DeleteRankPopup.resx">
-      <DependentUpon>DeleteRankPopup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PermissionLimitBox.resx">
-      <DependentUpon>PermissionLimitBox.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm - Copy.resx">
+      <DependentUpon>MainForm - Copy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report.resx">
-      <DependentUpon>Report.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TextEditorPopup.resx">
-      <DependentUpon>TextEditorPopup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UpdaterSettingsPopup.resx">
-      <DependentUpon>UpdaterSettingsPopup.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ChatBackground.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="MinecraftFont\minecraft.ttf" />
-    <Compile Include="ChatPreview.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ChatPreview.Designer.cs">
-      <DependentUpon>ChatPreview.cs</DependentUpon>
-    </Compile>
-    <Compile Include="KeywordPicker.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="KeywordPicker.Designer.cs">
-      <DependentUpon>KeywordPicker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainForm.ToolTips.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Adapter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddWorldPopup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddWorldPopup.Designer.cs">
-      <DependentUpon>AddWorldPopup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomPictureBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DeleteRankPopup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DeleteRankPopup.Designer.cs">
-      <DependentUpon>DeleteRankPopup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PermissionLimitBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PermissionLimitBox.Designer.cs">
-      <DependentUpon>PermissionLimitBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SortableBindingList.cs" />
-    <Compile Include="UpdaterSettingsPopup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UpdaterSettingsPopup.Designer.cs">
-      <DependentUpon>UpdaterSettingsPopup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WorldListEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -205,14 +163,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ChatBackground - Copy.png" />
     <Content Include="LegendCraftLogoIcon.ico" />
     <Content Include="LegendCraftLogoText.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fCraftGUI\fCraftGUI.csproj">
-      <Project>{AFAEE6CC-8B4F-40CD-9623-7FFDC8E52222}</Project>
-      <Name>fCraftGUI</Name>
-    </ProjectReference>
     <ProjectReference Include="..\fCraft\fCraft.csproj">
       <Project>{7FBE7809-6F77-415C-ABEB-A3F627E817B0}</Project>
       <Name>fCraft</Name>
