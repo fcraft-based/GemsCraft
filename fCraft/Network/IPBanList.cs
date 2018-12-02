@@ -5,9 +5,13 @@ using System.IO;
 using System.Net;
 using System.Linq;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Network {
     public static class IPBanList {
         static readonly SortedDictionary<string, IPBanInfo> Bans = new SortedDictionary<string, IPBanInfo>();
         static readonly object BanListLock = new object();

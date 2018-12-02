@@ -1,17 +1,16 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
+using fCraft.Players;
+using fCraft.Utils;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.DrawOps {
     public sealed class TriangleWireframeDrawOperation : DrawOperation {
 
-        public override int ExpectedMarks {
-            get { return 3; }
-        }
+        public override int ExpectedMarks => 3;
 
-        public override string Name {
-            get { return "TriangleW"; }
-        }
+        public override string Name => "TriangleW";
 
         public TriangleWireframeDrawOperation( Player player )
             : base( player ) {

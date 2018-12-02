@@ -1,8 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 // ReSharper disable UnusedMemberInSuper.Global
-using System;
 
-namespace fCraft {
+using System;
+using fCraft.Players;
+using fCraft.Worlds;
+
+namespace fCraft.Utils {
     /// <summary> An EventArgs for an event that can be cancelled. </summary>
     public interface ICancellableEvent {
         bool Cancel { get; set; }

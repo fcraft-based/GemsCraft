@@ -14,14 +14,17 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //Copyright (C) <2012> Lao Tszy (lao_tszy@yahoo.co.uk)
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Runtime.Serialization;
 
-namespace fCraft
+using System;
+using System.IO;
+using System.Runtime.Serialization;
+using fCraft.fSystem;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
+using Map = fCraft.Worlds.Map;
+
+namespace fCraft.Physics.Life
 {
 	public class CircularBuffer<T> where T:IEquatable<T>
 	{

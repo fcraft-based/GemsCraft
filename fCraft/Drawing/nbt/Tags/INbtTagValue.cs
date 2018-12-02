@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LibNbt.Tags
+﻿namespace fCraft.Drawing.nbt.Tags
 {
     internal interface INbtTagValue<T>
     {

@@ -17,7 +17,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using fCraft.Commands.Command_Handlers;
-using RandomMaze;
+using fCraft.Drawing.DrawOps;
+using fCraft.Drawing.DrawOps.RandomMaze;
+using fCraft.fSystem;
+using fCraft.Games;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.Commands
 {

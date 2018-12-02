@@ -20,7 +20,13 @@
 using System;
 using System.IO;
 using System.Linq;
+using fCraft.fSystem;
 using fCraft.MapConversion;
+using fCraft.Players;
+using fCraft.Plugins;
+using fCraft.Utils;
+using fCraft.Worlds;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.Commands.Command_Handlers
 {

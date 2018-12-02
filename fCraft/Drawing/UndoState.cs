@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using fCraft.Commands;
+using fCraft.Utils;
+using fCraft.Worlds;
 
 namespace fCraft.Drawing
 {

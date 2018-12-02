@@ -2,6 +2,8 @@
 
 using System;
 using System.Windows.Forms;
+using fCraft.GUI.ConfigGUI.GUI;
+using fCraft.Players;
 
 namespace fCraft.GUI.ConfigGUI {
     public sealed partial class DeleteRankPopup : Form {

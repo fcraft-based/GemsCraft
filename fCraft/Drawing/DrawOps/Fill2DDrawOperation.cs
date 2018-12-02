@@ -1,9 +1,13 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 using fCraft.Commands;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.DrawOps {
     public sealed class Fill2DDrawOperation : DrawOpWithBrush {
         int maxFillExtent;
 

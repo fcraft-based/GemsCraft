@@ -1,8 +1,8 @@
 ﻿using System.IO;
-using LibNbt.Exceptions;
-using LibNbt.Queries;
+using fCraft.Drawing.nbt.Exceptions;
+using fCraft.Drawing.nbt.Queries;
 
-namespace LibNbt.Tags
+namespace fCraft.Drawing.nbt.Tags
 {
     public abstract class NbtTag
     {

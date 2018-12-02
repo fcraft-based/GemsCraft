@@ -14,19 +14,19 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //Copyright (C) <2012> Jon Baker(http://au70.net)
+
 using System;
 using System.Collections.Generic;
+using fCraft.Players;
+using fCraft.Utils;
 
-namespace fCraft.Drawing
+namespace fCraft.Drawing.DrawOps
 {
     public sealed class WallsDrawOperation : DrawOperation
     {
         bool fillInner;
 
-        public override string Name
-        {
-            get { return "Walls"; }
-        }
+        public override string Name => "Walls";
 
         public override string Description
         {

@@ -1,12 +1,15 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using fCraft.Players;
+using fCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Plugins {
 
     /// <summary> Controller for setting and checking per-rank permissions and per-player exceptions.
     /// Used by World.AccessSecurity, World.BuildSecurity, and Zone. </summary>

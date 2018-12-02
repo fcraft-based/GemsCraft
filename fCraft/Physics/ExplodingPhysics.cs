@@ -12,15 +12,16 @@
 
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.Collections.Generic;
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Text;
-using fCraft.Events;
-using Util = RandomMaze.MazeUtil;
+using fCraft.Games;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
+using Util = fCraft.Drawing.DrawOps.RandomMaze.MazeUtil;
 
-namespace fCraft
+namespace fCraft.Physics
 {
     public class TNTTask : PhysicsTask
     {

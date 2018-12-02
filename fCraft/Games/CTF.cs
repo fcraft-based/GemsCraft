@@ -21,15 +21,19 @@ THE SOFTWARE.*/
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
+using System.Linq;
 using fCraft.Commands.Command_Handlers;
-using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 
-namespace fCraft
+namespace fCraft.Games
 {
-    class CTF
+    // ReSharper disable once InconsistentNaming
+    internal class CTF
     {
         //Team Tags
         public const string redTeam = "&c-Red-";

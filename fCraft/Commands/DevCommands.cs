@@ -1,7 +1,11 @@
 ﻿using System;
 using System.IO;
-using LibNbt;
-using LibNbt.Tags;
+using fCraft.Drawing.nbt;
+using fCraft.Drawing.nbt.Tags;
+using fCraft.Physics;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 
 namespace fCraft.Commands
 {

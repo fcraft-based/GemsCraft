@@ -1,9 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
 using System.Net;
+using fCraft.Players;
+using fCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Network {
     /// <summary> IP ban record. </summary>
     public sealed class IPBanInfo {
         public const int FieldCount = 8;

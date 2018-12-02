@@ -1,10 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Runtime.Serialization;
 using System.Xml.Linq;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Utils {
 
     /// <summary>
     /// Defines a 3D bounding box, in integer cartesian coordinates

@@ -3,9 +3,12 @@ using System;
 using System.Net;
 using System.Collections.Generic;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Players;
+using fCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.fSystem {
     partial class Server {
 
         /// <summary> Occurs when the server is about to be initialized. </summary>
@@ -102,8 +105,7 @@ namespace fCraft.Events {
 
     public sealed class ShutdownEventArgs : EventArgs {
         internal ShutdownEventArgs( [NotNull] ShutdownParams shutdownParams ) {
-            if( shutdownParams == null ) throw new ArgumentNullException( "shutdownParams" );
-            ShutdownParams = shutdownParams;
+            ShutdownParams = shutdownParams ?? throw new ArgumentNullException( "shutdownParams" );
         }
 
         [NotNull]
@@ -113,9 +115,8 @@ namespace fCraft.Events {
 
     public sealed class SearchingForPlayerEventArgs : EventArgs, IPlayerEvent {
         internal SearchingForPlayerEventArgs( [CanBeNull] Player player, [NotNull] string searchTerm, List<Player> matches ) {
-            if( searchTerm == null ) throw new ArgumentNullException( "searchTerm" );
             Player = player;
-            SearchTerm = searchTerm;
+            SearchTerm = searchTerm ?? throw new ArgumentNullException( "searchTerm" );
             Matches = matches;
         }
 

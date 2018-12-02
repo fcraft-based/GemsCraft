@@ -1,17 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Net.Cache;
 using System.Text;
-using System.Xml;
-using System.Xml.Linq;
-using fCraft.Events;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Utils {
     /// <summary> Checks for updates, and keeps track of current version/revision. </summary>
     public static class Updater {
 

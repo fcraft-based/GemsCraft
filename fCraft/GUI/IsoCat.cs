@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using fCraft.Properties;
+using fCraft.Worlds;
 using JetBrains.Annotations;
 
 // ReSharper disable IdentifierTypo

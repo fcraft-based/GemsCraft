@@ -4,7 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using fCraft.Events;
+using fCraft.fSystem;
 using fCraft.MapConversion;
+using fCraft.Players;
+using fCraft.Plugins;
+using fCraft.Utils;
+using fCraft.Worlds;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.Commands {
     /// <summary> Contains commands related to zone management. </summary>

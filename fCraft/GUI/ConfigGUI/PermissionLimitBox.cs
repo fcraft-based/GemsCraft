@@ -2,6 +2,8 @@
 
 using System;
 using System.Windows.Forms;
+using fCraft.GUI.ConfigGUI.GUI;
+using fCraft.Players;
 
 namespace fCraft.GUI.ConfigGUI {
     public sealed partial class PermissionLimitBox : UserControl {
@@ -46,7 +48,7 @@ namespace fCraft.GUI.ConfigGUI {
             comboBox.Items.Clear();
             comboBox.Items.Add( FirstItem );
             foreach( Rank rank in RankManager.Ranks ) {
-                comboBox.Items.Add( GUI.ConfigGUI.MainForm.ToComboBoxOption( rank ) );
+                comboBox.Items.Add( MainForm.ToComboBoxOption( rank ) );
             }
         }
 

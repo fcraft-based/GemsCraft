@@ -8,9 +8,12 @@ using System.Text;
 using System.Net.Sockets;
 using System.Linq;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft
+namespace fCraft.Network
 {
     /// <summary> Static class responsible for sending heartbeats. </summary>
     public static class Heartbeat

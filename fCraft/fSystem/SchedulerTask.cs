@@ -1,9 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Text;
+using fCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.fSystem {
     /// <summary> A task to be executed by the Scheduler.
     /// Stores timing information and state. </summary>
     public sealed class SchedulerTask {

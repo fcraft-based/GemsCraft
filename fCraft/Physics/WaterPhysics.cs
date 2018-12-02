@@ -15,12 +15,14 @@
 
 using System;
 using System.Linq;
-using System.Text;
-using fCraft.Events;
 using System.Threading;
-using Util = RandomMaze.MazeUtil;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 
-namespace fCraft
+namespace fCraft.Physics
 {
     public class BlockSink : PhysicsTask
     {

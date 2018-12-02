@@ -39,8 +39,11 @@ using fCraft.Events;
 using System.Collections.Concurrent;
 using JetBrains.Annotations;
 using System.Text;
+using fCraft.fSystem;
+using fCraft.Players;
+using fCraft.Utils;
 
-namespace fCraft
+namespace fCraft.Network
 {
     public static class GlobalChat
     {

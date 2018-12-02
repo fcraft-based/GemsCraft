@@ -6,6 +6,9 @@ using System.Xml;
 using System.Xml.Linq;
 using System.IO;
 using fCraft;
+using fCraft.fSystem;
+using fCraft.Players;
+using fCraft.Utils;
 
 namespace fCraft.AutoRank
 {

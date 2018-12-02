@@ -1,8 +1,12 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using fCraft.Commands;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.DrawOps {
     public sealed class UndoDrawOperation : DrawOpWithBrush {
         const BlockChangeContext UndoContext = BlockChangeContext.Drawn | BlockChangeContext.UndoneSelf;
 
@@ -10,23 +14,11 @@ namespace fCraft.Drawing {
 
         public bool Redo { get; private set; }
 
-        public override int ExpectedMarks {
-            get { return 0; }
-        }
+        public override int ExpectedMarks => 0;
 
-        public override string Description {
-            get { return Name; }
-        }
+        public override string Description => Name;
 
-        public override string Name {
-            get {
-                if( Redo ) {
-                    return "Redo";
-                } else {
-                    return "Undo";
-                }
-            }
-        }
+        public override string Name => Redo ? "Redo" : "Undo";
 
 
         public UndoDrawOperation( Player player, UndoState state, bool redo )

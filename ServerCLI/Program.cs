@@ -34,6 +34,10 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Linq;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
 
 namespace fCraft.ServerCLI {
 
@@ -44,7 +48,7 @@ namespace fCraft.ServerCLI {
             Logger.Logged += OnLogged;
             Heartbeat.UriChanged += OnHeartbeatUriChanged;
 
-            Console.Title = "LegendCraft " + fCraft.Updater.LatestStable + " - starting...";
+            Console.Title = "LegendCraft " + Updater.LatestStable + " - starting...";
 
 #if !DEBUG
             try {
@@ -194,7 +198,7 @@ namespace fCraft.ServerCLI {
                             string version = streamReader.ReadLine();
 
                             //update is available, prompt for a download
-                            if (version != null && version != fCraft.Updater.LatestStable)
+                            if (version != null && version != Updater.LatestStable)
                             {
 
                                 Console.WriteLine("Server.Run: Your LegendCraft version is out of date. A LegendCraft Update is available!");

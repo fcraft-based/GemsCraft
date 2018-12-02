@@ -1,12 +1,15 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using JetBrains.Annotations;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
+using System.Threading;
+using fCraft.Players;
+using fCraft.Utils;
+using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.fSystem {
     /// <summary> A general-purpose task scheduler. </summary>
     public static class Scheduler {
         static readonly HashSet<SchedulerTask> Tasks = new HashSet<SchedulerTask>();

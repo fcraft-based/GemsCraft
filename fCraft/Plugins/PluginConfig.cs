@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
-namespace fCraft
+namespace fCraft.Plugins
 {
     public abstract class PluginConfig
     {
-        public virtual void Save(Plugin plugin, String file)
+        public virtual void Save(IPlugin plugin, String file)
         {
             // Append plugin directory
             String realFile = "plugins/" + plugin.Name + "/" + file;
             PluginConfigSerializer.Serialize(realFile, this);
         }
 
-        public virtual PluginConfig Load(Plugin plugin, String file, Type type)
+        public virtual PluginConfig Load(IPlugin plugin, String file, Type type)
         {
             // Append plugin directory
             String realFile = "plugins/" + plugin.Name + "/" + file;

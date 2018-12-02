@@ -5,9 +5,10 @@
 using System.IO;
 using System.Net;
 using System.Text;
+using fCraft.Players;
 using JetBrains.Annotations;
 
-namespace fCraft
+namespace fCraft.Network
 {
     sealed class PacketReader : BinaryReader
     {

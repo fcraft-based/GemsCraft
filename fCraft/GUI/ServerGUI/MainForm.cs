@@ -9,6 +9,10 @@ using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
 
 namespace fCraft.GUI.ServerGUI
 {
@@ -42,7 +46,7 @@ namespace fCraft.GUI.ServerGUI
             Heartbeat.UriChanged += OnHeartbeatUriChanged;
             Server.PlayerListChanged += OnPlayerListChanged;
             Server.ShutdownEnded += OnServerShutdownEnded;
-            Text = "LegendCraft v" + fCraft.Updater.LatestStable + " - starting...";
+            Text = "LegendCraft v" + Updater.LatestStable + " - starting...";
             startupThread = new Thread(StartupThread);
             startupThread.Name = "LegendCraft ServerGUI Startup";
             startupThread.Start();
@@ -125,7 +129,7 @@ namespace fCraft.GUI.ServerGUI
                             StreamReader streamReader = new StreamReader(stream);
                             string version = streamReader.ReadLine();
                             //update is available, prompt for a download
-                            if (version != null && version != fCraft.Updater.LatestStable)
+                            if (version != null && version != Updater.LatestStable)
                             {
 
                                 Logger.Log(LogType.SystemActivity, "Server.Run: Your LegendCraft version is out of date. A LegendCraft Update is available!");
@@ -284,7 +288,7 @@ namespace fCraft.GUI.ServerGUI
                         case LogType.IRC:
                             if (ThemeBox.SelectedItem == null)
                             {
-                                logBox.SelectionColor = System.Drawing.Color.FromName(Color.GetName(fCraft.Color.IRC));
+                                logBox.SelectionColor = System.Drawing.Color.FromName(Color.GetName(Color.IRC));
                             }
                             else
                             {

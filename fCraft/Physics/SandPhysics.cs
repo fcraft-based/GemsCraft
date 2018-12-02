@@ -12,13 +12,11 @@
 
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using fCraft.Events;
 
-namespace fCraft
+using fCraft.Utils;
+using fCraft.Worlds;
+
+namespace fCraft.Physics
 {
     public class SandTask : PhysicsTask
     {
@@ -61,7 +59,7 @@ namespace fCraft
                     {
                         return 0;
                     }
-                    if (Physics.Physics.BlockThrough(nblock))
+                    if (fCraft.Physics.Physics.BlockThrough(nblock))
                     {
                         _world.Map.QueueUpdate(new BlockUpdate(null, (short)_pos.X, (short)_pos.Y, (short)(_nextPos + 1), Block.Air));
                         _world.Map.QueueUpdate(new BlockUpdate(null, (short)_pos.X, (short)_pos.Y, (short)_nextPos, _type));

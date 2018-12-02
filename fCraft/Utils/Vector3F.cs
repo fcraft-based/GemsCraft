@@ -1,9 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 // With contributions by Conrad "Redshift" Morgan
+
 using System;
 using fCraft.Drawing;
+using fCraft.Players;
 
-namespace fCraft {
+namespace fCraft.Utils {
     /// <summary> Floating-point (single precision) 3D vector. </summary>
     public struct Vector3F : IEquatable<Vector3F>, IComparable<Vector3I>, IComparable<Vector3F> {
         public static readonly Vector3F Zero = new Vector3F( 0, 0, 0 );

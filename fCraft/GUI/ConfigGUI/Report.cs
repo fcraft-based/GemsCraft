@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Cache;
 using System.Text;
 using System.Windows.Forms;
+using fCraft.Utils;
 
 namespace fCraft.GUI.ConfigGUI
 {

@@ -25,8 +25,13 @@ using System.Linq;
 using System.Text;
 using fCraft.Commands.Command_Handlers;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 
-namespace fCraft
+namespace fCraft.Games
 {
     class FFA
     {

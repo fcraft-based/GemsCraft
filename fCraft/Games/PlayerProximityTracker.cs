@@ -17,11 +17,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 
-namespace fCraft
+namespace fCraft.Games
 {
 	public class PlayersAtDistanceArgs : EventArgs
 	{

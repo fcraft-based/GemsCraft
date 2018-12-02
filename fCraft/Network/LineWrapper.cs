@@ -4,9 +4,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using fCraft.Players;
+using fCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft
+namespace fCraft.Network
 {
     /// <summary> Intelligent line-wrapper for Minecraft protocol.
     /// Splits long messages into 64-character chunks of ASCII.

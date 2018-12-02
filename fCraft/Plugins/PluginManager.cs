@@ -14,21 +14,19 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //Copyright (C) <2012> Glenn Mariën (http://project-vanilla.com)
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Reflection;
-using System.Collections;
-using System.Security.Policy;
+using fCraft.fSystem;
 
-namespace fCraft
+namespace fCraft.Plugins
 {
     class PluginManager
     {
         private static PluginManager instance;
-        public static List<Plugin> Plugins = new List<Plugin>();
+        public static List<IPlugin> Plugins = new List<IPlugin>();
 
         private PluginManager()
         {
@@ -85,7 +83,7 @@ namespace fCraft
                             pluginType = assembly.GetType(args + ".Init");
                             if (pluginType != null)
                             {
-                                Plugins.Add((Plugin)Activator.CreateInstance(pluginType));
+                                Plugins.Add((IPlugin)Activator.CreateInstance(pluginType));
                             }
                         }
                     }
@@ -103,7 +101,7 @@ namespace fCraft
         {
             if (Plugins.Count > 0)
             {
-                foreach (Plugin plugin in Plugins)
+                foreach (IPlugin plugin in Plugins)
                 {
                     Logger.Log(LogType.ConsoleOutput, "PluginManager: Loading plugin " + plugin.Name);
 

@@ -1,11 +1,12 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
-using System;
 
-namespace fCraft.Drawing {
+using System;
+using fCraft.Players;
+using fCraft.Utils;
+
+namespace fCraft.Drawing.DrawOps {
     public sealed class SphereHollowDrawOperation : EllipsoidHollowDrawOperation {
-        public override string Name {
-            get { return "SphereH"; }
-        }
+        public override string Name => "SphereH";
 
         public SphereHollowDrawOperation( Player player )
             : base( player ) {

@@ -8,8 +8,15 @@ using fCraft.Commands.Command_Handlers;
 using fCraft.Drawing;
 using fCraft.Drawing.Brushes;
 using fCraft.Drawing.DrawOps;
+using fCraft.fSystem;
 using fCraft.MapConversion;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 using JetBrains.Annotations;
+using Map = fCraft.Worlds.Map;
+using Block = fCraft.Worlds.Block;
 
 namespace fCraft.Commands {
     /// <summary> Commands for placing specific blocks (solid, water, grass),

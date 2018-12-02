@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using fCraft.Commands;
 using fCraft.Drawing.Brushes;
+using fCraft.Players;
+using fCraft.Utils;
 using JetBrains.Annotations;
 
 namespace fCraft.Drawing {

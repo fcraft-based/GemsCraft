@@ -16,6 +16,7 @@
 //Copyright (C) <2012> Lao Tszy (lao_tszy@yahoo.co.uk)
 
 using System;
+using fCraft.Players;
 
 namespace fCraft.Commands.Command_Handlers.Math_Handlers
 {

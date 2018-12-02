@@ -1,13 +1,16 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using fCraft.Players;
+using fCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.fSystem {
 
     /// <summary> Describes attributes and metadata of a configuration key. </summary>
     [AttributeUsage( AttributeTargets.Field )]

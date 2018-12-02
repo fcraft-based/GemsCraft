@@ -19,6 +19,9 @@ using System.Text;
 using System.Threading;
 using System.Collections;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Players;
+using fCraft.Worlds;
 
 namespace fCraft.Physics
 {
@@ -40,6 +43,8 @@ namespace fCraft.Physics
     //░░░░░░░░░░░░░░▀▄▄▄▄▄░░░░░█
     // Trollphysics, incoming? Admit it, you just laughed.
     // I laughed a little
+    // apotter96 - I have been through LegendCraft a million and one times and never
+    // have I ever seen this troll... HOW AM I JUST NOW SEEING THIS!?
 
     /// </summary>
     public static class Physics

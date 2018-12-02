@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using LibNbt.Queries;
 
-namespace LibNbt.Tags
+namespace fCraft.Drawing.nbt.Tags
 {
 	public class NbtByteArray : NbtTag, INbtTagValue<byte[]>
 	{
@@ -11,8 +10,8 @@ namespace LibNbt.Tags
 		
 		public byte this[int index]
 		{
-			get { return Value[index]; }
-			set { Value[index] = value; }
+			get => Value[index];
+		    set => Value[index] = value;
 		}
 
 		public NbtByteArray() : this("") { }

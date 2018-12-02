@@ -12,19 +12,16 @@
 
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using fCraft.Events;
-using fCraft.Physics;
-using System.Threading;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
-using Util = RandomMaze.MazeUtil;
 
-namespace fCraft
+using System;
+using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
+using Util = fCraft.Drawing.DrawOps.RandomMaze.MazeUtil;
+
+namespace fCraft.Physics
 {
     public class PlantPhysics
     {
@@ -49,7 +46,7 @@ namespace fCraft
 						{
 							world.Map.QueueUpdate(new BlockUpdate(null, z, Block.Dirt));
 						}
-						else if (Physics.Physics.CanSquash(world.Map.GetBlock(z)) && e.NewBlock!=Block.Air)
+						else if (fCraft.Physics.Physics.CanSquash(world.Map.GetBlock(z)) && e.NewBlock!=Block.Air)
 						{
 							e.Result = CanPlaceResult.Revert;
 							Player.RaisePlayerPlacedBlockEvent(player, world.Map, z, world.Map.GetBlock(z), e.NewBlock, BlockChangeContext.Physics);

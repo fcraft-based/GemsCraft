@@ -2,6 +2,7 @@
 
 using System;
 using System.Windows.Forms;
+using fCraft.Utils;
 
 namespace fCraft.GUI.ConfigGUI {
     public sealed partial class UpdaterSettingsPopup : Form {

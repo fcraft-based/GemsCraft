@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using fCraft.Utils;
 
 namespace fCraft.GUI {
     public sealed partial class AboutWindow : Form {

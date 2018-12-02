@@ -10,7 +10,12 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using fCraft.GUI.ConfigGUI.GUI;
 using fCraft.MapConversion;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
+
 // ReSharper disable CoVariantArrayConversion
 
 namespace fCraft.GUI.ConfigGUI {
@@ -402,7 +407,7 @@ namespace fCraft.GUI.ConfigGUI {
 
 
         void tName_Validating( object sender, CancelEventArgs e ) {
-            if( fCraft.World.IsValidName( tName.Text ) &&
+            if( Worlds.World.IsValidName( tName.Text ) &&
                 (!MainForm.IsWorldNameTaken( tName.Text ) ||
                 (_originalWorldName != null && tName.Text.ToLower() == _originalWorldName.ToLower())) ) {
                 tName.ForeColor = SystemColors.ControlText;

@@ -1,4 +1,5 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,7 +7,7 @@ using System.Net;
 using System.Text;
 using JetBrains.Annotations;
 
-namespace fCraft
+namespace fCraft.Utils
 {
 
     public static class IPAddressUtil

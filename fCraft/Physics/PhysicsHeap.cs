@@ -18,10 +18,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using fCraft.Worlds;
 
-namespace fCraft
+namespace fCraft.Physics
 {
     /// <summary>
     /// Base class for physic tasks

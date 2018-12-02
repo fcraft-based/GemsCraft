@@ -16,6 +16,8 @@
 //Copyright (C) <2012> Jon Baker (http://au70.net)
 
 using System;
+using fCraft.Players;
+using fCraft.Utils;
 
 namespace fCraft.Drawing.DrawOps {
     public class CylinderDrawOperation : DrawOperation {

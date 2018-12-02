@@ -1,8 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
+using fCraft.Players;
+using fCraft.Utils;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.DrawOps {
     public class EllipsoidDrawOperation : DrawOperation {
         Vector3F radius, center;
 

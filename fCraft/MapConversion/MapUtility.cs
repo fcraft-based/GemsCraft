@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using fCraft.fSystem;
+using fCraft.Physics.Life;
+using fCraft.Worlds;
 using JetBrains.Annotations;
 
 namespace fCraft.MapConversion {

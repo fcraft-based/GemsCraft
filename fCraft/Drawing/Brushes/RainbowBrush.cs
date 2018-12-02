@@ -2,6 +2,8 @@
 
 using System;
 using fCraft.Commands;
+using fCraft.Players;
+using fCraft.Worlds;
 using JetBrains.Annotations;
 
 namespace fCraft.Drawing.Brushes {

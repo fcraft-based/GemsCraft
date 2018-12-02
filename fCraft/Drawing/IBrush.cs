@@ -1,6 +1,8 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
 using fCraft.Commands;
+using fCraft.Players;
+using fCraft.Worlds;
 using JetBrains.Annotations;
 
 // ReSharper disable UnusedMemberInSuper.Global

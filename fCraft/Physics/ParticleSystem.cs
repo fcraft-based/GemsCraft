@@ -17,11 +17,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using fCraft;
+using fCraft.Games;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
+using Map = fCraft.Worlds.Map;
 
-namespace fCraft
+namespace fCraft.Physics
 {
     public interface IParticleBehavior
     {
@@ -593,11 +596,11 @@ namespace fCraft
                     restDistance = 0;
 
                     //TDM
-                    if (fCraft.TeamDeathMatch.isOn)
+                    if (TeamDeathMatch.isOn)
                     {
                         if (hitted.Info.isPlayingTD && hitted.Info.isOnBlueTeam && by.Info.isPlayingTD) //if the player is playing TD and on blue team, +1 for Red Team Score
                         {
-                            fCraft.TeamDeathMatch.redScore++;
+                            TeamDeathMatch.redScore++;
                             hitted.Info.gameDeaths++;
                             hitted.Info.totalDeathsTDM++;
                             by.Info.gameKills++;
@@ -605,7 +608,7 @@ namespace fCraft
                         }
                         if (hitted.Info.isPlayingTD && hitted.Info.isOnRedTeam && by.Info.isPlayingTD) //if the player is playing TD and on blue team, +1 for Red Team Score
                         {
-                            fCraft.TeamDeathMatch.blueScore++;
+                            TeamDeathMatch.blueScore++;
                             hitted.Info.gameDeaths++;       //counts the individual players deaths
                             hitted.Info.totalDeathsTDM++;   //tallies total TDM deaths (never gets reset)
                             by.Info.gameKills++;            //counts the individual players amount of kills
@@ -617,11 +620,11 @@ namespace fCraft
                         {
                             if (p.usesCPE)
                             {
-                                p.Send(PacketWriter.MakeSpecialMessage((byte)2, "&cRed&f: " + fCraft.TeamDeathMatch.redScore + ",&1 Blue&f: " + fCraft.TeamDeathMatch.blueScore));
+                                p.Send(PacketWriter.MakeSpecialMessage((byte)2, "&cRed&f: " + TeamDeathMatch.redScore + ",&1 Blue&f: " + TeamDeathMatch.blueScore));
                             }
                             else
                             {
-                                p.Message("The score is now &cRed&f: " + fCraft.TeamDeathMatch.redScore + ",&1 Blue&f: " + fCraft.TeamDeathMatch.blueScore);
+                                p.Message("The score is now &cRed&f: " + TeamDeathMatch.redScore + ",&1 Blue&f: " + TeamDeathMatch.blueScore);
                             }
                         }
                     }

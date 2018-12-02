@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using fCraft.GUI.ConfigGUI.GUI;
 using fCraft.Properties;
+using Color = fCraft.Utils.Color;
 
 namespace fCraft.GUI.ConfigGUI {
     internal sealed partial class ChatPreview : UserControl {
@@ -96,7 +98,16 @@ namespace fCraft.GUI.ConfigGUI {
                                     X = x,
                                     Y = y
                                 } );
-                                x += (int)g.MeasureString( t1, MinecraftFont ).Width;
+                                try
+                                {
+                                    if (!SectionClasses.ChatConfig.isPressed) x += (int) g.MeasureString(t1, MinecraftFont).Width;
+                                    else
+                                        SectionClasses.ChatConfig.isPressed = false;
+                                }
+                                catch (System.AccessViolationException)
+                                {
+                                    // Ignored
+                                }
                             }
                         }
                         y += 20;

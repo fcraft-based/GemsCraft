@@ -7,9 +7,14 @@ using System.Linq;
 using System.Xml.Linq;
 using fCraft.Commands;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.fSystem {
 
     /*
      * Config format-version changelog:

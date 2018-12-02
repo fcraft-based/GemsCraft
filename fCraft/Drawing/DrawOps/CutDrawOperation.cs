@@ -2,6 +2,9 @@
 
 using System;
 using fCraft.Drawing.Brushes;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 
 namespace fCraft.Drawing.DrawOps {
     public sealed class CutDrawOperation : DrawOperation {

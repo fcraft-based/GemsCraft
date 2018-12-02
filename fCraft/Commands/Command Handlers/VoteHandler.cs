@@ -17,6 +17,8 @@
 
 using System.Collections.Generic;
 using System.Threading;
+using fCraft.fSystem;
+using fCraft.Players;
 
 namespace fCraft.Commands.Command_Handlers
 {
@@ -159,7 +161,7 @@ namespace fCraft.Commands.Command_Handlers
             }
         }
 
-        static void VoteCheck()
+        private static void VoteCheck()
         {
             if (VoteIsOn)
             {

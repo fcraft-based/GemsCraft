@@ -14,12 +14,10 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //Copyright (C) <2012> Lao Tszy (lao_tszy@yahoo.co.uk)
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace fCraft
+using System;
+
+namespace fCraft.Physics.Life
 {
 	public class Life2d
 	{

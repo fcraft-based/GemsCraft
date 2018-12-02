@@ -106,6 +106,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\AStarPathFinder.dll</HintPath>
     </Reference>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Text, Version=3.6.8.20237, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ServiceStack.Text.dll</HintPath>
@@ -158,9 +167,9 @@
     <Compile Include="Commands\ZoneCommands.cs" />
     <Compile Include="Drawing\DrawOps\BlockDBDrawOperation.cs" />
     <Compile Include="Drawing\DrawOps\CylinderDrawOperation.cs" />
-    <Compile Include="Drawing\DrawOps\Maze.cs" />
-    <Compile Include="Drawing\DrawOps\MazeCuboidDrawOperation.cs" />
-    <Compile Include="Drawing\DrawOps\RandomMazeDrawOperation.cs">
+    <Compile Include="Drawing\DrawOps\RandomMaze\Maze.cs" />
+    <Compile Include="Drawing\DrawOps\RandomMaze\MazeCuboidDrawOperation.cs" />
+    <Compile Include="Drawing\DrawOps\RandomMaze\RandomMazeDrawOperation.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Drawing\DrawOps\WallsOp.cs" />
@@ -224,23 +233,81 @@
     <Compile Include="GUI\ConfigGUI\DeleteRankPopup.Designer.cs">
       <DependentUpon>DeleteRankPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\MainForm.Tooltips.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\MiscConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\MiscConfig.Designer.cs">
+      <DependentUpon>MiscConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\AdvancedConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\AdvancedConfig.Designer.cs">
+      <DependentUpon>AdvancedConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\IRCConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\IRCConfig.Designer.cs">
+      <DependentUpon>IRCConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\LoggingConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\LoggingConfig.Designer.cs">
+      <DependentUpon>LoggingConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\SectionClasses.cs" />
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\SecurityConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\SecurityConfig.Designer.cs">
+      <DependentUpon>SecurityConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\RankConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\RankConfig.Designer.cs">
+      <DependentUpon>RankConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\ChatConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\ChatConfig.Designer.cs">
+      <DependentUpon>ChatConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\SavingConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\SavingConfig.Designer.cs">
+      <DependentUpon>SavingConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\WorldConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\WorldConfig.Designer.cs">
+      <DependentUpon>WorldConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\GeneralConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\GeneralConfig.Designer.cs">
+      <DependentUpon>GeneralConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ConfigGUI\KeywordPicker.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\ConfigGUI\KeywordPicker.Designer.cs">
       <DependentUpon>KeywordPicker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\ConfigGUI\MainForm.Adapter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\ConfigGUI\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\ConfigGUI\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\ConfigGUI\MainForm.ToolTips.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\ConfigGUI\PermissionLimitBox.cs">
       <SubType>UserControl</SubType>
@@ -283,6 +350,7 @@
     </Compile>
     <Compile Include="MapConversion\MapFCMv3.cs" />
     <Compile Include="Network\CPE.cs" />
+    <Compile Include="Network\CPEMap.cs" />
     <Compile Include="Network\GlobalChat.cs" />
     <Compile Include="Network\PacketReader.cs" />
     <Compile Include="Physics\ExplodingPhysics.cs" />
@@ -308,23 +376,23 @@
     <Compile Include="Physics\SandPhysics.cs" />
     <Compile Include="Physics\TreeGeneration.cs" />
     <Compile Include="Physics\WaterPhysics.cs" />
-    <Compile Include="Player\Bot.cs" />
-    <Compile Include="Player\Chat.cs" />
-    <Compile Include="Player\ChatTimer.cs" />
-    <Compile Include="Player\LegendCraft.cs" />
-    <Compile Include="Player\Permission.cs" />
-    <Compile Include="Player\Player.cs" />
-    <Compile Include="Player\Player.Events.cs" />
-    <Compile Include="Player\PlayerConstants.cs" />
-    <Compile Include="Player\PlayerDB.cs" />
-    <Compile Include="Player\PlayerEnumerable.cs" />
-    <Compile Include="Player\PlayerInfo.Actions.cs" />
-    <Compile Include="Player\PlayerInfo.cs" />
-    <Compile Include="Player\PlayerInfo.Events.cs" />
-    <Compile Include="Player\PlayerOpException.cs" />
-    <Compile Include="Player\Position.cs" />
-    <Compile Include="Player\Rank.cs" />
-    <Compile Include="Player\RankManager.cs" />
+    <Compile Include="Players\Bot.cs" />
+    <Compile Include="Players\Chat.cs" />
+    <Compile Include="Players\ChatTimer.cs" />
+    <Compile Include="Players\LegendCraft.cs" />
+    <Compile Include="Players\Permission.cs" />
+    <Compile Include="Players\Player.cs" />
+    <Compile Include="Players\Player.Events.cs" />
+    <Compile Include="Players\PlayerConstants.cs" />
+    <Compile Include="Players\PlayerDB.cs" />
+    <Compile Include="Players\PlayerEnumerable.cs" />
+    <Compile Include="Players\PlayerInfo.Actions.cs" />
+    <Compile Include="Players\PlayerInfo.cs" />
+    <Compile Include="Players\PlayerInfo.Events.cs" />
+    <Compile Include="Players\PlayerOpException.cs" />
+    <Compile Include="Players\Position.cs" />
+    <Compile Include="Players\Rank.cs" />
+    <Compile Include="Players\RankManager.cs" />
     <Compile Include="Plugins\PluginConfig.cs" />
     <Compile Include="Plugins\PluginConfigSerializer.cs" />
     <Compile Include="Plugins\SecurityController.cs" />
@@ -375,16 +443,16 @@
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Trie.cs" />
-    <Compile Include="World\Block.cs" />
-    <Compile Include="World\BlockDBSearchType.cs" />
-    <Compile Include="World\BlockUpdate.cs" />
-    <Compile Include="World\Forester.cs" />
-    <Compile Include="World\Map.cs" />
-    <Compile Include="World\MapGenerator.cs">
+    <Compile Include="Worlds\Block.cs" />
+    <Compile Include="Worlds\BlockDBSearchType.cs" />
+    <Compile Include="Worlds\BlockUpdate.cs" />
+    <Compile Include="Worlds\Forester.cs" />
+    <Compile Include="Worlds\Map.cs" />
+    <Compile Include="Worlds\MapGenerator.cs">
     </Compile>
-    <Compile Include="World\MapGeneratorArgs.cs" />
-    <Compile Include="World\World.cs" />
-    <Compile Include="World\Zone.cs" />
+    <Compile Include="Worlds\MapGeneratorArgs.cs" />
+    <Compile Include="Worlds\World.cs" />
+    <Compile Include="Worlds\Zone.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -461,8 +529,8 @@
     <Compile Include="fSystem\ConfigKey.Metadata.cs" />
     <Compile Include="fSystem\ConfigSection.cs" />
     <Compile Include="Utils\Vector3I.cs" />
-    <Compile Include="World\BlockChangeContext.cs" />
-    <Compile Include="World\BlockDB.cs" />
+    <Compile Include="Worlds\BlockChangeContext.cs" />
+    <Compile Include="Worlds\BlockDB.cs" />
     <Compile Include="Utils\EventInterfaces.cs" />
     <Compile Include="fSystem\SchedulerTask.cs" />
     <Compile Include="Utils\IClassy.cs" />
@@ -471,14 +539,14 @@
     <Compile Include="Utils\LogRecorder.cs" />
     <Compile Include="Utils\PerlinNoise3D.cs" />
     <Compile Include="Utils\ZipStorer.cs" />
-    <Compile Include="World\BlockDBEntry.cs" />
+    <Compile Include="Worlds\BlockDBEntry.cs" />
     <Compile Include="Utils\MetadataCollection.cs" />
-    <Compile Include="World\WorldManager.cs" />
-    <Compile Include="World\WorldOpException.cs" />
+    <Compile Include="Worlds\WorldManager.cs" />
+    <Compile Include="Worlds\WorldOpException.cs" />
     <Compile Include="Utils\MonoCompat.cs" />
     <Compile Include="Utils\YesNoAuto.cs" />
-    <Compile Include="World\ZoneCollection.cs" />
-    <Compile Include="World\World.Events.cs" />
+    <Compile Include="Worlds\ZoneCollection.cs" />
+    <Compile Include="Worlds\World.Events.cs" />
     <Compile Include="Utils\JetBrains.Annotations.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -498,11 +566,41 @@
     <EmbeddedResource Include="GUI\ConfigGUI\DeleteRankPopup.resx">
       <DependentUpon>DeleteRankPopup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigGUI\GUI\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigGUI\GUI\Sections\MiscConfig.resx">
+      <DependentUpon>MiscConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigGUI\GUI\Sections\AdvancedConfig.resx">
+      <DependentUpon>AdvancedConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigGUI\GUI\Sections\IRCConfig.resx">
+      <DependentUpon>IRCConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigGUI\GUI\Sections\LoggingConfig.resx">
+      <DependentUpon>LoggingConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigGUI\GUI\Sections\SecurityConfig.resx">
+      <DependentUpon>SecurityConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigGUI\GUI\Sections\RankConfig.resx">
+      <DependentUpon>RankConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigGUI\GUI\Sections\ChatConfig.resx">
+      <DependentUpon>ChatConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigGUI\GUI\Sections\SavingConfig.resx">
+      <DependentUpon>SavingConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigGUI\GUI\Sections\WorldConfig.resx">
+      <DependentUpon>WorldConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigGUI\GUI\Sections\GeneralConfig.resx">
+      <DependentUpon>GeneralConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\ConfigGUI\KeywordPicker.resx">
       <DependentUpon>KeywordPicker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\ConfigGUI\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ConfigGUI\PermissionLimitBox.resx">
       <DependentUpon>PermissionLimitBox.cs</DependentUpon>
@@ -528,7 +626,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\ConfigGUI\GUI\MainForm.Adapter.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <None Include="GUI\ConfigGUI\MinecraftFont\minecraft.ttf" />
+    <None Include="packages.config" />
     <None Include="Resources\Tileset.png" />
   </ItemGroup>
   <ItemGroup>

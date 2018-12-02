@@ -1,12 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
-namespace fCraft.Drawing {
+using fCraft.Players;
+using fCraft.Utils;
+
+namespace fCraft.Drawing.DrawOps {
     sealed class QuickPasteDrawOperation : PasteDrawOperation {
-        public override string Name {
-            get {
-                return Not ? "PasteNot" : "Paste";
-            }
-        }
+        public override string Name => Not ? "PasteNot" : "Paste";
 
         public QuickPasteDrawOperation( Player player, bool not )
             : base( player, not ) {

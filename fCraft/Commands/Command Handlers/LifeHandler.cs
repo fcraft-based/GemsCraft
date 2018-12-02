@@ -19,6 +19,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using fCraft.Physics.Life;
+using fCraft.Players;
+using fCraft.Plugins;
+using fCraft.Utils;
+using fCraft.Worlds;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.Commands.Command_Handlers
 {

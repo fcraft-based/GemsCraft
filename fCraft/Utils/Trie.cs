@@ -1,14 +1,15 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
 
 // ReSharper disable ClassCanBeSealed.Global
-namespace fCraft {
+namespace fCraft.Utils {
     /// <summary> Specialized data structure for partial-matching of large sparse sets of words.
     /// Used as a searchable index of players for PlayerDB. </summary>
     /// <typeparam name="T"> Payload type (reference types only). </typeparam>

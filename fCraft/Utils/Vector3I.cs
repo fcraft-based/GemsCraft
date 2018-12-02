@@ -1,9 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 // With contributions by Conrad "Redshift" Morgan
+
 using System;
 using fCraft.Drawing;
+using fCraft.Players;
 
-namespace fCraft {
+namespace fCraft.Utils {
     /// <summary> Integer 3D vector. </summary>
     public struct Vector3I : IEquatable<Vector3I>, IComparable<Vector3I>, IComparable<Vector3F> {
         public static readonly Vector3I Zero = new Vector3I( 0, 0, 0 );

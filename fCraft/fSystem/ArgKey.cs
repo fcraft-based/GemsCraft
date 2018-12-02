@@ -1,6 +1,6 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
-namespace fCraft {
+namespace fCraft.fSystem {
     /// <summary> Enumerates the recognized command-line switches/arguments.
     /// Args are parsed in Server.InitLibrary </summary>
     public enum ArgKey {

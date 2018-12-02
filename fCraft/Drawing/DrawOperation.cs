@@ -4,7 +4,13 @@ using System;
 using System.Collections.Generic;
 using fCraft.Drawing;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 using JetBrains.Annotations;
+using Map = fCraft.Worlds.Map;
 
 // ReSharper disable UnusedMemberInSuper.Global
 // ReSharper disable MemberCanBeProtected.Global

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using LibNbt.Queries;
+﻿using System.Collections.Generic;
 
-namespace LibNbt.Tags
+namespace fCraft.Drawing.nbt.Tags
 {
     internal interface INbtTagList
     {

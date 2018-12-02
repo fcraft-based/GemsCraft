@@ -5,7 +5,11 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
+using fCraft.fSystem;
+using fCraft.Players;
+using fCraft.Utils;
 using JetBrains.Annotations;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.MapConversion {
     /// <summary> fCraft map format converter, for format version #3 (2011).

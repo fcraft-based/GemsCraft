@@ -1,5 +1,6 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 //Modified LegendCraft Team
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,11 +19,17 @@ using fCraft.Commands;
 using fCraft.Commands.Command_Handlers;
 using fCraft.Drawing;
 using fCraft.Events;
-using JetBrains.Annotations;
-using ThreadState = System.Threading.ThreadState;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Plugins;
 using fCraft.Portals;
+using fCraft.Utils;
+using fCraft.Worlds;
+using JetBrains.Annotations;
+using Map = fCraft.Worlds.Map;
+using ThreadState = System.Threading.ThreadState;
 
-namespace fCraft {
+namespace fCraft.fSystem {
     /// <summary> Core of an fCraft server. Manages startup/shutdown, online player
     /// sessions, and global events and scheduled tasks. </summary>
     public static partial class Server {
@@ -278,7 +285,7 @@ namespace fCraft {
             if( !libraryInitialized ) {
                 throw new InvalidOperationException( "Server.InitLibrary must be called before Server.InitServer" );
             }
-            RaiseEvent( Initializing );
+            fCraft.fSystem.Server.RaiseEvent( fCraft.fSystem.Server.Initializing );
 
             // Instantiate DeflateStream to make sure that libMonoPosix is present.
             // This allows catching misconfigured Mono installs early, and stopping the server.
@@ -351,7 +358,7 @@ namespace fCraft {
             Physics.Physics.Load();
             HeartbeatSaverUtil.Init();
 
-            RaiseEvent( Initialized );
+            fSystem.Server.RaiseEvent( fSystem.Server.Initialized );
 
             serverInitialized = true;
         }
@@ -378,7 +385,7 @@ namespace fCraft {
             cpuUsageStartingOffset = Process.GetCurrentProcess().TotalProcessorTime;
             Players = new Player[0];
 
-            RaiseEvent( Starting );
+            fSystem.Server.RaiseEvent( fSystem.Server.Starting );
 
             if( ConfigKey.BackupDataOnStartup.Enabled() ) {
                 BackupData();
@@ -532,7 +539,7 @@ namespace fCraft {
             GlobalChat.Start();
 
             IsRunning = true;
-            RaiseEvent( Started );
+            fSystem.Server.RaiseEvent( fSystem.Server.Started );
             return true;
         }
 
@@ -556,7 +563,7 @@ namespace fCraft {
             try {
 #endif
                 Heartbeat.HbSave();
-                RaiseShutdownBeganEvent( shutdownParams );
+                fSystem.Server.RaiseShutdownBeganEvent( shutdownParams );
 
                 Scheduler.BeginShutdown();
 
@@ -613,7 +620,7 @@ namespace fCraft {
                 if( PlayerDB.IsLoaded ) PlayerDB.Save();
                 if( IPBanList.IsLoaded ) IPBanList.Save();
 
-                RaiseShutdownEndedEvent( shutdownParams );
+                fSystem.Server.RaiseShutdownEndedEvent( shutdownParams );
 #if !DEBUG
             } catch( Exception ex ) {
                 Logger.LogAndReportCrash( "Error in Server.Shutdown", "800Craft", ex, true );
@@ -1250,7 +1257,7 @@ namespace fCraft {
                 Players = PlayerIndex.Values.Where( p => p.IsOnline )
                                             .OrderBy( player => player.Name )
                                             .ToArray();
-                RaiseEvent( PlayerListChanged );
+                fSystem.Server.RaiseEvent( fSystem.Server.PlayerListChanged );
             }
         }
 
@@ -1308,13 +1315,12 @@ namespace fCraft {
                     results.Add( tempList[i] );
                 }
             }
-            if( raiseEvent ) {
-                var h = SearchingForPlayer;
-                if( h != null ) {
-                    var e = new SearchingForPlayerEventArgs( null, name, results );
-                    h( null, e );
-                }
-            }
+
+            if (!raiseEvent) return results.ToArray();
+            var h = fSystem.Server.SearchingForPlayer;
+            if (h == null) return results.ToArray();
+            var e = new SearchingForPlayerEventArgs( null, name, results );
+            h( null, e );
             return results.ToArray();
         }
 
@@ -1339,18 +1345,21 @@ namespace fCraft {
             player.LastUsedPlayerName = name;
             List<Player> results = new List<Player>();
             Player[] tempList = Players;
-            for( int i = 0; i < tempList.Length; i++ ) {
-                if( tempList[i] == null || !player.CanSee( tempList[i] ) ) continue;
-                if( tempList[i].Name.Equals( name, StringComparison.OrdinalIgnoreCase ) ) {
+            foreach (var t in tempList)
+            {
+                if( t == null || !player.CanSee( t ) ) continue;
+                if( t.Name.Equals( name, StringComparison.OrdinalIgnoreCase ) ) {
                     results.Clear();
-                    results.Add( tempList[i] );
+                    results.Add( t );
                     break;
-                } else if( tempList[i].Name.StartsWith( name, StringComparison.OrdinalIgnoreCase ) ) {
-                    results.Add( tempList[i] );
+                }
+
+                if( t.Name.StartsWith( name, StringComparison.OrdinalIgnoreCase ) ) {
+                    results.Add( t );
                 }
             }
             if( raiseEvent ) {
-                var h = SearchingForPlayer;
+                var h = fSystem.Server.SearchingForPlayer;
                 if( h != null ) {
                     var e = new SearchingForPlayerEventArgs( player, name, results );
                     h( null, e );

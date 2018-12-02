@@ -1,7 +1,10 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
-using System.Diagnostics;
 
-namespace fCraft {
+using System.Diagnostics;
+using fCraft.Players;
+using fCraft.Utils;
+
+namespace fCraft.fSystem {
     /// <summary> Enumeration of available configuration keys. See comments
     /// at the top of Config.cs for a history of changes. </summary>
     public enum ConfigKey {
@@ -473,7 +476,7 @@ a copy of config.xml, and last 25 lines of the log file.
 Reports are confidential and are not displayed publicly." )]
         SubmitCrashReports,
 
-        [EnumKey( ConfigSection.Advanced, fCraft.UpdaterMode.Prompt,
+        [EnumKey( ConfigSection.Advanced, Utils.UpdaterMode.Prompt,
 @"800Craft can automatically update to latest stable versions.
 If enabled, the update check is done on-startup." )]
         UpdaterMode,
@@ -577,7 +580,7 @@ if you have more than one NIC) you can use this setting to make
 LegendCraft bind to the same IP every time." )]
         IP,
 
-        [EnumKey( ConfigSection.Advanced, fCraft.BandwidthUseMode.Normal,
+        [EnumKey( ConfigSection.Advanced, fCraft.Players.BandwidthUseMode.Normal,
 @"Determines the bandwidth use mode.
 High/Highest settings will reduce jitter of player movement, but increase bandwidth use.
 Low/Lowest settings will introduce some popping in/out of players and increase jitter,

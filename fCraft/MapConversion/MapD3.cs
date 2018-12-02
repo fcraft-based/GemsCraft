@@ -3,7 +3,10 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
+using fCraft.Players;
+using fCraft.Worlds;
 using JetBrains.Annotations;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.MapConversion {
     public sealed class MapD3 : IMapConverter {

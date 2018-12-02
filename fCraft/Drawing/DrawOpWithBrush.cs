@@ -1,13 +1,15 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
 using fCraft.Commands;
+using fCraft.Players;
+using fCraft.Worlds;
 
 namespace fCraft.Drawing {
     /// <summary> A self-contained DrawOperation that prodivides its own brush.
     /// Purpose of this class is mostly to take care of the boilerplate code. </summary>
     public abstract class DrawOpWithBrush : DrawOperation, IBrushFactory, IBrush, IBrushInstance {
 
-        public override abstract string Description {
+        public abstract override string Description {
             get;
         }
 

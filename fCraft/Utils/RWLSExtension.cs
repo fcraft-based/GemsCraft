@@ -1,10 +1,11 @@
 ﻿// Part of fCraft | Copyright 2009-2013 Matvei Stefarov <me@matvei.org> | BSD-3 | See LICENSE.txt //Copyright (c) 2011-2013 Jon Baker, Glenn Marien and Lao Tszy <Jonty800@gmail.com> //Copyright (c) <2012-2014> <LeChosenOne, DingusBungus> | Copyright 2014 123DMWM <shmo1joe2@gmail.com>
+
 using System;
 using System.Threading;
 
-namespace fCraft
+namespace fCraft.Utils
 {
-    static class RWLSExtension
+    internal static class RWLSExtension
     {
         public static ReadLockHelper ReadLock(this ReaderWriterLockSlim readerWriterLock)
         {

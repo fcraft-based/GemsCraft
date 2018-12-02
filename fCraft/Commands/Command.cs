@@ -2,7 +2,10 @@
 
 using System;
 using System.Diagnostics;
+using fCraft.Players;
+using fCraft.Worlds;
 using JetBrains.Annotations;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.Commands {
     /// <summary> A text scanner that aids parsing chat commands and their arguments.

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LibNbt.Queries
+﻿namespace fCraft.Drawing.nbt.Queries
 {
     public class TagQueryToken
     {

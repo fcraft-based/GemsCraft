@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace LibNbt.Exceptions
+namespace fCraft.Drawing.nbt.Exceptions
 {
     public class NbtQueryException : Exception
     {

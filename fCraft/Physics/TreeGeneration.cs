@@ -15,14 +15,12 @@
 
 // Code from Forester script by dudecon
 // Original: http://www.minecraftforum.net/viewtopic.php?f=25&t=9426
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using fCraft.Events;
-using fCraft;
 
-namespace fCraft
+using System;
+using fCraft.Utils;
+using fCraft.Worlds;
+
+namespace fCraft.Physics
 {
     public static class TreeGeneration
     {

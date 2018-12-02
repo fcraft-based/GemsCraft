@@ -1,10 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using LibNbt.Exceptions;
-using LibNbt.Queries;
 
-namespace LibNbt.Tags
+namespace fCraft.Drawing.nbt.Tags
 {
 	public class NbtLong : NbtTag, INbtTagValue<long>
 	{

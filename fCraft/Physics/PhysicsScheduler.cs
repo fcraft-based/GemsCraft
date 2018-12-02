@@ -12,15 +12,14 @@
 
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Threading;
-using fCraft.Physics;
-using System.Diagnostics;
-using System.Collections.Generic;
-using Util = RandomMaze.MazeUtil;
-using fCraft.Drawing;
 
-namespace fCraft
+using System;
+using System.Diagnostics;
+using System.Threading;
+using fCraft.fSystem;
+using fCraft.Worlds;
+
+namespace fCraft.Physics
 {
 	public enum TaskCategory
 	{
@@ -28,7 +27,7 @@ namespace fCraft
 		Life,
 	}
 
-public class PhysScheduler
+    public class PhysScheduler
 	{
 		private MinBinaryHeap<PhysicsTask, Int64> _tasks = new MinBinaryHeap<PhysicsTask, Int64>();
 		private Stopwatch _watch = new Stopwatch(); //a good counter of elapsed milliseconds

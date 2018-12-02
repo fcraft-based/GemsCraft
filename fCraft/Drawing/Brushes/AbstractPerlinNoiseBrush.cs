@@ -2,6 +2,9 @@
 
 using System;
 using System.Linq;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 using JetBrains.Annotations;
 
 namespace fCraft.Drawing.Brushes {

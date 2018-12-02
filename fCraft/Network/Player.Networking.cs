@@ -21,9 +21,13 @@ using System.Runtime;
 using fCraft.Commands;
 using fCraft.Commands.Command_Handlers;
 using fCraft.Drawing.Brushes;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Utils;
+using fCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft
+namespace fCraft.Players
 {
     /// <summary> Represents a connection to a Minecraft client. Handles low-level interactions (e.g. networking). </summary>
     public sealed partial class Player

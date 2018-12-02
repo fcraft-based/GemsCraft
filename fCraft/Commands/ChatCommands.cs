@@ -3,6 +3,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Plugins;
+using fCraft.Utils;
+using Player = fCraft.Players.Player;
 
 namespace fCraft.Commands
 {
@@ -182,7 +188,7 @@ THE SOFTWARE.*/
             player.Message("&c_Current plugins on {0}&c_", ConfigKey.ServerName.GetString());
           
             //Sloppy :P, PluginManager.Plugins adds ".Init", so this should split the ".Init" from the plugin name
-            foreach (Plugin plugin in PluginManager.Plugins)
+            foreach (IPlugin plugin in PluginManager.Plugins)
             {
                 String pluginString = plugin.ToString();
                 string[] splitPluginString = pluginString.Split('.');

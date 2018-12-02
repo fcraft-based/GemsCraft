@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using LibNbt.Exceptions;
-using LibNbt.Queries;
+using fCraft.Drawing.nbt.Queries;
 
-namespace LibNbt.Tags
+namespace fCraft.Drawing.nbt.Tags
 {
 	public class NbtCompound : NbtTag, INbtTagList
 	{

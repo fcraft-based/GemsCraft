@@ -4,10 +4,14 @@ using System.Linq;
 using System.Text;
 using fCraft;
 using fCraft.Commands;
+using fCraft.fSystem;
+using fCraft.Players;
+using fCraft.Plugins;
+using fCraft.Utils;
 
 namespace TrollPlugin
 {
-    public class Init : Plugin
+    public class Init : IPlugin
     {
         public void Initialize()
         {

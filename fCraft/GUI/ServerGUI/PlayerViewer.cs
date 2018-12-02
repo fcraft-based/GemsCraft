@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
 
 namespace fCraft.GUI.ServerGUI
 {
@@ -13,7 +16,7 @@ namespace fCraft.GUI.ServerGUI
         private Label ReasonLabel;
         private Label label2;
         PlayerInfo player;
-        public PlayerViewer(fCraft.PlayerInfo player_)
+        public PlayerViewer(PlayerInfo player_)
         {
             InitializeComponent();
             player = player_;

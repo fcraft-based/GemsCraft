@@ -14,14 +14,12 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //Copyright (C) <2012> Glenn Mariën (http://project-vanilla.com)
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace fCraft
+using System;
+
+namespace fCraft.Plugins
 {
-    public interface Plugin
+    public interface IPlugin
     {
         String Name { get; set; }
         String Version { get; set; }

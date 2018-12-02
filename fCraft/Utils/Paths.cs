@@ -1,12 +1,14 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security;
+using fCraft.fSystem;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Utils {
     /// <summary> Contains fCraft path settings, and some filesystem-related utilities. </summary>
     public static class Paths {
 

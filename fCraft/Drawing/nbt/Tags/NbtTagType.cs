@@ -1,4 +1,5 @@
-﻿namespace LibNbt.Tags
+﻿// ReSharper disable InconsistentNaming
+namespace fCraft.Drawing.nbt.Tags
 {
     public enum NbtTagType
     {

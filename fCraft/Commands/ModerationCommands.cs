@@ -5,7 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Plugins;
+using fCraft.Utils;
+using fCraft.Worlds;
 using JetBrains.Annotations;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.Commands {
     /// <summary>
@@ -967,6 +974,7 @@ THE SOFTWARE.*/
                                 int tNewMoney = target.Info.Money - amountnum;
                                 player.Message("&eYou have taken &c{1}&e from {0}.", target.ClassyName, amountnum);
                                 target.Message("&e{0} &ehas taken {1} &ebit(s) from you.", player.ClassyName, amountnum);
+                                
                                 Server.Players.Except(target).Except(player).Message("&e{0} &etook {1} &ebit(s) from {2}&e.", player.ClassyName, amountnum, target.ClassyName);
                                 target.Info.Money = tNewMoney;
                                 return;

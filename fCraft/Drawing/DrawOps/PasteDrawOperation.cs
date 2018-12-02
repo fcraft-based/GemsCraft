@@ -1,27 +1,17 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 using fCraft.Commands;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.DrawOps {
     public class PasteDrawOperation : DrawOpWithBrush {
-        public override string Name {
-            get {
-                return Not ? "PasteNotX" : "PasteX";
-            }
-        }
+        public override string Name => Not ? "PasteNotX" : "PasteX";
 
-        public override string Description {
-            get {
-                if( Blocks == null ) {
-                    return Name;
-                } else {
-                    return String.Format( "{0}({1})",
-                                          Name,
-                                          Blocks.JoinToString() );
-                }
-            }
-        }
+        public override string Description => Blocks == null ? Name : $"{Name}({Blocks.JoinToString()})";
 
         // ReSharper disable MemberCanBeProtected.Global
         public bool Not { get; private set; }

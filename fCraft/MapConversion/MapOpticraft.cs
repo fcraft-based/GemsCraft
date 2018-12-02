@@ -4,7 +4,11 @@ using System.IO;
 using System.IO.Compression;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 using JetBrains.Annotations;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.MapConversion {
     [DataContract]

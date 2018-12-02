@@ -1,7 +1,10 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
-using System;
 
-namespace fCraft.Drawing {
+using System;
+using fCraft.Players;
+using fCraft.Utils;
+
+namespace fCraft.Drawing.DrawOps {
     public class EllipsoidHollowDrawOperation : DrawOperation {
 
         public override string Name {

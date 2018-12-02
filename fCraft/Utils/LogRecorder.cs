@@ -1,11 +1,13 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
-using fCraft.Events;
 using System.Threading;
+using fCraft.Events;
+using fCraft.fSystem;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Utils {
     /// <summary> A simple way to temporarily hook into fCraft's Logger.
     /// Make sure to dispose this class when you are done recording.
     /// The easiest way to ensure that is with a using(){...} block. </summary>
@@ -28,19 +30,20 @@ namespace fCraft {
         /// recording to messages emitted from the same thread that created this object. </param>
         /// <param name="thingsToLog"> A list or array of LogTypes to record. </param>
         public LogRecorder( bool restrictToThisThread, [NotNull] params LogType[] thingsToLog ) {
-            if( thingsToLog == null ) throw new ArgumentNullException( "thingsToLog" );
             Logger.Logged += HandleLog;
-            this.thingsToLog = thingsToLog;
+            this.thingsToLog = thingsToLog ?? throw new ArgumentNullException( "thingsToLog" );
             if( restrictToThisThread ) {
                 creatingThread = Thread.CurrentThread;
             }
         }
 
 
-        void HandleLog( object sender, LogEventArgs e ) {
+        private void HandleLog( object sender, LogEventArgs e )
+        {
             if( creatingThread != null && creatingThread != Thread.CurrentThread ) return;
-            for( int i = 0; i < thingsToLog.Length; i++ ) {
-                if( thingsToLog[i] != e.MessageType ) continue;
+            foreach (var t in thingsToLog)
+            {
+                if( t != e.MessageType ) continue;
                 switch( e.MessageType ) {
                     case LogType.SeriousError:
                     case LogType.Error:

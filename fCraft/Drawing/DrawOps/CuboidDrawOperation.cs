@@ -1,5 +1,8 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
+using fCraft.Players;
+using fCraft.Utils;
+
 namespace fCraft.Drawing.DrawOps {
     public sealed class CuboidDrawOperation : DrawOperation {
         public override string Name {

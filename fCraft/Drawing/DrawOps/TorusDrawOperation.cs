@@ -1,9 +1,12 @@
 ﻿// fCraft is Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 // original TorusDrawOperation written and contributed by M1_Abrams
+
 using System;
 using System.Collections.Generic;
+using fCraft.Players;
+using fCraft.Utils;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.DrawOps {
     public sealed class TorusDrawOperation : DrawOperation {
         const float Bias = 0.5f;
 
@@ -11,9 +14,7 @@ namespace fCraft.Drawing {
 
         int tubeR;
         double bigR;
-        public override string Name {
-            get { return "Torus"; }
-        }
+        public override string Name => "Torus";
 
         public TorusDrawOperation( Player player )
             : base( player ) {

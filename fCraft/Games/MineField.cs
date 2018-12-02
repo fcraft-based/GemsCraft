@@ -14,15 +14,19 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //Copyright (C) <2012> Jon Baker(http://au70.net)
-using System;
-using System.Collections.Generic;
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Text;
-using fCraft.MapConversion;
-using fCraft.Events;
 
-namespace fCraft
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Physics;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
+using Map = fCraft.Worlds.Map;
+
+namespace fCraft.Games
 {
     class MineField
     {
@@ -95,14 +99,8 @@ namespace fCraft
             WorldManager.SaveWorldList();
             Server.RequestGC();
             instance = null;
-            if (Won)
-            {
-                Server.Players.Message("{0}&S Won the game of MineField!", player.ClassyName);
-            }
-            else
-            {
-                Server.Players.Message("{0}&S aborted the game of MineField", player.ClassyName);
-            }
+            Server.Players.Message(Won ? "{0}&S Won the game of MineField!" : "{0}&S aborted the game of MineField",
+                player.ClassyName);
         }
 
         private static void SetUpRed()

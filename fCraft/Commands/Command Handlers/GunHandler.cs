@@ -19,6 +19,14 @@ using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Games;
+using fCraft.Network;
+using fCraft.Physics;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.Commands.Command_Handlers
 {
@@ -487,7 +495,7 @@ namespace fCraft.Commands.Command_Handlers
                 Logger.Log(LogType.SeriousError, "GunPortalDisconnected: " + ex);
             }
         }
-        public static void removal(ConcurrentDictionary<String, Vector3I> bullets, Map map)
+        public static void Removal(ConcurrentDictionary<string, Vector3I> bullets, Map map)
         {
             foreach (Vector3I bp in bullets.Values)
             {

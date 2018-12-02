@@ -1,16 +1,15 @@
 ﻿// fCraft is Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 // TriangleDrawOperation contributed by Conrad "Redshift" Morgan
+
 using System;
+using fCraft.Players;
+using fCraft.Utils;
 
-namespace fCraft.Drawing {
+namespace fCraft.Drawing.DrawOps {
     public sealed class TriangleDrawOperation : DrawOperation {
-        public override string Name {
-            get { return "Triangle"; }
-        }
+        public override string Name => "Triangle";
 
-        public override int ExpectedMarks {
-            get { return 3; }
-        }
+        public override int ExpectedMarks => 3;
 
         public TriangleDrawOperation( Player player )
             : base( player ) {

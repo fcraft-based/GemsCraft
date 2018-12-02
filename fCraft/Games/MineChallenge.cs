@@ -22,6 +22,12 @@ using System.Text;
 using fCraft;
 using fCraft.Events;
 using System.Threading;
+using fCraft.fSystem;
+using fCraft.Network;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.Games
 {

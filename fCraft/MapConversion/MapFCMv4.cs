@@ -4,7 +4,12 @@ using System.Text;
 using System.IO;
 using System.IO.Compression;
 using System.Xml.Linq;
+using fCraft.fSystem;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 using JetBrains.Annotations;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.MapConversion {
     /// <summary> Next file format that fCraft shall use. </summary>

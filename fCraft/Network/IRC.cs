@@ -35,9 +35,12 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using fCraft.Events;
 using System.Collections.Concurrent;
+using fCraft.fSystem;
+using fCraft.Players;
+using fCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft
+namespace fCraft.Network
 {
 
     /// <summary> IRC control class. </summary>

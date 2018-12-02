@@ -1,5 +1,7 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
+using fCraft.Utils;
+using fCraft.Worlds;
 using JetBrains.Annotations;
 
 namespace fCraft.Drawing {

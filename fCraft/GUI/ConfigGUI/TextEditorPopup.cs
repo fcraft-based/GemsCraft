@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using fCraft.Utils;
 
 namespace fCraft.GUI.ConfigGUI {
     public sealed partial class TextEditorPopup : Form {

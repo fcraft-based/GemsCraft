@@ -1,10 +1,11 @@
 ﻿// Copyright 2009-2013 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 using JetBrains.Annotations;
 
-namespace fCraft
+namespace fCraft.Utils
 {
 
     /// <summary> Static class with definitions of Minecraft color codes,

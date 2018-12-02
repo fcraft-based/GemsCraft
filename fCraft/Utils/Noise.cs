@@ -1,8 +1,9 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Utils {
 
     /// <summary> Interpolation mode for perlin noise. </summary>
     public enum NoiseInterpolationMode {

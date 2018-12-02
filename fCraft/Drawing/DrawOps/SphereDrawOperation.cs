@@ -1,11 +1,12 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
-using System;
 
-namespace fCraft.Drawing {
+using System;
+using fCraft.Players;
+using fCraft.Utils;
+
+namespace fCraft.Drawing.DrawOps {
     public sealed class SphereDrawOperation : EllipsoidDrawOperation {
-        public override string Name {
-            get { return "Sphere"; }
-        }
+        public override string Name => "Sphere";
 
         public SphereDrawOperation( Player player )
             : base( player ) {
@@ -27,4 +28,4 @@ namespace fCraft.Drawing {
             return base.Prepare( marks );
         }
     }
-}
+} 

@@ -1,11 +1,12 @@
 ﻿// Copyright 2009-2013 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
-namespace fCraft
+namespace fCraft.Utils
 {
 
     /// <summary> Class dedicated to solving Mono compatibility issues </summary>

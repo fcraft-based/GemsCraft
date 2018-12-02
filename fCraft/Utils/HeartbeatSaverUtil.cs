@@ -12,15 +12,14 @@
 
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using fCraft.Events;
 using System.Diagnostics;
 using System.IO;
+using fCraft.Events;
+using fCraft.fSystem;
 
-namespace fCraft
+namespace fCraft.Utils
 {
     class HeartbeatSaverUtil
     {

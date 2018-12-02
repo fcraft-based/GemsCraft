@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
+using fCraft.fSystem;
 using fCraft.MapConversion;
+using fCraft.Worlds;
 
-namespace fCraft
+namespace fCraft.Physics.Life
 {
 	public class LifeSerialization : IConverterExtension
 	{

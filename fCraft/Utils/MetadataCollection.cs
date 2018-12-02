@@ -1,4 +1,5 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace fCraft {
+namespace fCraft.Utils {
     /// <summary> A string metadata entry. </summary>
     /// <typeparam name="TValue"> Value type. Must be a reference type. </typeparam>
     [DebuggerDisplay( "Count = {Count}" )]

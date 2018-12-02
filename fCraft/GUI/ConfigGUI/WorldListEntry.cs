@@ -3,8 +3,15 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using fCraft.fSystem;
+using fCraft.GUI.ConfigGUI.GUI;
 using fCraft.MapConversion;
+using fCraft.Players;
+using fCraft.Plugins;
+using fCraft.Utils;
+using fCraft.Worlds;
 using JetBrains.Annotations;
+using Map = fCraft.Worlds.Map;
 
 namespace fCraft.GUI.ConfigGUI
 {
@@ -215,10 +222,7 @@ namespace fCraft.GUI.ConfigGUI
         [SortableProperty(typeof(WorldListEntry), "Compare")]
         public string Name
         {
-            get
-            {
-                return name;
-            }
+            get => name;
             set
             {
                 if (name == value) return;
@@ -227,7 +231,7 @@ namespace fCraft.GUI.ConfigGUI
                     throw new FormatException("Invalid world name");
 
                 }
-                else if (!value.Equals(name, StringComparison.OrdinalIgnoreCase) && GUI.ConfigGUI.MainForm.IsWorldNameTaken(value))
+                else if (!value.Equals(name, StringComparison.OrdinalIgnoreCase) && MainForm.IsWorldNameTaken(value))
                 {
                     throw new FormatException("Duplicate world names are not allowed.");
 
@@ -250,7 +254,7 @@ namespace fCraft.GUI.ConfigGUI
                         }
                         if (File.Exists(newFileName) && !isSameFile)
                         {
-                            string messageText = String.Format("Map file \"{0}\" already exists. Overwrite?", value + ".fcm");
+                            string messageText = $"Map file \"{value + ".fcm"}\" already exists. Overwrite?";
                             var result = MessageBox.Show(messageText, "", MessageBoxButtons.OKCancel);
                             if (result == DialogResult.Cancel) return;
                         }
@@ -259,7 +263,7 @@ namespace fCraft.GUI.ConfigGUI
                     name = value;
                     if (oldName != null)
                     {
-                        GUI.ConfigGUI.MainForm.HandleWorldRename(oldName, name);
+                        MainForm.HandleWorldRename(oldName, name);
                     }
                 }
             }
@@ -294,27 +298,15 @@ namespace fCraft.GUI.ConfigGUI
         string accessRankString;
         public string AccessPermission
         {
-            get
-            {
-                if (accessSecurity.HasRankRestriction)
-                {
-                    return GUI.ConfigGUI.MainForm.ToComboBoxOption(accessSecurity.MinRank);
-                }
-                else
-                {
-                    return DefaultRankOption;
-                }
-            }
+            get => accessSecurity.HasRankRestriction ? MainForm.ToComboBoxOption(accessSecurity.MinRank) : DefaultRankOption;
             set
             {
                 foreach (Rank rank in RankManager.Ranks)
                 {
-                    if (GUI.ConfigGUI.MainForm.ToComboBoxOption(rank) == value)
-                    {
-                        accessSecurity.MinRank = rank;
-                        accessRankString = rank.FullName;
-                        return;
-                    }
+                    if (MainForm.ToComboBoxOption(rank) != value) continue;
+                    accessSecurity.MinRank = rank;
+                    accessRankString = rank.FullName;
+                    return;
                 }
                 accessSecurity.ResetMinRank();
                 accessRankString = "";
@@ -326,27 +318,15 @@ namespace fCraft.GUI.ConfigGUI
         string buildRankString;
         public string BuildPermission
         {
-            get
-            {
-                if (buildSecurity.HasRankRestriction)
-                {
-                    return GUI.ConfigGUI.MainForm.ToComboBoxOption(buildSecurity.MinRank);
-                }
-                else
-                {
-                    return DefaultRankOption;
-                }
-            }
+            get => buildSecurity.HasRankRestriction ? MainForm.ToComboBoxOption(buildSecurity.MinRank) : DefaultRankOption;
             set
             {
                 foreach (Rank rank in RankManager.Ranks)
                 {
-                    if (GUI.ConfigGUI.MainForm.ToComboBoxOption(rank) == value)
-                    {
-                        buildSecurity.MinRank = rank;
-                        buildRankString = rank.FullName;
-                        return;
-                    }
+                    if (MainForm.ToComboBoxOption(rank) != value) continue;
+                    buildSecurity.MinRank = rank;
+                    buildRankString = rank.FullName;
+                    return;
                 }
                 buildSecurity.ResetMinRank();
                 buildRankString = null;

@@ -10,12 +10,14 @@ using System.Reflection;
 using System.Text;
 using System.Management;
 using fCraft.Events;
+using fCraft.fSystem;
+using fCraft.Utils;
 using JetBrains.Annotations;
 #if DEBUG_EVENTS
 using System.Reflection.Emit;
 #endif
 
-namespace fCraft
+namespace fCraft.fSystem
 {
 
     /// <summary> Central logging class. Logs to file, relays messages to the frontend, submits crash reports. </summary>

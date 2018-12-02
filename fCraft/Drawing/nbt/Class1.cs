@@ -1,11 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using LibNbt.Exceptions;
-using LibNbt.Queries;
-using LibNbt.Tags;
+using fCraft.Drawing.nbt.Queries;
+using fCraft.Drawing.nbt.Tags;
 
-namespace LibNbt
+namespace fCraft.Drawing.nbt
 {
     public class NbtFile : IDisposable
     {

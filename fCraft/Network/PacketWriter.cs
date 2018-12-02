@@ -3,9 +3,14 @@ using System;
 using System.IO;
 using System.Net;
 using System.Text;
+using fCraft.fSystem;
+using fCraft.Players;
+using fCraft.Utils;
+using fCraft.Worlds;
 using JetBrains.Annotations;
+using Map = fCraft.Worlds.Map;
 
-namespace fCraft {
+namespace fCraft.Network {
     // Protocol encoder for outgoing packets
     public sealed class PacketWriter : BinaryWriter {
 
