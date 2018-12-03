@@ -17,10 +17,10 @@
 
 using System.Collections.Generic;
 using System.Threading;
-using fCraft.fSystem;
-using fCraft.Players;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
 
-namespace fCraft.Commands.Command_Handlers
+namespace GemsCraft.Commands.Command_Handlers
 {
     public class VoteHandler
     {

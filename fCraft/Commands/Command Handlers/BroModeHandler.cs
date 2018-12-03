@@ -17,11 +17,11 @@
 
 using System;
 using System.Collections.Generic;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.Commands.Command_Handlers
+namespace GemsCraft.Commands.Command_Handlers
 {
     class BroMode
     {

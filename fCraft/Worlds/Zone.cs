@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
-using fCraft.fSystem;
-using fCraft.MapConversion;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Utils;
+using GemsCraft.fSystem;
+using GemsCraft.MapConversion;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Worlds {
+namespace GemsCraft.Worlds {
 
     public sealed class Zone : IClassy, INotifiesOnChange {
 

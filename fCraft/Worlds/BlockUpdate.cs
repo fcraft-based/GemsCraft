@@ -1,9 +1,9 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.Worlds {
+namespace GemsCraft.Worlds {
     /// <summary> Structure representing a pending update to the map's block array.
     /// Contains information about the block coordinates, type, and change's origin. </summary>
     public struct BlockUpdate {

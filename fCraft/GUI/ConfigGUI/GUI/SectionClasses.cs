@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using fCraft.GUI.ConfigGUI.GUI.Sections;
+using GemsCraft.GUI.ConfigGUI.GUI.Sections;
 
-namespace fCraft.GUI.ConfigGUI.GUI
+namespace GemsCraft.GUI.ConfigGUI.GUI
 {
     /// <summary>
     /// All data entered will be stored statically in the form-objects here

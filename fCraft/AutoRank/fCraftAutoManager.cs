@@ -5,13 +5,13 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using System.Diagnostics;
-using fCraft.fSystem;
-using fCraft.Players;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
 using JetBrains.Annotations;
 
 //legacy autorank support for fCraft
 
-namespace fCraft.AutoRank
+namespace GemsCraft.AutoRank
 {
     public static class fCraftAutoManager
     {

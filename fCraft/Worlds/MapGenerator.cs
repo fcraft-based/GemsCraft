@@ -4,10 +4,10 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Xml.Linq;
-using fCraft.Utils;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Worlds
+namespace GemsCraft.Worlds
 {
 
     /// <summary> Map generator themes. A theme defines what type of blocks are used to fill the map. </summary>

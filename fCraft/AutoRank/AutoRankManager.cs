@@ -5,12 +5,12 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.IO;
-using fCraft;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.AutoRank
+namespace GemsCraft.AutoRank
 {
     public static class AutoRankManager
     {

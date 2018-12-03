@@ -1,6 +1,6 @@
 ﻿// Copyright 2009-2013 Matvei Stefarov <me@matvei.org>
 
-namespace fCraft.Worlds
+namespace GemsCraft.Worlds
 {
 
     /// <summary> Describes what kind of results should BlockDB.Lookup return. </summary>

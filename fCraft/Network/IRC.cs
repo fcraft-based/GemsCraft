@@ -33,14 +33,14 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Threading;
-using fCraft.Events;
+using GemsCraft.Events;
 using System.Collections.Concurrent;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Network
+namespace GemsCraft.Network
 {
 
     /// <summary> IRC control class. </summary>
@@ -82,7 +82,7 @@ namespace fCraft.Network
                     // start the machinery!
                     thread = new Thread(IoThread)
                     {
-                        Name = "fCraft.IRC",
+                        Name = "GemsCraft.IRC",
                         IsBackground = true
                     };
                     thread.Start();

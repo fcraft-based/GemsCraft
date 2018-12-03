@@ -7,11 +7,11 @@ using System.Threading;
 using JetBrains.Annotations;
 using System.IO;
 using System.Linq;
-using fCraft.fSystem;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Players
+namespace GemsCraft.Players
 {
     /// <summary> Object representing persistent state ("record") of a player, online or offline.
     /// There is exactly one PlayerInfo object for each known Minecraft account. All data is stored in the PlayerDB. </summary>

@@ -1,10 +1,10 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft.Drawing {
+namespace GemsCraft.Drawing {
     public sealed class CopyState : ICloneable {
         public CopyState( Vector3I mark1, Vector3I mark2 ) {
             BoundingBox box = new BoundingBox( mark1, mark2 );

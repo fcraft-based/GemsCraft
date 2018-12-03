@@ -7,18 +7,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using fCraft.fSystem;
-using fCraft.Games;
-using fCraft.MapConversion;
-using fCraft.Network;
-using fCraft.Physics;
-using fCraft.Physics.Life;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Utils;
+using GemsCraft.fSystem;
+using GemsCraft.Games;
+using GemsCraft.MapConversion;
+using GemsCraft.Network;
+using GemsCraft.Physics;
+using GemsCraft.Physics.Life;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Worlds {
+namespace GemsCraft.Worlds {
     public sealed class World : IClassy {
 
         /// <summary>Toggles world chat</summary>

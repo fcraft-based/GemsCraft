@@ -17,10 +17,10 @@
 // Original: http://www.minecraftforum.net/viewtopic.php?f=25&t=9426
 
 using System;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Physics
+namespace GemsCraft.Physics
 {
     public static class TreeGeneration
     {

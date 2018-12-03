@@ -31,7 +31,7 @@ A "contributor" is any person that distributes its contribution under this licen
 using System;
 using JetBrains.Annotations;
 
-namespace fCraft.Utils {
+namespace GemsCraft.Utils {
     /// <summary> Implementation of 3D Perlin Noise after Ken Perlin's reference implementation. </summary>
     public sealed class PerlinNoise3D {
         #region Fields

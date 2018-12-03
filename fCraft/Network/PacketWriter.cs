@@ -3,14 +3,14 @@ using System;
 using System.IO;
 using System.Net;
 using System.Text;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Network {
+namespace GemsCraft.Network {
     // Protocol encoder for outgoing packets
     public sealed class PacketWriter : BinaryWriter {
 

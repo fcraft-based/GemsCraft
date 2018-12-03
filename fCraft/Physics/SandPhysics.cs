@@ -13,10 +13,10 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Physics
+namespace GemsCraft.Physics
 {
     public class SandTask : PhysicsTask
     {
@@ -59,7 +59,7 @@ namespace fCraft.Physics
                     {
                         return 0;
                     }
-                    if (fCraft.Physics.Physics.BlockThrough(nblock))
+                    if (GemsCraft.Physics.Physics.BlockThrough(nblock))
                     {
                         _world.Map.QueueUpdate(new BlockUpdate(null, (short)_pos.X, (short)_pos.Y, (short)(_nextPos + 1), Block.Air));
                         _world.Map.QueueUpdate(new BlockUpdate(null, (short)_pos.X, (short)_pos.Y, (short)_nextPos, _type));

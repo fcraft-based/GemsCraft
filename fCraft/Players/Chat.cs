@@ -2,17 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using fCraft.Events;
+using GemsCraft.Events;
 using JetBrains.Annotations;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Players {
+namespace GemsCraft.Players {
     /// <summary> Helper class for handling player-generated chat. </summary>
     public static class Chat {
         public static List<string> Swears = new List<string>();
@@ -621,7 +621,7 @@ namespace fCraft.Players {
 }
 
 
-namespace fCraft.Events {
+namespace GemsCraft.Events {
     public sealed class ChatSendingEventArgs : EventArgs, IPlayerEvent, ICancellableEvent {
         internal ChatSendingEventArgs( Player player, string message, string formattedMessage,
                                        ChatMessageType messageType, IEnumerable<Player> recepientList ) {

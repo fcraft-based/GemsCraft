@@ -1,4 +1,4 @@
-﻿namespace fCraft.GUI {
+﻿namespace GemsCraft.GUI {
     sealed partial class AboutWindow {
         /// <summary>
         /// Required designer variable.
@@ -135,7 +135,7 @@
             // picLogo
             // 
             this.picLogo.BackColor = System.Drawing.Color.Transparent;
-            this.picLogo.Image = global::fCraft.Properties.Resources.main;
+            this.picLogo.Image = global::GemsCraft.Properties.Resources.main;
             this.picLogo.Location = new System.Drawing.Point(13, 69);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(524, 160);

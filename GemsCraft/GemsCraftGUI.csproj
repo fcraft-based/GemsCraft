@@ -90,9 +90,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fCraft\fCraft.csproj">
+    <ProjectReference Include="..\fCraft\GemsCraft.csproj">
       <Project>{7fbe7809-6f77-415c-abeb-a3f627e817b0}</Project>
-      <Name>fCraft</Name>
+      <Name>GemsCraft</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

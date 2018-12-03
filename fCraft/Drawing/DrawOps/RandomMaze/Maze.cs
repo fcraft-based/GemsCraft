@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace fCraft.Drawing.DrawOps.RandomMaze
+namespace GemsCraft.Drawing.DrawOps.RandomMaze
 {
     internal static class MazeUtil
     {

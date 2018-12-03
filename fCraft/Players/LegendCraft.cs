@@ -1,8 +1,8 @@
 ﻿using System;
-using fCraft.fSystem;
-using fCraft.Utils;
+using GemsCraft.fSystem;
+using GemsCraft.Utils;
 
-namespace fCraft.Players
+namespace GemsCraft.Players
 {
     public class LegendCraft
     {

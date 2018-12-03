@@ -2,7 +2,7 @@
 using System;
 using JetBrains.Annotations;
 
-namespace fCraft.MapConversion {
+namespace GemsCraft.MapConversion {
     /// <summary> Exception caused by problems with the map file's incorrect format or structure. </summary>
     public sealed class MapFormatException : Exception {
         public MapFormatException() { }

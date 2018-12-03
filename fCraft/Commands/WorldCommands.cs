@@ -5,22 +5,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using fCraft.Commands.Command_Handlers;
-using fCraft.Drawing;
-using fCraft.Drawing.Brushes;
-using fCraft.Drawing.DrawOps;
-using fCraft.fSystem;
-using fCraft.MapConversion;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Portals;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Commands.Command_Handlers;
+using GemsCraft.Drawing;
+using GemsCraft.Drawing.Brushes;
+using GemsCraft.Drawing.DrawOps;
+using GemsCraft.fSystem;
+using GemsCraft.MapConversion;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Portals;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
-using Player = fCraft.Players.Player;
+using Map = GemsCraft.Worlds.Map;
+using Player = GemsCraft.Players.Player;
 
-namespace fCraft.Commands
+namespace GemsCraft.Commands
 {
     /// <summary> Contains commands related to world management. </summary>
     static class WorldCommands

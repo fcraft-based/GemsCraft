@@ -1,10 +1,10 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
 using System.Net;
-using fCraft.fSystem;
+using GemsCraft.fSystem;
 using JetBrains.Annotations;
 
-namespace fCraft.Players {
+namespace GemsCraft.Players {
     public sealed class PlayerOpException : Exception {
         public PlayerOpException( [NotNull] Player player, PlayerInfo target,
                                   PlayerOpExceptionCode errorCode,

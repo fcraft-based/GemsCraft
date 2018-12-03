@@ -2,10 +2,10 @@
 
 using System;
 using System.Text;
-using fCraft.Utils;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.fSystem {
+namespace GemsCraft.fSystem {
     /// <summary> A task to be executed by the Scheduler.
     /// Stores timing information and state. </summary>
     public sealed class SchedulerTask {

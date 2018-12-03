@@ -2,7 +2,7 @@
 
 using System;
 
-namespace fCraft.Worlds
+namespace GemsCraft.Worlds
 {
 
     /// <summary> Context of the block change. Multiple flags can be combined. </summary>

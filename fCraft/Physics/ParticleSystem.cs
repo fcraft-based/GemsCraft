@@ -17,14 +17,14 @@
 
 using System;
 using System.Collections.Generic;
-using fCraft.Games;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
-using Map = fCraft.Worlds.Map;
+using GemsCraft.Games;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Physics
+namespace GemsCraft.Physics
 {
     public interface IParticleBehavior
     {

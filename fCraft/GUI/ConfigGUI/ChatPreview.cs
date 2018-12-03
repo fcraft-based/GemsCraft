@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using fCraft.GUI.ConfigGUI.GUI;
-using fCraft.Properties;
-using Color = fCraft.Utils.Color;
+using GemsCraft.GUI.ConfigGUI.GUI;
+using GemsCraft.Properties;
+using Color = GemsCraft.Utils.Color;
 
-namespace fCraft.GUI.ConfigGUI {
+namespace GemsCraft.GUI.ConfigGUI {
     internal sealed partial class ChatPreview : UserControl {
         private struct ColorPair {
             public ColorPair( int r, int g, int b, int sr, int sg, int sb ) {

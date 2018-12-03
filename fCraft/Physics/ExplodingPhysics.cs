@@ -15,13 +15,13 @@
 
 using System;
 using System.Collections.Generic;
-using fCraft.Games;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
-using Util = fCraft.Drawing.DrawOps.RandomMaze.MazeUtil;
+using GemsCraft.Games;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
+using Util = GemsCraft.Drawing.DrawOps.RandomMaze.MazeUtil;
 
-namespace fCraft.Physics
+namespace GemsCraft.Physics
 {
     public class TNTTask : PhysicsTask
     {

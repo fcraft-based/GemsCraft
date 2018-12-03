@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace fCraft.Drawing.nbt.Tags
+namespace GemsCraft.Drawing.nbt.Tags
 {
     internal interface INbtTagList
     {

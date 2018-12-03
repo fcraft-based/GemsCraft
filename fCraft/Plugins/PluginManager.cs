@@ -19,9 +19,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using fCraft.fSystem;
+using GemsCraft.fSystem;
 
-namespace fCraft.Plugins
+namespace GemsCraft.Plugins
 {
     class PluginManager
     {

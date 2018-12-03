@@ -10,15 +10,15 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using fCraft.GUI.ConfigGUI.GUI;
-using fCraft.MapConversion;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.GUI.ConfigGUI.GUI;
+using GemsCraft.MapConversion;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
 // ReSharper disable CoVariantArrayConversion
 
-namespace fCraft.GUI.ConfigGUI {
+namespace GemsCraft.GUI.ConfigGUI {
     internal sealed partial class AddWorldPopup : Form {
         private readonly BackgroundWorker _bwLoader = new BackgroundWorker(),
                                   _bwGenerator = new BackgroundWorker(),

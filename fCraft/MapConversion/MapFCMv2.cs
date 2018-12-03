@@ -3,13 +3,13 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.MapConversion {
+namespace GemsCraft.MapConversion {
     /// <summary> fCraft map format converter, for obsolete format version #2 (2010). </summary>
     public sealed class MapFCMv2 : IMapConverter {
         public const uint Identifier = 0xfc000002;

@@ -3,7 +3,7 @@
 using System;
 using JetBrains.Annotations;
 
-namespace fCraft.Utils {
+namespace GemsCraft.Utils {
 
     /// <summary> Interpolation mode for perlin noise. </summary>
     public enum NoiseInterpolationMode {

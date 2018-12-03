@@ -4,7 +4,7 @@ using System;
 using System.Xml.Linq;
 using JetBrains.Annotations;
 
-namespace fCraft.Worlds
+namespace GemsCraft.Worlds
 {
 
     public sealed class MapGeneratorArgs

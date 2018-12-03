@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Linq;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Network {
+namespace GemsCraft.Network {
     public static class IPBanList {
         static readonly SortedDictionary<string, IPBanInfo> Bans = new SortedDictionary<string, IPBanInfo>();
         static readonly object BanListLock = new object();
@@ -90,7 +90,7 @@ namespace fCraft.Network {
                             "IPBanList.Load: Done loading IP ban list ({0} records).", Bans.Count );
             } else {
                 Logger.Log( LogType.Warning,
-                            "IPBanList.Load: No IP ban file found. Ignore this message if this is your first time running LegendCraft." );
+                            "IPBanList.Load: No IP ban file found. Ignore this message if this is your first time running GemsCraft." );
             }
             IsLoaded = true;
         }
@@ -631,7 +631,7 @@ namespace fCraft.Network {
 }
 
 
-namespace fCraft.Events {
+namespace GemsCraft.Events {
 
     public class IPBanEventArgs : EventArgs {
         internal IPBanEventArgs( [NotNull] IPBanInfo info ) {

@@ -33,13 +33,13 @@ using System.Net;
 using System.ComponentModel;
 using System.Reflection;
 using System.Linq;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.ServerCLI {
+namespace GemsCraft.ServerCLI {
 
     static class Program {
         static bool useColor = true;
@@ -48,7 +48,7 @@ namespace fCraft.ServerCLI {
             Logger.Logged += OnLogged;
             Heartbeat.UriChanged += OnHeartbeatUriChanged;
 
-            Console.Title = "LegendCraft " + Updater.LatestStable + " - starting...";
+            Console.Title = "GemsCraft " + Updater.LatestStable + " - starting...";
 
 #if !DEBUG
             try {
@@ -62,7 +62,7 @@ namespace fCraft.ServerCLI {
                 {
                     CheckForUpdates();
                 }
-                Console.Title = "LegendCraft " + Updater.LatestStable + " - " + ConfigKey.ServerName.GetString();
+                Console.Title = "GemsCraft " + Updater.LatestStable + " - " + ConfigKey.ServerName.GetString();
 
                 if( !ConfigKey.ProcessPriority.IsBlank() ) {
                     try {
@@ -73,7 +73,7 @@ namespace fCraft.ServerCLI {
                 }
 
                 if( Server.StartServer() ) {
-                    Console.WriteLine( "** Running LegendCraft version {0} **", Updater.LatestStable );
+                    Console.WriteLine( "** Running GemsCraft version {0} **", Updater.LatestStable );
                     Console.WriteLine( "** Server is now ready. Type /Shutdown to exit safely. **" );
 
                     while( !Server.IsShuttingDown ) {
@@ -104,7 +104,7 @@ namespace fCraft.ServerCLI {
 
 
         static void ReportFailure( ShutdownReason reason ) {
-            Console.Title = String.Format( "LegendCraft {0} {1}", Updater.LatestStable, reason );
+            Console.Title = String.Format( "GemsCraft {0} {1}", Updater.LatestStable, reason );
             if( useColor ) Console.ForegroundColor = ConsoleColor.Red;
             Console.Error.WriteLine( "** {0} **", reason );
             if( useColor ) Console.ResetColor();
@@ -182,10 +182,10 @@ namespace fCraft.ServerCLI {
 
         static void CheckForUpdates()
         {
-            Console.WriteLine("Checking for LegendCraft updates...");
+            Console.WriteLine("Checking for GemsCraft updates...");
             try
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://raw.githubusercontent.com/LeChosenOne/LegendCraft/master/README.md");
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://raw.githubusercontent.com/apotter96/GemsCraft/master/README.md");
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
                 if (response.StatusCode == HttpStatusCode.OK)
@@ -201,8 +201,8 @@ namespace fCraft.ServerCLI {
                             if (version != null && version != Updater.LatestStable)
                             {
 
-                                Console.WriteLine("Server.Run: Your LegendCraft version is out of date. A LegendCraft Update is available!");
-                                Console.WriteLine("Download the latest LegendCraft version and restart the server? (Y/N)");
+                                Console.WriteLine("Server.Run: Your GemsCraft version is out of date. A GemsCraft Update is available!");
+                                Console.WriteLine("Download the latest GemsCraft version and restart the server? (Y/N)");
                                 string answer = Console.ReadLine();
                                 if (answer.ToLower() == "y" || answer.ToLower() == "yes" || answer.ToLower() == "yup" || answer.ToLower() == "yeah")//preparedness at its finest
                                 {
@@ -212,7 +212,7 @@ namespace fCraft.ServerCLI {
                                         {
                                             //download new zip in current directory
                                             Process.Start("http://www.legend-craft.tk/download/latest");
-                                            Console.WriteLine("Downloading the latest LegendCraft Version. Please replace all the files (not folders) in your current folder with the new ones after shutting down.");
+                                            Console.WriteLine("Downloading the latest GemsCraft Version. Please replace all the files (not folders) in your current folder with the new ones after shutting down.");
                                         }
                                         catch (Exception ex)
                                         {
@@ -224,13 +224,13 @@ namespace fCraft.ServerCLI {
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Update ignored. To ignore future LegendCraft update requests, uncheck the box in configGUI.");
+                                    Console.WriteLine("Update ignored. To ignore future GemsCraft update requests, uncheck the box in configGUI.");
                                 }
 
                             }
                             else
                             {
-                                Console.WriteLine("Your LegendCraft version is up to date!");
+                                Console.WriteLine("Your GemsCraft version is up to date!");
                             }
                         }
                     }

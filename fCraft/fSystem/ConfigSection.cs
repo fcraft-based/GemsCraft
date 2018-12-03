@@ -1,6 +1,6 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
-namespace fCraft.fSystem {
+namespace GemsCraft.fSystem {
     /// <summary> ConfigKey section/category. </summary>
     public enum ConfigSection {
 

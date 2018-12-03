@@ -1,9 +1,9 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
-using fCraft.Network;
+using GemsCraft.Network;
 using JetBrains.Annotations;
 
-namespace fCraft.Players
+namespace GemsCraft.Players
 {
 
     /// <summary> Packet struct, just a wrapper for a byte array. </summary>

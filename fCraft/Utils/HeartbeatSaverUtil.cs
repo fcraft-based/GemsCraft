@@ -16,10 +16,10 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using fCraft.Events;
-using fCraft.fSystem;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
 
-namespace fCraft.Utils
+namespace GemsCraft.Utils
 {
     class HeartbeatSaverUtil
     {

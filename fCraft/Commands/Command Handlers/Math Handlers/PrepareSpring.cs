@@ -19,9 +19,9 @@
 //for use in the /spring cmd (and possibly future cmds using similar methods).
 
 using System;
-using fCraft.Players;
+using GemsCraft.Players;
 
-namespace fCraft.Commands.Command_Handlers.Math_Handlers
+namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 {
     public static class PrepareSpring
     {

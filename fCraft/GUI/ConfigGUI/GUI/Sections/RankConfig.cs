@@ -8,12 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using fCraft.fSystem;
-using fCraft.Utils;
+using GemsCraft.fSystem;
+using GemsCraft.Utils;
 using MetroFramework.Forms;
-using static fCraft.GUI.ConfigGUI.GUI.MainForm;
+using static GemsCraft.GUI.ConfigGUI.GUI.MainForm;
 
-namespace fCraft.GUI.ConfigGUI.GUI.Sections
+namespace GemsCraft.GUI.ConfigGUI.GUI.Sections
 {
     public partial class RankConfig : MetroForm
     {

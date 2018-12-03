@@ -23,11 +23,11 @@ using System.IO;
 using ServiceStack.Text;
 using System.Collections;
 using System.Runtime.Serialization;
-using fCraft.fSystem;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Portals
+namespace GemsCraft.Portals
 {
     public class PortalDB
     {

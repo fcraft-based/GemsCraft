@@ -17,13 +17,13 @@
 //Copyright (C) <2012> Jon Baker(http://au70.net)
 
 using System;
-using fCraft.Events;
-using fCraft.Physics;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Events;
+using GemsCraft.Physics;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Games
+namespace GemsCraft.Games
 {
     public class Football
     {

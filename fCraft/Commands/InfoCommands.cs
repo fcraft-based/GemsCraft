@@ -8,15 +8,15 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Commands {
+namespace GemsCraft.Commands {
     /// <summary> Contains commands that don't do anything besides displaying some information or text.
     /// Includes several chat commands. </summary>
     static class InfoCommands {
@@ -585,6 +585,7 @@ THE SOFTWARE.*/
                         player.Message("/List portals cannot be used from Console");
                         return;
                     }
+     
                     if (player.World.Portals == null ||
                         player.World.Portals.Count == 0)
                     {
@@ -597,7 +598,7 @@ THE SOFTWARE.*/
 
                         for (int i = 0; i < player.World.Portals.Count; i++)
                         {
-                            portalNames[i] = ((fCraft.Portals.Portal)player.World.Portals[i]).Name;
+                            portalNames[i] = ((GemsCraft.Portals.Portal)player.World.Portals[i]).Name;
                         }
                         output.Append(portalNames.JoinToString(", "));
                         player.Message(output.ToString());

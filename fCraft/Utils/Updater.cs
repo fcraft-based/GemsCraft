@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using JetBrains.Annotations;
 
-namespace fCraft.Utils {
+namespace GemsCraft.Utils {
     /// <summary> Checks for updates, and keeps track of current version/revision. </summary>
     public static class Updater {
 
@@ -20,11 +20,9 @@ namespace fCraft.Utils {
 #endif
  );
 
-        public static string UserAgent {
-            get { return "LegendCraft " + LatestStable; }
-        }
+        public static string UserAgent => "GemsCraft " + LatestStable;
 
-        public const string LatestStable = "2.4.0";
+        public const string LatestStable = "Alpha 0.0";
 
         public static string UpdateUrl { get; set; }
 
@@ -45,9 +43,9 @@ namespace fCraft.Utils {
 
         public ReleaseFlags Flags { get; private set; }
 
-        public string FlagsString { get { return ReleaseFlagsToString( Flags ); } }
+        public string FlagsString => ReleaseFlagsToString( Flags );
 
-        public string[] FlagsList { get { return ReleaseFlagsToStringArray( Flags ); } }
+        public string[] FlagsList => ReleaseFlagsToStringArray( Flags );
 
         public int Version { get; private set; }
 
@@ -55,11 +53,7 @@ namespace fCraft.Utils {
 
         public DateTime Date { get; private set; }
 
-        public TimeSpan Age {
-            get {
-                return DateTime.UtcNow.Subtract( Date );
-            }
-        }
+        public TimeSpan Age => DateTime.UtcNow.Subtract( Date );
 
         public string Summary { get; private set; }
 

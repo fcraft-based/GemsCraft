@@ -19,14 +19,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using fCraft.Physics.Life;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Utils;
-using fCraft.Worlds;
-using Map = fCraft.Worlds.Map;
+using GemsCraft.Physics.Life;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
+using GemsCraft.Utils;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Commands.Command_Handlers
+namespace GemsCraft.Commands.Command_Handlers
 {
 	public class LifeHandler
 	{

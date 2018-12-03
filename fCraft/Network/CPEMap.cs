@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace fCraft.Worlds
+namespace GemsCraft.Worlds
 {
     public sealed partial class Map
     {

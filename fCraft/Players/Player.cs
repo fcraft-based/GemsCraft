@@ -7,17 +7,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading;
-using fCraft.Commands;
-using fCraft.Drawing;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Plugins;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Commands;
+using GemsCraft.Drawing;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Plugins;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft.Players
+namespace GemsCraft.Players
 {
     /// <summary> Callback for a player-made selection of one or more blocks on a map.
     /// A command may request a number of marks/blocks to select, and a specify callback

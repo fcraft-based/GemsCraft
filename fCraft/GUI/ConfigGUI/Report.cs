@@ -5,9 +5,9 @@ using System.Net;
 using System.Net.Cache;
 using System.Text;
 using System.Windows.Forms;
-using fCraft.Utils;
+using GemsCraft.Utils;
 
-namespace fCraft.GUI.ConfigGUI
+namespace GemsCraft.GUI.ConfigGUI
 {
     public partial class Report : Form
     {
@@ -131,7 +131,7 @@ namespace fCraft.GUI.ConfigGUI
                 }
             }
 
-            MessageBox.Show("Report sent. Thank you for helping with the development of LegendCraft!");
+            MessageBox.Show("Report sent. Thank you for helping with the development of GemsCraft!");
             this.Close();
 
         }

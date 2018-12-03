@@ -3,7 +3,7 @@
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace fCraft.GUI.ConfigGUI {
+namespace GemsCraft.GUI.ConfigGUI {
     internal sealed class CustomPictureBox : PictureBox {
         protected override void OnPaint( PaintEventArgs pe ) {
             if( Image != null ) {

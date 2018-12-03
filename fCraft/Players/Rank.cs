@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using fCraft.fSystem;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft.Players {
+namespace GemsCraft.Players {
     public sealed class Rank : IClassy, IComparable<Rank> {
 
         /// <summary> Rank color code. Should not be left blank. </summary>

@@ -3,7 +3,7 @@
 using System;
 
 // This file condenses some of the player-related enumerations
-namespace fCraft.Players {
+namespace GemsCraft.Players {
     /// <summary> List of possible reasons for players leaving the server. </summary>
     public enum LeaveReason : byte {
         /// <summary> Unknown leave reason (default) </summary>

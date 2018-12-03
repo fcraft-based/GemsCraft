@@ -9,15 +9,15 @@ using System.Net.Cache;
 using System.Reflection;
 using System.Text;
 using System.Management;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Utils;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 #if DEBUG_EVENTS
 using System.Reflection.Emit;
 #endif
 
-namespace fCraft.fSystem
+namespace GemsCraft.fSystem
 {
 
     /// <summary> Central logging class. Logs to file, relays messages to the frontend, submits crash reports. </summary>
@@ -42,7 +42,7 @@ namespace fCraft.fSystem
         public static readonly bool[] ConsoleOptions;
         public static readonly bool[] LogFileOptions;
 
-        const string DefaultLogFileName = "LegendCraft.log",
+        const string DefaultLogFileName = "GemsCraft.log",
                      LongDateFormat = "yyyy'-'MM'-'dd'_'HH'-'mm'-'ss",
                      ShortDateFormat = "yyyy'-'MM'-'dd";
         static readonly Uri CrashReportUri = new Uri("http://legend-craft.tk/crash");
@@ -651,7 +651,7 @@ namespace fCraft.fSystem
 }
 
 
-namespace fCraft.Events
+namespace GemsCraft.Events
 {
     public sealed class LogEventArgs : EventArgs
     {

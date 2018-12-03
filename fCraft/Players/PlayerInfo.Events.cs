@@ -1,12 +1,12 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
 using System.Net;
-using fCraft.Events;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Events;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Players {
+namespace GemsCraft.Players {
     sealed partial class PlayerInfo {
 
         /// <summary> Occurs when a new PlayerDB entry is being created.
@@ -118,7 +118,7 @@ namespace fCraft.Players {
 }
 
 
-namespace fCraft.Events {
+namespace GemsCraft.Events {
     public class PlayerInfoEventArgs : EventArgs {
         protected PlayerInfoEventArgs( [NotNull] PlayerInfo playerInfo ) {
             if( playerInfo == null ) throw new ArgumentNullException( "playerInfo" );

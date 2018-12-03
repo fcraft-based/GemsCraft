@@ -16,13 +16,13 @@
 using System;
 using System.Linq;
 using System.Threading;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Physics
+namespace GemsCraft.Physics
 {
     public class BlockSink : PhysicsTask
     {

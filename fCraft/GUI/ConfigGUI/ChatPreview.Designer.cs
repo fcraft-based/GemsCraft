@@ -1,4 +1,4 @@
-﻿namespace fCraft.GUI.ConfigGUI {
+﻿namespace GemsCraft.GUI.ConfigGUI {
     sealed partial class ChatPreview {
         /// <summary> 
         /// Required designer variable.

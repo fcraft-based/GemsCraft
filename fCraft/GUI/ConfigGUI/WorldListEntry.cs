@@ -3,17 +3,17 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using fCraft.fSystem;
-using fCraft.GUI.ConfigGUI.GUI;
-using fCraft.MapConversion;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.GUI.ConfigGUI.GUI;
+using GemsCraft.MapConversion;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.GUI.ConfigGUI
+namespace GemsCraft.GUI.ConfigGUI
 {
     /// <summary>
     /// A wrapper for per-World metadata, designed to be usable with SortableBindingList.

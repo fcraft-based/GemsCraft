@@ -19,11 +19,11 @@
 //This handler was made to use in those cmds specifically so that no messages would be displayed to the user when doing them.
 
 using System.Data;
-using fCraft.Drawing;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Drawing;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.Commands.Command_Handlers.Math_Handlers
+namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 {
     public class StartSpringDraw : DrawOperation
     {

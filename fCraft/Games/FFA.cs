@@ -23,15 +23,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using fCraft.Commands.Command_Handlers;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Commands.Command_Handlers;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Games
+namespace GemsCraft.Games
 {
     class FFA
     {

@@ -6,14 +6,14 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
 //All of this was pretty much taken or based off of FemtoCraft by fragmer, I wrote about 5%-7% of this lol
 
-namespace fCraft.Players
+namespace GemsCraft.Players
 {
     public sealed partial class Player
     {
@@ -215,7 +215,7 @@ namespace fCraft.Players
     {
         public static Packet MakeExtInfo(short extCount)
         {
-            String VersionString = "LegendCraft " + Updater.LatestStable;
+            String VersionString = "GemsCraft " + Updater.LatestStable;
             Logger.Log(LogType.Debug, "Send: ExtInfo({0},{1})", VersionString, extCount);
 
             Packet packet = new Packet(OpCode.ExtInfo);

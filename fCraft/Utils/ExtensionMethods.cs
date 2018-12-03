@@ -7,7 +7,7 @@ using System.Net;
 using System.Text;
 using JetBrains.Annotations;
 
-namespace fCraft.Utils
+namespace GemsCraft.Utils
 {
 
     public static class IPAddressUtil

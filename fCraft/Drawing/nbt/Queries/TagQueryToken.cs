@@ -1,4 +1,4 @@
-﻿namespace fCraft.Drawing.nbt.Queries
+﻿namespace GemsCraft.Drawing.nbt.Queries
 {
     public class TagQueryToken
     {

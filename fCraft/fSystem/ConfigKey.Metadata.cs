@@ -6,11 +6,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.fSystem {
+namespace GemsCraft.fSystem {
 
     /// <summary> Describes attributes and metadata of a configuration key. </summary>
     [AttributeUsage( AttributeTargets.Field )]

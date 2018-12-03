@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using JetBrains.Annotations;
 
-namespace fCraft.Utils
+namespace GemsCraft.Utils
 {
 
     /// <summary> Static class with definitions of Minecraft color codes,

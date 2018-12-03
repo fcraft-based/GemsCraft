@@ -16,12 +16,12 @@
 //Copyright (C) 2012 Lao Tszy (lao_tszy@yahoo.co.uk)
 
 using System;
-using fCraft.Commands;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Commands;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Drawing.DrawOps.RandomMaze
+namespace GemsCraft.Drawing.DrawOps.RandomMaze
 {
     internal class RandomMazeDrawOperation : DrawOpWithBrush
     {

@@ -2,9 +2,9 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using fCraft.Utils;
+using GemsCraft.Utils;
 
-namespace fCraft.GUI {
+namespace GemsCraft.GUI {
     public sealed partial class AboutWindow : Form {
         public AboutWindow() {
             InitializeComponent();
@@ -12,7 +12,7 @@ namespace fCraft.GUI {
         }
         private void lfCraft_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e ) {
             try {
-                Process.Start( "http://www.fcraft.net" );
+                Process.Start( "http://www.GemsCraft.net" );
             } catch { }
         }
 

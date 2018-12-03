@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fCraft", "fCraft\fCraft.csproj", "{7FBE7809-6F77-415C-ABEB-A3F627E817B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GemsCraft", "fCraft\GemsCraft.csproj", "{7FBE7809-6F77-415C-ABEB-A3F627E817B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateInstaller", "UpdateInstaller\UpdateInstaller.csproj", "{478256DE-BD19-4046-9449-A12FF90EE6A8}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateBuilder", "UpdaterBui
 		{7FBE7809-6F77-415C-ABEB-A3F627E817B0} = {7FBE7809-6F77-415C-ABEB-A3F627E817B0}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GemsCraft", "GemsCraft\GemsCraft.csproj", "{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GemsCraftGUI", "GemsCraft\GemsCraftGUI.csproj", "{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

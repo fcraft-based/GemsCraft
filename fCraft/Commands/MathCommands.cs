@@ -19,13 +19,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using fCraft.Commands.Command_Handlers.Math_Handlers;
-using fCraft.Drawing;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Commands.Command_Handlers.Math_Handlers;
+using GemsCraft.Drawing;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.Commands
+namespace GemsCraft.Commands
 {
     public class MathCommands
     {

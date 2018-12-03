@@ -3,15 +3,15 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Threading;
-using fCraft.Drawing;
-using fCraft.Drawing.Brushes;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Utils;
+using GemsCraft.Drawing;
+using GemsCraft.Drawing.Brushes;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Players {
+namespace GemsCraft.Players {
     public sealed partial class PlayerInfo {
         readonly object actionLock = new object();
 

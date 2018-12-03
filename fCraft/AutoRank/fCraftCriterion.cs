@@ -2,12 +2,12 @@
 using System;
 using System.Linq;
 using System.Xml.Linq;
-using fCraft.Players;
+using GemsCraft.Players;
 using JetBrains.Annotations;
 
 //legacy autorank support for fCraft
 
-namespace fCraft.AutoRank
+namespace GemsCraft.AutoRank
 {
     public sealed class fCraftCriterion : ICloneable
     {

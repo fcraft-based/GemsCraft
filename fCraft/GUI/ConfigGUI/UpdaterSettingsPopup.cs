@@ -2,9 +2,9 @@
 
 using System;
 using System.Windows.Forms;
-using fCraft.Utils;
+using GemsCraft.Utils;
 
-namespace fCraft.GUI.ConfigGUI {
+namespace GemsCraft.GUI.ConfigGUI {
     public sealed partial class UpdaterSettingsPopup : Form {
 
         public string RunBeforeUpdate {

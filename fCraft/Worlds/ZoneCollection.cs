@@ -5,12 +5,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Utils;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Worlds {
+namespace GemsCraft.Worlds {
     /// <summary> A collection of zones within a map. </summary>
     [DebuggerDisplay( "Count = {Count}" )]
     public sealed class ZoneCollection : ICollection<Zone>, ICollection, ICloneable, INotifiesOnChange {

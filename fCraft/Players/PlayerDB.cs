@@ -9,13 +9,13 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Utils;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Players
+namespace GemsCraft.Players
 {
     /// <summary> Persistent database of player information. </summary>
     public static class PlayerDB

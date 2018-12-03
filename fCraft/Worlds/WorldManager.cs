@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.MapConversion;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Utils;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.MapConversion;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Worlds {
+namespace GemsCraft.Worlds {
     public static class WorldManager {
         public const string BuildSecurityXmlTagName = "BuildSecurity",
                             AccessSecurityXmlTagName = "AccessSecurity",
@@ -76,7 +76,7 @@ namespace fCraft.Worlds {
 #if !DEBUG
                             } catch( Exception ex ) {
                                 Logger.LogAndReportCrash( "An error occured while trying to parse one of the entries on the world list",
-                                                          "LegendCraft", ex, false );
+                                                          "GemsCraft", ex, false );
                             }
 #endif
                         }
@@ -110,7 +110,7 @@ namespace fCraft.Worlds {
                 if( newMainWorld == null ) {
                     Logger.Log( LogType.Warning,
                                 "Server.Start: Could not load any of the specified worlds, or no worlds were specified. " +
-                                "Creating default \"main\" world. Ignore this message if this is your first time running LegendCraft." );
+                                "Creating default \"main\" world. Ignore this message if this is your first time running GemsCraft." );
                     newMainWorld = AddWorld( null, "main", MapGenerator.GenerateFlatgrass( 128, 128, 64 ), true );
                 }
 

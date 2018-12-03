@@ -15,10 +15,10 @@
 
 //Copyright (C) 2012 Lao Tszy (lao_tszy@yahoo.co.uk)
 
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.Drawing.DrawOps.RandomMaze
+namespace GemsCraft.Drawing.DrawOps.RandomMaze
 {
 	class MazeCuboidDrawOperation : DrawOperation 
 	{

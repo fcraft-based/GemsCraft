@@ -20,15 +20,15 @@
 using System;
 using System.IO;
 using System.Linq;
-using fCraft.fSystem;
-using fCraft.MapConversion;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Utils;
-using fCraft.Worlds;
-using Map = fCraft.Worlds.Map;
+using GemsCraft.fSystem;
+using GemsCraft.MapConversion;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Commands.Command_Handlers
+namespace GemsCraft.Commands.Command_Handlers
 {
     class RealmHandler
     {

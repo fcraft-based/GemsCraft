@@ -16,10 +16,10 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
-using fCraft.fSystem;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.Worlds;
 
-namespace fCraft.Physics
+namespace GemsCraft.Physics
 {
 	public enum TaskCategory
 	{

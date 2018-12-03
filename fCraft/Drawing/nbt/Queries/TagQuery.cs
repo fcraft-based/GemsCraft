@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace fCraft.Drawing.nbt.Queries
+namespace GemsCraft.Drawing.nbt.Queries
 {
     public class TagQuery
     {

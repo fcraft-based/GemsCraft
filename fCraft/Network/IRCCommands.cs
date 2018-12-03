@@ -27,7 +27,7 @@
 
 using System;
 
-namespace fCraft.Network {
+namespace GemsCraft.Network {
     // ReSharper disable UnusedMember.Global
     public static class IRCCommands {
         public static string Pass( string password ) {

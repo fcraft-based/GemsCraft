@@ -15,21 +15,21 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using fCraft.Commands;
-using fCraft.Commands.Command_Handlers;
-using fCraft.Drawing;
-using fCraft.Events;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Portals;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Commands;
+using GemsCraft.Commands.Command_Handlers;
+using GemsCraft.Drawing;
+using GemsCraft.Events;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Portals;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 using ThreadState = System.Threading.ThreadState;
 
-namespace fCraft.fSystem {
+namespace GemsCraft.fSystem {
     /// <summary> Core of an fCraft server. Manages startup/shutdown, online player
     /// sessions, and global events and scheduled tasks. </summary>
     public static partial class Server {
@@ -98,14 +98,14 @@ namespace fCraft.fSystem {
         }
 
 
-        /// <summary> Produces a string containing all recognized arguments that wereset/passed to this instance of fCraft. </summary>
+        /// <summary> Produces a string containing all recognized arguments that wereset/passed to this instance of GemsCraft. </summary>
         /// <returns> A string containing all given arguments, or an empty string if none were set. </returns>
         public static string GetArgString() {
             return String.Join( " ", GetArgList() );
         }
 
 
-        /// <summary> Produces a list of arguments that were passed to this instance of fCraft. </summary>
+        /// <summary> Produces a list of arguments that were passed to this instance of GemsCraft. </summary>
         /// <returns> An array of strings, formatted as --key="value" (or, for flag arguments, --key).
         /// Returns an empty string array if no arguments were set. </returns>
         public static string[] GetArgList() {
@@ -143,7 +143,7 @@ namespace fCraft.fSystem {
             if (rawArgs == null) throw new ArgumentNullException("rawArgs");
             if (libraryInitialized)
             {
-                throw new InvalidOperationException("LegendCraft library is already initialized");
+                throw new InvalidOperationException("GemsCraft library is already initialized");
             }
             ServicePointManager.Expect100Continue = false;
 
@@ -285,7 +285,7 @@ namespace fCraft.fSystem {
             if( !libraryInitialized ) {
                 throw new InvalidOperationException( "Server.InitLibrary must be called before Server.InitServer" );
             }
-            fCraft.fSystem.Server.RaiseEvent( fCraft.fSystem.Server.Initializing );
+            GemsCraft.fSystem.Server.RaiseEvent( GemsCraft.fSystem.Server.Initializing );
 
             // Instantiate DeflateStream to make sure that libMonoPosix is present.
             // This allows catching misconfigured Mono installs early, and stopping the server.
@@ -297,9 +297,9 @@ namespace fCraft.fSystem {
             // warnings/disclaimers
             if( Updater.CurrentRelease.IsFlagged( ReleaseFlags.Dev ) ) {
                 Logger.Log( LogType.Warning,
-                            "You are using an unreleased developer version of LegendCraft. " +
+                            "You are using an unreleased developer version of GemsCraft. " +
                             "Do not use this version unless you are ready to deal with bugs and potential data loss. " +
-                            "Consider using the latest stable version instead, available from http://github.com/LeChosenOne/LegendCraft/releases" );
+                            "Consider using the latest stable version instead, available from http://github.com/apotter96/GemsCraft/releases" );
             }
 
             if( Updater.CurrentRelease.IsFlagged( ReleaseFlags.Unstable ) ) {
@@ -330,7 +330,7 @@ namespace fCraft.fSystem {
 
             // try to load the config
             if( !Config.Load( false, false ) ) {
-                throw new Exception( "LegendCraft Config failed to initialize" );
+                throw new Exception( "GemsCraft Config failed to initialize" );
             }
 
             if( ConfigKey.VerifyNames.GetEnum<NameVerificationMode>() == NameVerificationMode.Never ) {
@@ -434,7 +434,7 @@ namespace fCraft.fSystem {
 
             //check for updates, updates are now checked from serverGUI/serverCLI
             
-            /*Logger.Log(LogType.ConsoleOutput, "Checking for LegendCraft updates...");
+            /*Logger.Log(LogType.ConsoleOutput, "Checking for GemsCraft updates...");
             try
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://legendcraft.webuda.com//CurrentVersion.html");
@@ -448,7 +448,7 @@ namespace fCraft.fSystem {
                         {
                             StreamReader streamReader = new StreamReader(stream);
                             string version = streamReader.ReadLine();
-                            if (version != null && version != fCraft.Updater.LatestStable)
+                            if (version != null && version != GemsCraft.Updater.LatestStable)
                             {
 
                                 Logger.Log(LogType.Warning, "Server.Run: Your LegendCraft version is out of date. A LegendCraft Update is available!");
@@ -637,7 +637,7 @@ namespace fCraft.fSystem {
             lock( ShutdownLock ) {
                 if( !CancelShutdown() ) return;
                 shutdownThread = new Thread( ShutdownThread ) {
-                    Name = "fCraft.Shutdown"
+                    Name = "GemsCraft.Shutdown"
                 };
                 if( shutdownParams.Delay >= ChatTimer.MinDuration ) {
                     string timerMsg = String.Format( "Server {0} ({1})",

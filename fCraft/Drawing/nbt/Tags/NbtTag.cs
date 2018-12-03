@@ -1,8 +1,8 @@
 ﻿using System.IO;
-using fCraft.Drawing.nbt.Exceptions;
-using fCraft.Drawing.nbt.Queries;
+using GemsCraft.Drawing.nbt.Exceptions;
+using GemsCraft.Drawing.nbt.Queries;
 
-namespace fCraft.Drawing.nbt.Tags
+namespace GemsCraft.Drawing.nbt.Tags
 {
     public abstract class NbtTag
     {

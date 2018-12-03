@@ -1,11 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using fCraft.Commands;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Commands;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Drawing
+namespace GemsCraft.Drawing
 {
     public sealed class UndoState
     {

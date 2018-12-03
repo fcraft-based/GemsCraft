@@ -5,16 +5,16 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using fCraft.Commands;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Commands;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft.fSystem {
+namespace GemsCraft.fSystem {
 
     /*
      * Config format-version changelog:
@@ -63,7 +63,7 @@ namespace fCraft.fSystem {
      *                  PlayerClass -> Rank
      *              Removed "rank" from PlayerClass/Rank object
      *              Made the order of Rank elements determine the relative index
-     *              Config.xml files of earlier versions than 111 can NOT be loaded by this copy of fCraft.
+     *              Config.xml files of earlier versions than 111 can NOT be loaded by this copy of GemsCraft.
      *
      * 112 - r235 - Removed PingInterval config key
      *              Removed inactive ControlPhysics and AddLandmarks permissions
@@ -173,7 +173,7 @@ namespace fCraft.fSystem {
         /// <summary>  Supported version of the Minecraft classic protocol. </summary>
         public const int ProtocolVersion = 7;
 
-        /// <summary> Latest version of config.xml available at the time of building this copy of fCraft.
+        /// <summary> Latest version of config.xml available at the time of building this copy of GemsCraft.
         /// Config.xml files saved with this build will have this version number embedded. </summary>
         public const int CurrentVersion = 156;
 
@@ -355,7 +355,7 @@ namespace fCraft.fSystem {
                                     "Please run ConfigGUI to make sure that everything is in order." );
                     } else if( version != CurrentVersion ) {
                         Logger.Log( LogType.Warning,
-                                    "Config.Load: Your config.xml was made for a different version of 800Craft / fCraft. " +
+                                    "Config.Load: Your config.xml was made for a different version of 800Craft / GemsCraft. " +
                                     "Some obsolete settings might be ignored, and some recently-added settings will be set to defaults. " +
                                     "It is recommended that you run ConfigGUI to make sure that everything is in order." );
                     }
@@ -1296,7 +1296,7 @@ namespace fCraft.fSystem {
 }
 
 
-namespace fCraft.Events {
+namespace GemsCraft.Events {
 
     public sealed class ConfigKeyChangingEventArgs : EventArgs, ICancellableEvent {
         public ConfigKey Key { get; private set; }

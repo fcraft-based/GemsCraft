@@ -35,15 +35,15 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Threading;
-using fCraft.Events;
+using GemsCraft.Events;
 using System.Collections.Concurrent;
 using JetBrains.Annotations;
 using System.Text;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.Network
+namespace GemsCraft.Network
 {
     public static class GlobalChat
     {
@@ -82,7 +82,7 @@ namespace fCraft.Network
                 {
                     thread = new Thread(IoThread)
                     {
-                        Name = "LegendCraft.GlobalChat",
+                        Name = "GemsCraft.GlobalChat",
                         IsBackground = true
                     };
                     thread.Start();
@@ -165,9 +165,9 @@ namespace fCraft.Network
                         ActualBotNick = desiredBotNick;
                         reconnect = false;
                         Logger.Log(LogType.SystemActivity,
-                                    "Connecting to LegendCraft Global Chat as {2}",
+                                    "Connecting to GemsCraft Global Chat as {2}",
                                     hostName, port, ActualBotNick);
-                        if (ActualBotNick == "Custom Minecraft Server (LegendCraft)")
+                        if (ActualBotNick == "Custom Minecraft Server (GemsCraft)")
                         {
                             Logger.Log(LogType.Error, "You must set a server name to connect to global chat.");
                             reconnect = false;
@@ -320,13 +320,13 @@ namespace fCraft.Network
                         if (!ResponsibleForInputParsing) return;
                         if (msg.Nick.StartsWith("("))
                         {
-                            SendList.Message("&g[Global] Server {0} joined the LegendCraft Global Chat", msg.Nick);
-                            Logger.Log(LogType.GlobalChat,"[Global] Server {0} joined the LegendCraft Global Chat", msg.Nick);               
+                            SendList.Message("&g[Global] Server {0} joined the GemsCraft Global Chat", msg.Nick);
+                            Logger.Log(LogType.GlobalChat,"[Global] Server {0} joined the GemsCraft Global Chat", msg.Nick);               
                         }
                         else
                         {
-                            SendList.Message("&g[Global] {0} joined the LegendCraft Global Chat", msg.Nick);
-                            Logger.Log(LogType.GlobalChat, "[Global] {0} joined the LegendCraft Global Chat", msg.Nick);                   
+                            SendList.Message("&g[Global] {0} joined the GemsCraft Global Chat", msg.Nick);
+                            Logger.Log(LogType.GlobalChat, "[Global] {0} joined the GemsCraft Global Chat", msg.Nick);                   
                         }
                         return;
 
@@ -351,8 +351,8 @@ namespace fCraft.Network
                     case IRCMessageType.Part:
                     case IRCMessageType.Quit:
                         if (!ResponsibleForInputParsing) return;
-                        SendList.Message("&g[Global] Server {0} left the LegendCraft Global Chat", msg.Nick);
-                        Logger.Log(LogType.GlobalChat, "[Global] Server {0} left the LegendCraft Global Chat", msg.Nick);
+                        SendList.Message("&g[Global] Server {0} left the GemsCraft Global Chat", msg.Nick);
+                        Logger.Log(LogType.GlobalChat, "[Global] Server {0} left the GemsCraft Global Chat", msg.Nick);
                         return;
 
 
@@ -388,7 +388,7 @@ namespace fCraft.Network
                             //wont happen
                             case IRCReplyCode.ErrorBadChannelKey:
                                 Logger.Log(LogType.SystemActivity,
-                                            "Error: Channel password required for {0}. LegendCraft does not currently support passworded channels.",
+                                            "Error: Channel password required for {0}. GemsCraft does not currently support passworded channels.",
                                             msg.Channel);
                                 die = true;
                                 GCReady = false;
@@ -541,7 +541,7 @@ namespace fCraft.Network
         {
             hostName = "irc.dal.net";
             port = 6667;
-            channelNames = new[] { "#LegendCraft" };
+            channelNames = new[] { "#GemsCraft_Global" };
             for (int i = 0; i < channelNames.Length; i++)
             {
                 channelNames[i] = channelNames[i].Trim();

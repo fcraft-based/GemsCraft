@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.fSystem {
+namespace GemsCraft.fSystem {
     /// <summary> A general-purpose task scheduler. </summary>
     public static class Scheduler {
         static readonly HashSet<SchedulerTask> Tasks = new HashSet<SchedulerTask>();
@@ -27,11 +27,11 @@ namespace fCraft.fSystem {
             Logger.Log( LogType.Debug, "Scheduler: Starting..." );
 #endif
             schedulerThread = new Thread( MainLoop ) {
-                Name = "fCraft.Main"
+                Name = "GemsCraft.Main"
             };
             schedulerThread.Start();
             backgroundThread = new Thread( BackgroundLoop ) {
-                Name = "fCraft.Background"
+                Name = "GemsCraft.Background"
             };
             backgroundThread.Start();
         }

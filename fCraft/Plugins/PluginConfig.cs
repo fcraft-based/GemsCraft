@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace fCraft.Plugins
+namespace GemsCraft.Plugins
 {
     public abstract class PluginConfig
     {

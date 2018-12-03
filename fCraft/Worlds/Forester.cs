@@ -4,12 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using fCraft.Events;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Events;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft.Events {
+namespace GemsCraft.Events {
     public sealed class ForesterBlockPlacingEventArgs : EventArgs {
         internal ForesterBlockPlacingEventArgs( Vector3I coordinate, Block block ) {
             Coordinate = coordinate;
@@ -20,7 +20,7 @@ namespace fCraft.Events {
     }
 }
 
-namespace fCraft {
+namespace GemsCraft {
     /// <summary> Vegetation generator for MapGenerator. </summary>
     public static class Forester {
         const int MaxTries = 1000;

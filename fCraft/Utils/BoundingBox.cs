@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Xml.Linq;
 using JetBrains.Annotations;
 
-namespace fCraft.Utils {
+namespace GemsCraft.Utils {
 
     /// <summary>
     /// Defines a 3D bounding box, in integer cartesian coordinates

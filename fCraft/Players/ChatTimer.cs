@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using fCraft.fSystem;
-using fCraft.Utils;
+using GemsCraft.fSystem;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Players {
+namespace GemsCraft.Players {
     public sealed class ChatTimer {
         public static readonly TimeSpan MinDuration = TimeSpan.FromSeconds( 1 );
         static readonly TimeSpan Hour = TimeSpan.FromHours( 1 );

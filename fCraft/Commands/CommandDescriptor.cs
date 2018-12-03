@@ -3,12 +3,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Commands {
+namespace GemsCraft.Commands {
 
     /// <summary> Delegate for command handlers/callbacks. </summary>
     /// <param name="source"> Player who called the command. </param>

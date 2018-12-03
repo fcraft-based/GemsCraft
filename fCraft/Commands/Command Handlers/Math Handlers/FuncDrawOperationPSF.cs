@@ -16,9 +16,9 @@
 //Copyright (C) <2012> Lao Tszy (lao_tszy@yahoo.co.uk)
 
 using System;
-using fCraft.Players;
+using GemsCraft.Players;
 
-namespace fCraft.Commands.Command_Handlers.Math_Handlers
+namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 {
 	public class FuncDrawOperationPoints : FuncDrawOperation
 	{

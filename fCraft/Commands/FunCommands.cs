@@ -16,18 +16,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using fCraft.Commands.Command_Handlers;
-using fCraft.Drawing.DrawOps;
-using fCraft.Drawing.DrawOps.RandomMaze;
-using fCraft.fSystem;
-using fCraft.Games;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
-using Map = fCraft.Worlds.Map;
+using GemsCraft.Commands.Command_Handlers;
+using GemsCraft.Drawing.DrawOps;
+using GemsCraft.Drawing.DrawOps.RandomMaze;
+using GemsCraft.fSystem;
+using GemsCraft.Games;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Commands
+namespace GemsCraft.Commands
 {
     internal static class FunCommands
     {
@@ -70,7 +70,7 @@ namespace fCraft.Commands
                 "zombie"
                                      };
 
-        public static void PlayerMoved(object sender, fCraft.Events.PlayerMovingEventArgs e)
+        public static void PlayerMoved(object sender, GemsCraft.Events.PlayerMovingEventArgs e)
         {
             if (e.Player.Info.IsFrozen || e.Player.SpectatedPlayer != null || !e.Player.SpeedMode)
                 return;
@@ -769,8 +769,8 @@ THE SOFTWARE.*/
                             p.JoinWorld(player.World, WorldChangeReason.Rejoin);
                         }
 
-                        fCraft.Games.Infection.GetInstance(world);
-                        fCraft.Games.Infection.Start();
+                        Infection.GetInstance(world);
+                        Infection.Start();
                     }
                     catch (Exception e)
                     {
@@ -783,7 +783,7 @@ THE SOFTWARE.*/
             {
                 if (world.gameMode == GameMode.Infection)
                 {
-                    fCraft.Games.Infection.Stop(player);
+                    Infection.Stop(player);
                     return;
                 }
                 else
@@ -850,8 +850,8 @@ THE SOFTWARE.*/
                             p.JoinWorld(player.World, WorldChangeReason.Rejoin);
                         }
 
-                        fCraft.Games.Infection.GetInstance(world);
-                        fCraft.Games.Infection.Custom(intLimit, intDelay);
+                        Infection.GetInstance(world);
+                        Infection.Custom(intLimit, intDelay);
                     }
                     catch (Exception e)
                     {

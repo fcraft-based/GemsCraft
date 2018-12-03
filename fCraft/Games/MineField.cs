@@ -18,15 +18,15 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Physics;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
-using Map = fCraft.Worlds.Map;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Physics;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Games
+namespace GemsCraft.Games
 {
     class MineField
     {

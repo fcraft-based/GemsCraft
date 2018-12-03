@@ -1,16 +1,16 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
 using System.Diagnostics;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.fSystem {
+namespace GemsCraft.fSystem {
     /// <summary> Enumeration of available configuration keys. See comments
     /// at the top of Config.cs for a history of changes. </summary>
     public enum ConfigKey {
         #region General
 
-        [StringKey( ConfigSection.General, "[LegendCraft] Default",
+        [StringKey( ConfigSection.General, "[GemsCraft] Default",
 @"The name of the server, as shown on the welcome screen and the
 official server list (if server is public).",
             MinLength = 1, MaxLength = 64 )]
@@ -86,10 +86,10 @@ changes if your computer's IP or server's port change." )]
 
 
         [IntKey( ConfigSection.General, 25565,
-@"Port number on your local machine that LegendCraft uses to listen for
+@"Port number on your local machine that GemsCraft uses to listen for
 incoming connections. If you are behind a router, you may need
 to set up port forwarding. You may also need to add a firewall
-exception for ServerGUI/ServerCLI/ConfigGUI. Note that your
+exception for ServerCLI/GemsCraft. Note that your
 server's URL will change if you change the port number.",
             MinValue = 1, MaxValue = 65535 )]
         Port,
@@ -370,7 +370,7 @@ If exceeded, oldest logs will be erased first. Set this to 0 to keep all logs.",
         #region IRC
 
         [BoolKey( ConfigSection.IRC, false,
-@"LegendCraft includes an IRC (Internet Relay Chat) client for
+@"GemsCraft includes an IRC (Internet Relay Chat) client for
 relaying messages to and from any IRC network.
 Note that encrypted IRC (via SSL) is not supported." )]
         IRCBotEnabled,
@@ -470,7 +470,7 @@ with IRC bots falling behind on messages.",
 
         [BoolKey( ConfigSection.Advanced, true,
 @"Crash reports are created when serious unexpected errors occur.
-Being able to receive crash reports helps identify bugs and improve LegendCraft!
+Being able to receive crash reports helps identify bugs and improve GemsCraft!
 The report consists of the error information, OS and runtime versions,
 a copy of config.xml, and last 25 lines of the log file.
 Reports are confidential and are not displayed publicly." )]
@@ -577,10 +577,10 @@ If disabled, heartbeat data is written to heartbeatdata.txt." )]
         [IPKey( ConfigSection.Advanced, IPKeyAttribute.BlankValueMeaning.Any,
 @"If the machine has more than one available IP address (for example
 if you have more than one NIC) you can use this setting to make
-LegendCraft bind to the same IP every time." )]
+GemsCraft bind to the same IP every time." )]
         IP,
 
-        [EnumKey( ConfigSection.Advanced, fCraft.Players.BandwidthUseMode.Normal,
+        [EnumKey( ConfigSection.Advanced, GemsCraft.Players.BandwidthUseMode.Normal,
 @"Determines the bandwidth use mode.
 High/Highest settings will reduce jitter of player movement, but increase bandwidth use.
 Low/Lowest settings will introduce some popping in/out of players and increase jitter,

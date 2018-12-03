@@ -1,4 +1,4 @@
-﻿namespace fCraft.Drawing.nbt.Tags
+﻿namespace GemsCraft.Drawing.nbt.Tags
 {
     internal interface INbtTagValue<T>
     {

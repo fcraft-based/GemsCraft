@@ -1,11 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
 using System.Windows.Forms;
-using fCraft.fSystem;
-using fCraft.Players;
-using static fCraft.GUI.ConfigGUI.GUI.SectionClasses;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using static GemsCraft.GUI.ConfigGUI.GUI.SectionClasses;
 
-namespace fCraft.GUI.ConfigGUI.GUI
+namespace GemsCraft.GUI.ConfigGUI.GUI
 {
     partial class MainForm
     {

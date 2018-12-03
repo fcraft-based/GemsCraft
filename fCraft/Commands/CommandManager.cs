@@ -2,14 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using fCraft.Commands;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Commands;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Commands {
+namespace GemsCraft.Commands {
     /// <summary> Static class that allows registration and parsing of all text commands. </summary>
     public static class CommandManager {
         static readonly SortedList<string, string> Aliases = new SortedList<string, string>();
@@ -71,7 +71,7 @@ namespace fCraft.Commands {
         }
 
 
-        /// <summary> Registers a custom command with fCraft.
+        /// <summary> Registers a custom command with GemsCraft.
         /// CommandRegistrationException may be thrown if the given descriptor does not meet all the requirements. </summary>
         public static void RegisterCustomCommand( [NotNull] CommandDescriptor descriptor ) {
             if( descriptor == null ) throw new ArgumentNullException( "descriptor" );
@@ -288,7 +288,7 @@ namespace fCraft.Commands {
 }
 
 
-namespace fCraft.Events {
+namespace GemsCraft.Events {
     public class CommandRegisteredEventArgs : EventArgs {
         internal CommandRegisteredEventArgs( CommandDescriptor commandDescriptor ) {
             CommandDescriptor = commandDescriptor;

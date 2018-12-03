@@ -4,9 +4,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using fCraft.Utils;
+using GemsCraft.Utils;
 
-namespace fCraft.GUI.ConfigGUI {
+namespace GemsCraft.GUI.ConfigGUI {
     public sealed partial class TextEditorPopup : Form {
         public string OriginalText { get; private set; }
         public string FileName { get; private set; }

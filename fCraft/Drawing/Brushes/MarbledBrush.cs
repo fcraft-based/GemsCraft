@@ -3,13 +3,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using fCraft.Commands;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Commands;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft.Drawing.Brushes {
+namespace GemsCraft.Drawing.Brushes {
     public sealed class MarbledBrushFactory : IBrushFactory {
         public static readonly MarbledBrushFactory Instance = new MarbledBrushFactory();
 

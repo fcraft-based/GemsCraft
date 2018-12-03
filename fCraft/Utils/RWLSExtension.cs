@@ -3,7 +3,7 @@
 using System;
 using System.Threading;
 
-namespace fCraft.Utils
+namespace GemsCraft.Utils
 {
     internal static class RWLSExtension
     {

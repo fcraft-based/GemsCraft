@@ -8,8 +8,8 @@
     <ProjectGuid>{7FBE7809-6F77-415C-ABEB-A3F627E817B0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>fCraft</RootNamespace>
-    <AssemblyName>fCraft</AssemblyName>
+    <RootNamespace>GemsCraft</RootNamespace>
+    <AssemblyName>GemsCraft</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>

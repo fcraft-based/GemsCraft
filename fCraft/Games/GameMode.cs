@@ -1,4 +1,4 @@
-﻿namespace fCraft.Games
+﻿namespace GemsCraft.Games
 {
     public enum GameMode
     {

@@ -11,15 +11,15 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using fCraft.fSystem;
-using fCraft.GUI.ConfigGUI.GUI.Sections;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.fSystem;
+using GemsCraft.GUI.ConfigGUI.GUI.Sections;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 using MetroFramework.Forms;
-using Color = fCraft.Utils.Color;
+using Color = GemsCraft.Utils.Color;
 
-namespace fCraft.GUI.ConfigGUI.GUI
+namespace GemsCraft.GUI.ConfigGUI.GUI
 {
     
     public partial class MainForm : MetroForm
@@ -1878,7 +1878,7 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
         {
             try
             {
-                Process.Start("https://github.com/LeChosenOne/LegendCraft/blob/master/README.md");
+                Process.Start("https://github.com/apotter96/GemsCraft/blob/master/README.md");
             }
             catch
             {

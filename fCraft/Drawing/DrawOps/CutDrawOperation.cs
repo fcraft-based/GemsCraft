@@ -1,12 +1,12 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
 using System;
-using fCraft.Drawing.Brushes;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Drawing.Brushes;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Drawing.DrawOps {
+namespace GemsCraft.Drawing.DrawOps {
     public sealed class CutDrawOperation : DrawOperation {
         public override string Name {
             get { return "Cut"; }

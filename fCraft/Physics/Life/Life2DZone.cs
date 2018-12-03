@@ -18,13 +18,13 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
-using Map = fCraft.Worlds.Map;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Physics.Life
+namespace GemsCraft.Physics.Life
 {
 	public class CircularBuffer<T> where T:IEquatable<T>
 	{

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace fCraft.Drawing.nbt.Tags
+namespace GemsCraft.Drawing.nbt.Tags
 {
 	public class NbtDouble : NbtTag, INbtTagValue<double>
 	{

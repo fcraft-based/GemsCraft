@@ -2,12 +2,12 @@
 
 using System;
 using System.Collections.Generic;
-using fCraft.Commands;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Commands;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Drawing.DrawOps {
+namespace GemsCraft.Drawing.DrawOps {
     public sealed class Fill2DDrawOperation : DrawOpWithBrush {
         int maxFillExtent;
 

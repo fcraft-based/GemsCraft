@@ -12,7 +12,7 @@
     <AssemblyName>ServerCLI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>fCraft.ServerCLI.Program</StartupObject>
+    <StartupObject>GemsCraft.ServerCLI.Program</StartupObject>
     <ApplicationIcon>ServerCLI.ico</ApplicationIcon>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -89,9 +89,9 @@
     <Content Include="ServerCLI.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fCraft\fCraft.csproj">
+    <ProjectReference Include="..\fCraft\GemsCraft.csproj">
       <Project>{7FBE7809-6F77-415C-ABEB-A3F627E817B0}</Project>
-      <Name>fCraft</Name>
+      <Name>GemsCraft</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

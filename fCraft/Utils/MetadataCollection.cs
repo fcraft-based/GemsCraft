@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace fCraft.Utils {
+namespace GemsCraft.Utils {
     /// <summary> A string metadata entry. </summary>
     /// <typeparam name="TValue"> Value type. Must be a reference type. </typeparam>
     [DebuggerDisplay( "Count = {Count}" )]

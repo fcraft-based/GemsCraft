@@ -2,10 +2,10 @@
 // ReSharper disable UnusedMemberInSuper.Global
 
 using System;
-using fCraft.Players;
-using fCraft.Worlds;
+using GemsCraft.Players;
+using GemsCraft.Worlds;
 
-namespace fCraft.Utils {
+namespace GemsCraft.Utils {
     /// <summary> An EventArgs for an event that can be cancelled. </summary>
     public interface ICancellableEvent {
         bool Cancel { get; set; }

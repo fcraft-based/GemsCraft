@@ -2,13 +2,13 @@
 using System;
 using System.Net;
 using System.Collections.Generic;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.fSystem {
+namespace GemsCraft.fSystem {
     partial class Server {
 
         /// <summary> Occurs when the server is about to be initialized. </summary>
@@ -101,7 +101,7 @@ namespace fCraft.fSystem {
 }
 
 
-namespace fCraft.Events {
+namespace GemsCraft.Events {
 
     public sealed class ShutdownEventArgs : EventArgs {
         internal ShutdownEventArgs( [NotNull] ShutdownParams shutdownParams ) {

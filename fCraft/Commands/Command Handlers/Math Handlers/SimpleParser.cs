@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace fCraft.Commands.Command_Handlers.Math_Handlers
+namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 {
 	//Shunting yard (Dijkstra) parser
 	public static class SimpleParser

@@ -7,13 +7,13 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Worlds {
+namespace GemsCraft.Worlds {
 
     /// <summary> Database of block changes. Each BlockDB object is associated with a world.
     /// Provides controls for storage/retention, and methods to look up data. </summary>

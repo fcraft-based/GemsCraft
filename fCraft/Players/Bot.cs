@@ -23,16 +23,16 @@ using System.Diagnostics;
 using System.Linq;
 using DeenGames.Utils;
 using DeenGames.Utils.AStarPathFinder;
-using fCraft.Commands;
-using fCraft.Drawing.DrawOps;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Commands;
+using GemsCraft.Drawing.DrawOps;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
 //AStarPathFinder - A* algorithm encoded in C# (c) http://www.csharpcity.com/reusable-code/a-path-finding-library/
 
-namespace fCraft.Players
+namespace GemsCraft.Players
 {
     public class Bot
     {

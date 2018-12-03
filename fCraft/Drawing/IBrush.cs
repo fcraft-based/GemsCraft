@@ -1,12 +1,12 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
-using fCraft.Commands;
-using fCraft.Players;
-using fCraft.Worlds;
+using GemsCraft.Commands;
+using GemsCraft.Players;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
 // ReSharper disable UnusedMemberInSuper.Global
-namespace fCraft.Drawing {
+namespace GemsCraft.Drawing {
 
     /// <summary> Class that desribes a type of brush in general, and allows creating new brushes with /Brush.
     /// One instance of IBrushFactory for each type of brush is kept by the BrushManager. </summary>

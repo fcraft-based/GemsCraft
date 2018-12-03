@@ -1,4 +1,4 @@
-﻿namespace fCraft.GUI.ConfigGUI.GUI.Sections
+﻿namespace GemsCraft.GUI.ConfigGUI.GUI.Sections
 {
     partial class GeneralConfig
     {
@@ -571,7 +571,7 @@
             // 
             // picLogo
             // 
-            this.picLogo.Image = global::fCraft.Properties.Resources.main;
+            this.picLogo.Image = global::GemsCraft.Properties.Resources.main;
             this.picLogo.Location = new System.Drawing.Point(413, 496);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(565, 127);

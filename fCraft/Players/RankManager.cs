@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using fCraft.fSystem;
-using fCraft.Players;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
 using JetBrains.Annotations;
 
-namespace fCraft.Players {
+namespace GemsCraft.Players {
     public static class RankManager {
         public static Dictionary<string, Rank> RanksByName { get; private set; }
         public static Dictionary<string, Rank> RanksByFullName { get; private set; }

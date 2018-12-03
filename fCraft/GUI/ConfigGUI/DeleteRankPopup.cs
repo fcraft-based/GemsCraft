@@ -2,10 +2,10 @@
 
 using System;
 using System.Windows.Forms;
-using fCraft.GUI.ConfigGUI.GUI;
-using fCraft.Players;
+using GemsCraft.GUI.ConfigGUI.GUI;
+using GemsCraft.Players;
 
-namespace fCraft.GUI.ConfigGUI {
+namespace GemsCraft.GUI.ConfigGUI {
     public sealed partial class DeleteRankPopup : Form {
         internal Rank SubstituteRank { get; private set; }
 

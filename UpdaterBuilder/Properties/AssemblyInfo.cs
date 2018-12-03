@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LegendCraft UpdateBuilder")]
-[assembly: AssemblyDescription("Tool for automating the process of building 800Craft update binaries.")]
+[assembly: AssemblyTitle("GemsCraft UpdateBuilder")]
+[assembly: AssemblyDescription("Tool for automating the process of building GemsCraft update binaries.")]
 [assembly: AssemblyConfiguration( "" )]
-[assembly: AssemblyCompany("LeChosenOne")]
-[assembly: AssemblyProduct("LegendCraft UpdateBuilder")]
+[assembly: AssemblyCompany("GemsCraft")]
+[assembly: AssemblyProduct("GemsCraft UpdateBuilder")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]

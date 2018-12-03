@@ -16,11 +16,11 @@
 //Copyright (C) <2012> Lao Tszy (lao_tszy@yahoo.co.uk)
 
 using System;
-using fCraft.Drawing;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Drawing;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.Commands.Command_Handlers.Math_Handlers
+namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 {
 	//draws all func variants: any axis as value axis, points, surface, filled
 	public abstract class FuncDrawOperation : DrawOperation

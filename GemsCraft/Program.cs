@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using fCraft.GUI.ConfigGUI.GUI;
+using GemsCraft.GUI.ConfigGUI.GUI;
 
 namespace GemsCraft
 {

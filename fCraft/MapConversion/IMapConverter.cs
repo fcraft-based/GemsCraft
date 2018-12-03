@@ -1,10 +1,10 @@
 // Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System.Collections.Generic;
 using System.IO;
-using fCraft.Worlds;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft.MapConversion {
+namespace GemsCraft.MapConversion {
     public interface IMapConverter {
         /// <summary> Returns name(s) of the server(s) that uses this format. </summary>
         [NotNull]

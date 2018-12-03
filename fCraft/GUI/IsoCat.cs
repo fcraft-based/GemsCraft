@@ -4,13 +4,13 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
-using fCraft.Properties;
-using fCraft.Worlds;
+using GemsCraft.Properties;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
 // ReSharper disable IdentifierTypo
 
-namespace fCraft.GUI {
+namespace GemsCraft.GUI {
 
     /// <summary> Drawing/clipping mode of IsoCat map renderer. </summary>
     public enum IsoCatMode {

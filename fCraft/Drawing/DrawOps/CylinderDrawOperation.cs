@@ -16,10 +16,10 @@
 //Copyright (C) <2012> Jon Baker (http://au70.net)
 
 using System;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.Drawing.DrawOps {
+namespace GemsCraft.Drawing.DrawOps {
     public class CylinderDrawOperation : DrawOperation {
 
         public override string Name {

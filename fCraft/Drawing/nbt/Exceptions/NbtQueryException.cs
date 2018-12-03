@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace fCraft.Drawing.nbt.Exceptions
+namespace GemsCraft.Drawing.nbt.Exceptions
 {
     public class NbtQueryException : Exception
     {

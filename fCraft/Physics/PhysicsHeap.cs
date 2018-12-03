@@ -18,9 +18,9 @@
 
 using System;
 using System.Collections.Generic;
-using fCraft.Worlds;
+using GemsCraft.Worlds;
 
-namespace fCraft.Physics
+namespace GemsCraft.Physics
 {
     /// <summary>
     /// Base class for physic tasks

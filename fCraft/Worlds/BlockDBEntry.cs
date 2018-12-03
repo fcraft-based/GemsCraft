@@ -2,9 +2,11 @@
 
 using System.IO;
 using System.Runtime.InteropServices;
-using fCraft.Utils;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
+using GemsCraft.Utils;
 
-namespace fCraft.Worlds
+namespace GemsCraft.Worlds
 {
 
     /// <summary> Struct representing a single block change.

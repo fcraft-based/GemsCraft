@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using fCraft.fSystem;
-using fCraft.Physics.Life;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.Physics.Life;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft.MapConversion {
+namespace GemsCraft.MapConversion {
 
     public static class MapUtility {
 

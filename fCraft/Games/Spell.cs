@@ -16,7 +16,7 @@
 
 
 ///<Summary> Spell enum, to be used with Spell Physics </Summary>
-namespace fCraft.Games
+namespace GemsCraft.Games
 {
     public enum Spell : byte
     {

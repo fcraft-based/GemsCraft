@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace fCraft.MapConversion {
+namespace GemsCraft.MapConversion {
     /// <summary> INI parser used by MapMyne. </summary>
     sealed class INIFile {
         const string Separator = "=";

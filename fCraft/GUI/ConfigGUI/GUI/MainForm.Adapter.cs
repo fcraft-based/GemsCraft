@@ -6,12 +6,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.GUI.ConfigGUI.GUI
+namespace GemsCraft.GUI.ConfigGUI.GUI
 {
     // This section handles transfer of settings from Config to the specific UI controls, and vice versa.
     // Effectively, it's an adapter between Config's and ConfigUI's representations of the settings

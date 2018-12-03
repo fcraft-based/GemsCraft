@@ -3,16 +3,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.MapConversion;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Utils;
-using fCraft.Worlds;
-using Map = fCraft.Worlds.Map;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.MapConversion;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Commands {
+namespace GemsCraft.Commands {
     /// <summary> Contains commands related to zone management. </summary>
     static class ZoneCommands {
 

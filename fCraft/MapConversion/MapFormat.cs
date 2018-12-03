@@ -1,15 +1,15 @@
 // Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
-namespace fCraft.MapConversion {
-    /// <summary> An enumeration of map formats supported by fCraft. </summary>
+namespace GemsCraft.MapConversion {
+    /// <summary> An enumeration of map formats supported by GemsCraft. </summary>
     public enum MapFormat {
         /// <summary> Unidentified map. </summary>
         Unknown,
 
-        /// <summary> Current map format used by fCraft. </summary>
+        /// <summary> Current map format used by GemsCraft. </summary>
         FCMv3,
 
-        /// <summary> Current map format used by fCraft. </summary>
+        /// <summary> Current map format used by GemsCraft. </summary>
         FCMv2,
 
         /// <summary> Map format used by MCSharp and its forks (MCZall/MCLawl). Initial support added by Tyler/TkTech. </summary>
@@ -36,7 +36,7 @@ namespace fCraft.MapConversion {
         /// <summary> Format used by Opticraft v0.2+. Support contributed by Jared/LgZ-optical. </summary>
         Opticraft,
 
-        /// <summary> Universal map format, planned for future use by fCraft. Currently unsupported. </summary>
+        /// <summary> Universal map format, planned for future use by GemsCraft. Currently unsupported. </summary>
         FCMv4
     }
 

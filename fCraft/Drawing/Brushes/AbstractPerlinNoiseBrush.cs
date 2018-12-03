@@ -2,12 +2,12 @@
 
 using System;
 using System.Linq;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft.Drawing.Brushes {
+namespace GemsCraft.Drawing.Brushes {
     public abstract class AbstractPerlinNoiseBrush : IBrushInstance {
         public int Seed { get; set; }
         public float Coverage { get; set; }

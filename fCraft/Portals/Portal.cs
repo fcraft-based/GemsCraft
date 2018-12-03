@@ -18,15 +18,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using fCraft.Drawing;
+using GemsCraft.Drawing;
 using System.Threading;
-using fCraft.Drawing.Brushes;
-using fCraft.Drawing.DrawOps;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Drawing.Brushes;
+using GemsCraft.Drawing.DrawOps;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Portals
+namespace GemsCraft.Portals
 {
     public class Portal
     {

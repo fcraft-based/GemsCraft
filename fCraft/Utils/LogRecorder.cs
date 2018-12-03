@@ -3,11 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using fCraft.Events;
-using fCraft.fSystem;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
 using JetBrains.Annotations;
 
-namespace fCraft.Utils {
+namespace GemsCraft.Utils {
     /// <summary> A simple way to temporarily hook into fCraft's Logger.
     /// Make sure to dispose this class when you are done recording.
     /// The easiest way to ensure that is with a using(){...} block. </summary>

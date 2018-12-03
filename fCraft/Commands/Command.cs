@@ -2,12 +2,12 @@
 
 using System;
 using System.Diagnostics;
-using fCraft.Players;
-using fCraft.Worlds;
+using GemsCraft.Players;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Commands {
+namespace GemsCraft.Commands {
     /// <summary> A text scanner that aids parsing chat commands and their arguments.
     /// Breaks up a message into tokens at spaces. Treats quoted strings as whole tokens. </summary>
     public sealed class Command : ICloneable {

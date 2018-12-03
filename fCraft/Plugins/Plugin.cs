@@ -17,7 +17,7 @@
 
 using System;
 
-namespace fCraft.Plugins
+namespace GemsCraft.Plugins
 {
     public interface IPlugin
     {

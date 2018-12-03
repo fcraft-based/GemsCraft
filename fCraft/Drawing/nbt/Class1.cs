@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using fCraft.Drawing.nbt.Queries;
-using fCraft.Drawing.nbt.Tags;
+using GemsCraft.Drawing.nbt.Queries;
+using GemsCraft.Drawing.nbt.Tags;
 
-namespace fCraft.Drawing.nbt
+namespace GemsCraft.Drawing.nbt
 {
     public class NbtFile : IDisposable
     {

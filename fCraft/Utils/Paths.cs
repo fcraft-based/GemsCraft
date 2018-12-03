@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security;
-using fCraft.fSystem;
+using GemsCraft.fSystem;
 using JetBrains.Annotations;
 
-namespace fCraft.Utils {
+namespace GemsCraft.Utils {
     /// <summary> Contains fCraft path settings, and some filesystem-related utilities. </summary>
     public static class Paths {
 
@@ -32,7 +32,7 @@ namespace fCraft.Utils {
             ProtectedFiles = new[]{
                 "ConfigGUI.exe",
                 "ConfigCLI.exe",
-                "fCraft.dll",
+                "GemsCraft.dll",
                 "fCraftGUI.dll",
                 "ServerCLI.exe",
                 "ServerGUI.exe",
@@ -77,7 +77,7 @@ namespace fCraft.Utils {
         /// or via "MapPath" ConfigKey </summary>
         public static string MapPath { get; set; }
 
-        /// <summary> Working path (default: whatever directory fCraft.dll is located in)
+        /// <summary> Working path (default: whatever directory GemsCraft.dll is located in)
         /// Can be overridden at startup via command line argument "--path=" </summary>
         public static string WorkingPath { get; set; }
 
@@ -148,7 +148,7 @@ namespace fCraft.Utils {
 
 
         public const string DataBackupDirectory = "databackups";
-        public const string DataBackupFileNameFormat = "LegendCraftData_{0:yyyyMMdd'_'HH'-'mm'-'ss}.zip";
+        public const string DataBackupFileNameFormat = "GemsCraftData_{0:yyyyMMdd'_'HH'-'mm'-'ss}.zip";
 
         #endregion
 
@@ -186,7 +186,7 @@ namespace fCraft.Utils {
                 }
                 DirectoryInfo info = new DirectoryInfo( path );
                 if( checkForWriteAccess ) {
-                    string randomFileName = Path.Combine( info.FullName, "LegendCraft_write_test_" + Guid.NewGuid() );
+                    string randomFileName = Path.Combine( info.FullName, "GemsCraft_write_test_" + Guid.NewGuid() );
                     using( File.Create( randomFileName ) ) { }
                     File.Delete( randomFileName );
                 }

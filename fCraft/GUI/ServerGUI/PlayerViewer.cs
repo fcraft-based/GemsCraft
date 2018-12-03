@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.GUI.ServerGUI
+namespace GemsCraft.GUI.ServerGUI
 {
     public partial class PlayerViewer : Form
     {

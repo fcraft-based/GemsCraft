@@ -1,13 +1,13 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
 using System.Collections.Generic;
-using fCraft.Commands;
-using fCraft.Drawing.Brushes;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Commands;
+using GemsCraft.Drawing.Brushes;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Drawing {
+namespace GemsCraft.Drawing {
     public static class BrushManager {
         static readonly Dictionary<string, IBrushFactory> BrushFactories = new Dictionary<string, IBrushFactory>();
         static readonly Dictionary<string, IBrushFactory> BrushAliases = new Dictionary<string, IBrushFactory>();

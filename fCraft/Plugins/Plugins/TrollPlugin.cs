@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using fCraft;
-using fCraft.Commands;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Utils;
+using GemsCraft;
+using GemsCraft.Commands;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Utils;
 
 namespace TrollPlugin
 {

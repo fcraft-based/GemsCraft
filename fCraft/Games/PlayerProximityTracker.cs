@@ -17,13 +17,13 @@
 
 using System;
 using System.Collections.Generic;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Games
+namespace GemsCraft.Games
 {
 	public class PlayersAtDistanceArgs : EventArgs
 	{

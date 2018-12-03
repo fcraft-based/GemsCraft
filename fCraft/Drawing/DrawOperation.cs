@@ -2,19 +2,19 @@
 //#define DEBUG_CHECK_DUPLICATE_COORDS
 using System;
 using System.Collections.Generic;
-using fCraft.Drawing;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Drawing;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
 // ReSharper disable UnusedMemberInSuper.Global
 // ReSharper disable MemberCanBeProtected.Global
-namespace fCraft.Drawing {
+namespace GemsCraft.Drawing {
     /// <summary> Abstract class representing a drawing operation. </summary>
     public abstract class DrawOperation {
         /// <summary> Expected number of marks to pass to DrawOperation.Prepare() </summary>
@@ -440,7 +440,7 @@ namespace fCraft.Drawing {
     }
 }
 
-namespace fCraft.Events {
+namespace GemsCraft.Events {
     public sealed class DrawOperationEventArgs : EventArgs{
         public DrawOperationEventArgs( DrawOperation drawOp ) {
             DrawOp = drawOp;

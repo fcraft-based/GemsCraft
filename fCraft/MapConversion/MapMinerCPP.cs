@@ -4,11 +4,11 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
-using fCraft.Players;
+using GemsCraft.Players;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.MapConversion {
+namespace GemsCraft.MapConversion {
     public sealed class MapMinerCPP : IMapConverter {
 
         public string ServerName {

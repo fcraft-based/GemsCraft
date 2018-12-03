@@ -4,13 +4,13 @@ using System.IO;
 using System.IO.Compression;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.MapConversion {
+namespace GemsCraft.MapConversion {
     [DataContract]
     public sealed class OpticraftMetaData {
         [DataMember]
@@ -74,19 +74,13 @@ namespace fCraft.MapConversion {
 
 
     public sealed class MapOpticraft : IMapConverter {
-        public string ServerName {
-            get { return "Opticraft"; }
-        }
+        public string ServerName => "Opticraft";
 
-        const short MapVersion = 2;
+        private const short MapVersion = 2;
 
-        public MapFormat Format {
-            get { return MapFormat.Opticraft; }
-        }
+        public MapFormat Format => MapFormat.Opticraft;
 
-        public MapStorageType StorageType {
-            get { return MapStorageType.SingleFile; }
-        }
+        public MapStorageType StorageType => MapStorageType.SingleFile;
 
 
         public bool ClaimsName( [NotNull] string fileName ) {

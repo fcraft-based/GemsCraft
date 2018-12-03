@@ -9,7 +9,7 @@ using System.Text;
 using JetBrains.Annotations;
 
 // ReSharper disable UnusedMember.Global
-namespace fCraft.MapConversion {
+namespace GemsCraft.MapConversion {
     /// <summary> Standard NBT data types. </summary>
     public enum NBTType : byte {
         End,

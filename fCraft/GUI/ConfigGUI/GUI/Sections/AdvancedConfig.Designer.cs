@@ -1,4 +1,4 @@
-﻿namespace fCraft.GUI.ConfigGUI.GUI.Sections
+﻿namespace GemsCraft.GUI.ConfigGUI.GUI.Sections
 {
     partial class AdvancedConfig
     {

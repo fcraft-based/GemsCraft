@@ -1,4 +1,4 @@
-﻿namespace fCraft.GUI.ConfigGUI.GUI
+﻿namespace GemsCraft.GUI.ConfigGUI.GUI
 {
     partial class MainForm
     {

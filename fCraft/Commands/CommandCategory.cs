@@ -2,7 +2,7 @@
 
 using System;
 
-namespace fCraft.Commands {
+namespace GemsCraft.Commands {
     /// <summary> Command categories. A command may belong to more than one category.
     /// Use binary flag logic (value & flag == flag) to test whether a command belongs to a particular category. </summary>
     [Flags]

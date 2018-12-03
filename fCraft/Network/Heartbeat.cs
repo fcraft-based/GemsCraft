@@ -7,13 +7,13 @@ using System.Net.Cache;
 using System.Text;
 using System.Net.Sockets;
 using System.Linq;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Utils;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Network
+namespace GemsCraft.Network
 {
     /// <summary> Static class responsible for sending heartbeats. </summary>
     public static class Heartbeat
@@ -363,7 +363,7 @@ namespace fCraft.Network
                  ProtocolVersion,
                  Uri.EscapeDataString(salt_),
                  Uri.EscapeDataString(ServerName),
-                 "LegendCraft v" + Updater.LatestStable);
+                 "GemsCraft v" + Updater.LatestStable);
                 foreach (var pair in CustomData)
                 {
                     sb.AppendFormat("&{0}={1}",
@@ -396,7 +396,7 @@ namespace fCraft.Network
 }
 
 
-namespace fCraft.Events
+namespace GemsCraft.Events
 {
     public sealed class HeartbeatSentEventArgs : EventArgs
     {

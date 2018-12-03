@@ -1,14 +1,14 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
 using System.Net;
-using fCraft.Events;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Events;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Players {
+namespace GemsCraft.Players {
     partial class Player {
         /// <summary> Occurs when a player is connecting (cancellable).
         /// Player name is verified and bans are checked before this event is raised. </summary>
@@ -199,7 +199,7 @@ namespace fCraft.Players {
     }
 }
 
-namespace fCraft.Events {
+namespace GemsCraft.Events {
 
     public sealed class PlayerEventArgs : EventArgs, IPlayerEvent {
         internal PlayerEventArgs( Player player ) {

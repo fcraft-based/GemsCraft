@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml.Serialization;
 
-namespace fCraft.Plugins
+namespace GemsCraft.Plugins
 {
     public class PluginConfigSerializer
     {

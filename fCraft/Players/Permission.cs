@@ -1,6 +1,6 @@
 // Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
-namespace fCraft.Players {
+namespace GemsCraft.Players {
 
     // See comment at the top of Config.cs for a history of changes.
 

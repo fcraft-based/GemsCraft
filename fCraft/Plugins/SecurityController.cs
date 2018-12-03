@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Plugins {
+namespace GemsCraft.Plugins {
 
     /// <summary> Controller for setting and checking per-rank permissions and per-player exceptions.
     /// Used by World.AccessSecurity, World.BuildSecurity, and Zone. </summary>

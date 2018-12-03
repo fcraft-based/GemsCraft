@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
-using fCraft.Drawing.nbt;
-using fCraft.Drawing.nbt.Tags;
-using fCraft.Physics;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Drawing.nbt;
+using GemsCraft.Drawing.nbt.Tags;
+using GemsCraft.Physics;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Commands
+namespace GemsCraft.Commands
 {
     static class DevCommands {
 

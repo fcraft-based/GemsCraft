@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
-using fCraft.Players;
-using fCraft.Worlds;
+using GemsCraft.Players;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.MapConversion
+namespace GemsCraft.MapConversion
 {
     public sealed class MapDat : IMapConverter
     {

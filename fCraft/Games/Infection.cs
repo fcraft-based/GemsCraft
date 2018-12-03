@@ -22,13 +22,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Games
+namespace GemsCraft.Games
 {
     class Infection
     {
@@ -285,7 +285,7 @@ namespace fCraft.Games
         #region events
 
         //check if player tagged another player
-        public static void PlayerMoved(object poo, fCraft.Events.PlayerMovingEventArgs e)
+        public static void PlayerMoved(object poo, GemsCraft.Events.PlayerMovingEventArgs e)
         {
             if (e.Player.Info.isInfected)
             {       
@@ -311,7 +311,7 @@ namespace fCraft.Games
         }
 
         //check if player left server to reset stats
-        public static void PlayerLeftServer(object poo, fCraft.Events.PlayerDisconnectedEventArgs e)
+        public static void PlayerLeftServer(object poo, GemsCraft.Events.PlayerDisconnectedEventArgs e)
         {
             e.Player.Info.isPlayingInfection = false;
             if (e.Player.Info.isInfected)
@@ -324,16 +324,14 @@ namespace fCraft.Games
         }
 
         //check if player left world where infection is being played
-        public static void PlayerLeftWorld(object poo, fCraft.Events.PlayerJoinedWorldEventArgs e)
+        public static void PlayerLeftWorld(object poo, GemsCraft.Events.PlayerJoinedWorldEventArgs e)
         {
 
             e.Player.Info.isPlayingInfection = false;
-            if (e.Player.Info.isInfected)
-            {
-                e.Player.Info.isInfected = false;
-                e.Player.entityChanged = false;
-                e.Player.iName = null;
-            }
+            if (!e.Player.Info.isInfected) return;
+            e.Player.Info.isInfected = false;
+            e.Player.entityChanged = false;
+            e.Player.iName = null;
         }
         #endregion
     }

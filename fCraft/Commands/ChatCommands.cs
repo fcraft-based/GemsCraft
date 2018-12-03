@@ -3,14 +3,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Utils;
-using Player = fCraft.Players.Player;
+using GemsCraft.Commands;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Utils;
+using Player = GemsCraft.Players.Player;
 
-namespace fCraft.Commands
+namespace GemsCraft.Commands
 {
     static class ChatCommands
     {
@@ -299,7 +300,7 @@ THE SOFTWARE.*/
                     IsConsoleSafe = true,
                     Permissions = new[] { Permission.Chat },
                     Usage = "/Global [ <message here> / ignore / unignore / disconnect / connect / help]",
-                    Help = "Sends a global message to other LegendCraft servers",
+                    Help = "Sends a global message to other GemsCraft servers",
                     Handler = GHandler
                 };
 
@@ -312,11 +313,11 @@ THE SOFTWARE.*/
                 {
                     if (GlobalChat.GlobalThread.isConnected)
                     {
-                        player.Message("&c{0}&c is already connected to the LegendCraft Global Chat Network!", ConfigKey.ServerName.GetString());
+                        player.Message("&c{0}&c is already connected to the GemsCraft Global Chat Network!", ConfigKey.ServerName.GetString());
                         return;
                     }
                     GlobalChat.GlobalThread.GCReady = true;
-                    Server.Message("&eAttempting to connect to LegendCraft Global Chat Network. This may take up to two minutes.");
+                    Server.Message("&eAttempting to connect to GemsCraft Global Chat Network. This may take up to two minutes.");
                     GlobalChat.Init();
                     GlobalChat.Start();
                     return;
@@ -339,8 +340,8 @@ THE SOFTWARE.*/
             {
                 if (player.Can(Permission.ReadAdminChat))
                 {
-                    Server.Message("&e{0}&e disconnected {1}&e from the LegendCraft Global Chat Network.", player.ClassyName, ConfigKey.ServerName.GetString());
-                    GlobalChat.GlobalThread.SendChannelMessage("&i" + ConfigKey.ServerName.GetString() + "&i has disconnected from the LegendCraft Global Chat Network.");
+                    Server.Message("&e{0}&e disconnected {1}&e from the GemsCraft Global Chat Network.", player.ClassyName, ConfigKey.ServerName.GetString());
+                    GlobalChat.GlobalThread.SendChannelMessage("&i" + ConfigKey.ServerName.GetString() + "&i has disconnected from the GemsCraft Global Chat Network.");
                     GlobalChat.GlobalThread global = new GlobalChat.GlobalThread();
                     global.DisconnectThread();
                     return;
@@ -381,11 +382,11 @@ THE SOFTWARE.*/
             }
             else if (message == "help")
             {
-                player.Message("_LegendCraft GlobalChat Network Help_\n" +
+                player.Message("_GemsCraft GlobalChat Network Help_\n" +
                     "Ignore: Usage is '/global ignore'. Allows a user to ignore and stop using global chat. Type /global unignore to return to global chat. \n" +
                     "Unignore: Usage is '/global unignore.' Allows a user to return to global chat. \n" +
-                    "Connect: For admins only. Usage is /global connect. Connects your server to the LegendCraft GlobalChat Network. \n" +
-                    "Disconnect: For admins only. Usage is /global disconnect. Disconnects your server from the LegendCraft GlobalChat Network. \n" +
+                    "Connect: For admins only. Usage is /global connect. Connects your server to the GemsCraft GlobalChat Network. \n" +
+                    "Disconnect: For admins only. Usage is /global disconnect. Disconnects your server from the GemsCraft GlobalChat Network. \n" +
                     "Message: Usage is '/global <your message here>'. Will send your message to the rest of the servers connected to GlobalChat.");
                 return;
             }
@@ -401,7 +402,9 @@ THE SOFTWARE.*/
                     "1) No Spamming or deliberate insulting. \n" +
                     "2) No advertising of any server or other minecraft related/unrelated service or product. \n" +
                     "3) No discussion of illegal or partially illegal tasks is permitted. \n" +
-                    "4) Connecting bots to the Global Chat Network is not permitted, unless approved by the LegendCraft Team. \n" +
+                    "4) Connecting bots to the Global Chat Network is not permitted, unless approved by the GemsCraft Team. \n" +
+                    "5) Political or controversial topics, including but not limited to religion, politics, sexual content, etc. or not permitted.\n" +
+                    "6) Keep it PG-13\n" +
                     "&aYou are now permitted to use /global on this server.");
                 player.GlobalChatAllowed = true;
             }
@@ -436,7 +439,8 @@ THE SOFTWARE.*/
 
         static void VoteHandler(Player player, Command cmd)
         {
-            Commands.Command_Handlers.VoteHandler.VoteParams(player, cmd);
+            Command_Handlers.VoteHandler.VoteParams(player, cmd);
+            
         }                                                                
 
         static readonly CommandDescriptor CdGPS = new CommandDescriptor

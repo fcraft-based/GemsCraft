@@ -1,11 +1,11 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
-namespace fCraft.fSystem {
+namespace GemsCraft.fSystem {
     /// <summary> Enumerates the recognized command-line switches/arguments.
     /// Args are parsed in Server.InitLibrary </summary>
     public enum ArgKey {
         /// <summary> Working path (directory) that fCraft should use.
-        /// If the path is relative, it's computed against the location of fCraft.dll </summary>
+        /// If the path is relative, it's computed against the location of GemsCraft.dll </summary>
         Path,
 
         /// <summary> Path (directory) where the log files should be placed.

@@ -1,13 +1,13 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
 using System.Collections.Generic;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Events {
+namespace GemsCraft.Events {
     public class MainWorldChangedEventArgs : EventArgs {
         internal MainWorldChangedEventArgs( [CanBeNull] World oldWorld, [NotNull] World newWorld ) {
             if( newWorld == null ) throw new ArgumentNullException( "newWorld" );

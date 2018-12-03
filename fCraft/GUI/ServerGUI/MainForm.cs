@@ -8,13 +8,13 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.GUI.ServerGUI
+namespace GemsCraft.GUI.ServerGUI
 {
 
     public sealed partial class MainForm : Form
@@ -46,13 +46,12 @@ namespace fCraft.GUI.ServerGUI
             Heartbeat.UriChanged += OnHeartbeatUriChanged;
             Server.PlayerListChanged += OnPlayerListChanged;
             Server.ShutdownEnded += OnServerShutdownEnded;
-            Text = "LegendCraft v" + Updater.LatestStable + " - starting...";
-            startupThread = new Thread(StartupThread);
-            startupThread.Name = "LegendCraft ServerGUI Startup";
+            Text = "GemsCraft v" + Updater.LatestStable + " - starting...";
+            startupThread = new Thread(StartupThread) {Name = "GemsCraft ServerGUI Startup"};
             startupThread.Start();
         }
 
-        void StartupThread()
+        private void StartupThread()
         {
 #if !DEBUG
             try
@@ -107,17 +106,17 @@ namespace fCraft.GUI.ServerGUI
         }
 
 
-        void OnInitSuccess()
+        private void OnInitSuccess()
         {
-            Text = "LegendCraft " + " - " + ConfigKey.ServerName.GetString();
+            Text = "GemsCraft " + " - " + ConfigKey.ServerName.GetString();
         }
 
-        void UpdateCheck()
+        private void UpdateCheck()
         {
-            Logger.Log(LogType.SystemActivity, "Checking for LegendCraft updates...");
+            Logger.Log(LogType.SystemActivity, "Checking for GemsCraft updates...");
             try
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://raw.githubusercontent.com/LeChosenOne/LegendCraft/master/README.md");
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://raw.githubusercontent.com/apotter96/GemsCraft/master/README.md");
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
                 if (response.StatusCode == HttpStatusCode.OK)
@@ -132,22 +131,22 @@ namespace fCraft.GUI.ServerGUI
                             if (version != null && version != Updater.LatestStable)
                             {
 
-                                Logger.Log(LogType.SystemActivity, "Server.Run: Your LegendCraft version is out of date. A LegendCraft Update is available!");
+                                Logger.Log(LogType.SystemActivity, "Server.Run: Your GemsCraft version is out of date. A GemsCraft Update is available!");
 
-                                DialogResult answer = MessageBox.Show("Would you like to download the latest LegendCraft Version? (" + version + ")", "LegendCraft Updater", MessageBoxButtons.YesNo);
+                                DialogResult answer = MessageBox.Show("Would you like to download the latest GemsCraft Version? (" + version + ")", "GemsCraft Updater", MessageBoxButtons.YesNo);
                                 if (answer == DialogResult.Yes)
                                 {
-                                    Process.Start("https://github.com/LegendCraft/LegendCraft/releases");
+                                    Process.Start("https://github.com/apotter96/GemsCraft/releases");
                                 }
                                 else
                                 {
-                                    Logger.Log(LogType.SystemActivity, "Update ignored. To ignore future LegendCraft update requests, uncheck the box in configGUI.");
+                                    Logger.Log(LogType.SystemActivity, "Update ignored. To ignore future GemsCraft update requests, uncheck the box in configGUI.");
                                 }
 
                             }
                             else
                             {
-                                Logger.Log(LogType.SystemActivity, "Your LegendCraft version is up to date!");
+                                Logger.Log(LogType.SystemActivity, "Your GemsCraft version is up to date!");
                             }
                         }
                     }
@@ -205,7 +204,7 @@ namespace fCraft.GUI.ServerGUI
             shutdownPending = true;
             console.Enabled = false;
             console.Text = "Shutting down...";
-            Text = "LegendCraft " + " - shutting down...";
+            Text = "GemsCraft " + " - shutting down...";
             uriDisplay.Enabled = false;
             if (!startupComplete)
             {
@@ -473,7 +472,7 @@ namespace fCraft.GUI.ServerGUI
                     {
                        /* if (onGlobal)
                         {
-                            fCraft.GlobalChat.GlobalThread.SendChannelMessage("[console]: " + line);
+                            GemsCraft.GlobalChat.GlobalThread.SendChannelMessage("[console]: " + line);
                             Logger.Log(LogType.GlobalChat, "[console]: " + line);
                             return;
                         }

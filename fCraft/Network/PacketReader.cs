@@ -1,14 +1,14 @@
 ﻿// Part of FemtoCraft | Copyright 2012-2013 Matvei Stefarov <me@matvei.org> | See LICENSE.txt
 // This entire file was taken from the FemtoCraft source Copyright 2012-2013 Matvei Stefarov
-// The source can be found here: http://svn.fcraft.net:8080/svn/femtocraft/
+// The source can be found here: http://svn.GemsCraft.net:8080/svn/femtocraft/
 
 using System.IO;
 using System.Net;
 using System.Text;
-using fCraft.Players;
+using GemsCraft.Players;
 using JetBrains.Annotations;
 
-namespace fCraft.Network
+namespace GemsCraft.Network
 {
     sealed class PacketReader : BinaryReader
     {

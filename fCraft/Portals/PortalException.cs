@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace fCraft.Portals
+namespace GemsCraft.Portals
 {
     class PortalException : Exception
     {

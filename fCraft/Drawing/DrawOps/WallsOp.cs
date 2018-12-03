@@ -17,10 +17,10 @@
 
 using System;
 using System.Collections.Generic;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.Drawing.DrawOps
+namespace GemsCraft.Drawing.DrawOps
 {
     public sealed class WallsDrawOperation : DrawOperation
     {

@@ -1,12 +1,12 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
 using System;
-using fCraft.Commands;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Commands;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 
-namespace fCraft.Drawing.DrawOps {
+namespace GemsCraft.Drawing.DrawOps {
     public sealed class UndoDrawOperation : DrawOpWithBrush {
         const BlockChangeContext UndoContext = BlockChangeContext.Drawn | BlockChangeContext.UndoneSelf;
 

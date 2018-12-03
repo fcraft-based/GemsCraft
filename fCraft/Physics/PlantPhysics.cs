@@ -14,14 +14,14 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
-using Util = fCraft.Drawing.DrawOps.RandomMaze.MazeUtil;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
+using Util = GemsCraft.Drawing.DrawOps.RandomMaze.MazeUtil;
 
-namespace fCraft.Physics
+namespace GemsCraft.Physics
 {
     public class PlantPhysics
     {
@@ -46,7 +46,7 @@ namespace fCraft.Physics
 						{
 							world.Map.QueueUpdate(new BlockUpdate(null, z, Block.Dirt));
 						}
-						else if (fCraft.Physics.Physics.CanSquash(world.Map.GetBlock(z)) && e.NewBlock!=Block.Air)
+						else if (GemsCraft.Physics.Physics.CanSquash(world.Map.GetBlock(z)) && e.NewBlock!=Block.Air)
 						{
 							e.Result = CanPlaceResult.Revert;
 							Player.RaisePlayerPlacedBlockEvent(player, world.Map, z, world.Map.GetBlock(z), e.NewBlock, BlockChangeContext.Physics);

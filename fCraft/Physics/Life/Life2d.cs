@@ -17,7 +17,7 @@
 
 using System;
 
-namespace fCraft.Physics.Life
+namespace GemsCraft.Physics.Life
 {
 	public class Life2d
 	{

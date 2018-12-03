@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using fCraft.Network;
-using fCraft.Worlds;
+using GemsCraft.Network;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
 // ReSharper disable LoopCanBeConvertedToQuery
-namespace fCraft.Players {
+namespace GemsCraft.Players {
     /// <summary> Contains a set of utilities that simplify working with sets of players.
     /// All the utilities are implemented as extension methods,
     /// and it is recommended that you invoke them as extension methods. </summary>

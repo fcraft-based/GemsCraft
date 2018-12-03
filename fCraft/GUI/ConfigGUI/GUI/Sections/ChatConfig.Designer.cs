@@ -1,4 +1,4 @@
-﻿namespace fCraft.GUI.ConfigGUI.GUI.Sections
+﻿namespace GemsCraft.GUI.ConfigGUI.GUI.Sections
 {
     partial class ChatConfig
     {
@@ -52,7 +52,7 @@
             this.xRankPrefixesInList = new System.Windows.Forms.CheckBox();
             this.xRankPrefixesInChat = new System.Windows.Forms.CheckBox();
             this.xRankColorsInChat = new System.Windows.Forms.CheckBox();
-            this.chatPreview = new fCraft.GUI.ConfigGUI.ChatPreview();
+            this.chatPreview = new GemsCraft.GUI.ConfigGUI.ChatPreview();
             this.gChatColors.SuspendLayout();
             this.gAppearence.SuspendLayout();
             this.SuspendLayout();

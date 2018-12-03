@@ -18,12 +18,12 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Collections;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Worlds;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Worlds;
 
-namespace fCraft.Physics
+namespace GemsCraft.Physics
 {
     /// <summary>
     //  ░░░▄▄▄▄▀▀▀▀▀▀▀▀▄▄▄▄▄▄

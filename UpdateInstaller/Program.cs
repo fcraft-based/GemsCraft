@@ -29,12 +29,12 @@ using System.Reflection;
 using System.Threading;
 using System.Linq;
 using System.Xml.Linq;
-using fCraft.UpdateInstaller.Properties;
+using GemsCraft.UpdateInstaller.Properties;
 
-namespace fCraft.UpdateInstaller {
+namespace GemsCraft.UpdateInstaller {
     static class Program {
         const string ConfigFileNameDefault = "config.xml",
-                     BackupFileNameFormat = "LegendCraftData_{0:yyyyMMdd'_'HH'-'mm'-'ss}_BeforeUpdate.zip";
+                     BackupFileNameFormat = "GemsCraftData_{0:yyyyMMdd'_'HH'-'mm'-'ss}_BeforeUpdate.zip";
 
         public const string DataBackupDirectory = "databackups";
 

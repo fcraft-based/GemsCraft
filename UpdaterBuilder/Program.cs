@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using System.IO.Compression;
 
-namespace fCraft.UpdateBuilder {
+namespace GemsCraft.UpdateBuilder {
     static class Program {
 
         static readonly string[] FileList = {
             "ConfigGUI.exe",
-            "fCraft.dll",
+            "GemsCraft.dll",
             "fCraftGUI.dll",
             "ServerCLI.exe",
             "ServerGUI.exe",

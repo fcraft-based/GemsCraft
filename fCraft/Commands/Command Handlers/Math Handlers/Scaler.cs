@@ -17,7 +17,7 @@
 
 using System;
 
-namespace fCraft.Commands.Command_Handlers.Math_Handlers
+namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 {
 	//scales coords according to the defined possibilities
 	public class Scaler

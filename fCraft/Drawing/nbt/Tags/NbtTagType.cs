@@ -1,5 +1,5 @@
 ﻿// ReSharper disable InconsistentNaming
-namespace fCraft.Drawing.nbt.Tags
+namespace GemsCraft.Drawing.nbt.Tags
 {
     public enum NbtTagType
     {

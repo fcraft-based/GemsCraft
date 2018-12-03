@@ -2,10 +2,11 @@
 // With contributions by Conrad "Redshift" Morgan
 
 using System;
-using fCraft.Drawing;
-using fCraft.Players;
+using GemsCraft.Drawing;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 
-namespace fCraft.Utils {
+namespace GemsCraft.Utils {
     /// <summary> Integer 3D vector. </summary>
     public struct Vector3I : IEquatable<Vector3I>, IComparable<Vector3I>, IComparable<Vector3F> {
         public static readonly Vector3I Zero = new Vector3I( 0, 0, 0 );
@@ -50,17 +51,9 @@ namespace fCraft.Utils {
         }
 
 
-        public float Length {
-            get {
-                return (float)Math.Sqrt( (double)X * X + (double)Y * Y + (double)Z * Z );
-            }
-        }
+        public float Length => (float)Math.Sqrt( (double)X * X + (double)Y * Y + (double)Z * Z );
 
-        public int LengthSquared {
-            get {
-                return X * X + Y * Y + Z * Z;
-            }
-        }
+        public int LengthSquared => X * X + Y * Y + Z * Z;
 
 
         public int this[int i] {

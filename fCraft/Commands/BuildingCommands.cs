@@ -4,21 +4,23 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using fCraft.Commands.Command_Handlers;
-using fCraft.Drawing;
-using fCraft.Drawing.Brushes;
-using fCraft.Drawing.DrawOps;
-using fCraft.fSystem;
-using fCraft.MapConversion;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft;
+using GemsCraft.Commands;
+using GemsCraft.Commands.Command_Handlers;
+using GemsCraft.Drawing;
+using GemsCraft.Drawing.Brushes;
+using GemsCraft.Drawing.DrawOps;
+using GemsCraft.fSystem;
+using GemsCraft.MapConversion;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
-using Block = fCraft.Worlds.Block;
+using Map = GemsCraft.Worlds.Map;
+using Block = GemsCraft.Worlds.Block;
 
-namespace fCraft.Commands {
+namespace GemsCraft.Commands {
     /// <summary> Commands for placing specific blocks (solid, water, grass),
     /// and switching block placement modes (paint, bind). </summary>
     static class BuildingCommands {
@@ -2288,7 +2290,7 @@ THE SOFTWARE.*/
                 return;
             }
 
-            map.Metadata["fCraft.Temp", "FileName"] = fullFileName;
+            map.Metadata["GemsCraft.Temp", "FileName"] = fullFileName;
             player.SelectionStart( 2, RestoreCallback, map, CdRestore.Permissions );
             player.MessageNow( "Restore: Select the area to restore. To mark a corner, place/click a block or type &H/Mark" );
         }
@@ -2329,7 +2331,7 @@ THE SOFTWARE.*/
                         playerWorld.Name,
                         selection.XMin, selection.YMin, selection.ZMin,
                         selection.XMax, selection.YMax, selection.ZMax,
-                        map.Metadata["fCraft.Temp", "FileName"] );
+                        map.Metadata["GemsCraft.Temp", "FileName"] );
 
             DrawingFinished( player, "Restored", blocksDrawn, blocksSkipped );
         }

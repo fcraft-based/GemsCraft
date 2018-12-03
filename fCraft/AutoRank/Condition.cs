@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace fCraft.AutoRank
+namespace GemsCraft.AutoRank
 {
     /// <summary>
     /// Simple class to hold values for autorank conditions

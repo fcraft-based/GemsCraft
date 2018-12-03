@@ -4,17 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using fCraft.Events;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Players;
-using fCraft.Plugins;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Events;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Players;
+using GemsCraft.Plugins;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.Commands {
+namespace GemsCraft.Commands {
     /// <summary>
     /// Most commands for server moderation - kick, ban, rank change, etc - are here.
     /// </summary>
@@ -877,7 +877,7 @@ THE SOFTWARE.*/
             IsConsoleSafe = false,
             Permissions = new[] { Permission.Economy },
             Usage = "/Economy [give/take/show/pay] [playername] [pay/give/take: amount]",
-            Help = "&SEconomy commands for LegendCraft. Show will show you the amount of money a player has" +
+            Help = "&SEconomy commands for GemsCraft. Show will show you the amount of money a player has" +
             "and give/take will give or take bits from or to a player. WARNING, give and take will change your server's inflation.",
             Handler = EconomyHandler
         };

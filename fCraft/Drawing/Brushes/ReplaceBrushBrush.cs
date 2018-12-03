@@ -1,12 +1,12 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
 using System;
-using fCraft.Commands;
-using fCraft.Players;
-using fCraft.Worlds;
+using GemsCraft.Commands;
+using GemsCraft.Players;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft.Drawing.Brushes {
+namespace GemsCraft.Drawing.Brushes {
     public sealed class ReplaceBrushBrushFactory : IBrushFactory {
         public static readonly ReplaceBrushBrushFactory Instance = new ReplaceBrushBrushFactory();
 

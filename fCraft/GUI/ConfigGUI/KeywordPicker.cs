@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace fCraft.GUI.ConfigGUI {
+namespace GemsCraft.GUI.ConfigGUI {
     public sealed partial class KeywordPicker : Form {
         public string Result;
 

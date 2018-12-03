@@ -1,8 +1,8 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
-using fCraft.Utils;
+using GemsCraft.Utils;
 
-namespace fCraft.Players {
+namespace GemsCraft.Players {
 
     /// <summary> Struct representing a position AND orientation. Takes up 8 bytes of memory.
     /// Use Vector3I if you just need X/Y/Z coordinates without orientation.

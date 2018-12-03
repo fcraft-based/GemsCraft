@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using fCraft.Drawing.nbt.Exceptions;
-using fCraft.Drawing.nbt.Queries;
+using GemsCraft.Drawing.nbt.Exceptions;
+using GemsCraft.Drawing.nbt.Queries;
 
-namespace fCraft.Drawing.nbt.Tags
+namespace GemsCraft.Drawing.nbt.Tags
 {
     public class NbtList : NbtTag, INbtTagList
     {

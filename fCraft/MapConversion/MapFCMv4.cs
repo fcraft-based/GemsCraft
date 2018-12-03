@@ -4,18 +4,18 @@ using System.Text;
 using System.IO;
 using System.IO.Compression;
 using System.Xml.Linq;
-using fCraft.fSystem;
-using fCraft.Players;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.fSystem;
+using GemsCraft.Players;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
-using Map = fCraft.Worlds.Map;
+using Map = GemsCraft.Worlds.Map;
 
-namespace fCraft.MapConversion {
+namespace GemsCraft.MapConversion {
     /// <summary> Next file format that fCraft shall use. </summary>
     public sealed class MapFCMv4 : IMapConverter {
         public const int FormatID = 0x00FC0004;
-        const string ZoneMetaGroupName = "fCraft.Zones",
+        const string ZoneMetaGroupName = "GemsCraft.Zones",
                      BlockLayerName = "Blocks";
 
 

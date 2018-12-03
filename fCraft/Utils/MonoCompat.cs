@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
-namespace fCraft.Utils
+namespace GemsCraft.Utils
 {
 
     /// <summary> Class dedicated to solving Mono compatibility issues </summary>

@@ -2,7 +2,7 @@
 
 using System;
 
-namespace fCraft.Worlds {
+namespace GemsCraft.Worlds {
     public sealed class WorldOpException : Exception {
 
         public WorldOpExceptionCode ErrorCode { get; private set; }

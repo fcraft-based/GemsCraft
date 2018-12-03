@@ -13,21 +13,21 @@ using System.Collections.Concurrent;
 using System.Xml.Linq;
 using System.Xml;
 using System.Security.Cryptography;
-using fCraft.AutoRank;
-using fCraft.Drawing;
-using fCraft.Events;
-using fCraft.MapConversion;
+using GemsCraft.AutoRank;
+using GemsCraft.Drawing;
+using GemsCraft.Events;
+using GemsCraft.MapConversion;
 using System.Runtime;
-using fCraft.Commands;
-using fCraft.Commands.Command_Handlers;
-using fCraft.Drawing.Brushes;
-using fCraft.fSystem;
-using fCraft.Network;
-using fCraft.Utils;
-using fCraft.Worlds;
+using GemsCraft.Commands;
+using GemsCraft.Commands.Command_Handlers;
+using GemsCraft.Drawing.Brushes;
+using GemsCraft.fSystem;
+using GemsCraft.Network;
+using GemsCraft.Utils;
+using GemsCraft.Worlds;
 using JetBrains.Annotations;
 
-namespace fCraft.Players
+namespace GemsCraft.Players
 {
     /// <summary> Represents a connection to a Minecraft client. Handles low-level interactions (e.g. networking). </summary>
     public sealed partial class Player
@@ -99,7 +99,7 @@ namespace fCraft.Players
 
                 ioThread = new Thread(IoLoop)
                 {
-                    Name = "LegendCraft.Session",
+                    Name = "GemsCraft.Session",
                     IsBackground = true
                 };
                 ioThread.Start();
@@ -113,7 +113,7 @@ namespace fCraft.Players
             }
             catch (Exception ex)
             {
-                Logger.LogAndReportCrash("Session failed to start", "LegendCraft", ex, false);
+                Logger.LogAndReportCrash("Session failed to start", "GemsCraft", ex, false);
                 Disconnect();
             }
         }
@@ -377,7 +377,7 @@ namespace fCraft.Players
             }
             catch (Exception ex)
             {
-                Logger.LogAndReportCrash("Error while parsing player's message", "LegendCraft", ex, false);
+                Logger.LogAndReportCrash("Error while parsing player's message", "GemsCraft", ex, false);
                 MessageNow("&WError while handling your message ({0}: {1})." +
                             "It is recommended that you reconnect to the server.",
                             ex.GetType().Name, ex.Message);
@@ -897,7 +897,7 @@ namespace fCraft.Players
                 return false;
             }
 
-            // negotiate protocol extensions, if applicable  (FROM FEMTOCRAFT: http://svn.fcraft.net:8080/svn/femtocraft/ - to be compatible with CPE)
+            // negotiate protocol extensions, if applicable  (FROM FEMTOCRAFT: http://svn.GemsCraft.net:8080/svn/femtocraft/ - to be compatible with CPE)
             if (Config.ProtocolExtension && magicNum == 0x42)
             {
                 if (!NegotiateProtocolExtension()) return false;
@@ -1145,7 +1145,7 @@ namespace fCraft.Players
 
                 Logger.Log(LogType.Warning,
                             "Player.LoginSequence: Player \"{0}\" tried connecting with Minecraft Beta client from {1}. " +
-                            "LegendCraft does not support Minecraft Beta.",
+                            "GemsCraft does not support Minecraft Beta.",
                             smpPlayerName, IP);
 
                 // send SMP KICK packet

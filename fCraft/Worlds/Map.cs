@@ -7,16 +7,16 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
-using fCraft.Drawing;
-using fCraft.fSystem;
-using fCraft.MapConversion;
-using fCraft.Network;
-using fCraft.Physics.Life;
-using fCraft.Players;
-using fCraft.Utils;
+using GemsCraft.Drawing;
+using GemsCraft.fSystem;
+using GemsCraft.MapConversion;
+using GemsCraft.Network;
+using GemsCraft.Physics.Life;
+using GemsCraft.Players;
+using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace fCraft.Worlds {
+namespace GemsCraft.Worlds {
 
     public sealed partial class Map {
         public const MapFormat SaveFormat = MapFormat.FCMv3;
