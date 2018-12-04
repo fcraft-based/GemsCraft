@@ -150,22 +150,14 @@ namespace GemsCraft.Drawing {
 
             Context |= BlockChangeContext.Drawn;
             AnnounceCompletion = true;
-            if (Updater.CurrentRelease.IsFlagged(ReleaseFlags.Dev))
-            {
-                LogCompletion = true;
-            }
-            else
-            {
-                LogCompletion = false;
-            }
+            LogCompletion = Updater.CheckUpdates() == VersionResult.Developer;
         }
 
 
         public virtual bool Prepare( [NotNull] Vector3I[] marks ) {
             if( marks == null ) throw new ArgumentNullException( "marks" );
             if( marks.Length != ExpectedMarks ) {
-                string msg = String.Format( "Wrong number of marks ({0}), expecting {1}.",
-                                            marks.Length, ExpectedMarks );
+                string msg = $"Wrong number of marks ({marks.Length}), expecting {ExpectedMarks}.";
                 throw new ArgumentException( msg, "marks" );
             }
 
@@ -365,7 +357,7 @@ namespace GemsCraft.Drawing {
                     }
                 }
             }
-            if( AnnounceCompletion && Map.World != null && Updater.CurrentRelease.IsFlagged(ReleaseFlags.Dev)) {
+            if( AnnounceCompletion && Map.World != null && Updater.CheckUpdates() == VersionResult.Developer) {
                 Logger.Log( LogType.UserActivity,
                             "Player {0} executed {1} on world {2} (between {3} and {4}). Processed {5}, Updated {6}, Skipped {7}, Denied {8} blocks.",
                             Player.Name, Description, Map.World.Name,
@@ -375,7 +367,7 @@ namespace GemsCraft.Drawing {
         }
 
 
-        void OnCancellation() {
+        private void OnCancellation() {
             if( AnnounceCompletion ) {
                 if( BlocksDenied > 0 ) {
                     Player.Message( "{0}: Cancelled after {1}. Processed {2}, updated {3}. Skipped {4} due to permission issues.",
@@ -389,12 +381,12 @@ namespace GemsCraft.Drawing {
                                     BlocksProcessed, BlocksUpdated );
                 }
             }
-            if (LogCompletion && Map.World != null && Updater.CurrentRelease.IsFlagged(ReleaseFlags.Dev))
+            if (LogCompletion && Map.World != null && Updater.CheckUpdates() == VersionResult.Developer)
             {
                 Logger.Log( LogType.UserActivity,
                             "Player {0} cancelled {1} on world {2}. Processed {3}, Updated {4}, Skipped {5}, Denied {6} blocks.",
                             Player, Description, Map.World.Name,
-                            BlocksProcessed, BlocksUpdated, BlocksSkipped, BlocksDenied, Updater.CurrentRelease.FlagsString);
+                            BlocksProcessed, BlocksUpdated, BlocksSkipped, BlocksDenied, Updater.LatestStable.ToString());
             }
         }
 

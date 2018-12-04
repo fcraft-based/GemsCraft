@@ -207,7 +207,6 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
             _updaterWindow.BackupBeforeUpdate = ConfigKey.BackupBeforeUpdate.Enabled();
             _updaterWindow.RunBeforeUpdate = ConfigKey.RunBeforeUpdate.GetString();
             _updaterWindow.RunAfterUpdate = ConfigKey.RunAfterUpdate.GetString();
-            _updaterWindow.UpdaterMode = ConfigKey.UpdaterMode.GetEnum<UpdaterMode>();
         }
 
 
@@ -603,7 +602,6 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
                     ? SectionClasses.GeneralConfig.nAnnouncements.Value : 0);
 
             // UpdaterSettingsWindow
-            ConfigKey.UpdaterMode.TrySetValue(_updaterWindow.UpdaterMode);
             ConfigKey.BackupBeforeUpdate.TrySetValue(_updaterWindow.BackupBeforeUpdate);
             ConfigKey.RunBeforeUpdate.TrySetValue(_updaterWindow.RunBeforeUpdate);
             ConfigKey.RunAfterUpdate.TrySetValue(_updaterWindow.RunAfterUpdate);

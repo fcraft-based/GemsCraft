@@ -86,7 +86,6 @@ namespace GemsCraft.GUI.ConfigGUI
             request.ContentType = "application/x-www-form-urlencoded";
             request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
             request.ContentLength = byteData.Length;
-            request.UserAgent = Updater.UserAgent;
 
             using (Stream requestStream = request.GetRequestStream())
             {

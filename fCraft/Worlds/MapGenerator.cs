@@ -512,7 +512,7 @@ namespace GemsCraft.Worlds
             ReportProgress(0, "Generation complete");
 
             map.Metadata["_Origin", "GeneratorName"] = "fCraft";
-            map.Metadata["_Origin", "GeneratorVersion"] = Updater.LatestStable;
+            map.Metadata["_Origin", "GeneratorVersion"] = Updater.LatestStable.ToString();
             map.Metadata["_Origin", "GeneratorParams"] = args.Serialize().ToString(SaveOptions.DisableFormatting);
             return map;
         }

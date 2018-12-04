@@ -16,34 +16,14 @@ namespace GemsCraft.GUI.ConfigGUI {
             get => xRunAfterUpdate.Checked ? tRunAfterUpdate.Text : "";
             set => tRunAfterUpdate.Text = value;
         }
-
-        public UpdaterMode UpdaterMode {
-            get {
-                if( rDisabled.Checked ) return UpdaterMode.Disabled;
-                if( rNotify.Checked ) return UpdaterMode.Notify;
-                return rPrompt.Checked ? UpdaterMode.Prompt : UpdaterMode.Auto;
-            }
-            set {
-                switch( value ) {
-                    case UpdaterMode.Disabled:
-                        rDisabled.Checked = true; break;
-                    case UpdaterMode.Notify:
-                        rNotify.Checked = true; break;
-                    case UpdaterMode.Prompt:
-                        rPrompt.Checked = true; break;
-                    case UpdaterMode.Auto:
-                        rAutomatic.Checked = true; break;
-                }
-            }
-        }
+        
 
         public bool BackupBeforeUpdate {
-            get { return xBackupBeforeUpdating.Checked; }
-            set { xBackupBeforeUpdating.Checked = value; }
+            get => xBackupBeforeUpdating.Checked;
+            set => xBackupBeforeUpdating.Checked = value;
         }
 
         string oldRunBeforeUpdate, oldRunAfterUpdate;
-        UpdaterMode oldUpdaterMode;
         bool oldBackupBeforeUpdate;
 
         public UpdaterSettingsPopup() {
@@ -51,14 +31,12 @@ namespace GemsCraft.GUI.ConfigGUI {
             Shown += delegate {
                 oldRunBeforeUpdate = RunBeforeUpdate;
                 oldRunAfterUpdate = RunAfterUpdate;
-                oldUpdaterMode = UpdaterMode;
                 oldBackupBeforeUpdate = BackupBeforeUpdate;
             };
             FormClosed += delegate {
                 if( DialogResult != DialogResult.OK ) {
                     RunBeforeUpdate = oldRunBeforeUpdate;
                     RunAfterUpdate = oldRunAfterUpdate;
-                    UpdaterMode = oldUpdaterMode;
                     BackupBeforeUpdate = oldBackupBeforeUpdate;
                 }
             };

@@ -2,199 +2,146 @@
 
 using System;
 using System.Collections.Generic;
+using System.Speech.Recognition.SrgsGrammar;
 using System.Text;
+using GemsCraft.Network;
 using JetBrains.Annotations;
 
 namespace GemsCraft.Utils {
-    /// <summary> Checks for updates, and keeps track of current version/revision. </summary>
-    public static class Updater {
-
-        public static readonly ReleaseInfo CurrentRelease = new ReleaseInfo(
-            206,
-            151,
-            new DateTime( 2012, 07, 19, 1, 0, 0, DateTimeKind.Utc ),
-            "", "",
-            ReleaseFlags.Feature
-#if DEBUG
-            | ReleaseFlags.Dev
-#endif
- );
-
-        public static string UserAgent => "GemsCraft " + LatestStable;
-
-        public const string LatestStable = "Alpha 0.0";
-
-        public static string UpdateUrl { get; set; }
-
-        public static bool RunAtShutdown { get; set; }
+    public enum VersionResult
+    {
+        Outdated, Current, Developer
     }
+    /// <summary> Checks for updates, and keeps track of current version/revision. </summary>
+    public class Updater {
+        public struct Version
+        {
+            public string Title;
+            public int Major;
+            public int Minor;
+            public int Revision;
+            public int Build;
+            public bool ShowTitle;
 
+            public static Version ToVersion(List<string> list)
+            {
+                return new Version(list[0],
+                    int.Parse(list[1]), 
+                    int.Parse(list[2]), 
+                    int.Parse(list[3]), 
+                    int.Parse(list[4]), 
+                    true);
+            }
+            public Version(string title, int major, int minor, int revision, int build, bool show)
+            {
+                Title = title;
+                Major = major;
 
-    public sealed class ReleaseInfo {
-        internal ReleaseInfo( int version, int revision, DateTime releaseDate,
-                              string summary, string changeLog, ReleaseFlags releaseType ) {
-            Version = version;
-            Revision = revision;
-            Date = releaseDate;
-            Summary = summary;
-            ChangeLog = changeLog.Split( new[] { '\n' } );
-            Flags = releaseType;
-        }
-
-        public ReleaseFlags Flags { get; private set; }
-
-        public string FlagsString => ReleaseFlagsToString( Flags );
-
-        public string[] FlagsList => ReleaseFlagsToStringArray( Flags );
-
-        public int Version { get; private set; }
-
-        public int Revision { get; private set; }
-
-        public DateTime Date { get; private set; }
-
-        public TimeSpan Age => DateTime.UtcNow.Subtract( Date );
-
-        public string Summary { get; private set; }
-
-        public string[] ChangeLog { get; private set; }
-
-        public static ReleaseFlags StringToReleaseFlags( [NotNull] string str ) {
-            if( str == null ) throw new ArgumentNullException( "str" );
-            ReleaseFlags flags = ReleaseFlags.None;
-            for( int i = 0; i < str.Length; i++ ) {
-                switch( Char.ToUpper( str[i] ) ) {
-                    case 'A':
-                        flags |= ReleaseFlags.APIChange;
-                        break;
-                    case 'B':
-                        flags |= ReleaseFlags.Bugfix;
-                        break;
-                    case 'C':
-                        flags |= ReleaseFlags.ConfigFormatChange;
-                        break;
-                    case 'D':
-                        flags |= ReleaseFlags.Dev;
-                        break;
-                    case 'F':
-                        flags |= ReleaseFlags.Feature;
-                        break;
-                    case 'M':
-                        flags |= ReleaseFlags.MapFormatChange;
-                        break;
-                    case 'P':
-                        flags |= ReleaseFlags.PlayerDBFormatChange;
-                        break;
-                    case 'S':
-                        flags |= ReleaseFlags.Security;
-                        break;
-                    case 'U':
-                        flags |= ReleaseFlags.Unstable;
-                        break;
-                    case 'O':
-                        flags |= ReleaseFlags.Optimized;
-                        break;
+                Minor = minor;
+                Revision = revision;
+                Build = build;
+                ShowTitle = show;
+            }
+            public static int Compare(Version version1, Version version2)
+            {
+                if (version1.Title == version2.Title)
+                {
+                    if (version1.Major < version2.Major) return 1;
+                    else if (version1.Major > version2.Major) return 0;
+                    else
+                    {
+                        if (version1.Minor < version2.Minor) return 1;
+                        else if (version1.Minor > version2.Minor) return 0;
+                        else
+                        {
+                            if (version1.Revision < version2.Revision) return 1;
+                            else if (version1.Revision > version2.Revision) return 0;
+                            else
+                            {
+                                if (version1.Build < version2.Build) return 1;
+                                else if (version1.Build > version2.Build) return 0;
+                                else
+                                {
+                                    return -1;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (version1.Title == "Alpha") return 1;
+                    if (version1.Title == "Beta" && version2.Title == "Alpha") return 0;
+                    else
+                    {
+                        if (version1.Major < version2.Major) return 1;
+                        else if (version1.Major > version2.Major) return 0;
+                        else
+                        {
+                            if (version1.Minor < version2.Minor) return 1;
+                            else if (version1.Minor > version2.Minor) return 0;
+                            else
+                            {
+                                if (version1.Revision < version2.Revision) return 1;
+                                else if (version1.Revision > version2.Revision) return 0;
+                                else
+                                {
+                                    if (version1.Build < version2.Build) return 1;
+                                    else if (version1.Build > version2.Build) return 0;
+                                    else
+                                    {
+                                        return -1;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            return flags;
+            
+            public override string ToString()
+            {
+                string finalResult = "";
+                if (ShowTitle || Title == "Alpha" || Title == "Beta")
+                {
+                    finalResult = Title;
+                }
+
+                finalResult += $"{Major}.{Minor}";
+                if (Revision > -1)
+                {
+                    finalResult += $".{Revision}";
+                    if (Build > -1)
+                    {
+                        finalResult += $".{Build}";
+                    }
+                }
+
+                return finalResult;
+            }
         }
 
-        public static string ReleaseFlagsToString( ReleaseFlags flags ) {
-            StringBuilder sb = new StringBuilder();
-            if( (flags & ReleaseFlags.APIChange) == ReleaseFlags.APIChange ) sb.Append( 'A' );
-            if( (flags & ReleaseFlags.Bugfix) == ReleaseFlags.Bugfix ) sb.Append( 'B' );
-            if( (flags & ReleaseFlags.ConfigFormatChange) == ReleaseFlags.ConfigFormatChange ) sb.Append( 'C' );
-            if( (flags & ReleaseFlags.Dev) == ReleaseFlags.Dev ) sb.Append( 'D' );
-            if( (flags & ReleaseFlags.Feature) == ReleaseFlags.Feature ) sb.Append( 'F' );
-            if( (flags & ReleaseFlags.MapFormatChange) == ReleaseFlags.MapFormatChange ) sb.Append( 'M' );
-            if( (flags & ReleaseFlags.PlayerDBFormatChange) == ReleaseFlags.PlayerDBFormatChange ) sb.Append( 'P' );
-            if( (flags & ReleaseFlags.Security) == ReleaseFlags.Security ) sb.Append( 'S' );
-            if( (flags & ReleaseFlags.Unstable) == ReleaseFlags.Unstable ) sb.Append( 'U' );
-            if( (flags & ReleaseFlags.Optimized) == ReleaseFlags.Optimized ) sb.Append( 'O' );
-            return sb.ToString();
-        }
+        public static Version LatestStable = new Version()
+        {
+            Title = "Alpha",
+            Major = 0,
+            Minor = 0,
+            Revision = -1,
+            Build = -1,
+            ShowTitle = true
+        };
 
-        public static string[] ReleaseFlagsToStringArray( ReleaseFlags flags ) {
-            List<string> list = new List<string>();
-            if( (flags & ReleaseFlags.APIChange) == ReleaseFlags.APIChange ) list.Add( "API Changes" );
-            if( (flags & ReleaseFlags.Bugfix) == ReleaseFlags.Bugfix ) list.Add( "Fixes" );
-            if( (flags & ReleaseFlags.ConfigFormatChange) == ReleaseFlags.ConfigFormatChange ) list.Add( "Config Changes" );
-            if( (flags & ReleaseFlags.Dev) == ReleaseFlags.Dev ) list.Add( "Developer" );
-            if( (flags & ReleaseFlags.Feature) == ReleaseFlags.Feature ) list.Add( "New Features" );
-            if( (flags & ReleaseFlags.MapFormatChange) == ReleaseFlags.MapFormatChange ) list.Add( "Map Format Changes" );
-            if( (flags & ReleaseFlags.PlayerDBFormatChange) == ReleaseFlags.PlayerDBFormatChange ) list.Add( "PlayerDB Changes" );
-            if( (flags & ReleaseFlags.Security) == ReleaseFlags.Security ) list.Add( "Security Patch" );
-            if( (flags & ReleaseFlags.Unstable) == ReleaseFlags.Unstable ) list.Add( "Unstable" );
-            if( (flags & ReleaseFlags.Optimized) == ReleaseFlags.Optimized ) list.Add( "Optimized" );
-            return list.ToArray();
-        }
-
-        public bool IsFlagged( ReleaseFlags flag ) {
-            return (Flags & flag) == flag;
+        public static VersionResult CheckUpdates()
+        {
+            Version currentOnline = Version.ToVersion(
+                NetworkUtils.GetUrlSourceAsList("http://gemscraft-download.christplay.x10host.com/current.txt"));
+            int versionCompare = Version.Compare(LatestStable, currentOnline);
+            if (versionCompare == -1) return VersionResult.Current;
+            if (versionCompare == 0) return VersionResult.Developer;
+            if (versionCompare == 1) return VersionResult.Outdated;
+            return VersionResult.Current;
         }
     }
-
-
-    #region Enums
-
-    /// <summary> Updater behavior. </summary>
-    public enum UpdaterMode {
-        /// <summary> Does not check for updates. </summary>
-        Disabled = 0,
-
-        /// <summary> Checks for updates and notifies of availability (in console/log). </summary>
-        Notify = 1,
-
-        /// <summary> Checks for updates, downloads them if available, and prompts to install.
-        /// Behavior is frontend-specific: in ServerGUI, a dialog is shown with the list of changes and
-        /// options to update immediately or next time. In ServerCLI, asks to type in 'y' to confirm updating
-        /// or press any other key to skip. '''Note: Requires user interaction
-        /// (if you restart the server remotely while unattended, it may get stuck on this dialog).''' </summary>
-        Prompt = 2,
-
-        /// <summary> Checks for updates, automatically downloads and installs the updates, and restarts the server. </summary>
-        Auto = 3,
-    }
-
-
-    /// <summary> A list of release flags/attributes.
-    /// Use binary flag logic (value & flag == flag) or Release.IsFlagged() to test for flags. </summary>
-    [Flags]
-    public enum ReleaseFlags {
-        None = 0,
-
-        /// <summary> The API was notably changed in this release. </summary>
-        APIChange = 1,
-
-        /// <summary> Bugs were fixed in this release. </summary>
-        Bugfix = 2,
-
-        /// <summary> Config.xml format was changed (and version was incremented) in this release. </summary>
-        ConfigFormatChange = 4,
-
-        /// <summary> This is a developer-only release, not to be used on live servers.
-        /// Untested/undertested releases are often marked as such. </summary>
-        Dev = 8,
-
-        /// <summary> A notable new feature was added in this release. </summary>
-        Feature = 16,
-
-        /// <summary> The map format was changed in this release (rare). </summary>
-        MapFormatChange = 32,
-
-        /// <summary> The PlayerDB format was changed in this release. </summary>
-        PlayerDBFormatChange = 64,
-
-        /// <summary> A security issue was addressed in this release. </summary>
-        Security = 128,
-
-        /// <summary> There are known or likely stability issues in this release. </summary>
-        Unstable = 256,
-
-        /// <summary> This release contains notable optimizations. </summary>
-        Optimized = 512
-    }
-
-    #endregion
+    
 }
 

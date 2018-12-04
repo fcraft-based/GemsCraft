@@ -295,23 +295,13 @@ namespace GemsCraft.fSystem {
             }
 
             // warnings/disclaimers
-            if( Updater.CurrentRelease.IsFlagged( ReleaseFlags.Dev ) ) {
+            if( Updater.CheckUpdates() == VersionResult.Developer) {
                 Logger.Log( LogType.Warning,
                             "You are using an unreleased developer version of GemsCraft. " +
                             "Do not use this version unless you are ready to deal with bugs and potential data loss. " +
                             "Consider using the latest stable version instead, available from http://github.com/apotter96/GemsCraft/releases" );
             }
-
-            if( Updater.CurrentRelease.IsFlagged( ReleaseFlags.Unstable ) ) {
-                const string unstableMessage = "This build has been marked as UNSTABLE. " +
-                                               "Do not use except for debugging purposes. " +
-                                               "Latest non-broken build is " + Updater.LatestStable;
-#if DEBUG
-                Logger.Log( LogType.Warning, unstableMessage );
-#else
-                throw new Exception( unstableMessage );
-#endif
-            }
+            
 
             if( MonoCompat.IsMono && !MonoCompat.IsSGenCapable ) {
                 Logger.Log( LogType.Warning,
@@ -691,26 +681,21 @@ namespace GemsCraft.fSystem {
             bool doRestart = (param.Restart && !HasArg( ArgKey.NoRestart ));
             string assemblyExecutable = Assembly.GetEntryAssembly().Location;
 
-            if( Updater.RunAtShutdown && doRestart ) {
+            if(doRestart) {
                 if (MonoCompat.IsMono)
                 {
-                    ProcessStartInfo proc = new ProcessStartInfo("mono");
-                    proc.Arguments = assemblyExecutable;
-                    proc.UseShellExecute = false;
-                    proc.CreateNoWindow = true;
+                    ProcessStartInfo proc = new ProcessStartInfo("mono")
+                    {
+                        Arguments = assemblyExecutable, UseShellExecute = false, CreateNoWindow = true
+                    };
                     Process.Start(proc);
                 }
                 else
                 {
-                    string args = String.Format("--restart=\"{0}\" {1}",
-                                                 MonoCompat.PrependMono(assemblyExecutable),
-                                                 GetArgString());
+                    string args = $"--restart=\"{MonoCompat.PrependMono(assemblyExecutable)}\" {GetArgString()}";
 
                     MonoCompat.StartDotNetProcess(Paths.UpdaterFileName, args, true);
                 }
-            } else if( Updater.RunAtShutdown ) {
-                MonoCompat.StartDotNetProcess( Paths.UpdaterFileName, GetArgString(), true );
-
             } else if( doRestart ) {
 
                 if (MonoCompat.IsMono)
@@ -1046,7 +1031,7 @@ namespace GemsCraft.fSystem {
             sb.Replace( "{PLAYERS}", CountVisiblePlayers( player ).ToString() );
             sb.Replace( "{WORLDS}", WorldManager.Worlds.Length.ToString() );
             sb.Replace( "{MOTD}", ConfigKey.MOTD.GetString() );
-            sb.Replace( "{VERSION}", Updater.LatestStable );
+            sb.Replace( "{VERSION}", Updater.LatestStable.ToString() );
             if (ConfigKey.IRCBotEnabled.Enabled())
             {
                 sb.Replace("{IRC_CHANNEL}", ConfigKey.IRCBotChannels.GetString());

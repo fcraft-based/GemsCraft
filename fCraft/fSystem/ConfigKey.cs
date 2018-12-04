@@ -475,11 +475,7 @@ The report consists of the error information, OS and runtime versions,
 a copy of config.xml, and last 25 lines of the log file.
 Reports are confidential and are not displayed publicly." )]
         SubmitCrashReports,
-
-        [EnumKey( ConfigSection.Advanced, Utils.UpdaterMode.Prompt,
-@"800Craft can automatically update to latest stable versions.
-If enabled, the update check is done on-startup." )]
-        UpdaterMode,
+        
 
         [StringKey( ConfigSection.Advanced, "",
 @"Command to execute (via operating system's shell) before the update is applied." )]

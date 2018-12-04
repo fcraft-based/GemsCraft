@@ -1672,7 +1672,7 @@ THE SOFTWARE.*/
             }
 
             // no need to set player.drawingInProgress here because this is done on the user thread
-            if (Updater.CurrentRelease.IsFlagged(ReleaseFlags.Dev))
+            if (Updater.CheckUpdates() == VersionResult.Developer)
             {
                 Logger.Log(LogType.UserActivity,
                             "Player {0} initiated /Undo affecting {1} blocks (on world {2})",
@@ -1681,8 +1681,7 @@ THE SOFTWARE.*/
                             playerWorld.Name);
             }
 
-            msg += String.Format( "Restoring {0} blocks. Type &H/Redo&S to reverse.",
-                                  undoState.Buffer.Count );
+            msg += $"Restoring {undoState.Buffer.Count} blocks. Type &H/Redo&S to reverse.";
             player.MessageNow( msg );
 
             var op = new UndoDrawOperation( player, undoState, false );

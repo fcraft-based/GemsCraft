@@ -8,7 +8,7 @@ namespace GemsCraft.GUI {
     public sealed partial class AboutWindow : Form {
         public AboutWindow() {
             InitializeComponent();
-            lSubheader.Text = String.Format( lSubheader.Text, Updater.LatestStable );
+            lSubheader.Text = String.Format( lSubheader.Text, Updater.LatestStable.ToString() );
         }
         private void lfCraft_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e ) {
             try {

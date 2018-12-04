@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GemsCraft.GUI.ConfigGUI.GUI;
 
-namespace GemsCraft
+namespace GemsCraftGUI
 {
     static class Program
     {

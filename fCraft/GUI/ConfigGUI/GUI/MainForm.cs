@@ -1913,29 +1913,17 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
                     string version = streamReader.ReadLine();
 
                     //update is available, prompt for a download
-                    if (version != null && version != Updater.LatestStable)
+                    if (Updater.CheckUpdates() == VersionResult.Outdated)
                     {
 
-                        DialogResult answer = MessageBox.Show("A LegendCraft Update is available. Would you like to download the latest LegendCraft Version? (" + version + ")", "LegendCraft Updater", MessageBoxButtons.YesNo);
+                        DialogResult answer = MessageBox.Show("A GemsCraft Update is available. Would you like to download the latest GemsCraft Version? (" + version + ")", "GemsCraft Updater", MessageBoxButtons.YesNo);
                         if (answer != DialogResult.Yes) return;
-                        using (var client = new WebClient())
-                        {
-                            try
-                            {
-                                //download new zip in current directory
-                                Process.Start("http://www.legend-craft.tk/download/latest");
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Update error: " + ex);
-                            }
-
-                        }
-
+                        Process.Start("Updater.exe");
+                        Application.Exit();
                     }
                     else
                     {
-                        MessageBox.Show("Your LegendCraft version is up to date!");
+                        MessageBox.Show("Your GemsCraft version is up to date!");
                     }
                 }
             }

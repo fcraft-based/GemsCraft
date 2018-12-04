@@ -198,7 +198,7 @@ namespace GemsCraft.ServerCLI {
                             string version = streamReader.ReadLine();
 
                             //update is available, prompt for a download
-                            if (version != null && version != Updater.LatestStable)
+                            if (version != null && version != Updater.LatestStable.ToString())
                             {
 
                                 Console.WriteLine("Server.Run: Your GemsCraft version is out of date. A GemsCraft Update is available!");

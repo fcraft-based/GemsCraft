@@ -352,6 +352,7 @@
     <Compile Include="Network\CPE.cs" />
     <Compile Include="Network\CPEMap.cs" />
     <Compile Include="Network\GlobalChat.cs" />
+    <Compile Include="Network\NetworkUtils.cs" />
     <Compile Include="Network\PacketReader.cs" />
     <Compile Include="Physics\ExplodingPhysics.cs" />
     <Compile Include="Physics\Life\Life2d.cs" />

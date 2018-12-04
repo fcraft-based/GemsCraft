@@ -149,7 +149,6 @@ namespace GemsCraft.Network
             request.Method = "GET";
             request.Timeout = (int)Timeout.TotalMilliseconds;
             request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.BypassCache);
-            request.UserAgent = Updater.UserAgent;
             if (uri.Scheme == "http")
             {
                 request.Proxy = new WebProxy("http://" + RefreshTargetAddress(uri) + ":" + uri.Port);
@@ -363,7 +362,7 @@ namespace GemsCraft.Network
                  ProtocolVersion,
                  Uri.EscapeDataString(salt_),
                  Uri.EscapeDataString(ServerName),
-                 "GemsCraft v" + Updater.LatestStable);
+                 "GemsCraft v" + Updater.LatestStable.ToString());
                 foreach (var pair in CustomData)
                 {
                     sb.AppendFormat("&{0}={1}",

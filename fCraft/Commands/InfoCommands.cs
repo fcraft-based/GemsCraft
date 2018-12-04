@@ -1571,7 +1571,7 @@ THE SOFTWARE.*/
 
             if( MonoCompat.IsMono ) {
                 player.Message( " Running &5Legend&WCraft&S v{0}, under Mono {1}",
-                                Updater.LatestStable,
+                                Updater.LatestStable.ToString(),
                                 MonoCompat.MonoVersionString );
             } else {
                 player.Message(" Running &5Legend&WCraft&S v{0}, under .NET {1}",

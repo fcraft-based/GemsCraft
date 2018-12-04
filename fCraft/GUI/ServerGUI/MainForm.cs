@@ -128,7 +128,7 @@ namespace GemsCraft.GUI.ServerGUI
                             StreamReader streamReader = new StreamReader(stream);
                             string version = streamReader.ReadLine();
                             //update is available, prompt for a download
-                            if (version != null && version != Updater.LatestStable)
+                            if (Updater.CheckUpdates() == VersionResult.Outdated)
                             {
 
                                 Logger.Log(LogType.SystemActivity, "Server.Run: Your GemsCraft version is out of date. A GemsCraft Update is available!");
@@ -136,7 +136,8 @@ namespace GemsCraft.GUI.ServerGUI
                                 DialogResult answer = MessageBox.Show("Would you like to download the latest GemsCraft Version? (" + version + ")", "GemsCraft Updater", MessageBoxButtons.YesNo);
                                 if (answer == DialogResult.Yes)
                                 {
-                                    Process.Start("https://github.com/apotter96/GemsCraft/releases");
+                                    Process.Start("Updater.exe");
+                                    Application.Exit();
                                 }
                                 else
                                 {

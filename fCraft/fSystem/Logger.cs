@@ -225,7 +225,7 @@ namespace GemsCraft.fSystem
                 try
                 {
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("version=").Append(Uri.EscapeDataString(Updater.LatestStable));
+                    sb.Append("version=").Append(Uri.EscapeDataString(Updater.LatestStable.ToString()));
                     sb.Append("&error=").Append(Uri.EscapeDataString(message));
 
                     if (MonoCompat.IsMono)
@@ -266,7 +266,7 @@ namespace GemsCraft.fSystem
                     {
                         lastFewLines = RecentMessages.ToArray();
                     }
-                    sb.Append("&log=").Append(Uri.EscapeDataString(String.Join(Environment.NewLine, lastFewLines)));
+                    sb.Append("&log=").Append(Uri.EscapeDataString(string.Join(Environment.NewLine, lastFewLines)));
 
                     byte[] formData = Encoding.UTF8.GetBytes(sb.ToString());
 
@@ -276,7 +276,6 @@ namespace GemsCraft.fSystem
                     request.ContentType = "application/x-www-form-urlencoded";
                     request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
                     request.ContentLength = formData.Length;
-                    request.UserAgent = Updater.UserAgent;
 
                     using (Stream requestStream = request.GetRequestStream())
                     {
