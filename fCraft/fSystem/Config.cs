@@ -204,6 +204,16 @@ namespace GemsCraft.fSystem {
                     new Dictionary<ConfigKey, KeyValuePair<string, string>>(); // LEGACY
 
 
+        public static ConfigKey[] AllKeys()
+        {
+            ConfigSection[] sections =
+            {
+                ConfigSection.Advanced, ConfigSection.Chat, ConfigSection.General,
+                ConfigSection.IRC, ConfigSection.Logging, ConfigSection.SavingAndBackup,
+                ConfigSection.Worlds, ConfigSection.Security, ConfigSection.Worlds
+            };
+            return sections.SelectMany(GetKeys).ToArray();
+        }
         static Config() {
             int keyCount = Enum.GetValues( typeof( ConfigKey ) ).Length;
             Settings = new string[keyCount];

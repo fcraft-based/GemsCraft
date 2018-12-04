@@ -1,6 +1,7 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
 using System.Diagnostics;
+using System.Windows.Forms.VisualStyles;
 using GemsCraft.Players;
 using GemsCraft.Utils;
 
@@ -591,6 +592,26 @@ but will reduce bandwidth use." )]
 @"If enabled, allows the server to respond to connect to online WebPanel at http://legend-craft.tk")]
         WebPanelEnabled,
 
+        #endregion
+
+        #region Misc
+        
+        [BoolKey(ConfigSection.Misc, false,
+@"If enabled, allows users to use the GemsCraft Mobile app to directly connect to the server remotely.")]
+        RemoteControlEnabled,
+
+        [BoolKey(ConfigSection.Misc, true,
+@"If set to true, requires owner or admins login with administrator password to access server remotely.")]
+        RequireRemoteAdminPass,
+
+        [StringKey(ConfigSection.Misc, "empty",
+@"MD5 hash of the admin password for administrators to login to the remote server. Will only be checked if RequireAdmin
+  pass is set to true.")]
+        RemoteAdminPass,
+
+        [IntKey(ConfigSection.Misc, 65509,
+@"Port Remote Control Server will use to establish external connections.")]
+        RemoteControlPort
         #endregion
     }
 }

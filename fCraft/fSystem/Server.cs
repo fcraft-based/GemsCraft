@@ -347,7 +347,7 @@ namespace GemsCraft.fSystem {
             GunClass.Init();
             Physics.Physics.Load();
             HeartbeatSaverUtil.Init();
-
+            Network.Remote.Server.Start(); // Starting the remote control server
             fSystem.Server.RaiseEvent( fSystem.Server.Initialized );
 
             serverInitialized = true;

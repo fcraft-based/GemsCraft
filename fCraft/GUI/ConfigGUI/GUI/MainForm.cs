@@ -1384,6 +1384,7 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
             ApplyTabLogging();
             ApplyTabIRC();
             ApplyTabAdvanced();
+            ApplyTabMisc();
         }
 
         internal void bResetTab_Click(object sender, EventArgs e)
@@ -1430,6 +1431,10 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
                 case 8:// Advanced
                     Config.LoadDefaults(ConfigSection.Logging);
                     ApplyTabAdvanced();
+                    break;
+                case 9:// Misc
+                    Config.LoadDefaults(ConfigSection.Misc);
+                    ApplyTabMisc();
                     break;
             }
         }

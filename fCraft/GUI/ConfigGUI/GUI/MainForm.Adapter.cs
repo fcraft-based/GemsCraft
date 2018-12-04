@@ -64,6 +64,7 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
             ApplyTabLogging();
             ApplyTabIRC();
             ApplyTabAdvanced();
+            ApplyTabMisc();
 
             AddChangeHandler(SectionClasses.GeneralConfig, SomethingChanged);
             AddChangeHandler(SectionClasses.ChatConfig, SomethingChanged);
@@ -166,17 +167,23 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
             MainForm.Worlds.ListChanged += SomethingChanged;
         }
 
-
-        private void ApplyTabGeneral()
+        private void ApplyTabMisc()
         {
-
-            SectionClasses.GeneralConfig.tServerName.Text = ConfigKey.ServerName.GetString();
             SectionClasses.MiscConfig.CustomName.Text = ConfigKey.CustomChatName.GetString();
             SectionClasses.MiscConfig.SwearBox.Text = ConfigKey.SwearName.GetString();
             SectionClasses.MiscConfig.CustomAliases.Text = ConfigKey.CustomAliasName.GetString();
-            SectionClasses.GeneralConfig.tMOTD.Text = ConfigKey.MOTD.GetString();
             SectionClasses.MiscConfig.websiteURL.Text = ConfigKey.WebsiteURL.GetString();
 
+            bool remoteenabled = ConfigKey.RemoteControlEnabled.TryGetBool(out bool response);
+            SectionClasses.MiscConfig.chkEnableRemoteControl.Checked = remoteenabled && response;
+            bool adminlogin = ConfigKey.RequireRemoteAdminPass.TryGetBool(out bool response2);
+            SectionClasses.MiscConfig.chkRequireLogin.Checked = adminlogin && response2;
+            SectionClasses.MiscConfig.numPort.Value = ConfigKey.RemoteControlPort.GetInt();
+        }
+        private void ApplyTabGeneral()
+        {
+            SectionClasses.GeneralConfig.tServerName.Text = ConfigKey.ServerName.GetString();
+            SectionClasses.GeneralConfig.tMOTD.Text = ConfigKey.MOTD.GetString();
             SectionClasses.GeneralConfig.nMaxPlayers.Value = ConfigKey.MaxPlayers.GetInt();
             MainForm._instance.CheckMaxPlayersPerWorldValue();
             SectionClasses.GeneralConfig.nMaxPlayersPerWorld.Value = ConfigKey.MaxPlayersPerWorld.GetInt();
@@ -570,6 +577,17 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
 
         private void SaveConfig()
         {
+
+            // Misc
+
+            ConfigKey.RemoteControlEnabled.TrySetValue(SectionClasses.MiscConfig.chkEnableRemoteControl.Checked);
+            ConfigKey.RequireRemoteAdminPass.TrySetValue(SectionClasses.MiscConfig.chkRequireLogin.Checked);
+            string password = SectionClasses.MiscConfig.setPassword == null
+                ? ConfigKey.RemoteAdminPass.GetDefault().ToString()
+                : SectionClasses.MiscConfig.setPassword;
+            ConfigKey.RemoteAdminPass.TrySetValue(password);
+            ConfigKey.RemoteControlPort.TrySetValue(SectionClasses.MiscConfig.numPort.Value);
+
             // General
 
             ConfigKey.ServerName.TrySetValue(SectionClasses.GeneralConfig.tServerName.Text);

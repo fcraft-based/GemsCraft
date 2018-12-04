@@ -127,7 +127,7 @@ namespace GemsCraft.Commands {
 
 
         public override string ToString() {
-            return String.Format( "CommandDescriptor({0})", Name );
+            return $"CommandDescriptor({Name})";
         }
 
         public string ClassyName {

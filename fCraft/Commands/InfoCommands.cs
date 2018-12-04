@@ -2107,20 +2107,20 @@ THE SOFTWARE.*/
                     player.Message( "Unknown rank: {0}", rankName );
                     return;
                 } else {
-                    prefix = String.Format( "Commands available to {0}&S", rank.ClassyName );
+                    prefix = $"Commands available to {rank.ClassyName}&S";
                     cd = CommandManager.GetCommands( rank, false );
                 }
 
             } else if( param.Equals( "all", StringComparison.OrdinalIgnoreCase ) ) {
                 prefix = "All commands";
-                cd = CommandManager.GetCommands();
+                cd = CommandManager.GetCommandDescriptors();
 
             } else if( param.Equals( "hidden", StringComparison.OrdinalIgnoreCase ) ) {
                 prefix = "Hidden commands";
-                cd = CommandManager.GetCommands( true );
+                cd = CommandManager.GetCommandDescriptors( true );
 
             } else if( EnumUtil.TryParse( param, out category, true ) ) {
-                prefix = String.Format( "{0} commands", category );
+                prefix = $"{category} commands";
                 cd = CommandManager.GetCommands( category, false );
 
             } else {

@@ -16,7 +16,26 @@ namespace GemsCraft.Commands {
         static readonly SortedList<string, CommandDescriptor> Commands = new SortedList<string, CommandDescriptor>();
 
         public static readonly string[] ReservedCommandNames = new[] { "ok", "nvm", "dev" };
+        internal static List<Command> CommandList = new List<Command>();
+        public static Command GetCommand(string name, bool searchAliases)
+        {
+            foreach (Command c in CommandList)
+            {
+                if (name.ToLower().Equals(c.Descriptor.Name.ToLower()))
+                {
+                    return c;
+                }
 
+                if (!searchAliases) continue;
+                if ((c.Descriptor.Aliases 
+                     ?? throw new InvalidOperationException()).Any(aliases => aliases.ToLower().Equals(name.ToLower())))
+                {
+                    return c;
+                }
+            }
+
+            throw new ArgumentException($"Command \"{name}\" does not exist.");
+        }
         // Sets up all the command hooks
         public static void Init() {
             DevCommands.Init();
@@ -37,20 +56,36 @@ namespace GemsCraft.Commands {
         }
 
 
-        /// <summary> Gets a list of all commands (includding hidden ones). </summary>
-        public static CommandDescriptor[] GetCommands() {
+        /// <summary> Gets a list of all command descriptors (including hidden ones). </summary>
+        public static CommandDescriptor[] GetCommandDescriptors() {
             return Commands.Values.ToArray();
         }
 
 
         /// <summary> Gets a list of ONLY hidden or non-hidden commands, not both. </summary>
-        public static CommandDescriptor[] GetCommands( bool hidden ) {
+        public static CommandDescriptor[] GetCommandDescriptors( bool hidden ) {
             return Commands.Values
                            .Where( cmd => ( cmd.IsHidden == hidden ) )
                            .ToArray();
         }
 
+        /// <summary>
+        /// Gets a list of all commands (including hidden ones).
+        /// </summary>
+        public static Command[] GetCommands()
+        {
+            return CommandList.ToArray();
+        }
 
+        /// <summary>
+        /// Gets a list of ONLY hidden or non-hidden commands, not both.
+        /// </summary>
+        public static Command[] GetCommands(bool hidden)
+        {
+            return CommandList
+                .Where(cmd => (cmd.Descriptor.IsHidden == hidden))
+                .ToArray();
+        }
         /// <summary> Gets a list of commands available to a specified rank. </summary>
         public static CommandDescriptor[] GetCommands( [NotNull] Rank rank, bool includeHidden ) {
             if( rank == null ) throw new ArgumentNullException( "rank" );

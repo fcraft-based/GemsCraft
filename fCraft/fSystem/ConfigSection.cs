@@ -26,6 +26,16 @@ namespace GemsCraft.fSystem {
         IRC,
 
         /// <summary> Advanced configuration (performance adjustments, protocol tweaks, experimental features, etc). </summary>
-        Advanced
+        Advanced,
+
+        /// <summary>
+        /// Extra configurations that don't fit in the other categories
+        /// </summary>
+        Misc,
+
+        /// <summary>
+        /// Extensions directly related to Classic Protocol Extensions (aka CPE)
+        /// </summary>
+        CPE
     }
 }
