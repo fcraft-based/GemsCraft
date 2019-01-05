@@ -2,3 +2,6 @@ GemsCraft Changelog
 Alpha 0.0
 - Moved fCraftGUI to fCraft
 - Moved ConfigGUI to fCraft
+- Reorganized namespaces, breaks other forks plugins
+- Changed name of library to GemsCraft, instead of fCraft, breaks other forks plugins
+- Switched from using xml to using json for the Config

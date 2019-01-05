@@ -6,6 +6,8 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Diagnostics;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
+
 using GemsCraft.Players;
 using JetBrains.Annotations;
 

@@ -9,10 +9,14 @@ using System.Net.Cache;
 using System.Reflection;
 using System.Text;
 using System.Management;
+using System.Windows.Forms;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.Utils;
 using JetBrains.Annotations;
+using Newtonsoft.Json;
+
 #if DEBUG_EVENTS
 using System.Reflection.Emit;
 #endif
@@ -29,28 +33,28 @@ namespace GemsCraft.fSystem
         {
             string result = string.Empty;
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem");
-            foreach (ManagementObject os in searcher.Get())
+            foreach (var o in searcher.Get())
             {
+                var os = (ManagementObject) o;
                 result = os["Caption"].ToString();
                 break;
             }
             return result;
         }
-
-        static readonly object LogLock = new object();
+        
+        private static readonly object LogLock = new object();
         public static bool Enabled { get; set; }
         public static readonly bool[] ConsoleOptions;
         public static readonly bool[] LogFileOptions;
 
-        const string DefaultLogFileName = "GemsCraft.log",
+        private const string DefaultLogFileName = "GemsCraft.log",
                      LongDateFormat = "yyyy'-'MM'-'dd'_'HH'-'mm'-'ss",
                      ShortDateFormat = "yyyy'-'MM'-'dd";
-        static readonly Uri CrashReportUri = new Uri("http://legend-craft.tk/crash");
+        private static readonly Uri CrashReportUri = new Uri("http://gemz.christplay.x10host.com/crash.php");
         public static LogSplittingType SplittingType = LogSplittingType.OneFile;
-
-        static readonly string SessionStart = DateTime.Now.ToString(LongDateFormat); // localized
-        static readonly Queue<string> RecentMessages = new Queue<string>();
-        const int MaxRecentMessages = 25;
+        private static readonly string SessionStart = DateTime.Now.ToString(LongDateFormat); // localized
+        private static readonly Queue<string> RecentMessages = new Queue<string>();
+        private const int MaxRecentMessages = 25;
 
         public static string CurrentLogFileName
         {
@@ -86,8 +90,8 @@ namespace GemsCraft.fSystem
         internal static void MarkLogStart()
         {
             // Mark start of logging
-            Log(LogType.SystemActivity, "------ Log Starts {0} ({1}) ------",
-                 DateTime.Now.ToLongDateString(), DateTime.Now.ToShortDateString()); // localized
+            Log(LogType.SystemActivity,
+                $"------ Log Starts {DateTime.Now.ToLongDateString()} ({DateTime.Now.ToShortDateString()}) ------");
         }
 
         public static void LogToConsole([NotNull] string message)
@@ -117,7 +121,7 @@ namespace GemsCraft.fSystem
         {
             if (message == null) throw new ArgumentNullException("message");
             if (values == null) throw new ArgumentNullException("values");
-            Log(type, String.Format(message, values));
+            Log(type, string.Format(message, values));
         }
 
 
@@ -127,7 +131,7 @@ namespace GemsCraft.fSystem
             if (message == null) throw new ArgumentNullException("message");
             if (!Enabled) return;
             string line = DateTime.Now.ToLongTimeString() + " > " + GetPrefix(type) + message; // localized
-
+            Network.Remote.Server.Logs.Add(line);
             lock (LogLock)
             {
                 RaiseLoggedEvent(message, line, type);
@@ -138,19 +142,17 @@ namespace GemsCraft.fSystem
                     RecentMessages.Dequeue();
                 }
 
-                if (LogFileOptions[(int)type])
+                if (!LogFileOptions[(int) type]) return;
+                try
                 {
-                    try
-                    {
-                        File.AppendAllText(Path.Combine(Paths.LogPath, CurrentLogFileName), line + Environment.NewLine);
-                    }
-                    catch (Exception ex)
-                    {
-                        string errorMessage = "Logger.Log: " + ex.Message;
-                        RaiseLoggedEvent(errorMessage,
-                                          DateTime.Now.ToLongTimeString() + " > " + GetPrefix(LogType.Error) + errorMessage, // localized
-                                          LogType.Error);
-                    }
+                    File.AppendAllText(Path.Combine(Paths.LogPath, CurrentLogFileName), line + Environment.NewLine);
+                }
+                catch (Exception ex)
+                {
+                    string errorMessage = "Logger.Log: " + ex.Message;
+                    RaiseLoggedEvent(errorMessage,
+                        DateTime.Now.ToLongTimeString() + " > " + GetPrefix(LogType.Error) + errorMessage, // localized
+                        LogType.Error);
                 }
             }
         }
@@ -169,7 +171,7 @@ namespace GemsCraft.fSystem
                 case LogType.IRC:
                     return "IRC: ";
                 default:
-                    return String.Empty;
+                    return string.Empty;
             }
         }
 
@@ -180,10 +182,47 @@ namespace GemsCraft.fSystem
         static DateTime lastCrashReport = DateTime.MinValue;
         const int MinCrashReportInterval = 61; // minimum interval between submitting crash reports, in seconds
 
+        private struct CrashReportData
+        {
+            public string SoftwareVersion;
+            public string Error;
+            public string OperatingSystem;
+            public string Runtime;
+            public string ServerName;
+            public string Exception;
+            public string Config;
+            public string Logs;
+            public string Date;
+            public string Time;
+            public string Assembly;
+            public bool ShutdownImminent;
+        }
 
+        private static void SaveReport(DateTime n, CrashReportData data)
+        {
+            string folder = "Crash Reports/";
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+            
+            string file = $"{folder}crash_report.{ReportDateTime(n)}";
+            var writer = File.CreateText(file);
+            writer.WriteLine(JsonConvert.SerializeObject(data, Formatting.Indented));
+            writer.Flush();
+            writer.Close();
+        }
+
+        private static string ReportDateTime(DateTime n)
+        {
+            return $"{n.ToLongDateString()}.{n.ToLongTimeString()}.txt".Replace(",", "_").Replace(":", "-");
+        }
         public static void LogAndReportCrash([CanBeNull] string message, [CanBeNull] string assembly,
                                              [CanBeNull] Exception exception, bool shutdownImminent)
         {
+            DateTime n = DateTime.Now;
+            string file = $"crash{ReportDateTime(n)}";
+            
             if (message == null) message = "(null)";
             if (assembly == null) assembly = "(null)";
             if (exception == null) exception = new Exception("(null)");
@@ -225,21 +264,25 @@ namespace GemsCraft.fSystem
                 try
                 {
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("version=").Append(Uri.EscapeDataString(Updater.LatestStable.ToString()));
-                    sb.Append("&error=").Append(Uri.EscapeDataString(message));
+                    CrashReportData data = new CrashReportData
+                    {
+                        SoftwareVersion = Updater.LatestStable.ToString(),
+                        Error = message
+                    };
+                    
 
                     if (MonoCompat.IsMono)
                     {
-                        sb.Append("&os=").Append(Environment.OSVersion.VersionString);
-                        sb.Append("&runtime=").Append(Uri.EscapeDataString("Mono " + MonoCompat.MonoVersionString));
+                        data.OperatingSystem = Environment.OSVersion.VersionString;
+                        data.Runtime = "Mono " + MonoCompat.MonoVersionString;
                     }
                     else
                     {
-                        sb.Append("&os=").Append(GetOS() + Environment.OSVersion.ServicePack);
-                        sb.Append("&runtime=").Append(Uri.EscapeDataString(".Net " + Environment.Version.Major + "." + Environment.Version.MajorRevision + "." + Environment.Version.Build));
+                        data.OperatingSystem = GetOS() + Environment.OSVersion.ServicePack;
+                        data.Runtime =
+                            $".Net {".Net " + Environment.Version.Major + "." + Environment.Version.MajorRevision + "." + Environment.Version.Build}";
                     }
-
-                    sb.Append("&server=").Append(ConfigKey.ServerName.GetString());
+                    data.ServerName = ConfigKey.ServerName.GetString();
                 
 
                     if (exception is TargetInvocationException)
@@ -250,25 +293,23 @@ namespace GemsCraft.fSystem
                     {
                         exception = (exception).InnerException;
                     }
-                    sb.Append("&exception=").Append(Uri.EscapeDataString(exception.GetType().ToString() + ": " + exception.Message + ", Stack: " + exception.StackTrace));
 
-                    if (File.Exists(Paths.ConfigFileName))
-                    {
-                        sb.Append("&config=").Append(Uri.EscapeDataString(File.ReadAllText(Paths.ConfigFileName)));
-                    }
-                    else
-                    {
-                        sb.Append("&config=EMPTY");
-                    }
+                    if (exception != null)
+                        data.Exception = exception.GetType() + ": " + exception.Message + ", Stack: " +
+                                         exception.StackTrace;
+
+                    data.Config = File.Exists(Paths.ConfigFileName) ? Paths.ConfigFileName : "config.json not found";
 
                     string[] lastFewLines;
                     lock (LogLock)
                     {
                         lastFewLines = RecentMessages.ToArray();
                     }
-                    sb.Append("&log=").Append(Uri.EscapeDataString(string.Join(Environment.NewLine, lastFewLines)));
 
-                    byte[] formData = Encoding.UTF8.GetBytes(sb.ToString());
+                    data.Logs = string.Join(Environment.NewLine, lastFewLines);
+                    string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+                    string postData = $"?json={Uri.EscapeDataString(json)}";
+                    byte[] formData = Encoding.UTF8.GetBytes(postData);
 
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(CrashReportUri);
                     request.Method = "POST";
@@ -300,12 +341,11 @@ namespace GemsCraft.fSystem
 
                     if (responseString != null && responseString.StartsWith("ERROR"))
                     {
-                        Log(LogType.Error, "Crash report could not be processed by legend-craft.net.");
+                        Log(LogType.Error, "Crash report could not be processed by gemscraft.net.");
                     }
                     else
                     {
-                        int referenceNumber;
-                        if (responseString != null && Int32.TryParse(responseString, out referenceNumber))
+                        if (responseString != null && int.TryParse(responseString, out var referenceNumber))
                         {
                             Log(LogType.SystemActivity, "Crash report submitted (Reference #{0})", referenceNumber);
                         }

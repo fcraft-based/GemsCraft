@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Utils;
@@ -1293,7 +1294,7 @@ THE SOFTWARE.*/
 
                 switch( whatToReload ) {
                     case "config":
-                        success = Config.Load( true, true );
+                        success = Config.LoadXml( true, true );
                         break;
 
                     case "swears":
@@ -1323,6 +1324,7 @@ THE SOFTWARE.*/
 
                 if( success ) {
                     player.Message( "Reload: reloaded {0}.", whatToReload );
+                    Network.Remote.Server.UpdateServer();
                 } else {
                     player.Message( "&WReload: Error(s) occured while reloading {0}.", whatToReload );
                 }

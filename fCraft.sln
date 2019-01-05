@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GemsCraftGUI", "GemsCraft\G
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Updater", "Updater\Updater.vbproj", "{AADB978D-C022-44A4-91F5-4886CD377583}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteTest", "RemoteTest\RemoteTest.csproj", "{8CAB7AD8-3432-462C-81CD-91B4F0DD373E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteTest", "RemoteTest\RemoteTest.csproj", "{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,16 +62,16 @@ Global
 		{AADB978D-C022-44A4-91F5-4886CD377583}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AADB978D-C022-44A4-91F5-4886CD377583}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AADB978D-C022-44A4-91F5-4886CD377583}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CAB7AD8-3432-462C-81CD-91B4F0DD373E}.Debug_Events|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CAB7AD8-3432-462C-81CD-91B4F0DD373E}.Debug_Events|Any CPU.Build.0 = Debug|Any CPU
-		{8CAB7AD8-3432-462C-81CD-91B4F0DD373E}.Debug_IRC|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CAB7AD8-3432-462C-81CD-91B4F0DD373E}.Debug_IRC|Any CPU.Build.0 = Debug|Any CPU
-		{8CAB7AD8-3432-462C-81CD-91B4F0DD373E}.Debug_Scheduler|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CAB7AD8-3432-462C-81CD-91B4F0DD373E}.Debug_Scheduler|Any CPU.Build.0 = Debug|Any CPU
-		{8CAB7AD8-3432-462C-81CD-91B4F0DD373E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CAB7AD8-3432-462C-81CD-91B4F0DD373E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CAB7AD8-3432-462C-81CD-91B4F0DD373E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CAB7AD8-3432-462C-81CD-91B4F0DD373E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Debug_Events|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Debug_Events|Any CPU.Build.0 = Debug|Any CPU
+		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Debug_IRC|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Debug_IRC|Any CPU.Build.0 = Debug|Any CPU
+		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Debug_Scheduler|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Debug_Scheduler|Any CPU.Build.0 = Debug|Any CPU
+		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

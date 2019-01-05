@@ -8,6 +8,8 @@ using JetBrains.Annotations;
 using System.IO;
 using System.Linq;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
+
 using GemsCraft.Utils;
 using GemsCraft.Worlds;
 
@@ -455,7 +457,7 @@ namespace GemsCraft.Players
             ID = id;
         }
 
-        PlayerInfo()
+        private PlayerInfo()
         {
             // reset everything to defaults
             LastIP = IPAddress.None;
@@ -481,10 +483,8 @@ namespace GemsCraft.Players
                           bool setLoginDate, RankChangeType rankChangeType)
             : this()
         {
-            if (name == null) throw new ArgumentNullException("name");
-            if (rank == null) throw new ArgumentNullException("rank");
-            Name = name;
-            Rank = rank;
+            Name = name ?? throw new ArgumentNullException("name");
+            Rank = rank ?? throw new ArgumentNullException("rank");
             if (setLoginDate)
             {
                 FirstLoginDate = DateTime.UtcNow;
@@ -500,16 +500,13 @@ namespace GemsCraft.Players
         public PlayerInfo([NotNull] string name, [NotNull] IPAddress lastIP, [NotNull] Rank startingRank)
             : this()
         {
-            if (name == null) throw new ArgumentNullException("name");
-            if (lastIP == null) throw new ArgumentNullException("lastIP");
-            if (startingRank == null) throw new ArgumentNullException("startingRank");
             FirstLoginDate = DateTime.UtcNow;
             LastSeen = DateTime.UtcNow;
             LastLoginDate = DateTime.UtcNow;
-            Rank = startingRank;
-            Name = name;
+            Rank = startingRank ?? throw new ArgumentNullException("startingRank");
+            Name = name ?? throw new ArgumentNullException("name");
             ID = PlayerDB.GetNextID();
-            LastIP = lastIP;
+            LastIP = lastIP ?? throw new ArgumentNullException("lastIP");
         }
 
         #endregion
@@ -1631,7 +1628,7 @@ namespace GemsCraft.Players
 
         public static string Escape([CanBeNull] string str)
         {
-            if (String.IsNullOrEmpty(str))
+            if (string.IsNullOrEmpty(str))
             {
                 return "";
             }
@@ -1776,7 +1773,7 @@ namespace GemsCraft.Players
 
         public override string ToString()
         {
-            return String.Format("PlayerInfo({0},{1})", Name, Rank.Name);
+            return $"PlayerInfo({Name},{Rank.Name})";
         }
 
         public bool Can(Permission permission)
@@ -1822,23 +1819,11 @@ namespace GemsCraft.Players
             bool xIsOnline = xPlayer != null && observer.CanSee(xPlayer);
             bool yIsOnline = yPlayer != null && observer.CanSee(yPlayer);
 
-            if (!xIsOnline && yIsOnline)
-            {
-                return 1;
-            }
-            else if (xIsOnline && !yIsOnline)
-            {
-                return -1;
-            }
+            if (!xIsOnline && yIsOnline) return 1;
+            if (xIsOnline && !yIsOnline) return -1;
 
-            if (x.Rank == y.Rank)
-            {
-                return Math.Sign(y.LastSeen.Ticks - x.LastSeen.Ticks);
-            }
-            else
-            {
-                return x.Rank.Index - y.Rank.Index;
-            }
+            if (x.Rank == y.Rank) return Math.Sign(y.LastSeen.Ticks - x.LastSeen.Ticks);
+            return x.Rank.Index - y.Rank.Index;
         }
     }
 }

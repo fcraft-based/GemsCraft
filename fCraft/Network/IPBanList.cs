@@ -6,6 +6,7 @@ using System.Net;
 using System.Linq;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Utils;
@@ -472,16 +473,11 @@ namespace GemsCraft.Network {
 
             // Kick all players from IP
             Player[] targetsOnline = Server.Players.FromIP( targetAddress ).ToArray();
-            if( targetsOnline.Length > 0 ) {
-                string kickReason;
-                if( reason != null ) {
-                    kickReason = String.Format( "Banned by {0}: {1}", player.Name, reason );
-                } else {
-                    kickReason = String.Format( "Banned by {0}", player.Name );
-                }
-                for( int i = 0; i < targetsOnline.Length; i++ ) {
-                    targetsOnline[i].Kick( kickReason, LeaveReason.BanAll );
-                }
+            if (targetsOnline.Length <= 0) return;
+            var kickReason = reason != null ? $"Banned by {player.Name}: {reason}" : $"Banned by {player.Name}";
+            foreach (var t in targetsOnline)
+            {
+                t.Kick( kickReason, LeaveReason.BanAll );
             }
         }
 

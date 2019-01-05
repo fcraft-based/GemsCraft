@@ -35,6 +35,7 @@ using System.Reflection;
 using System.Linq;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Utils;
@@ -63,7 +64,7 @@ namespace GemsCraft.ServerCLI {
                     CheckForUpdates();
                 }
                 Console.Title = "GemsCraft " + Updater.LatestStable + " - " + ConfigKey.ServerName.GetString();
-
+                
                 if( !ConfigKey.ProcessPriority.IsBlank() ) {
                     try {
                         Process.GetCurrentProcess().PriorityClass = ConfigKey.ProcessPriority.GetEnum<ProcessPriorityClass>();
@@ -75,8 +76,8 @@ namespace GemsCraft.ServerCLI {
                 if( Server.StartServer() ) {
                     Console.WriteLine( "** Running GemsCraft version {0} **", Updater.LatestStable );
                     Console.WriteLine( "** Server is now ready. Type /Shutdown to exit safely. **" );
-
-                    while( !Server.IsShuttingDown ) {
+                    GemsCraft.Network.Remote.Server.UpdateServer(); // Send to GemsCraft Server List
+                    while ( !Server.IsShuttingDown ) {
                         string cmd = Console.ReadLine();
                         if( cmd.Equals( "/Clear", StringComparison.OrdinalIgnoreCase ) ) {
                             Console.Clear();

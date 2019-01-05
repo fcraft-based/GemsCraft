@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using GemsCraft.Drawing;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.MapConversion;
 using GemsCraft.Network;
 using GemsCraft.Physics.Life;

@@ -2,6 +2,7 @@
 
 using System.Windows.Forms;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.Players;
 using static GemsCraft.GUI.ConfigGUI.GUI.SectionClasses;
 

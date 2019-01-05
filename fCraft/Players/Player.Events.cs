@@ -121,7 +121,7 @@ namespace GemsCraft.Players {
         public static void RaisePlayerMovedEvent( [NotNull] Player player, Position oldPos ) {
             if( player == null ) throw new ArgumentNullException( "player" );
             var h = Moved;
-            if( h != null ) h( null, new PlayerMovedEventArgs( player, oldPos ) );
+            h?.Invoke( null, new PlayerMovedEventArgs( player, oldPos ) );
         }
 
 
@@ -137,18 +137,14 @@ namespace GemsCraft.Players {
        public static void RaisePlayerClickedEvent( Player player, Vector3I coords,
                                              ClickAction action, Block block ) {
             var handler = Clicked;
-            if( handler != null ) {
-                handler( null, new PlayerClickedEventArgs( player, coords, action, block ) );
-            }
-        }
+           handler?.Invoke( null, new PlayerClickedEventArgs( player, coords, action, block ) );
+       }
 
 
         public static void RaisePlayerPlacedBlockEvent( Player player, Map map, Vector3I coords,
                                                           Block oldBlock, Block newBlock, BlockChangeContext context ) {
             var handler = PlacedBlock;
-            if( handler != null ) {
-                handler( null, new PlayerPlacedBlockEventArgs( player, map, coords, oldBlock, newBlock, context ) );
-            }
+            handler?.Invoke( null, new PlayerPlacedBlockEventArgs( player, map, coords, oldBlock, newBlock, context ) );
         }
 
 

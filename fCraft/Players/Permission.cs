@@ -123,7 +123,7 @@ namespace GemsCraft.Players {
         Spectate,
 
         /// <summary> Ability to freeze/unfreeze players.
-        /// Frozen players cannot move or build/delete. </summary>
+        /// Frozen players cannot move or build/delete. (They gotta let it go)</summary>
         Freeze,
 
         /// <summary> Ability to temporarily mute players.

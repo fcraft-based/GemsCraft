@@ -20,6 +20,7 @@ using GemsCraft.Commands.Command_Handlers;
 using GemsCraft.Drawing.DrawOps;
 using GemsCraft.Drawing.DrawOps.RandomMaze;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.Games;
 using GemsCraft.Network;
 using GemsCraft.Players;
@@ -167,106 +168,108 @@ THE SOFTWARE.*/
                 return;
             }
 
-            //certain options that take in specific params are in here, the rest are in the switch-case
-            if (option.ToLower() == "list")
+            switch (option.ToLower())
             {
-                player.Message("_Bots on {0}_", ConfigKey.ServerName.GetString());
-                foreach (Bot botCheck in Server.Bots)
+                //certain options that take in specific params are in here, the rest are in the switch-case
+                case "list":
                 {
-                    player.Message(botCheck.Name + " on " + botCheck.World.Name);
-                }
-                return;
-            }
-            else if (option.ToLower() == "removeall")
-            {
-
-            rewipe:
-                Server.Bots.ForEach(botToRemove =>
-                {
-                    botToRemove.removeBot();
-                });
-
-                if (Server.Bots.Count != 0)
-                {
-                    goto rewipe;
-                }
-
-                player.Message("All bots removed from the server.");
-                return;
-            }
-            else if (option.ToLower() == "move")
-            {
-                string targetBot = cmd.Next();
-                if (string.IsNullOrEmpty(targetBot))
-                {
-                    CdBot.PrintUsage(player);
+                    player.Message("_Bots on {0}_", ConfigKey.ServerName.GetString());
+                    foreach (Bot botCheck in Server.Bots)
+                    {
+                        player.Message(botCheck.Name + " on " + botCheck.World.Name);
+                    }
                     return;
                 }
-                string targetPlayer = cmd.Next();
-                if (string.IsNullOrEmpty(targetPlayer))
+                case "removeall":
                 {
-                    CdBot.PrintUsage(player);
+                    rewipe:
+                    Server.Bots.ForEach(botToRemove =>
+                    {
+                        botToRemove.removeBot();
+                    });
+
+                    if (Server.Bots.Count != 0)
+                    {
+                        goto rewipe;
+                    }
+
+                    player.Message("All bots removed from the server.");
                     return;
                 }
-
-                Bot targetB = player.World.FindBot(targetBot);
-                Player targetP = player.World.FindPlayerExact(targetPlayer);
-
-                if (targetP == null)
+                case "move":
                 {
-                    player.Message("Could not find {0} on {1}! Please make sure you spelled their name correctly.", targetPlayer, player.World);
+                    string targetBot = cmd.Next();
+                    if (string.IsNullOrEmpty(targetBot))
+                    {
+                        CdBot.PrintUsage(player);
+                        return;
+                    }
+                    string targetPlayer = cmd.Next();
+                    if (string.IsNullOrEmpty(targetPlayer))
+                    {
+                        CdBot.PrintUsage(player);
+                        return;
+                    }
+
+                    Bot targetB = player.World.FindBot(targetBot);
+                    Player targetP = player.World.FindPlayerExact(targetPlayer);
+
+                    if (targetP == null)
+                    {
+                        player.Message("Could not find {0} on {1}! Please make sure you spelled their name correctly.", targetPlayer, player.World);
+                        return;
+                    }
+                    if (targetB == null)
+                    {
+                        player.Message("Could not find {0} on {1}! Please make sure you spelled their name correctly.", targetBot, player.World);
+                        return;
+                    }
+
+                    player.Message("{0} is now moving!", targetB.Name);
+                    targetB.isMoving = true;
+                    targetB.NewPosition = targetP.Position;
+                    targetB.OldPosition = targetB.Position;
+                    targetB.timeCheck.Start();
                     return;
                 }
-                if (targetB == null)
+                case "follow":
                 {
-                    player.Message("Could not find {0} on {1}! Please make sure you spelled their name correctly.", targetBot, player.World);
+                    return; // not used for now
+
+                    string targetBot = cmd.Next();
+                    if (string.IsNullOrEmpty(targetBot))
+                    {
+                        CdBot.PrintUsage(player);
+                        return;
+                    }
+                    string targetPlayer = cmd.Next();
+                    if (string.IsNullOrEmpty(targetPlayer))
+                    {
+                        CdBot.PrintUsage(player);
+                        return;
+                    }
+
+                    Bot targetB = player.World.FindBot(targetBot);
+                    Player targetP = player.World.FindPlayerExact(targetPlayer);
+
+                    if (targetP == null)
+                    {
+                        player.Message("Could not find {0} on {1}! Please make sure you spelled their name correctly.", targetPlayer, player.World);
+                        return;
+                    }
+                    if (targetB == null)
+                    {
+                        player.Message("Could not find {0} on {1}! Please make sure you spelled their name correctly.", targetBot, player.World);
+                        return;
+                    }
+
+                    player.Message("{0} is now following {1}!", targetB.Name, targetP.Name);
+                    targetB.isMoving = true;
+                    targetB.followTarget = targetP;
+                    targetB.OldPosition = targetB.Position;
+                    targetB.timeCheck.Start();
                     return;
                 }
-
-                player.Message("{0} is now moving!", targetB.Name);
-                targetB.isMoving = true;
-                targetB.NewPosition = targetP.Position;
-                targetB.OldPosition = targetB.Position;
-                targetB.timeCheck.Start();
-                return;
-            }
-            else if (option.ToLower() == "follow")
-            {
-                return; // not used for now
-
-                string targetBot = cmd.Next();
-                if (string.IsNullOrEmpty(targetBot))
-                {
-                    CdBot.PrintUsage(player);
-                    return;
-                }
-                string targetPlayer = cmd.Next();
-                if (string.IsNullOrEmpty(targetPlayer))
-                {
-                    CdBot.PrintUsage(player);
-                    return;
-                }
-
-                Bot targetB = player.World.FindBot(targetBot);
-                Player targetP = player.World.FindPlayerExact(targetPlayer);
-
-                if (targetP == null)
-                {
-                    player.Message("Could not find {0} on {1}! Please make sure you spelled their name correctly.", targetPlayer, player.World);
-                    return;
-                }
-                if (targetB == null)
-                {
-                    player.Message("Could not find {0} on {1}! Please make sure you spelled their name correctly.", targetBot, player.World);
-                    return;
-                }
-
-                player.Message("{0} is now following {1}!", targetB.Name, targetP.Name);
-                targetB.isMoving = true;
-                targetB.followTarget = targetP;
-                targetB.OldPosition = targetB.Position;
-                targetB.timeCheck.Start();
-                return;
             }
 
             //finally away from the special cases

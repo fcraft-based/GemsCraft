@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.GUI.ConfigGUI.GUI.Sections;
 using GemsCraft.Players;
 using GemsCraft.Utils;
@@ -46,7 +44,7 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
         internal void btnRanks_Click(object sender, EventArgs e)
         {
             _selectedTab = 3;
-            SectionClasses.WorldConfig.ShowDialog();
+            SectionClasses.RankConfig.ShowDialog();
         }
 
         internal void btnSecurity_Click(object sender, EventArgs e)
@@ -1598,11 +1596,18 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
             List<string> lines = new List<string>();
             if (SectionClasses.ChatConfig.xShowConnectionMessages.Checked)
             {
-                lines.Add(string.Format("&SPlayer {0}{1}apotter96&S connected, joined {2}{3}main",
-                    SectionClasses.ChatConfig.xRankColorsInChat.Checked ? RankManager.HighestRank.Color : "",
-                    SectionClasses.ChatConfig.xRankPrefixesInChat.Checked ? RankManager.HighestRank.Prefix : "",
-                    SectionClasses.ChatConfig.xRankColorsInWorldNames.Checked ? RankManager.LowestRank.Color : "",
-                    SectionClasses.ChatConfig.xRankPrefixesInChat.Checked ? RankManager.LowestRank.Prefix : ""));
+                try
+                {
+                    lines.Add(string.Format("&SPlayer {0}{1}apotter96&S connected, joined {2}{3}main",
+                        SectionClasses.ChatConfig.xRankColorsInChat.Checked ? RankManager.HighestRank.Color : "",
+                        SectionClasses.ChatConfig.xRankPrefixesInChat.Checked ? RankManager.HighestRank.Prefix : "",
+                        SectionClasses.ChatConfig.xRankColorsInWorldNames.Checked ? RankManager.LowestRank.Color : "",
+                        SectionClasses.ChatConfig.xRankPrefixesInChat.Checked ? RankManager.LowestRank.Prefix : ""));
+                }
+                catch (NullReferenceException)
+                {
+                    return;
+                }
             }
             lines.Add("&R<*- This is an announcement -*>");
             lines.Add("&YThis is a /say announcement");
@@ -1847,6 +1852,11 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
         {
             SaveButtonHandlers();
             FormClosing += ConfigUI_FormClosing;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
         }
 
         internal void websiteURL_TextChanged(object sender, EventArgs e)

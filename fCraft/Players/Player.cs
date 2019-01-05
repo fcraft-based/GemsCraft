@@ -11,6 +11,8 @@ using GemsCraft.Commands;
 using GemsCraft.Drawing;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
+
 using GemsCraft.Network;
 using GemsCraft.Plugins;
 using GemsCraft.Utils;
@@ -58,13 +60,7 @@ namespace GemsCraft.Players
         public bool HasFullyConnected { get; private set; }
 
         /// <summary> Whether the client is currently connected. </summary>
-        public bool IsOnline
-        {
-            get
-            {
-                return State == SessionState.Online;
-            }
-        }
+        public bool IsOnline => State == SessionState.Online;
 
         /// <summary> Whether the player name was verified at login. </summary>
         public bool IsVerified { get; private set; }
@@ -130,10 +126,7 @@ namespace GemsCraft.Players
 
         /// <summary> Plain version of the name (no formatting). </summary>      
         [NotNull]
-        public string Name
-        {
-            get { return Info.Name; }
-        }
+        public string Name => Info.Name;
 
         /// <summary>
         /// The name used when the server extracts the skin for a player
@@ -187,10 +180,7 @@ namespace GemsCraft.Players
 
         /// <summary> Name formatted for display in chat. </summary>
         [NotNull]
-        public string ClassyName
-        {
-            get { return Info.ClassyName; }
-        }
+        public string ClassyName => Info.ClassyName;
 
         /// <summary> Whether the client supports advanced WoM client functionality. </summary>
         public bool IsUsingWoM { get; private set; }
@@ -276,11 +266,7 @@ namespace GemsCraft.Players
         public bool CanBeKilled()
         {
             if (Immortal) return false;
-            if ((DateTime.UtcNow - LastTimeKilled).TotalSeconds < 15)
-            {
-                return false;
-            }
-            return true;
+            return !((DateTime.UtcNow - LastTimeKilled).TotalSeconds < 15);
         }
 
 
@@ -377,14 +363,9 @@ namespace GemsCraft.Players
 
             // actually kick
             string kickReason;
-            if (reason.Length > 0)
-            {
-                kickReason = String.Format("Got blasted out of the server with the BASSCANNON executed by {0}: {1}", player.Name, reason);
-            }
-            else
-            {
-                kickReason = String.Format("Got blasted out of the server with the BASSCANNON executed by {0}", player.Name);
-            }
+            kickReason = reason.Length > 0 
+                ? $"Got blasted out of the server with the BASSCANNON executed by {player.Name}: {reason}" 
+                : $"Got blasted out of the server with the BASSCANNON executed by {player.Name}";
             Kick(kickReason, context);
 
             // log and record kick to PlayerDB
@@ -976,7 +957,7 @@ namespace GemsCraft.Players
             if (args == null) throw new ArgumentNullException("args");
             if (args.Length > 0)
             {
-                message = String.Format(message, args);
+                message = string.Format(message, args);
             }
             if (this == Console)
             {
@@ -2320,13 +2301,7 @@ namespace GemsCraft.Players
 
 
         /// <summary> Time since the player was last active (moved, talked, or clicked). </summary>
-        public TimeSpan IdleTime
-        {
-            get
-            {
-                return DateTime.UtcNow.Subtract(LastActiveTime);
-            }
-        }
+        public TimeSpan IdleTime => DateTime.UtcNow.Subtract(LastActiveTime);
 
 
         /// <summary> Resets the IdleTimer to 0. </summary>
@@ -2442,15 +2417,10 @@ namespace GemsCraft.Players
         /// <summary> Name formatted for the debugger. </summary>
         public override string ToString()
         {
-            if (Info != null)
-            {
-                return String.Format("Player({0})", Info.Name);
-            }
-            else
-            {
-                return String.Format((string) "Player({0})", (object) IP);
-            }
+            return Info != null ? $"Player({Info.Name})" : $"Player({IP})";
         }
+
+        
     }
 
 

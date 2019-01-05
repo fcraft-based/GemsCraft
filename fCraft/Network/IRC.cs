@@ -36,6 +36,7 @@ using System.Threading;
 using GemsCraft.Events;
 using System.Collections.Concurrent;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.Players;
 using GemsCraft.Utils;
 using JetBrains.Annotations;

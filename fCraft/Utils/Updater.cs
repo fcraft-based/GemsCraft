@@ -104,7 +104,7 @@ namespace GemsCraft.Utils {
                 string finalResult = "";
                 if (ShowTitle || Title == "Alpha" || Title == "Beta")
                 {
-                    finalResult = Title;
+                    finalResult = Title + " ";
                 }
 
                 finalResult += $"{Major}.{Minor}";
@@ -134,7 +134,7 @@ namespace GemsCraft.Utils {
         public static VersionResult CheckUpdates()
         {
             Version currentOnline = Version.ToVersion(
-                NetworkUtils.GetUrlSourceAsList("http://gemscraft-download.christplay.x10host.com/current.txt"));
+                NetworkUtils.GetUrlSourceAsList("http://gemz.christplay.x10host.com/current.txt"));
             int versionCompare = Version.Compare(LatestStable, currentOnline);
             if (versionCompare == -1) return VersionResult.Current;
             if (versionCompare == 0) return VersionResult.Developer;

@@ -2,6 +2,7 @@
 using System;
 using System.Net;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using JetBrains.Annotations;
 
 namespace GemsCraft.Players {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GemsCraft.Commands;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Plugins;

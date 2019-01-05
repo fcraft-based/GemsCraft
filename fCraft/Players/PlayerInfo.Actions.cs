@@ -7,6 +7,8 @@ using GemsCraft.Drawing;
 using GemsCraft.Drawing.Brushes;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
+
 using GemsCraft.Network;
 using GemsCraft.Utils;
 using JetBrains.Annotations;

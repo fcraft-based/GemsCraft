@@ -28,6 +28,7 @@ namespace GemsCraft.Players
         /// the list before accessing it in a loop, since this 
         /// array be frequently be replaced by an updated one. </summary>
         public static PlayerInfo[] PlayerInfoList { get; private set; }
+        
 
         static int maxID = 255;
         const int BufferSize = 64 * 1024;

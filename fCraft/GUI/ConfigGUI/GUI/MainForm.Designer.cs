@@ -47,9 +47,10 @@
             // btnGeneral
             // 
             this.btnGeneral.ActiveControl = null;
-            this.btnGeneral.Location = new System.Drawing.Point(23, 96);
+            this.btnGeneral.Location = new System.Drawing.Point(20, 77);
+            this.btnGeneral.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGeneral.Name = "btnGeneral";
-            this.btnGeneral.Size = new System.Drawing.Size(214, 135);
+            this.btnGeneral.Size = new System.Drawing.Size(190, 108);
             this.btnGeneral.TabIndex = 0;
             this.btnGeneral.Text = "General";
             this.btnGeneral.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -59,9 +60,10 @@
             // btnChat
             // 
             this.btnChat.ActiveControl = null;
-            this.btnChat.Location = new System.Drawing.Point(243, 96);
+            this.btnChat.Location = new System.Drawing.Point(216, 77);
+            this.btnChat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnChat.Name = "btnChat";
-            this.btnChat.Size = new System.Drawing.Size(214, 135);
+            this.btnChat.Size = new System.Drawing.Size(190, 108);
             this.btnChat.TabIndex = 1;
             this.btnChat.Text = "Chat";
             this.btnChat.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -71,9 +73,10 @@
             // btnWorlds
             // 
             this.btnWorlds.ActiveControl = null;
-            this.btnWorlds.Location = new System.Drawing.Point(463, 96);
+            this.btnWorlds.Location = new System.Drawing.Point(412, 77);
+            this.btnWorlds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnWorlds.Name = "btnWorlds";
-            this.btnWorlds.Size = new System.Drawing.Size(214, 135);
+            this.btnWorlds.Size = new System.Drawing.Size(190, 108);
             this.btnWorlds.TabIndex = 2;
             this.btnWorlds.Text = "Worlds";
             this.btnWorlds.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -83,9 +86,10 @@
             // btnRanks
             // 
             this.btnRanks.ActiveControl = null;
-            this.btnRanks.Location = new System.Drawing.Point(683, 96);
+            this.btnRanks.Location = new System.Drawing.Point(607, 77);
+            this.btnRanks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRanks.Name = "btnRanks";
-            this.btnRanks.Size = new System.Drawing.Size(214, 135);
+            this.btnRanks.Size = new System.Drawing.Size(190, 108);
             this.btnRanks.TabIndex = 3;
             this.btnRanks.Text = "Ranks";
             this.btnRanks.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -95,9 +99,10 @@
             // btnSecurity
             // 
             this.btnSecurity.ActiveControl = null;
-            this.btnSecurity.Location = new System.Drawing.Point(23, 237);
+            this.btnSecurity.Location = new System.Drawing.Point(20, 190);
+            this.btnSecurity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSecurity.Name = "btnSecurity";
-            this.btnSecurity.Size = new System.Drawing.Size(214, 135);
+            this.btnSecurity.Size = new System.Drawing.Size(190, 108);
             this.btnSecurity.TabIndex = 4;
             this.btnSecurity.Text = "Security";
             this.btnSecurity.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -107,9 +112,10 @@
             // btnSavingAndBackup
             // 
             this.btnSavingAndBackup.ActiveControl = null;
-            this.btnSavingAndBackup.Location = new System.Drawing.Point(243, 237);
+            this.btnSavingAndBackup.Location = new System.Drawing.Point(216, 190);
+            this.btnSavingAndBackup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSavingAndBackup.Name = "btnSavingAndBackup";
-            this.btnSavingAndBackup.Size = new System.Drawing.Size(214, 135);
+            this.btnSavingAndBackup.Size = new System.Drawing.Size(190, 108);
             this.btnSavingAndBackup.TabIndex = 5;
             this.btnSavingAndBackup.Text = "Saving and Backup";
             this.btnSavingAndBackup.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -119,9 +125,10 @@
             // btnLogging
             // 
             this.btnLogging.ActiveControl = null;
-            this.btnLogging.Location = new System.Drawing.Point(463, 237);
+            this.btnLogging.Location = new System.Drawing.Point(412, 190);
+            this.btnLogging.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogging.Name = "btnLogging";
-            this.btnLogging.Size = new System.Drawing.Size(214, 135);
+            this.btnLogging.Size = new System.Drawing.Size(190, 108);
             this.btnLogging.TabIndex = 6;
             this.btnLogging.Text = "Logging";
             this.btnLogging.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -131,9 +138,10 @@
             // btnIRC
             // 
             this.btnIRC.ActiveControl = null;
-            this.btnIRC.Location = new System.Drawing.Point(683, 237);
+            this.btnIRC.Location = new System.Drawing.Point(607, 190);
+            this.btnIRC.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnIRC.Name = "btnIRC";
-            this.btnIRC.Size = new System.Drawing.Size(214, 135);
+            this.btnIRC.Size = new System.Drawing.Size(190, 108);
             this.btnIRC.TabIndex = 7;
             this.btnIRC.Text = "IRC";
             this.btnIRC.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -143,9 +151,10 @@
             // btnAdvanced
             // 
             this.btnAdvanced.ActiveControl = null;
-            this.btnAdvanced.Location = new System.Drawing.Point(23, 378);
+            this.btnAdvanced.Location = new System.Drawing.Point(20, 302);
+            this.btnAdvanced.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAdvanced.Name = "btnAdvanced";
-            this.btnAdvanced.Size = new System.Drawing.Size(214, 135);
+            this.btnAdvanced.Size = new System.Drawing.Size(190, 108);
             this.btnAdvanced.TabIndex = 8;
             this.btnAdvanced.Text = "Advanced";
             this.btnAdvanced.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -155,9 +164,10 @@
             // btnMisc
             // 
             this.btnMisc.ActiveControl = null;
-            this.btnMisc.Location = new System.Drawing.Point(243, 378);
+            this.btnMisc.Location = new System.Drawing.Point(216, 302);
+            this.btnMisc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMisc.Name = "btnMisc";
-            this.btnMisc.Size = new System.Drawing.Size(214, 135);
+            this.btnMisc.Size = new System.Drawing.Size(190, 108);
             this.btnMisc.TabIndex = 9;
             this.btnMisc.Text = "Misc";
             this.btnMisc.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -167,9 +177,10 @@
             // btnCPE
             // 
             this.btnCPE.ActiveControl = null;
-            this.btnCPE.Location = new System.Drawing.Point(463, 378);
+            this.btnCPE.Location = new System.Drawing.Point(412, 302);
+            this.btnCPE.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCPE.Name = "btnCPE";
-            this.btnCPE.Size = new System.Drawing.Size(214, 135);
+            this.btnCPE.Size = new System.Drawing.Size(190, 108);
             this.btnCPE.TabIndex = 10;
             this.btnCPE.Text = "CPE";
             this.btnCPE.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
@@ -179,19 +190,22 @@
             // btnSave
             // 
             this.btnSave.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.btnSave.Location = new System.Drawing.Point(684, 379);
+            this.btnSave.Location = new System.Drawing.Point(608, 303);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(213, 38);
+            this.btnSave.Size = new System.Drawing.Size(189, 30);
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = " Save";
             this.btnSave.UseSelectable = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // bResetAll
             // 
             this.bResetAll.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.bResetAll.Location = new System.Drawing.Point(684, 427);
+            this.bResetAll.Location = new System.Drawing.Point(608, 342);
+            this.bResetAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bResetAll.Name = "bResetAll";
-            this.bResetAll.Size = new System.Drawing.Size(213, 38);
+            this.bResetAll.Size = new System.Drawing.Size(189, 30);
             this.bResetAll.TabIndex = 12;
             this.bResetAll.Text = "Reset All";
             this.bResetAll.UseSelectable = true;
@@ -199,18 +213,19 @@
             // bApply
             // 
             this.bApply.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.bApply.Location = new System.Drawing.Point(684, 475);
+            this.bApply.Location = new System.Drawing.Point(608, 380);
+            this.bApply.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bApply.Name = "bApply";
-            this.bApply.Size = new System.Drawing.Size(213, 38);
+            this.bApply.Size = new System.Drawing.Size(189, 30);
             this.bApply.TabIndex = 13;
-            this.bApply.Text = " Save";
+            this.bApply.Text = "Apply";
             this.bApply.UseSelectable = true;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(929, 527);
+            this.ClientSize = new System.Drawing.Size(826, 422);
             this.Controls.Add(this.bApply);
             this.Controls.Add(this.bResetAll);
             this.Controls.Add(this.btnSave);
@@ -225,7 +240,9 @@
             this.Controls.Add(this.btnWorlds);
             this.Controls.Add(this.btnChat);
             this.Controls.Add(this.btnGeneral);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
+            this.Padding = new System.Windows.Forms.Padding(18, 48, 18, 16);
             this.Style = MetroFramework.MetroColorStyle.Lime;
             this.Text = "GemsCraft Configuration";
             this.Load += new System.EventHandler(this.MainForm_Load);

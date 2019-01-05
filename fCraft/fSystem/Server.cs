@@ -19,6 +19,7 @@ using GemsCraft.Commands;
 using GemsCraft.Commands.Command_Handlers;
 using GemsCraft.Drawing;
 using GemsCraft.Events;
+using GemsCraft.fSystem.Config;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Plugins;
@@ -249,7 +250,7 @@ namespace GemsCraft.fSystem {
             string configFile = GetArg(ArgKey.Config);
             if (configFile != null)
             {
-                if (Paths.TestFile("config.xml", configFile, false, FileAccess.Read))
+                if (Paths.TestFile("config.json", configFile, false, FileAccess.Read))
                 {
                     Paths.ConfigFileName = new FileInfo(configFile).FullName;
                 }
@@ -311,7 +312,7 @@ namespace GemsCraft.fSystem {
             }
 
 #if DEBUG
-            Config.RunSelfTest();
+            Config.Config.RunSelfTest();
 #else
             // delete the old updater, if exists
             File.Delete( Paths.UpdaterFileName );
@@ -319,7 +320,7 @@ namespace GemsCraft.fSystem {
 #endif
 
             // try to load the config
-            if( !Config.Load( false, false ) ) {
+            if( !Config.Config.LoadXml( false, false ) ) {
                 throw new Exception( "GemsCraft Config failed to initialize" );
             }
 
@@ -401,8 +402,7 @@ namespace GemsCraft.fSystem {
             } catch( Exception ex ) {
                 // if the port is unavailable, try next one
                 Logger.Log( LogType.Error,
-                            "Could not start listening on port {0}, stopping. ({1})",
-                            Port, ex.Message );
+                            $"Could not start listening on port {Port}, stopping. ({ex.Message})");
                 if( !ConfigKey.IP.IsDefault() ) {
                     Logger.Log( LogType.Warning,
                                 "Do not use the \"Designated IP\" setting unless you have multiple NICs or IPs." );
@@ -422,47 +422,9 @@ namespace GemsCraft.fSystem {
                             ExternalIP, Port );
             }
 
-            //check for updates, updates are now checked from serverGUI/serverCLI
+            Server.PlayerListChanged += Network.Remote.Server.UpdateServer;
+            Server.ShutdownEnded += Network.Remote.Server.RemoveServer;
             
-            /*Logger.Log(LogType.ConsoleOutput, "Checking for GemsCraft updates...");
-            try
-            {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://legendcraft.webuda.com//CurrentVersion.html");
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    using (Stream stream = response.GetResponseStream())
-                    {
-                        if (stream != null)
-                        {
-                            StreamReader streamReader = new StreamReader(stream);
-                            string version = streamReader.ReadLine();
-                            if (version != null && version != GemsCraft.Updater.LatestStable)
-                            {
-
-                                Logger.Log(LogType.Warning, "Server.Run: Your LegendCraft version is out of date. A LegendCraft Update is available!");
-                                Logger.Log(LogType.Warning, "Download the latest LegendCraft at: https://github.com/LeChosenOne/LegendCraft/releases");
-
-                            }
-                            else
-                            {
-                                Logger.Log(LogType.ConsoleOutput, "Your LegendCraft version is up to date!");
-                            }
-                        }
-                    }
-                }
-            }
-            
-            catch (WebException)
-            {
-                Logger.Log(LogType.Warning, "There was an internet connection error. Server was unable to check for updates.");
-            }
-            catch(Exception e)
-            {
-                Logger.Log(LogType.Error, "There was an error in trying to check for updates:\n\r " + e);
-            }*/
-
 
             // list loaded worlds
             WorldManager.UpdateWorldList();
@@ -475,7 +437,7 @@ namespace GemsCraft.fSystem {
                         WorldManager.MainWorld.Name, RankManager.DefaultRank.Name );
 
             // Check for incoming connections (every 250ms)
-            checkConnectionsTask = Scheduler.NewTask( CheckConnections ).RunForever( CheckConnectionsInterval );
+            _checkConnectionsTask = Scheduler.NewTask( CheckConnections ).RunForever( CheckConnectionsInterval );
 
             // Check for idles (every 30s)
             checkIdlesTask = Scheduler.NewTask( CheckIdles ).RunForever( CheckIdlesInterval );
@@ -582,15 +544,13 @@ namespace GemsCraft.fSystem {
                 // kill IRC bot
                 IRC.Disconnect();
 
-                if (Server.TempBans.Count() > 0)
+                if (TempBans.Any())
                 {
                     foreach (Player p in Server.TempBans)
                     {
-                        if (p.Info.IsBanned)
-                        {
-                            p.Info.Unban(Player.Console, "Shutdown: Tempban cancelled", false, true);
-                            Logger.Log(LogType.SystemActivity, "Unbanning {0}: Was tempbanned", p.Name);
-                        }
+                        if (!p.Info.IsBanned) continue;
+                        p.Info.Unban(Player.Console, "Shutdown: Tempban cancelled", false, true);
+                        Logger.Log(LogType.SystemActivity, "Unbanning {0}: Was tempbanned", p.Name);
                     }
                 }
                 
@@ -763,26 +723,25 @@ namespace GemsCraft.fSystem {
         #region Scheduled Tasks
 
         // checks for incoming connections
-        static SchedulerTask checkConnectionsTask;
-        static TimeSpan checkConnectionsInterval = TimeSpan.FromMilliseconds( 250 );
+        private static SchedulerTask _checkConnectionsTask;
+        private static TimeSpan _checkConnectionsInterval = TimeSpan.FromMilliseconds(250);
         public static TimeSpan CheckConnectionsInterval {
-            get { return checkConnectionsInterval; }
+            get => _checkConnectionsInterval;
             set {
-                if( value.Ticks < 0 ) throw new ArgumentException( "CheckConnectionsInterval may not be negative." );
-                checkConnectionsInterval = value;
-                if( checkConnectionsTask != null ) checkConnectionsTask.Interval = value;
+                if( value.Ticks < 0 ) throw new ArgumentException("CheckConnectionsInterval may not be negative.");
+                _checkConnectionsInterval = value;
+                if( _checkConnectionsTask != null ) _checkConnectionsTask.Interval = value;
             }
         }
 
-        static void CheckConnections( SchedulerTask param ) {
+        private static void CheckConnections( SchedulerTask param ) {
             TcpListener listenerCache = listener;
-            if( listenerCache != null && listenerCache.Pending() ) {
-                try {
-                    Player.StartSession( listenerCache.AcceptTcpClient() );
-                } catch( Exception ex ) {
-                    Logger.Log( LogType.Error,
-                                "Server.CheckConnections: Could not accept incoming connection: {0}", ex );
-                }
+            if (listenerCache == null || !listenerCache.Pending()) return;
+            try {
+                Player.StartSession( listenerCache.AcceptTcpClient() );
+            } catch( Exception ex ) {
+                Logger.Log( LogType.Error,
+                    $"Server.CheckConnections: Could not accept incoming connection: {ex}");
             }
         }
         // checks for idle players
@@ -847,7 +806,7 @@ namespace GemsCraft.fSystem {
         static SchedulerTask gcTask;
         static TimeSpan gcInterval = TimeSpan.FromSeconds( 60 );
         public static TimeSpan GCInterval {
-            get { return gcInterval; }
+            get => gcInterval;
             set {
                 if( value.Ticks < 0 ) throw new ArgumentException( "GCInterval may not be negative." );
                 gcInterval = value;
@@ -981,9 +940,8 @@ namespace GemsCraft.fSystem {
             {
                 try
                 {
-                    string fileComment = String.Format("Backup of 800Craft data for server \"{0}\", saved on {1}",
-                                                        ConfigKey.ServerName.GetString(),
-                                                        DateTime.Now);
+                    string fileComment =
+                        $"Backup of 800Craft data for server \"{ConfigKey.ServerName.GetString()}\", saved on {DateTime.Now}";
                     using (ZipStorer backupZip = ZipStorer.Create(fs, fileComment))
                     {
                         foreach (string dataFileName in Paths.DataFilesToBackup)
@@ -1184,9 +1142,7 @@ namespace GemsCraft.fSystem {
             if( player == null ) throw new ArgumentNullException( "player" );
             if( world == null ) throw new ArgumentNullException( "world" );
             if (firstTime){
-                return String.Format("&S{0} &Sconnected, joined {1}",
-                                      player.ClassyName,
-                                      world.ClassyName);
+                return $"&S{player.ClassyName} &Sconnected, joined {world.ClassyName}";
             }
             //use this if you want to show original names for people with displayednames
             if (!firstTime && player.Info.DisplayedName != null){
@@ -1439,11 +1395,7 @@ namespace GemsCraft.fSystem {
 
         readonly string customReasonString;
         [NotNull]
-        public string ReasonString {
-            get {
-                return customReasonString ?? Reason.ToString();
-            }
-        }
+        public string ReasonString => customReasonString ?? Reason.ToString();
 
         /// <summary> Delay before shutting down. </summary>
         public TimeSpan Delay { get; private set; }

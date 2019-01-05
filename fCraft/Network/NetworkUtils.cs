@@ -33,7 +33,17 @@ namespace GemsCraft.Network
                 }
 
             }
-            return File.ReadAllLines(temp).ToList();
+
+            try
+            {
+                return File.ReadAllLines(temp).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new List<string>();
+            }
+            
         }
         /// <summary>
         /// Obtain source of webpage

@@ -10,6 +10,7 @@ using GemsCraft.Drawing;
 using GemsCraft.Drawing.Brushes;
 using GemsCraft.Drawing.DrawOps;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.MapConversion;
 using GemsCraft.Players;
 using GemsCraft.Plugins;

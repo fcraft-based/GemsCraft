@@ -12,17 +12,13 @@ namespace GemsCraft.Utils {
     /// <summary> Contains fCraft path settings, and some filesystem-related utilities. </summary>
     public static class Paths {
 
-        static readonly string[] ProtectedFiles;
+        private static readonly string[] ProtectedFiles;
 
         internal static readonly string[] DataFilesToBackup;
 
         static Paths() {
             string assemblyDir = Path.GetDirectoryName( Assembly.GetExecutingAssembly().Location );
-            if( assemblyDir != null ) {
-                WorkingPathDefault = Path.GetFullPath( assemblyDir );
-            } else {
-                WorkingPathDefault = Path.GetPathRoot( assemblyDir );
-            }
+            WorkingPathDefault = assemblyDir != null ? Path.GetFullPath( assemblyDir ) : Path.GetPathRoot( assemblyDir );
 
             WorkingPath = WorkingPathDefault;
             MapPath = MapPathDefault;
@@ -68,7 +64,7 @@ namespace GemsCraft.Utils {
 
         public const string MapPathDefault = "maps",
                             LogPathDefault = "logs",
-                            ConfigFileNameDefault = "config.xml";
+                            ConfigFileNameDefault = "config.json";
 
         public static readonly string WorkingPathDefault;
 
@@ -121,30 +117,16 @@ namespace GemsCraft.Utils {
         public const string SwearWordsFileName = "swearwords.txt";
 
 
-        public static string BlockDBPath {
-            get { return Path.Combine( WorkingPath, BlockDBDirectory ); }
-        }
+        public static string BlockDBPath => Path.Combine( WorkingPath, BlockDBDirectory );
 
-        public static string RulesPath {
-            get { return Path.Combine( WorkingPath, RulesDirectory ); }
-        }
+        public static string RulesPath => Path.Combine( WorkingPath, RulesDirectory );
 
-        public static string ReqPath
-        {
-            get { return Path.Combine(WorkingPath, ReqDirectory); }
-        }
+        public static string ReqPath => Path.Combine(WorkingPath, ReqDirectory);
 
-        public static string ReqTextPath
-        {
-            get { return Path.Combine(ReqDirectory, "requirements.txt"); }
-        }
+        public static string ReqTextPath => Path.Combine(ReqDirectory, "requirements.txt");
 
         /// <summary> Path where map backups are stored </summary>
-        public static string BackupPath {
-            get {
-                return Path.Combine( MapPath, "backups" );
-            }
-        }
+        public static string BackupPath => Path.Combine( MapPath, "backups" );
 
 
         public const string DataBackupDirectory = "databackups";

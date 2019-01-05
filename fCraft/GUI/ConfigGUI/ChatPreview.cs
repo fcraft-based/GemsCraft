@@ -11,7 +11,7 @@ using GemsCraft.Properties;
 using Color = GemsCraft.Utils.Color;
 
 namespace GemsCraft.GUI.ConfigGUI {
-    internal sealed partial class ChatPreview : UserControl {
+    public sealed partial class ChatPreview : UserControl {
         private struct ColorPair {
             public ColorPair( int r, int g, int b, int sr, int sg, int sb ) {
                 Foreground = new SolidBrush( System.Drawing.Color.FromArgb( r, g, b ) );
@@ -20,15 +20,18 @@ namespace GemsCraft.GUI.ConfigGUI {
             public readonly Brush Foreground, Shadow;
         }
 
-        private static readonly Font MinecraftFont;
+        public static Font MinecraftFont;
         private static readonly ColorPair[] ColorPairs;
-
+        private static readonly PrivateFontCollection Fonts;
         static unsafe ChatPreview() {
-            var fonts = new PrivateFontCollection();
+            Fonts = new PrivateFontCollection();
             fixed( byte* fontPointer = Resources.MinecraftFont ) {
-                fonts.AddMemoryFont( (IntPtr)fontPointer, Resources.MinecraftFont.Length );
+                Fonts.AddMemoryFont( (IntPtr)fontPointer, Resources.MinecraftFont.Length );
             }
-            MinecraftFont = new Font( fonts.Families[0], 12, FontStyle.Regular );
+
+            FontFamily fam = Fonts.Families[0];
+
+            MinecraftFont = new Font(fam, 12, FontStyle.Regular);
             ColorPairs = new[]{
                 new ColorPair(0,0,0,0,0,0),
                 new ColorPair(0,0,191,0,0,47),
@@ -102,9 +105,11 @@ namespace GemsCraft.GUI.ConfigGUI {
                                 {
                                     if (!SectionClasses.ChatConfig.isPressed) x += (int) g.MeasureString(t1, MinecraftFont).Width;
                                     else
+                                    {
                                         SectionClasses.ChatConfig.isPressed = false;
+                                    }
                                 }
-                                catch (System.AccessViolationException)
+                                catch (AccessViolationException)
                                 {
                                     // Ignored
                                 }

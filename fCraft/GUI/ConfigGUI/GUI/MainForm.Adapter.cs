@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.Players;
 using GemsCraft.Utils;
 using JetBrains.Annotations;
@@ -21,6 +22,7 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
 
         private void LoadConfig()
         {
+            Config.OldConfigHandling(true); // If XML version of Config exists (legacy), prompt to have it converted
             string missingFileMsg = null;
             if (!File.Exists(Paths.WorldListFileName) && !File.Exists(Paths.ConfigFileName))
             {
@@ -420,14 +422,23 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
 
         private void ApplyTabLogging()
         {
+            int loopCount = 0;
             foreach (ListViewItem item in SectionClasses.LoggingConfig.vConsoleOptions.Items)
             {
-                item.Checked = Logger.ConsoleOptions[item.Index];
+                item.Checked = Config.logOps.Contains(loopCount);
+                Logger.LogFileOptions[loopCount] = item.Checked;
+                loopCount++;
             }
+
+            loopCount = 0;
             foreach (ListViewItem item in SectionClasses.LoggingConfig.vLogFileOptions.Items)
             {
-                item.Checked = Logger.LogFileOptions[item.Index];
+                item.Checked = Config.conOps.Contains(loopCount);
+                Logger.ConsoleOptions[loopCount] = item.Checked;
+                loopCount++;
             }
+
+
 
             ApplyEnum(SectionClasses.LoggingConfig.cLogMode, ConfigKey.LogMode, LogSplittingType.OneFile);
 

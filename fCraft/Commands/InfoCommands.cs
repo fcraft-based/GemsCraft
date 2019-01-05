@@ -9,6 +9,7 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Utils;
@@ -930,9 +931,8 @@ THE SOFTWARE.*/
                 // IP range matching (CIDR notation)
                 string ipString = name.Substring( 0, name.IndexOf( '/' ) );
                 string rangeString = name.Substring( name.IndexOf( '/' ) + 1 );
-                byte range;
                 if( Server.IsIP( ipString ) && IPAddress.TryParse( ipString, out ip ) &&
-                    Byte.TryParse( rangeString, out range ) && range <= 32 ) {
+                    byte.TryParse( rangeString, out var range ) && range <= 32 ) {
                     player.Message( "Searching {0}-{1}", ip.RangeMin( range ), ip.RangeMax( range ) );
                     infos = PlayerDB.FindPlayersCidr( ip, range );
                 } else {

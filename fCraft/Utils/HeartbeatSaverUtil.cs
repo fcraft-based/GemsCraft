@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.IO;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 
 namespace GemsCraft.Utils
 {
@@ -29,25 +30,18 @@ namespace GemsCraft.Utils
         }
         public static void HbCrashEvent(object sender, CrashedEventArgs e)
         {
-            if (e.ShutdownImminent.Equals(true))
+            if (!e.ShutdownImminent.Equals(true)) return;
+            if (!ConfigKey.HbSaverKey.Enabled()) return;
+            if (!ConfigKey.HbSaverKey.Enabled()) return;
+            if (!File.Exists("heartbeatsaver.exe"))
             {
-                if (ConfigKey.HbSaverKey.Enabled())
-                {
-                    if (ConfigKey.HbSaverKey.Enabled())
-                    {
-                        if (!File.Exists("heartbeatsaver.exe"))
-                        {
                             
-                            return;
-                        }
-
-                        //start the heartbeat saver
-                        Process HeartbeatSaver = new Process();
-                        HeartbeatSaver.StartInfo.FileName = "heartbeatsaver.exe";
-                        HeartbeatSaver.Start();
-                    }
-                }
+                return;
             }
+
+            //start the heartbeat saver
+            Process HeartbeatSaver = new Process {StartInfo = {FileName = "heartbeatsaver.exe"}};
+            HeartbeatSaver.Start();
         }
     }
 }

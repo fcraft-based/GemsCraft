@@ -49,23 +49,20 @@ namespace GemsCraft.Network
         bool supportsAllChars;
 
 
-        LineWrapper([NotNull] string message, bool supportsAllChars)
+        private LineWrapper([NotNull] string message, bool supportsAllChars)
         {
-            if (message == null) throw new ArgumentNullException("message");
-            input = message;
+            input = message ?? throw new ArgumentNullException("message");
             prefix = DefaultPrefixString;
             this.supportsAllChars = supportsAllChars;
             Reset();
         }
 
 
-        LineWrapper([NotNull] string prefixString, [NotNull] string message, bool supportsAllChars)
+        private LineWrapper([NotNull] string prefixString, [NotNull] string message, bool supportsAllChars)
         {
-            if (prefixString == null) throw new ArgumentNullException("prefixString");
-            prefix = prefixString;
+            prefix = prefixString ?? throw new ArgumentNullException("prefixString");
             if (prefix.Length > MaxPrefixSize) throw new ArgumentException("Prefix too long", "prefixString");
-            if (message == null) throw new ArgumentNullException("message");
-            input = message;
+            input = message ?? throw new ArgumentNullException("message");
             this.supportsAllChars = supportsAllChars;
             Reset();
         }

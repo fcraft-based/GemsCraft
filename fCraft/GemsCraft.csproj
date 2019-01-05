@@ -196,6 +196,10 @@
     <Compile Include="Drawing\nbt\Tags\NbtString.cs" />
     <Compile Include="Drawing\nbt\Tags\NbtTag.cs" />
     <Compile Include="Drawing\nbt\Tags\NbtTagType.cs" />
+    <Compile Include="fSystem\Config\Config.cs" />
+    <Compile Include="fSystem\Config\ConfigKey.cs" />
+    <Compile Include="fSystem\Config\ConfigKey.Metadata.cs" />
+    <Compile Include="fSystem\Config\ConfigJObject.cs" />
     <Compile Include="Games\CTF.cs" />
     <Compile Include="Games\FFA.cs" />
     <Compile Include="Games\Football.cs" />
@@ -441,12 +445,10 @@
     <Compile Include="MapConversion\MapUtility.cs" />
     <Compile Include="MapConversion\NBTag.cs" />
     <Compile Include="Utils\BoundingBox.cs" />
-    <Compile Include="fSystem\ConfigKey.cs" />
     <Compile Include="Utils\Noise.cs" />
     <Compile Include="Utils\Updater.cs" />
     <Compile Include="Utils\Color.cs" />
     <Compile Include="fSystem\Server.cs" />
-    <Compile Include="fSystem\Config.cs" />
     <Compile Include="fSystem\Logger.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -534,8 +536,7 @@
     <Compile Include="MapConversion\MapOpticraft.cs" />
     <Compile Include="MapConversion\MapFCMv4.cs" />
     <Compile Include="fSystem\ArgKey.cs" />
-    <Compile Include="fSystem\ConfigKey.Metadata.cs" />
-    <Compile Include="fSystem\ConfigSection.cs" />
+    <Compile Include="fSystem\Config\ConfigSection.cs" />
     <Compile Include="Utils\Vector3I.cs" />
     <Compile Include="Worlds\BlockChangeContext.cs" />
     <Compile Include="Worlds\BlockDB.cs" />
@@ -629,7 +630,7 @@
       <DependentUpon>PlayerViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
@@ -637,7 +638,9 @@
     <Compile Include="GUI\ConfigGUI\GUI\MainForm.Adapter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <None Include="GUI\ConfigGUI\MinecraftFont\minecraft.ttf" />
+    <EmbeddedResource Include="GUI\ConfigGUI\MinecraftFont\minecraft.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Resources\Tileset.png" />
   </ItemGroup>

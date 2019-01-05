@@ -9,11 +9,12 @@ using GemsCraft.Players;
 namespace GemsCraft.Network.Remote
 {
     /// <summary>
-    /// Several actions that can be performed by the mobile app
+    /// Several actions that can be performed by the mobile app, or have information sent to the mobile app
     /// </summary>
     public class Actions
     {
-        public static void ShutdownServer(string reason)
+
+        public static void ShutdownServer(PlayerInfo player, string reason)
         {
             ShutDown(Enum.TryParse(reason, true, out ShutdownReason result) ? result : ShutdownReason.Other);
         }
@@ -22,17 +23,24 @@ namespace GemsCraft.Network.Remote
         {
             GemsCraft.fSystem.Server.Shutdown(new ShutdownParams(downReason, TimeSpan.Zero, true, false), true);
         }
-        public static void RestartServer()
+        public static void RestartServer(PlayerInfo player)
         {
             GemsCraft.fSystem.Server.Shutdown(new ShutdownParams(ShutdownReason.Restarting, TimeSpan.Zero, true, true), true );
         }
 
-        public static string RunCommand(string command, string[] args)
+        public static string RunCommand(PlayerInfo player, string command, string[] args)
         {
             try
             {
+                if (command == null) return "";
                 CommandDescriptor cd = CommandManager.GetDescriptor(command, true);
-                cd.Call(Player.Console, new Command(CommandString(command, args)), true);
+                if (cd != null && cd.Permissions.Any(p => !player.Can(p)))
+                {
+                    return "Player does not have this permission.";
+                }
+
+                cd?.Call(Player.Console, new Command(CommandString(command, args)), true);
+
                 return "";
             }
             catch (Exception e)
@@ -47,22 +55,6 @@ namespace GemsCraft.Network.Remote
             finalResult = args.Aggregate(finalResult, (current, arg) => current + (arg + " "));
             return finalResult;
         }
-
-        public static bool EditConfigKey(ConfigKey key, object value, out string response)
-        {
-            try
-            {
-                key.TrySetValue(value);
-                Config.Save();
-                response = "success";
-                return true;
-            }
-            catch (FormatException e)
-            {
-                response = "Value was not in the correct format";;
-                Console.WriteLine(e);
-                return false;
-            }
-        }
+        
     }
 }

@@ -8,9 +8,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
+using GemsCraft.Network.Remote;
 using GemsCraft.Players;
 using GemsCraft.Utils;
 using GemsCraft.Worlds;
+using Server = GemsCraft.fSystem.Server;
 
 namespace GemsCraft.Players {
     /// <summary> Helper class for handling player-generated chat. </summary>
@@ -49,22 +52,20 @@ namespace GemsCraft.Players {
             rawMessage = rawMessage.Replace("$date", DateTime.UtcNow.ToShortDateString());
             rawMessage = rawMessage.Replace("$time", DateTime.Now.ToString());
             rawMessage = rawMessage.Replace("$money", player.Info.Money.ToString());
-            rawMessage = rawMessage.Replace("$ass", "You, my good sir, are an &cAss&f");
+            // Profanity removed
             rawMessage = rawMessage.Replace("$mad", "U &cmad&f, bro?");
             rawMessage = rawMessage.Replace("$welcome", "Welcome to " + ConfigKey.ServerName.GetString());
             rawMessage = rawMessage.Replace("$clap", "A round of applause might be appropriate, *claps*");
             rawMessage = rawMessage.Replace("$website", ConfigKey.WebsiteURL.GetString());
             rawMessage = rawMessage.Replace("$ws", ConfigKey.WebsiteURL.GetString());
 
-            if (ConfigKey.IRCBotEnabled.Enabled())
-            {
-                rawMessage = rawMessage.Replace("$irc", ConfigKey.IRCBotChannels.GetString());
-            }
-            else
-            {
-                rawMessage = rawMessage.Replace("$irc", "No IRC");
-            }
-            
+            Player[] active = Server.Players.Where(p => p.IsOnline).ToArray();
+            int rndPlayer = new Random().Next(0, active.Length - 1);
+            string dis = active[rndPlayer].Info.DisplayedName ?? active[rndPlayer].Name;
+            rawMessage = rawMessage.Replace("$moron", dis + "&r is a complete and total moron.");
+
+            rawMessage = rawMessage.Replace("$irc", ConfigKey.IRCBotEnabled.Enabled() ? ConfigKey.IRCBotChannels.GetString() : "No IRC");
+
             if (player.Can(Permission.UseColorCodes))
             {
                 rawMessage = rawMessage.Replace("$lime", "&a");     //alternate color codes for ease if you can't remember the codes
@@ -197,9 +198,7 @@ namespace GemsCraft.Players {
             var recepientList = Server.Players.NotIgnoring(player); //if (player.World.WorldOnlyChat) recepientList = player.World.Players.NotIgnoring(player);
 
 
-            string formattedMessage = String.Format( "{0}&F: {1}",
-                                                     player.ClassyName,
-                                                     rawMessage );
+            string formattedMessage = $"{player.ClassyName}&F: {rawMessage}";
 
             var e = new ChatSendingEventArgs( player,
                                               rawMessage,
@@ -208,6 +207,14 @@ namespace GemsCraft.Players {
                                               recepientList );
 
             if( !SendInternal( e ) ) return false;
+            Network.Remote.Server.Chats.Add(
+                new ServerLog
+                {
+                    Sender = player.Name,
+                    Message = OriginalMessage,
+                    ChatMode = ""
+                }
+            );
 
             Logger.Log( LogType.GlobalChat,
                         "{0}: {1}", player.Name, OriginalMessage );
@@ -233,7 +240,14 @@ namespace GemsCraft.Players {
                                               recepientList);
 
             if (!SendInternal(e)) return false;
-
+            Network.Remote.Server.Chats.Add(
+                new ServerLog
+                {
+                    Sender = player.Name,
+                    Message = rawMessage,
+                    ChatMode = "Admin"
+                }
+            );
             Logger.Log(LogType.GlobalChat, "(Admin){0}: {1}", player.Name, rawMessage);
             return true;
         }
@@ -257,7 +271,14 @@ namespace GemsCraft.Players {
                                               recepientList);
 
             if (!SendInternal(e)) return false;
-
+            Network.Remote.Server.Chats.Add(
+                new ServerLog
+                {
+                    Sender = player.Name,
+                    Message = rawMessage,
+                    ChatMode = "Custom"
+                }
+            );
             Logger.Log(LogType.GlobalChat, "({2}){0}: {1}", player.Name, rawMessage, ConfigKey.CustomChatName.GetString());
             return true;
         }
@@ -284,7 +305,14 @@ namespace GemsCraft.Players {
                                               recepientList );
 
             if( !SendInternal( e ) ) return false;
-
+            Network.Remote.Server.Chats.Add(
+                new ServerLog
+                {
+                    Sender = player.Name,
+                    Message = rawMessage,
+                    ChatMode = "Me"
+                }
+            );
             Logger.Log( LogType.GlobalChat,
                         "(me){0}: {1}", player.Name, rawMessage );
             return true;
@@ -302,8 +330,7 @@ namespace GemsCraft.Players {
             if( rawMessage == null ) throw new ArgumentNullException( "rawMessage" );
             var recepientList = new[] { to };
 
-            string formattedMessage = String.Format( "&Pfrom {0}: {1}",
-                                                     from.Name, rawMessage );
+            string formattedMessage = $"&Pfrom {@from.Name}: {rawMessage}";
 
             var e = new ChatSendingEventArgs( from,
                                               rawMessage,
@@ -313,6 +340,14 @@ namespace GemsCraft.Players {
 
             if( !SendInternal( e ) ) return false;
 
+            Network.Remote.Server.Chats.Add(
+                new ServerLog
+                {
+                    Sender = from.Name,
+                    Message = rawMessage,
+                    ChatMode = $"PM: {to.Name}"
+                }
+            );
             Logger.Log( LogType.PrivateChat,
                         "{0} to {1}: {2}",
                         from.Name, to.Name, rawMessage );
@@ -332,10 +367,7 @@ namespace GemsCraft.Players {
 
             var recepientList = rank.Players.NotIgnoring( player ).Union( player );
 
-            string formattedMessage = String.Format( "&P({0}&P){1}: {2}",
-                                                     rank.ClassyName,
-                                                     player.Name,
-                                                     rawMessage );
+            string formattedMessage = $"&P({rank.ClassyName}&P){player.Name}: {rawMessage}";
 
             var e = new ChatSendingEventArgs( player,
                                               rawMessage,
@@ -344,7 +376,14 @@ namespace GemsCraft.Players {
                                               recepientList );
 
             if( !SendInternal( e ) ) return false;
-
+            Network.Remote.Server.Chats.Add(
+                new ServerLog
+                {
+                    Sender = player.Name,
+                    Message = rawMessage,
+                    ChatMode = $"Rank: {rank.Name}"
+                }
+            );
             Logger.Log( LogType.RankChat,
                         "(rank {0}){1}: {2}",
                         rank.Name, player.Name, rawMessage );
@@ -372,7 +411,7 @@ namespace GemsCraft.Players {
 
             var recepientList = world.Players.NotIgnoring(player).Union(player);
 
-            string formattedMessage = String.Format("&P({0}&P){1}: {2}", world.ClassyName, player.Name, rawMessage);
+            string formattedMessage = $"&P({world.ClassyName}&P){player.Name}: {rawMessage}";
 
             var e = new ChatSendingEventArgs(player,
                                   rawMessage,
@@ -380,7 +419,14 @@ namespace GemsCraft.Players {
                                   ChatMessageType.World, recepientList);
 
             if (!SendInternal(e)) return false;
-
+            Network.Remote.Server.Chats.Add(
+                new ServerLog
+                {
+                    Sender = player.Name,
+                    Message = rawMessage,
+                    ChatMode = $"World: {world.Name}"
+                }
+            );
             Logger.Log(LogType.GlobalChat, "({0}){1}: {2}", world.Name, player.Name, rawMessage);
             return true;
         }
@@ -405,7 +451,14 @@ namespace GemsCraft.Players {
                                               recepientList );
 
             if( !SendInternal( e ) ) return false;
-
+            Network.Remote.Server.Chats.Add(
+                new ServerLog
+                {
+                    Sender = player.Name,
+                    Message = rawMessage,
+                    ChatMode = "Say"
+                }
+            );
             Logger.Log( LogType.GlobalChat,
                         "(say){0}: {1}", player.Name, rawMessage );
             return true;
@@ -424,9 +477,7 @@ namespace GemsCraft.Players {
                                               .NotIgnoring( player )
                                               .Union( player );
 
-            string formattedMessage = String.Format( "&P(staff){0}&P: {1}",
-                                                     player.ClassyName,
-                                                     rawMessage );
+            string formattedMessage = $"&P(staff){player.ClassyName}&P: {rawMessage}";
 
             var e = new ChatSendingEventArgs( player,
                                               rawMessage,
@@ -436,6 +487,14 @@ namespace GemsCraft.Players {
 
             if( !SendInternal( e ) ) return false;
 
+            Network.Remote.Server.Chats.Add(
+                new ServerLog
+                {
+                    Sender = player.Name,
+                    Message = rawMessage,
+                    ChatMode = "Staff"
+                }
+            );
             Logger.Log( LogType.GlobalChat,
                         "(staff){0}: {1}", player.Name, rawMessage );
             return true;
