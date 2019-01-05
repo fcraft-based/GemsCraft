@@ -320,7 +320,7 @@ namespace GemsCraft.fSystem {
 #endif
 
             // try to load the config
-            if( !Config.Config.LoadXml( false, false ) ) {
+            if( !Config.Config.Load( false, false ) ) {
                 throw new Exception( "GemsCraft Config failed to initialize" );
             }
 

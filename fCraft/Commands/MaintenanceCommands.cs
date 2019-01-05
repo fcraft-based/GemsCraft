@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -40,6 +41,9 @@ namespace GemsCraft.Commands {
             CommandManager.RegisterCommand(CdName);
             CommandManager.RegisterCommand(CdEdit);
 
+            CommandManager.RegisterCommand(CdEditConfig);
+            CommandManager.RegisterCommand(CdConfigList);
+            CommandManager.RegisterCommand(CdConfigValue);
 #if DEBUG
             CommandManager.RegisterCommand( new CommandDescriptor {
                 Name = "BUM",
@@ -80,6 +84,173 @@ namespace GemsCraft.Commands {
             } );
 #endif
         }
+
+        private static readonly CommandDescriptor CdConfigValue = new CommandDescriptor
+        {
+            Name = "ConfigValue",
+            Category = CommandCategory.Maintenance,
+            Permissions = new[] { Permission.EditConfiguration },
+            Help = "Retrieves the value of specified configkey",
+            IsConsoleSafe = true,
+            Usage = "/ConfigValue Key",
+            Handler = ConfigValueHandler
+        };
+
+        private static void ConfigValueHandler(Player source, Command cmd)
+        {
+            try
+            {
+                string key = cmd.Next().ToLower();
+                bool foundOne = false;
+                foreach (ConfigKey keys in Config.AllKeys())
+                {
+                    foundOne = true;
+                    if (keys.ToString().ToLower() == key)
+                    {
+                        source.Message($"&aValue of {keys.ToString()}: &f{keys.GetString()}");
+                    }
+                }
+
+                if (!foundOne)
+                {
+                    source.Message("&cConfigKey does not exist.");
+                }
+            }
+            catch (Exception e)
+            {
+                CdConfigValue.PrintUsage(source);
+            }
+        }
+
+        private static readonly CommandDescriptor CdConfigList = new CommandDescriptor
+        {
+            Name = "ConfigList",
+            Aliases = new[] { "SettingList" },
+            Category = CommandCategory.Maintenance,
+            Permissions = new[] { Permission.EditConfiguration },
+            Help = "Retrieves lists of configurations available for the server.",
+            IsConsoleSafe = true,
+            Usage = "/ConfigList optional: Section",
+            Handler = ConfigListHandler
+        };
+
+        private static ConfigSection[] cSections = {
+            ConfigSection.General, ConfigSection.Chat, ConfigSection.Security,
+            ConfigSection.SavingAndBackup, ConfigSection.IRC, ConfigSection.Advanced,
+            ConfigSection.Misc, ConfigSection.CPE
+        };
+        private static void ConfigListHandler(Player player, Command cmd)
+        {
+            try
+            {
+                string section = cmd.Next().ToLower();
+                string message = "&aConfigurations in this section are: ";
+                bool foundOne = false;
+                foreach (ConfigSection cs in cSections)
+                {
+                    if (cs.ToString().ToLower() != section) continue;
+                    foundOne = true;
+                    ConfigKey[] keys = cs.GetKeys();
+                    for (int x = 0; x <= keys.Length - 1; x++)
+                    {
+                        if (x < keys.Length - 1)
+                        {
+                            message += keys[x] + ", ";
+                        }
+                        else
+                        {
+                            message += keys[x];
+                        }
+                    }
+                }
+
+                if (foundOne) return;
+                if (section == "world" || section == "ranks" || section == "logging")
+                {
+                    player.Message("&cSorry, that section cannot be edited in game.");
+                }
+                else
+                {
+                    player.Message("&cSorry, that section does not exist.");
+                }
+            }
+            catch (NullReferenceException)
+            {
+                string message = "&aAvailable configurations are: &f";
+                foreach (ConfigSection cs in cSections)
+                {
+                    ConfigKey[] keys = cs.GetKeys();
+                    for (int x = 0; x <= keys.Length - 1; x++)
+                    {
+                        if (x < keys.Length - 1)
+                        {
+                            message += keys[x] + ", ";
+                        }
+                        else
+                        {
+                            message += keys[x];
+                        }
+                    }
+                }
+
+                player.Message(message);
+            }
+        }
+
+        private static readonly CommandDescriptor CdEditConfig = new CommandDescriptor
+        {
+            Name = "EditConfig",
+            Aliases = new[] {"ConfigEdit", "ChangeSettings", "EditSettings", "SettingsEdit"},
+            Category = CommandCategory.Maintenance,
+            Permissions = new[] {Permission.EditConfiguration},
+            Help = "Edits the server settings/config. This command cannot edit Ranks, logging, or world settings. Use /configlist to see what settings are available.",
+            IsConsoleSafe = true,
+            Usage = "/EditConfig Key Value",
+            Handler = EditConfigHandler
+        };
+
+        private static void EditConfigHandler(Player player, Command cmd)
+        {
+            string key;
+            string value;
+            try
+            {
+                key = cmd.Next().ToLower();
+                value = cmd.NextAll();
+                bool foundOne = false;
+                foreach (ConfigKey configItem in Config.AllKeys())
+                {
+                    if (configItem.ToString().ToLower() == key)
+                    {
+                        foundOne = true;
+                        try
+                        {
+                            configItem.TrySetValue(value);
+                            Config.Save();
+                            player.Message("&aConfig edited successfully!");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            player.Message(
+                                "&4Unable to edit config item. Please check whether the value was in the correct format.");
+                        }
+                        
+                    }
+                }
+
+                if (!foundOne)
+                {
+                    player.Message($"&cSetting {key} does note exist.");
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                CdEditConfig.PrintUsage(player);
+            }
+        }
+
+
         #region LegendCraft
         /* Copyright (c) <2013-2014> <LeChosenOne, DingusBungus>
    Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1294,7 +1465,7 @@ THE SOFTWARE.*/
 
                 switch( whatToReload ) {
                     case "config":
-                        success = Config.LoadXml( true, true );
+                        success = Config.Load( true, true );
                         break;
 
                     case "swears":

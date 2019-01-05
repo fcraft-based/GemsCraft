@@ -49,6 +49,11 @@ namespace GemsCraft.Players {
         /// manipulate players' records, and to promote/demote players in batches. </summary>
         EditPlayerDB,
 
+        /// <summary>
+        /// Ability to edit the Server Configuration.
+        /// </summary>
+        EditConfiguration,
+
         /// <summary> Ability to use /Say command. </summary>
         Say,
 
