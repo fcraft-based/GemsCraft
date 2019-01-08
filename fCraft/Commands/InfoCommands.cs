@@ -419,7 +419,7 @@ THE SOFTWARE.*/
 
         internal static void MsgHandler(Player player, Command cmd)
         {
-            player.MessageNow("&HThe available $messages are&S: $names, $kicks, $bans, $awesome, $server, $motd, $date, $time, $money, $ass, $mad, $welcome " +
+            player.MessageNow("&HThe available $messages are&S: $names, $kicks, $bans, $awesome, $server, $motd, $date, $time, $money, $mad, $welcome, $moron " +
                 "$clap, $website (or $ws), and $irc.");
             player.MessageNow("&HAlso try the $colors&S: for ex. $green, $lime, $red, etc."); 
             player.MessageNow("&HNOTE&S: All $messages must be done with all lowercase letters.");

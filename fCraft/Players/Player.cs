@@ -299,6 +299,7 @@ namespace GemsCraft.Players
         {
             if (name == null) throw new ArgumentNullException("name");
             Info = new PlayerInfo(name, RankManager.HighestRank, true, RankChangeType.AutoPromoted);
+            if (Info.Rank == null) return;
             spamBlockLog = new Queue<DateTime>(Info.Rank.AntiGriefBlocks);
             IP = IPAddress.Loopback;
             ResetAllBinds();
@@ -1752,7 +1753,15 @@ namespace GemsCraft.Players
         /// <summary> Returns true if player has the given permission. </summary>
         public bool Can(Permission permission)
         {
-            return IsSuper || Info.Rank.Can(permission);
+            try
+            {
+                return IsSuper || Info.Rank.Can(permission);
+            }
+            catch (Exception e)
+            {
+                return this == Console;
+            }
+            
         }
 
 

@@ -13,37 +13,40 @@ using GemsCraft.Worlds;
 
 //All of this was pretty much taken or based off of FemtoCraft by fragmer, I wrote about 5%-7% of this lol
 
+// ReSharper disable once CheckNamespace
 namespace GemsCraft.Players
 {
     public sealed partial class Player
     {
-        const string CustomBlocksExtName = "CustomBlocks";
-        const int CustomBlocksExtVersion = 1;
-        const byte CustomBlocksLevel = 1;
-        const string ClickDistanceExtName = "ClickDistance";
-        const int ClickDistanceExtVersion = 1;
-        const string EnvColorsExtName = "EnvColors";
-        const int EnvColorsExtVersion = 1;
-        const string ChangeModelExtName = "ChangeModel";
-        const int ChangeModelExtVersion = 1;
-        const string EnvMapAppearanceExtName = "EnvMapAppearance";
-        const int EnvMapAppearanceExtVersion = 1;
-        const string HeldBlockExtName = "HeldBlock";
-        const int HeldBlockExtVersion = 1;
-        const string ExtPlayerListExtName = "ExtPlayerList";
-        const int ExtPlayerListExtVersion = 1;
-        const string SelectionCuboidExtName = "SelectionCuboid";
-        const int SelectionCuboidExtVersion = 1;
-        const string MessageTypesExtName = "MessageTypes";
-        const int MessageTypesExtVersion = 1;
-        const string EnvWeatherTypeExtName = "EnvWeatherType";
-        const int EnvWeatherTypeExtVersion = 1;
-        const string HackControlExtName = "HackControl";
-        const int HackControlExtVersion = 1;
-        const string LongerMessagesExtName = "LongerMessages";
-        const int LongerMessagesExtVersion = 1;
-        const string FullCP437ExtName = "FullCP437";
-        const int FullCP437ExtVersion = 1;
+        private const string CustomBlocksExtName = "CustomBlocks";
+        private const int CustomBlocksExtVersion = 1;
+        private const byte CustomBlocksLevel = 1;
+        private const string ClickDistanceExtName = "ClickDistance";
+        private const int ClickDistanceExtVersion = 1;
+        private const string EnvColorsExtName = "EnvColors";
+        private const int EnvColorsExtVersion = 1;
+        private const string ChangeModelExtName = "ChangeModel";
+        private const int ChangeModelExtVersion = 1;
+        private const string EnvMapAppearanceExtName = "EnvMapAppearance";
+        private const int EnvMapAppearanceExtVersion = 1;
+        private const string HeldBlockExtName = "HeldBlock";
+        private const int HeldBlockExtVersion = 1;
+        private const string ExtPlayerListExtName = "ExtPlayerList";
+        private const int ExtPlayerListExtVersion = 1;
+        private const string SelectionCuboidExtName = "SelectionCuboid";
+        private const int SelectionCuboidExtVersion = 1;
+        private const string MessageTypesExtName = "MessageTypes";
+        private const int MessageTypesExtVersion = 1;
+        private const string EnvWeatherTypeExtName = "EnvWeatherType";
+        private const int EnvWeatherTypeExtVersion = 1;
+        private const string HackControlExtName = "HackControl";
+        private const int HackControlExtVersion = 1;
+        private const string LongerMessagesExtName = "LongerMessages";
+        private const int LongerMessagesExtVersion = 1;
+        private const string FullCP437ExtName = "FullCP437";
+        private const int FullCP437ExtVersion = 1;
+        private const string EmoteFixExtName = "EmoteFix";
+        private const int EmoteFixExtVersion = 1;
         
         // Note: if more levels are added, change UsesCustomBlocks from bool to int
         public bool UsesCustomBlocks { get; set; }
@@ -59,6 +62,7 @@ namespace GemsCraft.Players
         public bool SupportsHackControl = false;
         public bool SupportsLongerMessages = false;
         public bool SupportsFullCP437 = false;
+        public bool SupportsEmoteFix = false;
         
         string ClientName { get; set; }
 
@@ -81,6 +85,8 @@ namespace GemsCraft.Players
             writer.Write(Packet.MakeExtEntry(HackControlExtName, HackControlExtVersion).Data);
             writer.Write(Packet.MakeExtEntry(LongerMessagesExtName, LongerMessagesExtVersion).Data);
             writer.Write(Packet.MakeExtEntry(FullCP437ExtName, FullCP437ExtVersion).Data);
+
+            writer.Write(Packet.MakeExtEntry(EmoteFixExtName, EmoteFixExtVersion).Data);
             
             Logger.Log(LogType.Debug, "Sent ExtInfo and entry packets");
 
@@ -113,45 +119,75 @@ namespace GemsCraft.Players
                 string extName = reader.ReadString();
                 int extVersion = reader.ReadInt32();
 
-                if (extName == CustomBlocksExtName && extVersion == CustomBlocksExtVersion) {
+                if (extName == CustomBlocksExtName && extVersion == CustomBlocksExtVersion)
+                {
                     // Hooray, client supports custom blocks! We still need to check support level.
                     sendCustomBlockPacket = true;
                     clientExts.Add(extName + " " + extVersion);
-                } else if (extName == ClickDistanceExtName && extVersion == ClickDistanceExtVersion) {
+                }
+                else if (extName == ClickDistanceExtName && extVersion == ClickDistanceExtVersion)
+                {
                     SupportsClickDistance = true;
                     clientExts.Add(extName + " " + extVersion);
-                } else if (extName == EnvColorsExtName && extVersion == EnvColorsExtVersion) {
+                }
+                else if (extName == EnvColorsExtName && extVersion == EnvColorsExtVersion)
+                {
                     SupportsEnvColors = true;
                     clientExts.Add(extName + " " + extVersion);
-                } else if (extName == ChangeModelExtName && extVersion == ChangeModelExtVersion) {
+                }
+                else if (extName == ChangeModelExtName && extVersion == ChangeModelExtVersion)
+                {
                     SupportsChangeModel = true;
                     clientExts.Add(extName + " " + extVersion);
-                } else if (extName == EnvMapAppearanceExtName && extVersion == EnvMapAppearanceExtVersion) {
+                }
+                else if (extName == EnvMapAppearanceExtName && extVersion == EnvMapAppearanceExtVersion)
+                {
                     SupportsEnvMapAppearance = true;
                     clientExts.Add(extName + " " + extVersion);
-                } else if (extName == HeldBlockExtName && extVersion == HeldBlockExtVersion) {
+                }
+                else if (extName == HeldBlockExtName && extVersion == HeldBlockExtVersion)
+                {
                     SupportsHeldBlock = true;
                     clientExts.Add(extName + " " + extVersion);
-                } else if (extName == ExtPlayerListExtName && extVersion == ExtPlayerListExtVersion) {
+                }
+                else if (extName == ExtPlayerListExtName && extVersion == ExtPlayerListExtVersion)
+                {
                     SupportsExtPlayerList = true;
                     clientExts.Add(extName + " " + extVersion);
-                } else if (extName == SelectionCuboidExtName && extVersion == SelectionCuboidExtVersion) {
+                }
+                else if (extName == SelectionCuboidExtName && extVersion == SelectionCuboidExtVersion)
+                {
                     SupportsSelectionCuboid = true;
                     clientExts.Add(extName + " " + extVersion);
-                } else if (extName == MessageTypesExtName && extVersion == MessageTypesExtVersion) {
+                }
+                else if (extName == MessageTypesExtName && extVersion == MessageTypesExtVersion)
+                {
                     SupportsMessageTypes = true;
                     clientExts.Add(extName + " " + extVersion);
-                } else if (extName == EnvWeatherTypeExtName && extVersion == EnvWeatherTypeExtVersion) {
+                }
+                else if (extName == EnvWeatherTypeExtName && extVersion == EnvWeatherTypeExtVersion)
+                {
                     SupportsEnvWeatherType = true;
                     clientExts.Add(extName + " " + extVersion);
-                } else if (extName == HackControlExtName && extVersion == HackControlExtVersion) {
+                }
+                else if (extName == HackControlExtName && extVersion == HackControlExtVersion)
+                {
                     SupportsHackControl = true;
                     clientExts.Add(extName + " " + extVersion);
-                } else if (extName == LongerMessagesExtName && extVersion == LongerMessagesExtVersion) {
+                }
+                else if (extName == LongerMessagesExtName && extVersion == LongerMessagesExtVersion)
+                {
                     SupportsLongerMessages = true;
                     clientExts.Add(extName + " " + extVersion);
-                } else if (extName == FullCP437ExtName && extVersion == FullCP437ExtVersion) {
+                }
+                else if (extName == FullCP437ExtName && extVersion == FullCP437ExtVersion)
+                {
                     SupportsFullCP437 = true;
+                    clientExts.Add(extName + " " + extVersion);
+                }
+                else if (extName == EmoteFixExtName && extVersion == EmoteFixExtVersion)
+                {
+                    SupportsEmoteFix = true;
                     clientExts.Add(extName + " " + extVersion);
                 }
             }
@@ -215,7 +251,7 @@ namespace GemsCraft.Players
     {
         public static Packet MakeExtInfo(short extCount)
         {
-            String VersionString = "GemsCraft " + Updater.LatestStable;
+            string VersionString = "GemsCraft " + Updater.LatestStable;
             Logger.Log(LogType.Debug, "Send: ExtInfo({0},{1})", VersionString, extCount);
 
             Packet packet = new Packet(OpCode.ExtInfo);
@@ -287,6 +323,8 @@ namespace GemsCraft.Players
             arr[offset + 2] = (byte)((number & 0x0000ff00) >> 8);
             arr[offset + 3] = (byte)(number & 0x000000ff);
         }
+        
+        
     }
 
 

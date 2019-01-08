@@ -372,6 +372,11 @@ namespace GemsCraft.fSystem.Config {
             }
 
             string version = "j0";
+            if (file.Root == null)
+            {
+                LoadDefaults();
+                return true;
+            }
             foreach (ConfigJObject obj in file.Root)
             {
                 string key = obj.Key.ToLower();

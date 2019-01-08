@@ -42,17 +42,17 @@ namespace GemsCraft.Players {
                 player.Message("&WError: Server Moderation is activated. Message failed to send");
                 return false;
             }
-
+            
+            rawMessage = EmoteHandler.Process(rawMessage);
             rawMessage = rawMessage.Replace("$name", player.ClassyName + "&f");
             rawMessage = rawMessage.Replace("$kicks", player.Info.TimesKickedOthers.ToString());
             rawMessage = rawMessage.Replace("$bans", player.Info.TimesBannedOthers.ToString());
-            rawMessage = rawMessage.Replace("$awesome", "It is my professional opinion, that " + ConfigKey.ServerName.GetString() + " is the best server on Minecraft");
+            rawMessage = rawMessage.Replace("$awesome", "It is my professional opinion, that " + ConfigKey.ServerName.GetString() + " is the best server on ClassiCube");
             rawMessage = rawMessage.Replace("$server", ConfigKey.ServerName.GetString());
             rawMessage = rawMessage.Replace("$motd", ConfigKey.MOTD.GetString());
             rawMessage = rawMessage.Replace("$date", DateTime.UtcNow.ToShortDateString());
             rawMessage = rawMessage.Replace("$time", DateTime.Now.ToString());
             rawMessage = rawMessage.Replace("$money", player.Info.Money.ToString());
-            // Profanity removed
             rawMessage = rawMessage.Replace("$mad", "U &cmad&f, bro?");
             rawMessage = rawMessage.Replace("$welcome", "Welcome to " + ConfigKey.ServerName.GetString());
             rawMessage = rawMessage.Replace("$clap", "A round of applause might be appropriate, *claps*");
@@ -60,9 +60,13 @@ namespace GemsCraft.Players {
             rawMessage = rawMessage.Replace("$ws", ConfigKey.WebsiteURL.GetString());
 
             Player[] active = Server.Players.Where(p => p.IsOnline).ToArray();
-            int rndPlayer = new Random().Next(0, active.Length - 1);
-            string dis = active[rndPlayer].Info.DisplayedName ?? active[rndPlayer].Name;
-            rawMessage = rawMessage.Replace("$moron", dis + "&r is a complete and total moron.");
+            if (Server.Players.Length > 0)
+            {
+                int rndPlayer = new Random().Next(0, active.Length - 1);
+                string dis = active[rndPlayer].Info.DisplayedName ?? active[rndPlayer].Name;
+                rawMessage = rawMessage.Replace("$moron", dis + "&r is a complete and total moron.");
+            }
+            
 
             rawMessage = rawMessage.Replace("$irc", ConfigKey.IRCBotEnabled.Enabled() ? ConfigKey.IRCBotChannels.GetString() : "No IRC");
 
@@ -90,21 +94,16 @@ namespace GemsCraft.Players {
                 rawMessage = rawMessage.Replace("$blue", "&9");
                 rawMessage = rawMessage.Replace("$black", "&0");
             }
-            
             if (!player.Can(Permission.ChatWithCaps))
             {
                 int caps = 0;
                 for (int i = 0; i < rawMessage.Length; i++)
                 {
-                    if (Char.IsUpper(rawMessage[i]))
-                    {
-                        caps++;
-                        if (caps > ConfigKey.MaxCaps.GetInt())
-                        {
-                            rawMessage = rawMessage.ToLower();
-                            player.Message("Your message was changed to lowercase as it exceeded the maximum amount of capital letters.");
-                        }
-                    }
+                    if (!char.IsUpper(rawMessage[i])) continue;
+                    caps++;
+                    if (caps <= ConfigKey.MaxCaps.GetInt()) continue;
+                    rawMessage = rawMessage.ToLower();
+                    player.Message("Your message was changed to lowercase as it exceeded the maximum amount of capital letters.");
                 }
             }
 
@@ -226,12 +225,10 @@ namespace GemsCraft.Players {
             if (player == null) throw new ArgumentNullException("player");
             if (rawMessage == null) throw new ArgumentNullException("rawMessage");
 
-            var recepientList = PlayerEnumerable.Can(Server.Players, Permission.ReadAdminChat)
+            var recepientList = Server.Players.Can(Permission.ReadAdminChat)
                                               .NotIgnoring(player);
 
-            string formattedMessage = String.Format("&9(Admin){0}&b: {1}",
-                                                     player.ClassyName,
-                                                     rawMessage);
+            string formattedMessage = $"&9(Admin){player.ClassyName}&b: {rawMessage}";
 
             var e = new ChatSendingEventArgs(player,
                                               rawMessage,
@@ -294,9 +291,7 @@ namespace GemsCraft.Players {
 
             var recepientList = Server.Players.NotIgnoring( player );
 
-            string formattedMessage = String.Format( "&M*{0} {1}",
-                                                     player.Name,
-                                                     rawMessage );
+            string formattedMessage = $"&M*{player.Name} {rawMessage}";
 
             var e = new ChatSendingEventArgs( player,
                                               rawMessage,

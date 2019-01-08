@@ -9,7 +9,7 @@ namespace GemsCraft.Worlds
     public sealed partial class Map
     {
         public const Block MaxCustomBlockType = Block.StoneBrick;
-        public readonly static Block[] FallbackBlocks = new Block[256];
+        public static readonly Block[] FallbackBlocks = new Block[256];
 
         //fallback for all blocks, blocks 49 (obsidian) and under (non cpe blocks) fallback to themselves
         public static void DefineFallbackBlocks()

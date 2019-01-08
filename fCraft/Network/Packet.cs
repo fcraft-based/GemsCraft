@@ -11,15 +11,11 @@ namespace GemsCraft.Players
     {
         public readonly byte[] Data;
 
-        public OpCode OpCode
-        {
-            get { return (OpCode)Data[0]; }
-        }
+        public OpCode OpCode => (OpCode)Data[0];
 
         public Packet([NotNull] byte[] data)
         {
-            if (data == null) throw new ArgumentNullException("data");
-            Data = data;
+            Data = data ?? throw new ArgumentNullException("data");
         }
 
         /// <summary> Creates a packet of correct size for a given opcode,

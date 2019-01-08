@@ -484,7 +484,6 @@ namespace GemsCraft.Players
             : this()
         {
             Name = name ?? throw new ArgumentNullException("name");
-            Rank = rank ?? throw new ArgumentNullException("rank");
             if (setLoginDate)
             {
                 FirstLoginDate = DateTime.UtcNow;
@@ -1676,7 +1675,14 @@ namespace GemsCraft.Players
                 }
                 if (ConfigKey.RankColorsInChat.Enabled())
                 {
-                    sb.Append(Rank.Color);
+                    try
+                    {
+                        sb.Append(Rank.Color);
+                    }
+                    catch (Exception)
+                    {
+                        sb.Append(TitleName);
+                    }
                 }
 
                 //tempDisplayName overrides DisplayedName always, but we store displayedname for use after games

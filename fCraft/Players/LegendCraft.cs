@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using GemsCraft.fSystem;
 using GemsCraft.Utils;
 
@@ -21,12 +22,7 @@ namespace GemsCraft.Players
         public static byte toByteValue(string s)
         {
             byte[] bytes = System.Text.Encoding.ASCII.GetBytes(s);
-            byte bytesValue = (byte)0;
-            foreach (Byte b in bytes)
-            {
-                bytesValue = (byte)((byte)bytesValue + (byte)b);
-            }
-            return bytesValue;
+            return bytes.Aggregate((byte) 0, (current, b) => (byte) (current + b));
         }
 
         //generates a new ID for newly created bots

@@ -391,6 +391,7 @@
     <Compile Include="Players\Bot.cs" />
     <Compile Include="Players\Chat.cs" />
     <Compile Include="Players\ChatTimer.cs" />
+    <Compile Include="Players\Emotes.cs" />
     <Compile Include="Players\LegendCraft.cs" />
     <Compile Include="Players\Permission.cs" />
     <Compile Include="Players\Player.cs" />

@@ -600,18 +600,18 @@ namespace GemsCraft.fSystem
             if (rawMessage == null) throw new ArgumentNullException("rawMessage");
             if (line == null) throw new ArgumentNullException("line");
             var h = Logged;
-            if (h != null) h(null, new LogEventArgs(rawMessage,
-                                                      line,
-                                                      logType,
-                                                      LogFileOptions[(int)logType],
-                                                      ConsoleOptions[(int)logType]));
+            h?.Invoke(null, new LogEventArgs(rawMessage,
+                line,
+                logType,
+                LogFileOptions[(int)logType],
+                ConsoleOptions[(int)logType]));
         }
 
 
         static void RaiseCrashedEvent(CrashedEventArgs e)
         {
             var h = Crashed;
-            if (h != null) h(null, e);
+            h?.Invoke(null, e);
         }
 
         #endregion
