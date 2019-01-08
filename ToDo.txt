@@ -4,3 +4,8 @@ For Alpha 0.0
 - New GUI (DONE!)
 - Possible switch to json for config (DONE!)
 - Commands to edit config (DONE!)
+
+For Alpha 0.1
+- GUI pictures
+- Emotes (DONE!)
+- MessageType CPE extension (In Progress)
