@@ -91,7 +91,7 @@ namespace GemsCraft.Games
             stopwatch.Reset();
             stopwatch.Start();
             world_.gameMode = GameMode.CaptureTheFlag;
-            delayTask = Scheduler.NewTask(t => world_.Players.Message("&WCTF &fwill be starting in {0} seconds: &WGet ready!", (timeDelay - stopwatch.Elapsed.Seconds)));
+            delayTask = Scheduler.NewTask(t => world_.Players.Message("&WCTF &fwill be starting in {0} seconds: &WGet ready!", 0, (timeDelay - stopwatch.Elapsed.Seconds)));
             delayTask.RunRepeating(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(10), (int)Math.Floor((double)(timeDelay / 10)));//Start task immediately, send message every 10s
             if (stopwatch.Elapsed.Seconds > 11)
             {
@@ -113,7 +113,7 @@ namespace GemsCraft.Games
 
             if (p != null && world_ != null)
             {
-                world_.Players.Message("{0}&S stopped the game of CTF early on world {1}", p.ClassyName, world_.ClassyName);               
+                world_.Players.Message("{0}&S stopped the game of CTF early on world {1}", 0, p.ClassyName, world_.ClassyName);               
             }
             RevertGame();
 
@@ -163,7 +163,7 @@ namespace GemsCraft.Games
                         p.Info.canDodge = false;
                         p.Info.dodgeTime = DateTime.MaxValue;
 
-                        world_.Players.Message(p.Name + " is no longer able to dodge.");
+                        world_.Players.Message(p.Name + " is no longer able to dodge.", 0);
                     }
                 }
             }
@@ -178,7 +178,7 @@ namespace GemsCraft.Games
                         p.Info.strengthened = false;
                         p.Info.strengthTime = DateTime.MaxValue;
 
-                        world_.Players.Message(p.Name + " is no longer dealing 2x damage.");
+                        world_.Players.Message(p.Name + " is no longer dealing 2x damage.", 0);
                     }
                 }
             }
@@ -199,7 +199,7 @@ namespace GemsCraft.Games
                 }
                 BlueBOFdebuff = DateTime.MaxValue;
 
-                world_.Players.Message("Blades of Fury has ended.");
+                world_.Players.Message("Blades of Fury has ended.", 0);
             }
 
             if ((RedBOFdebuff != DateTime.MaxValue && (DateTime.Now - RedBOFdebuff).TotalSeconds >= 60))
@@ -217,7 +217,7 @@ namespace GemsCraft.Games
                 }
                 RedBOFdebuff = DateTime.MaxValue;
 
-                world_.Players.Message("Blades of Fury has ended.");
+                world_.Players.Message("Blades of Fury has ended.", 0);
             }
 
             //remove disarm after 30s
@@ -233,7 +233,7 @@ namespace GemsCraft.Games
                 }
                 RedDisarmed = DateTime.MaxValue;
 
-                world_.Players.Message("The Disarm Spell has ended.");
+                world_.Players.Message("The Disarm Spell has ended.", 0);
             }
 
             if ((BlueDisarmed != DateTime.MaxValue && (DateTime.Now - BlueDisarmed).TotalSeconds >= 30))
@@ -248,7 +248,7 @@ namespace GemsCraft.Games
                 }
                 BlueDisarmed = DateTime.MaxValue;
 
-                world_.Players.Message("The Disarm Spell has ended.");
+                world_.Players.Message("The Disarm Spell has ended.", 0);
             }
 
             if (!started)
@@ -258,7 +258,7 @@ namespace GemsCraft.Games
 
                 if (world_.Players.Count() < 2) //in case players leave the world or disconnect during the start delay
                 {
-                    world_.Players.Message("&WCTF&s requires at least 2 people to play.");
+                    world_.Players.Message("&WCTF&s requires at least 2 people to play.", 0);
                     return;
                 }
 
@@ -296,7 +296,7 @@ namespace GemsCraft.Games
                             }
                         }
 
-                        assignTeams(p);
+                        AssignTeams(p);
 
                         if (p.Info.IsHidden) //unhides players automatically if hidden (cannot shoot guns while hidden)
                         {
@@ -374,7 +374,7 @@ namespace GemsCraft.Games
                 {
                     if (p.Info.hasRedFlag && redFlagHolder == null)
                     {
-                        world_.Players.Message(p.Name + " has stolen the Red flag!");
+                        world_.Players.Message(p.Name + " has stolen the Red flag!", 0);
                         redFlagHolder = p.Name;
                     }
                 }
@@ -399,7 +399,7 @@ namespace GemsCraft.Games
                 {
                     if (p.Info.hasBlueFlag && blueFlagHolder == null)
                     {
-                        world_.Players.Message(p.Name + " has stolen the Blue flag!");
+                        world_.Players.Message(p.Name + " has stolen the Blue flag!", 0);
                         blueFlagHolder = p.Name;
                     }
                 }
@@ -421,14 +421,14 @@ namespace GemsCraft.Games
             //Check victory conditions
             if (blueScore == 5)
             {
-                world_.Players.Message("&fThe blue team has won {0} to {1}!", blueScore, redScore);
+                world_.Players.Message("&fThe blue team has won {0} to {1}!", 0, blueScore, redScore);
                 Stop(null);
                 return;
             }
 
             if (redScore == 5)
             {
-                world_.Players.Message("&fThe red team has won {1} to {0}!", blueScore, redScore);
+                world_.Players.Message("&fThe red team has won {1} to {0}!", 0, blueScore, redScore);
                 Stop(null);
                 return;
             }
@@ -438,19 +438,19 @@ namespace GemsCraft.Games
             {
                 if (redScore > blueScore)
                 {
-                    world_.Players.Message("&fThe &cRed&f Team won {0} to {1}!", redScore, blueScore);
+                    world_.Players.Message("&fThe &cRed&f Team won {0} to {1}!", 0, redScore, blueScore);
                     Stop(null);
                     return;
                 }
                 if (redScore < blueScore)
                 {
-                    world_.Players.Message("&fThe &1Blue&f Team won {0} to {1}!", blueScore, redScore);
+                    world_.Players.Message("&fThe &1Blue&f Team won {0} to {1}!", 0, blueScore, redScore);
                     Stop(null);
                     return;
                 }
                 if (redScore == blueScore)
                 {
-                    world_.Players.Message("&fThe teams tied {0} to {0}!", blueScore);
+                    world_.Players.Message("&fThe teams tied {0} to {0}!", 0, blueScore);
                     Stop(null);
                     return;
                 }
@@ -468,18 +468,18 @@ namespace GemsCraft.Games
                 {
                     if (blueTeamCount == 0)
                     {
-                        if (world_.Players.Count() >= 1)
+                        if (world_.Players.Any())
                         {
-                            world_.Players.Message("&1Blue Team &fhas forfeited the game. &cRed Team &fwins!");
+                            world_.Players.Message("&1Blue Team &fhas forfeited the game. &cRed Team &fwins!", 0);
                         }
                         Stop(null);
                         return;
                     }
                     if (redTeamCount == 0)
                     {
-                        if (world_.Players.Count() >= 1)
+                        if (world_.Players.Any())
                         {
-                            world_.Players.Message("&cRed Team &fhas forfeited the game. &1Blue Team &fwins!");
+                            world_.Players.Message("&cRed Team &fhas forfeited the game. &1Blue Team &fwins!", 0);
                         }
                         Stop(null);
                         return;
@@ -499,37 +499,38 @@ namespace GemsCraft.Games
             {
                 if (redScore > blueScore)
                 {
-                    world_.Players.Message("&fThe &cRed Team&f is winning {0} to {1}.", redScore, blueScore);
-                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", timeLeft);
+                    world_.Players.Message("&fThe &cRed Team&f is winning {0} to {1}.",  0, redScore, blueScore);
+                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", 0, timeLeft);
                 }
                 if (redScore < blueScore)
                 {
-                    world_.Players.Message("&fThe &1Blue Team&f is winning {0} to {1}.", blueScore, redScore);
-                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", timeLeft);
+                    world_.Players.Message("&fThe &1Blue Team&f is winning {0} to {1}.", 0, blueScore, redScore);
+                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", 0, timeLeft);
                 }
                 if (redScore == blueScore)
                 {
-                    world_.Players.Message("&fThe teams are tied at {0}!", blueScore);
-                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", timeLeft);
+                    world_.Players.Message("&fThe teams are tied at {0}!", 0, blueScore);
+                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", 0, timeLeft);
                 }
                 lastChecked = DateTime.Now;
             }
             if (timeLeft == 10)
             {
-                world_.Players.Message("&WOnly 10 seconds left!");
+                world_.Players.Message("&WOnly 10 seconds left!", 0);
             }
         }
         #endregion
 
         #region SeperateVoids
-        static public void assignTeams(Player p)    //Assigns teams to all players in the world
+        public static void AssignTeams(Player p)    //Assigns teams to all players in the world
         {
             //if there are no players assigned to any team yet
             if (redTeamCount == 0) { AssignRed(p); return; }
             //if the red team has more players and the red team has already been assigned at least one player
             if (blueTeamCount < redTeamCount) { AssignBlue(p); return; }
             //if the teams have the same number of players, by default the next player will be assigned to the red team
-            if (blueTeamCount == redTeamCount) { AssignRed(p); return; }
+            if (blueTeamCount != redTeamCount) return;
+            AssignRed(p);
         }
 
         public static void RevertGame() //Reset game bools/stats and stop timers
@@ -680,8 +681,8 @@ namespace GemsCraft.Games
                 case 2:
                 case 3:
                     //first aid kit - heal user for 50 hp
-                    world_.Players.Message("&f{0} has discovered a &aFirst Aid Kit&f!", p.Name);
-                    world_.Players.Message("&f{0} has been healed for 50 hp.", p.Name);
+                    world_.Players.Message("&f{0} has discovered a &aFirst Aid Kit&f!", 0, p.Name);
+                    world_.Players.Message("&f{0} has been healed for 50 hp.", 0, p.Name);
 
                     //set health to 100, make sure it doesn't overflow
                     p.Info.Health += 50;
@@ -721,27 +722,27 @@ namespace GemsCraft.Games
                 case 4:
                 case 5:
                     //penicillin - heal user for 100 hp
-                    world_.Players.Message("&f{0} has discovered a &aPenicillin Case&f!", p.Name);
-                    world_.Players.Message("&f{0} has been healed for 100 hp.", p.Name);
+                    world_.Players.Message("&f{0} has discovered a &aPenicillin Case&f!", 0, p.Name);
+                    world_.Players.Message("&f{0} has been healed for 100 hp.", 0, p.Name);
                     p.Info.Health = 100;
 
                     if (p.usesCPE)
                     {
-                        p.Send(PacketWriter.MakeSpecialMessage((byte)1, "&f[&8--------&f]"));
+                        p.Send(PacketWriter.MakeSpecialMessage(1, "&f[&8--------&f]"));
                     }
                     else
                     {
-                        p.Message("You have " + p.Info.Health.ToString() + " health.");
+                        p.Message("You have " + p.Info.Health + " health.");
                     }
 
                     break;
                 case 6:
                 case 7:
                     //disarm
-                    world_.Players.Message("&f{0} has discovered a &aDisarm Spell&f!", p.Name);
+                    world_.Players.Message("&f{0} has discovered a &aDisarm Spell&f!", 0, p.Name);
                     if (p.Info.CTFBlueTeam)
                     {
-                        world_.Players.Message("The red team has lost all weaponry for 30 seconds!");
+                        world_.Players.Message("The red team has lost all weaponry for 30 seconds!", 0);
                         foreach (Player pl in world_.Players)
                         {
                             if (pl.Info.CTFRedTeam)
@@ -755,15 +756,13 @@ namespace GemsCraft.Games
                     }
                     else
                     {
-                        world_.Players.Message("The blue team has lost all weaponry for 30 seconds!");
+                        world_.Players.Message("The blue team has lost all weaponry for 30 seconds!", 0);
                         foreach (Player pl in world_.Players)
                         {
-                            if (pl.Info.CTFBlueTeam)
-                            {
-                                pl.Info.gunDisarmed = true;
-                                pl.Info.stabDisarmed = true;
-                                pl.GunMode = false;
-                            }
+                            if (!pl.Info.CTFBlueTeam) continue;
+                            pl.Info.gunDisarmed = true;
+                            pl.Info.stabDisarmed = true;
+                            pl.GunMode = false;
                         }
                         BlueDisarmed = DateTime.Now;
                     }
@@ -772,11 +771,11 @@ namespace GemsCraft.Games
                 case 8:
                 case 9:
                     //blades of fury
-                    world_.Players.Message("&f{0} has discovered the &aBlades of Fury&f!", p.Name);
+                    world_.Players.Message("&f{0} has discovered the &aBlades of Fury&f!", 0, p.Name);
                     if (p.Info.CTFBlueTeam)
                     {
-                        world_.Players.Message("The red team is unable to backstab for 1 minute!");
-                        world_.Players.Message("The blue team can now stab the red team from any angle for 1 minute!");
+                        world_.Players.Message("The red team is unable to backstab for 1 minute!", 0);
+                        world_.Players.Message("The blue team can now stab the red team from any angle for 1 minute!", 0);
                         foreach (Player pl in world_.Players)
                         {
                             if (pl.Info.CTFBlueTeam)
@@ -792,8 +791,8 @@ namespace GemsCraft.Games
                     }
                     else
                     {
-                        world_.Players.Message("The blue team is unable to backstab for 1 minute!");
-                        world_.Players.Message("The red team can now stab the blue team from any angle for 1 minute!");
+                        world_.Players.Message("The blue team is unable to backstab for 1 minute!", 0);
+                        world_.Players.Message("The red team can now stab the blue team from any angle for 1 minute!", 0);
                         foreach (Player pl in world_.Players)
                         {
                             if (pl.Info.CTFRedTeam)
@@ -811,10 +810,10 @@ namespace GemsCraft.Games
                 case 10:
                 case 11:
                     //war cry
-                    world_.Players.Message("&f{0} has discovered their &aWar Cry&f!", p.Name);
+                    world_.Players.Message("&f{0} has discovered their &aWar Cry&f!", 0, p.Name);
                     if (p.Info.CTFBlueTeam)
                     {
-                        world_.Players.Message("The red team has been frightened back into their spawn!");
+                        world_.Players.Message("The red team has been frightened back into their spawn!", 0);
                         foreach (Player pl in world_.Players)
                         {
                             if (pl.Info.CTFRedTeam)
@@ -825,7 +824,7 @@ namespace GemsCraft.Games
                     }
                     else
                     {
-                        world_.Players.Message("The blue team has been frightened back into their spawn!");
+                        world_.Players.Message("The blue team has been frightened back into their spawn!", 0);
                         foreach (Player pl in world_.Players)
                         {
                             if (pl.Info.CTFBlueTeam)
@@ -839,8 +838,8 @@ namespace GemsCraft.Games
                 case 13:
                 case 14:
                     //strengthen
-                    world_.Players.Message("&f{0} has discovered a &aStrength Pack&f!", p.Name);
-                    world_.Players.Message("&f{0}'s gun now deals twice the damage for the next minute!", p.Name);
+                    world_.Players.Message("&f{0} has discovered a &aStrength Pack&f!", 0, p.Name);
+                    world_.Players.Message("&f{0}'s gun now deals twice the damage for the next minute!", 0, p.Name);
                     p.Info.strengthened = true;
                     p.Info.strengthTime = DateTime.Now;
                     break;
@@ -848,23 +847,23 @@ namespace GemsCraft.Games
                 case 16:
                 case 17:
                     //dodge
-                    world_.Players.Message("&f{0} has discovered a new &aDodging Technique&f!", p.Name);
-                    world_.Players.Message("&f{0}'s has a 50% chance to dodge incomming gun attacks for the next minute!", p.Name);
+                    world_.Players.Message("&f{0} has discovered a new &aDodging Technique&f!", 0, p.Name);
+                    world_.Players.Message("&f{0}'s has a 50% chance to dodge incomming gun attacks for the next minute!", 0, p.Name);
                     p.Info.canDodge = true;
                     p.Info.dodgeTime = DateTime.Now;
                     break;
                 case 18:
                     //holy blessing (rarest and most treasured power up, yet easiest to code :P )
-                    world_.Players.Message("&f{0} has discovered the rare &aHoly Blessing&f!!!", p.Name);
+                    world_.Players.Message("&f{0} has discovered the rare &aHoly Blessing&f!!!", 0, p.Name);
                     if (p.Info.CTFBlueTeam)
                     {
-                        world_.Players.Message("The Blue Team has been granted 1 point.");
-                        redScore++;
+                        world_.Players.Message("The Blue Team has been granted 1 point.", 0);
+                        blueScore++;
                     }
                     else
                     {
-                        world_.Players.Message("The Red Team has been granted 1 point.");
-                        blueScore++;
+                        world_.Players.Message("The Red Team has been granted 1 point.", 0);
+                        redScore++;
                     }
                     foreach (Player pl in world_.Players)
                     {
@@ -878,16 +877,13 @@ namespace GemsCraft.Games
                         }
                     }
                     break;
-                default:
-                    //no power up 4 u
-                    break;
             }
 
         }
         #endregion
 
         #region MovingEvent
-        public static void PlayerMoving(object poo, GemsCraft.Events.PlayerMovingEventArgs e)
+        public static void PlayerMoving(object poo, Events.PlayerMovingEventArgs e)
         {
             if (!started)
             {
@@ -905,7 +901,7 @@ namespace GemsCraft.Games
                     if (e.NewPosition.DistanceSquaredTo(world_.blueCTFSpawn.ToPlayerCoords()) <= 42 * 42)
                     {
                         blueScore++;
-                        world_.Players.Message("&f{0} has capped the &cred &fflag. The score is now &cRed&f: {1} and &1Blue&f: {2}.", e.Player.Name, redScore, blueScore);
+                        world_.Players.Message("&f{0} has capped the &cred &fflag. The score is now &cRed&f: {1} and &1Blue&f: {2}.", 0, e.Player.Name, redScore, blueScore);
                         e.Player.Info.hasRedFlag = false;
                         redFlagHolder = null;
                         e.Player.Info.CTFCaptures++;
@@ -941,7 +937,7 @@ namespace GemsCraft.Games
                     if (e.NewPosition.DistanceSquaredTo(world_.redCTFSpawn.ToPlayerCoords()) <= 42 * 42)
                     {
                         redScore++;
-                        world_.Players.Message("&f{0} has capped the &1blue &fflag. The score is now &cRed&f: {1} and &1Blue&f: {2}.", e.Player.Name, redScore, blueScore);
+                        world_.Players.Message("&f{0} has capped the &1blue &fflag. The score is now &cRed&f: {1} and &1Blue&f: {2}.", 0, e.Player.Name, redScore, blueScore);
                         e.Player.Info.hasBlueFlag = false;
                         blueFlagHolder = null;
                         e.Player.Info.CTFCaptures++;
@@ -1042,7 +1038,7 @@ namespace GemsCraft.Games
 
                                 if (p.Info.hasRedFlag)
                                 {
-                                    world_.Players.Message("The red flag has been returned.");
+                                    world_.Players.Message("The red flag has been returned.", 0);
                                     p.Info.hasRedFlag = false;
                                     redFlagHolder = null;
 
@@ -1058,7 +1054,7 @@ namespace GemsCraft.Games
 
                                 if (p.Info.hasBlueFlag)
                                 {
-                                    world_.Players.Message("The blue flag has been returned.");
+                                    world_.Players.Message("The blue flag has been returned.", 0);
                                     p.Info.hasBlueFlag = false;
                                     blueFlagHolder = null;
 

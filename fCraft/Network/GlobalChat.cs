@@ -299,19 +299,19 @@ namespace GemsCraft.Network
                         {
                             if (msg.Type == IRCMessageType.ChannelAction)
                             {
-                                SendList.Message("&g[Global] * {1} {2}", ActualBotNick, msg.Nick, processedMessage);
+                                SendList.Message("&g[Global] * {1} {2}", 0, ActualBotNick, msg.Nick, processedMessage);
                                 Logger.Log(LogType.GlobalChat,"[Global] * {1} {2}", ActualBotNick, msg.Nick, processedMessage);               
                             }
                             else
                             {
-                                SendList.Message("&g[Global] {1}: {2}", ActualBotNick, msg.Nick, processedMessage);
+                                SendList.Message("&g[Global] {1}: {2}", 0, ActualBotNick, msg.Nick, processedMessage);
                                 Logger.Log(LogType.GlobalChat,"[Global] {1}: {2}", ActualBotNick, msg.Nick, processedMessage);            
                             }
                         }
 
                         else if (msg.Message.StartsWith("#"))
                         {
-                            SendList.Message("&g[Global] {1}: {2}", ActualBotNick, msg.Nick, processedMessage.Substring(1));
+                            SendList.Message("&g[Global] {1}: {2}", 0, ActualBotNick, msg.Nick, processedMessage.Substring(1));
                             Logger.Log(LogType.GlobalChat,"[Global] {1}: {2}", ActualBotNick, msg.Nick,  processedMessage.Substring(1));              
                         }
                         return;
@@ -321,12 +321,12 @@ namespace GemsCraft.Network
                         if (!ResponsibleForInputParsing) return;
                         if (msg.Nick.StartsWith("("))
                         {
-                            SendList.Message("&g[Global] Server {0} joined the GemsCraft Global Chat", msg.Nick);
+                            SendList.Message("&g[Global] Server {0} joined the GemsCraft Global Chat", 0, msg.Nick);
                             Logger.Log(LogType.GlobalChat,"[Global] Server {0} joined the GemsCraft Global Chat", msg.Nick);               
                         }
                         else
                         {
-                            SendList.Message("&g[Global] {0} joined the GemsCraft Global Chat", msg.Nick);
+                            SendList.Message("&g[Global] {0} joined the GemsCraft Global Chat", 0, msg.Nick);
                             Logger.Log(LogType.GlobalChat, "[Global] {0} joined the GemsCraft Global Chat", msg.Nick);                   
                         }
                         return;
@@ -343,7 +343,7 @@ namespace GemsCraft.Network
                         else
                         {
                             if (!ResponsibleForInputParsing) return;
-                            SendList.Message("&g[Global] {0} kicked {1} ({2})", msg.Nick, kicked, msg.Message);
+                            SendList.Message("&g[Global] {0} kicked {1} ({2})", 0, msg.Nick, kicked, msg.Message);
                             Logger.Log(LogType.GlobalChat, "[Global] {0} kicked {1} ({2})", msg.Nick, kicked, msg.Message);                 
                         }
                         return;
@@ -352,14 +352,14 @@ namespace GemsCraft.Network
                     case IRCMessageType.Part:
                     case IRCMessageType.Quit:
                         if (!ResponsibleForInputParsing) return;
-                        SendList.Message("&g[Global] Server {0} left the GemsCraft Global Chat", msg.Nick);
+                        SendList.Message("&g[Global] Server {0} left the GemsCraft Global Chat", MessageType.Chat, msg.Nick);
                         Logger.Log(LogType.GlobalChat, "[Global] Server {0} left the GemsCraft Global Chat", msg.Nick);
                         return;
 
 
                     case IRCMessageType.NickChange:
                         if (!ResponsibleForInputParsing) return;
-                        SendList.Message("&g[Global] {0} is now known as {1}", msg.Nick, msg.Message);
+                        SendList.Message("&g[Global] {0} is now known as {1}", 0, msg.Nick, msg.Message);
                         Logger.Log(LogType.GlobalChat, "[Global] {0} is now known as {1}", msg.Nick, msg.Message);               
                         return;
 

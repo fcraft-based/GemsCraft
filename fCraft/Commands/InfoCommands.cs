@@ -17,10 +17,12 @@ using GemsCraft.Worlds;
 using JetBrains.Annotations;
 using Map = GemsCraft.Worlds.Map;
 
-namespace GemsCraft.Commands {
+namespace GemsCraft.Commands
+{
     /// <summary> Contains commands that don't do anything besides displaying some information or text.
     /// Includes several chat commands. </summary>
-    static class InfoCommands {
+    static class InfoCommands
+    {
         const int PlayersPerPage = 30;
 
         /// <summary> Gives back an array of players arranged from most to least number of bans </summary>
@@ -47,26 +49,27 @@ namespace GemsCraft.Commands {
         static List<PlayerInfo> TopBuilders = new List<PlayerInfo>(PlayerDB.PlayerInfoList
                                         .OrderBy(p => p.BlocksBuilt).ToArray().Reverse());
 
-        internal static void Init() {
-            CommandManager.RegisterCommand( CdInfo );
-            CommandManager.RegisterCommand( CdBanInfo );
-            CommandManager.RegisterCommand( CdRankInfo );
-            CommandManager.RegisterCommand( CdServerInfo );
+        internal static void Init()
+        {
+            CommandManager.RegisterCommand(CdInfo);
+            CommandManager.RegisterCommand(CdBanInfo);
+            CommandManager.RegisterCommand(CdRankInfo);
+            CommandManager.RegisterCommand(CdServerInfo);
 
-            CommandManager.RegisterCommand( CdRanks );
+            CommandManager.RegisterCommand(CdRanks);
 
-            CommandManager.RegisterCommand( CdRules );
+            CommandManager.RegisterCommand(CdRules);
 
-            CommandManager.RegisterCommand( CdMeasure );
+            CommandManager.RegisterCommand(CdMeasure);
 
-            CommandManager.RegisterCommand( CdPlayers );
+            CommandManager.RegisterCommand(CdPlayers);
 
-            CommandManager.RegisterCommand( CdWhere );
+            CommandManager.RegisterCommand(CdWhere);
 
-            CommandManager.RegisterCommand( CdHelp );
-            CommandManager.RegisterCommand( CdCommands );
+            CommandManager.RegisterCommand(CdHelp);
+            CommandManager.RegisterCommand(CdCommands);
 
-            CommandManager.RegisterCommand( CdColors );
+            CommandManager.RegisterCommand(CdColors);
 
             CommandManager.RegisterCommand(CdReqs);
             CommandManager.RegisterCommand(CdList);
@@ -76,12 +79,30 @@ namespace GemsCraft.Commands {
             CommandManager.RegisterCommand(CdWebsite);
             CommandManager.RegisterCommand(CdMoneyMessages);
             CommandManager.RegisterCommand(CdGameStats);
-
+            CommandManager.RegisterCommand(CdTestCommand);
 #if DEBUG_SCHEDULER
             CommandManager.RegisterCommand( cdTaskDebug );
 #endif
         }
-        
+
+        static readonly CommandDescriptor CdTestCommand = new CommandDescriptor
+        {
+            Name = "Testing",
+            Aliases = new[] { "tester" },
+            IsConsoleSafe = true,
+            Category = CommandCategory.Info,
+            UsableByFrozenPlayers = false,
+            Usage = "/Testing (type) (player)",
+            Help = "GC testing command",
+            Handler = TestingHandler
+        };
+
+        private static void TestingHandler(Player source, Command cmd)
+        {
+            //string x = cmd.Next();
+            Chat.SendGlobal(source, "Testing Command", MessageType.Announcement);
+        }
+
         #region LegendCraft
         /* Copyright (c) <2012-2014> <LeChosenOne, DingusBungus, Eeyle>
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -101,7 +122,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.*/
-        
+
         static readonly CommandDescriptor CdGameStats = new CommandDescriptor
         {
             Name = "GameStats",
@@ -119,11 +140,11 @@ THE SOFTWARE.*/
             string targetName = cmd.Next();
             if (targetName == null) { CdGameStats.PrintUsage(player); return; }
             PlayerInfo target = PlayerDB.FindPlayerInfoOrPrintMatches(player, targetName);
-            if (target == null) return; 
-            
-            
+            if (target == null) return;
+
+
             int indexLogins = TopLogins.FindIndex(p => p.Name.Equals(target.Name)) + 1;
-            
+
             int indexPromos = MostPromos.FindIndex(p => p.Name.Equals(target.Name)) + 1;
 
             int indexBuilders = TopBuilders.FindIndex(p => p.Name.Equals(target.Name)) + 1;
@@ -138,10 +159,10 @@ THE SOFTWARE.*/
             player.Message("&c_Player {0}&c's Game Stats_:\n&6TopLogins: {1}\n&eTopTime: {2}\n&aTopBuilders: {3}\n&2MostKicks: {4}\n&1MostBans: {5}\n&5MostPromos: {6}", target.ClassyName, indexLogins
                 , indexTime, indexBuilders, indexKicks, indexBans, indexPromos);
             return;
-            
+
 
         }
-        
+
         static readonly CommandDescriptor CdIrc = new CommandDescriptor
         {
             Name = "Irc",
@@ -200,7 +221,7 @@ THE SOFTWARE.*/
                 }
             }
         }
-        
+
 
         static readonly CommandDescriptor CdWebsite = new CommandDescriptor
         {
@@ -261,7 +282,7 @@ THE SOFTWARE.*/
             }
         }
 
-        static readonly CommandDescriptor CdAbout = new CommandDescriptor       
+        static readonly CommandDescriptor CdAbout = new CommandDescriptor
         {
             Name = "About",
             UsableByFrozenPlayers = true,
@@ -335,60 +356,60 @@ THE SOFTWARE.*/
                 case "commands":
                 case "cmd":
                 case "cmds":
-                {
-                    string helpCommand = cmd.Next();
-                    if (helpCommand == null)
                     {
-                        player.Message("Use the format /About Command (CommandName)");
+                        string helpCommand = cmd.Next();
+                        if (helpCommand == null)
+                        {
+                            player.Message("Use the format /About Command (CommandName)");
+                        }
+                        else
+                        {
+                            HelpHandler(player, new Command("/help " + helpCommand));
+                        }
+                        break;
                     }
-                    else
-                    {
-                        HelpHandler(player, new Command("/help " + helpCommand));
-                    }
-                    break;
-                }
                 case "help":
                 case "about":
-                {
-                    CdAbout.PrintUsage(player);
-                    break;
-                }
+                    {
+                        CdAbout.PrintUsage(player);
+                        break;
+                    }
 
                 case "color":
                 case "colorcodes":
                 case "colors":
-                {
-                    ColorsHandler(player, new Command("/colors"));
-                    break;
-                }
+                    {
+                        ColorsHandler(player, new Command("/colors"));
+                        break;
+                    }
                 case "world":
                 case "winfo":
-                {
-                    string world = cmd.Next();
-                    if (world == null)
                     {
-                        WorldCommands.WorldInfoHandler(player, new Command("/winfo"));
+                        string world = cmd.Next();
+                        if (world == null)
+                        {
+                            WorldCommands.WorldInfoHandler(player, new Command("/winfo"));
+                        }
+                        else
+                        {
+                            WorldCommands.WorldInfoHandler(player, new Command("/winfo " + world));
+                        }
+                        break;
                     }
-                    else
-                    {
-                        WorldCommands.WorldInfoHandler(player, new Command("/winfo " + world));
-                    }
-                    break;
-                }
                 case "irc":
-                {
-                    InfoCommands.IRCHandler(player, new Command("/irc"));
-                    break;
-                }
+                    {
+                        InfoCommands.IRCHandler(player, new Command("/irc"));
+                        break;
+                    }
                 case "website":
                 case "ws":
                 case "forum":
                 case "forums":
                 case "site":
-                {
-                    InfoCommands.WebsiteHandler(player, new Command("/ws"));
-                    break;
-                }
+                    {
+                        InfoCommands.WebsiteHandler(player, new Command("/ws"));
+                        break;
+                    }
                 case "moneymessages":
                 case "moneycommands":
                 case "$messages":
@@ -399,10 +420,10 @@ THE SOFTWARE.*/
                 case "mm":
                 case "moneymsgs":
                 case "moneycmds":
-                {
-                    InfoCommands.MsgHandler(player, new Command("/MoneyMessages"));
-                    break;
-                }
+                    {
+                        InfoCommands.MsgHandler(player, new Command("/MoneyMessages"));
+                        break;
+                    }
             }
         }
 
@@ -421,13 +442,13 @@ THE SOFTWARE.*/
         {
             player.MessageNow("&HThe available $messages are&S: $names, $kicks, $bans, $awesome, $server, $motd, $date, $time, $money, $mad, $welcome, $moron " +
                 "$clap, $website (or $ws), and $irc.");
-            player.MessageNow("&HAlso try the $colors&S: for ex. $green, $lime, $red, etc."); 
+            player.MessageNow("&HAlso try the $colors&S: for ex. $green, $lime, $red, etc.");
             player.MessageNow("&HNOTE&S: All $messages must be done with all lowercase letters.");
         }
 
         #endregion LegendCraft
-        
-        
+
+
         #region 800Craft
 
         //Copyright (C) <2012>  <Jon Baker, Glenn Mariën and Lao Tszy>
@@ -511,16 +532,16 @@ THE SOFTWARE.*/
             player.Message("More than one player matched with that DisplayedName: {0}",
                      nameList);
         }
-        
 
-       static readonly CommandDescriptor CdList = new CommandDescriptor
+
+        static readonly CommandDescriptor CdList = new CommandDescriptor
         {
             Name = "List",
             Category = CommandCategory.Info,
             IsConsoleSafe = true,
             UsableByFrozenPlayers = true,
-            Help = "&SCan show an advanced list for a chosen section. " + 
-            "Type /List to display the sections",
+            Help = "&SCan show an advanced list for a chosen section. " +
+             "Type /List to display the sections",
             Usage = "/List SectionName",
             Handler = ListHandler
         };
@@ -586,7 +607,7 @@ THE SOFTWARE.*/
                         player.Message("/List portals cannot be used from Console");
                         return;
                     }
-     
+
                     if (player.World.Portals == null ||
                         player.World.Portals.Count == 0)
                     {
@@ -695,7 +716,8 @@ THE SOFTWARE.*/
                     var RankNames = PlayerDB.PlayerInfoList
                                          .Where(r => r.Rank == rank)
                                              .ToArray();
-                    if (RankNames.Length < 1){
+                    if (RankNames.Length < 1)
+                    {
                         player.Message("&WNo results found");
                         return;
                     }
@@ -725,7 +747,8 @@ THE SOFTWARE.*/
                 case "dn":
                     var DisplayedNames = PlayerDB.PlayerInfoList
                                              .Where(r => r.DisplayedName != null).OrderBy(p => p.Rank).ToArray();
-                    if (DisplayedNames.Length < 1){
+                    if (DisplayedNames.Length < 1)
+                    {
                         player.Message("&WNo results found");
                         return;
                     }
@@ -865,7 +888,8 @@ THE SOFTWARE.*/
                         player.Message("&R{0}", Server.ReplaceTextKeywords(player, reqLine));
 
                     }
-                } player.Message("Your current time on the server is {0}" + " Hours", player.Info.TotalTime.TotalHours);
+                }
+                player.Message("Your current time on the server is {0}" + " Hours", player.Info.TotalTime.TotalHours);
             }
 
             catch (Exception ex)
@@ -880,9 +904,10 @@ THE SOFTWARE.*/
         #region Info
 
         const int MaxAltsToPrint = 15;
-        static readonly Regex RegexNonNameChars = new Regex( @"[^a-zA-Z0-9_\*\?]", RegexOptions.Compiled );
+        static readonly Regex RegexNonNameChars = new Regex(@"[^a-zA-Z0-9_\*\?]", RegexOptions.Compiled);
 
-        static readonly CommandDescriptor CdInfo = new CommandDescriptor {
+        static readonly CommandDescriptor CdInfo = new CommandDescriptor
+        {
             Name = "Info",
             Aliases = new[] { "whowas" },
             Category = CommandCategory.Info,
@@ -895,31 +920,41 @@ THE SOFTWARE.*/
             Handler = InfoHandler
         };
 
-        internal static void InfoHandler( Player player, Command cmd ) {
+        internal static void InfoHandler(Player player, Command cmd)
+        {
             string name = cmd.Next();
-            if( name == null ) {
+            if (name == null)
+            {
                 // no name given, print own info
-                PrintPlayerInfo( player, player.Info );
+                PrintPlayerInfo(player, player.Info);
                 return;
 
-            } else if( name.Equals( player.Name, StringComparison.OrdinalIgnoreCase ) ) {
+            }
+            else if (name.Equals(player.Name, StringComparison.OrdinalIgnoreCase))
+            {
                 // own name given
                 player.LastUsedPlayerName = player.Name;
-                PrintPlayerInfo( player, player.Info );
+                PrintPlayerInfo(player, player.Info);
                 return;
 
-            } else if( !player.Can( Permission.ViewOthersInfo ) ) {
+            }
+            else if (!player.Can(Permission.ViewOthersInfo))
+            {
                 // someone else's name or IP given, permission required.
-                player.MessageNoAccess( Permission.ViewOthersInfo );
+                player.MessageNoAccess(Permission.ViewOthersInfo);
                 return;
             }
 
             // repeat last-typed name
-            if( name == "-" ) {
-                if( player.LastUsedPlayerName != null ) {
+            if (name == "-")
+            {
+                if (player.LastUsedPlayerName != null)
+                {
                     name = player.LastUsedPlayerName;
-                } else {
-                    player.Message( "Cannot repeat player name: you haven't used any names yet." );
+                }
+                else
+                {
+                    player.Message("Cannot repeat player name: you haven't used any names yet.");
                     return;
                 }
             }
@@ -927,268 +962,360 @@ THE SOFTWARE.*/
             PlayerInfo[] infos;
             IPAddress ip;
 
-            if( name.Contains( "/" ) ) {
+            if (name.Contains("/"))
+            {
                 // IP range matching (CIDR notation)
-                string ipString = name.Substring( 0, name.IndexOf( '/' ) );
-                string rangeString = name.Substring( name.IndexOf( '/' ) + 1 );
-                if( Server.IsIP( ipString ) && IPAddress.TryParse( ipString, out ip ) &&
-                    byte.TryParse( rangeString, out var range ) && range <= 32 ) {
-                    player.Message( "Searching {0}-{1}", ip.RangeMin( range ), ip.RangeMax( range ) );
-                    infos = PlayerDB.FindPlayersCidr( ip, range );
-                } else {
-                    player.Message( "Info: Invalid IP range format. Use CIDR notation." );
+                string ipString = name.Substring(0, name.IndexOf('/'));
+                string rangeString = name.Substring(name.IndexOf('/') + 1);
+                if (Server.IsIP(ipString) && IPAddress.TryParse(ipString, out ip) &&
+                    byte.TryParse(rangeString, out var range) && range <= 32)
+                {
+                    player.Message("Searching {0}-{1}", ip.RangeMin(range), ip.RangeMax(range));
+                    infos = PlayerDB.FindPlayersCidr(ip, range);
+                }
+                else
+                {
+                    player.Message("Info: Invalid IP range format. Use CIDR notation.");
                     return;
                 }
 
-            } else if( Server.IsIP( name ) && IPAddress.TryParse( name, out ip ) ) {
+            }
+            else if (Server.IsIP(name) && IPAddress.TryParse(name, out ip))
+            {
                 // find players by IP
-                infos = PlayerDB.FindPlayers( ip );
+                infos = PlayerDB.FindPlayers(ip);
 
-            } else if( name.Contains( "*" ) || name.Contains( "?" ) ) {
+            }
+            else if (name.Contains("*") || name.Contains("?"))
+            {
                 // find players by regex/wildcard
-                string regexString = "^" + RegexNonNameChars.Replace( name, "" ).Replace( "*", ".*" ).Replace( "?", "." ) + "$";
-                Regex regex = new Regex( regexString, RegexOptions.IgnoreCase | RegexOptions.Compiled );
-                infos = PlayerDB.FindPlayers( regex );
+                string regexString = "^" + RegexNonNameChars.Replace(name, "").Replace("*", ".*").Replace("?", ".") + "$";
+                Regex regex = new Regex(regexString, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+                infos = PlayerDB.FindPlayers(regex);
 
-            } else {
+            }
+            else
+            {
                 // find players by partial matching
                 PlayerInfo tempInfo;
-                if( !PlayerDB.FindPlayerInfo( name, out tempInfo ) ) {
-                    infos = PlayerDB.FindPlayers( name );
-                } else if( tempInfo == null ) {
-                    player.MessageNoPlayer( name );
+                if (!PlayerDB.FindPlayerInfo(name, out tempInfo))
+                {
+                    infos = PlayerDB.FindPlayers(name);
+                }
+                else if (tempInfo == null)
+                {
+                    player.MessageNoPlayer(name);
                     return;
-                } else {
+                }
+                else
+                {
                     infos = new[] { tempInfo };
                 }
             }
 
-            Array.Sort( infos, new PlayerInfoComparer( player ) );
+            Array.Sort(infos, new PlayerInfoComparer(player));
 
-            if( infos.Length == 1 ) {
+            if (infos.Length == 1)
+            {
                 // only one match found; print it right away
                 player.LastUsedPlayerName = infos[0].Name;
-                PrintPlayerInfo( player, infos[0] );
+                PrintPlayerInfo(player, infos[0]);
 
-            } else if( infos.Length > 1 ) {
+            }
+            else if (infos.Length > 1)
+            {
                 // multiple matches found
-                if( infos.Length <= PlayersPerPage ) {
+                if (infos.Length <= PlayersPerPage)
+                {
                     // all fit to one page
-                    player.MessageManyMatches( "player", infos );
+                    player.MessageManyMatches("player", infos);
 
-                } else {
+                }
+                else
+                {
                     // pagination
                     int offset;
-                    if( !cmd.NextInt( out offset ) ) offset = 0;
-                    if( offset >= infos.Length ) {
-                        offset = Math.Max( 0, infos.Length - PlayersPerPage );
+                    if (!cmd.NextInt(out offset)) offset = 0;
+                    if (offset >= infos.Length)
+                    {
+                        offset = Math.Max(0, infos.Length - PlayersPerPage);
                     }
-                    PlayerInfo[] infosPart = infos.Skip( offset ).Take( PlayersPerPage ).ToArray();
-                    player.MessageManyMatches( "player", infosPart );
-                    if( offset + infosPart.Length < infos.Length ) {
+                    PlayerInfo[] infosPart = infos.Skip(offset).Take(PlayersPerPage).ToArray();
+                    player.MessageManyMatches("player", infosPart);
+                    if (offset + infosPart.Length < infos.Length)
+                    {
                         // normal page
-                        player.Message( "Showing {0}-{1} (out of {2}). Next: &H/Info {3} {4}",
+                        player.Message("Showing {0}-{1} (out of {2}). Next: &H/Info {3} {4}",
                                         offset + 1, offset + infosPart.Length, infos.Length,
-                                        name, offset + infosPart.Length );
-                    } else {
+                                        name, offset + infosPart.Length);
+                    }
+                    else
+                    {
                         // last page
-                        player.Message( "Showing matches {0}-{1} (out of {2}).",
-                                        offset + 1, offset + infosPart.Length, infos.Length );
+                        player.Message("Showing matches {0}-{1} (out of {2}).",
+                                        offset + 1, offset + infosPart.Length, infos.Length);
                     }
                 }
 
-            } else {
+            }
+            else
+            {
                 // no matches found
-                player.MessageNoPlayer( name );
+                player.MessageNoPlayer(name);
             }
         }
 
-        public static void PrintPlayerInfo( [NotNull] Player player, [NotNull] PlayerInfo info ) {
-            if( player == null ) throw new ArgumentNullException( "player" );
-            if( info == null ) throw new ArgumentNullException( "info" );
+        public static void PrintPlayerInfo([NotNull] Player player, [NotNull] PlayerInfo info)
+        {
+            if (player == null) throw new ArgumentNullException("player");
+            if (info == null) throw new ArgumentNullException("info");
             Player target = info.PlayerObject;
 
             // hide online status when hidden
-            if( target != null && !player.CanSee( target ) ) {
+            if (target != null && !player.CanSee(target))
+            {
                 target = null;
             }
 
-            if( info.LastIP.Equals( IPAddress.None ) ) {
-                player.Message( "About {0}&S({1}): Never seen before.", info.ClassyName, info.Name );
+            if (info.LastIP.Equals(IPAddress.None))
+            {
+                player.Message("About {0}&S({1}): Never seen before.", info.ClassyName, info.Name);
 
-            } else {
-                if( target != null ) {
+            }
+            else
+            {
+                if (target != null)
+                {
                     TimeSpan idle = target.IdleTime;
-                    if( info.IsHidden ) {
-                        if( idle.TotalMinutes > 2 ) {
-                            if( player.Can( Permission.ViewPlayerIPs ) ) {
-                                player.Message( "About {0}&S({1}): HIDDEN from {2} (idle {3})",
+                    if (info.IsHidden)
+                    {
+                        if (idle.TotalMinutes > 2)
+                        {
+                            if (player.Can(Permission.ViewPlayerIPs))
+                            {
+                                player.Message("About {0}&S({1}): HIDDEN from {2} (idle {3})",
                                                 info.ClassyName,
                                                 info.Name,
                                                 info.LastIP,
-                                                idle.ToMiniString() );
-                            } else {
-                                player.Message( "About {0}&S({1}): HIDDEN (idle {1})",
-                                                info.ClassyName,
-                                                info.Name,
-                                                idle.ToMiniString() );
+                                                idle.ToMiniString());
                             }
-                        } else {
-                            if( player.Can( Permission.ViewPlayerIPs ) ) {
-                                player.Message( "About {0}&S({1}): HIDDEN. Online from {2}",
+                            else
+                            {
+                                player.Message("About {0}&S({1}): HIDDEN (idle {1})",
                                                 info.ClassyName,
                                                 info.Name,
-                                                info.LastIP );
-                            } else {
-                                player.Message( "About {0}&S({1}): HIDDEN.",
-                                                info.ClassyName,
-                                                info.Name);
+                                                idle.ToMiniString());
                             }
                         }
-                    } else {
-                        if( idle.TotalMinutes > 1 ) {
-                            if( player.Can( Permission.ViewPlayerIPs ) ) {
-                                player.Message( "About {0}&S({1}): Online now from {2} (idle {3})",
+                        else
+                        {
+                            if (player.Can(Permission.ViewPlayerIPs))
+                            {
+                                player.Message("About {0}&S({1}): HIDDEN. Online from {2}",
                                                 info.ClassyName,
                                                 info.Name,
-                                                info.LastIP,
-                                                idle.ToMiniString() );
-                            } else {
-                                player.Message( "About {0}&S({1}): Online now (idle {2})",
-                                                info.ClassyName,
-                                                info.Name,
-                                                idle.ToMiniString() );
+                                                info.LastIP);
                             }
-                        } else {
-                            if( player.Can( Permission.ViewPlayerIPs ) ) {
-                                player.Message( "About {0}&S({1}): Online now from {2}",
-                                                info.ClassyName,
-                                                info.Name,
-                                                info.LastIP );
-                            } else {
-                                player.Message( "About {0}&S({1}): Online now.",
+                            else
+                            {
+                                player.Message("About {0}&S({1}): HIDDEN.",
                                                 info.ClassyName,
                                                 info.Name);
                             }
                         }
                     }
-                } else {
-                    if( player.Can( Permission.ViewPlayerIPs ) ) {
-                        if( info.LeaveReason != LeaveReason.Unknown ) {
-                            player.Message( "About {0}&S({1}): Last seen {2} ago from {3} ({4}).",
+                    else
+                    {
+                        if (idle.TotalMinutes > 1)
+                        {
+                            if (player.Can(Permission.ViewPlayerIPs))
+                            {
+                                player.Message("About {0}&S({1}): Online now from {2} (idle {3})",
+                                                info.ClassyName,
+                                                info.Name,
+                                                info.LastIP,
+                                                idle.ToMiniString());
+                            }
+                            else
+                            {
+                                player.Message("About {0}&S({1}): Online now (idle {2})",
+                                                info.ClassyName,
+                                                info.Name,
+                                                idle.ToMiniString());
+                            }
+                        }
+                        else
+                        {
+                            if (player.Can(Permission.ViewPlayerIPs))
+                            {
+                                player.Message("About {0}&S({1}): Online now from {2}",
+                                                info.ClassyName,
+                                                info.Name,
+                                                info.LastIP);
+                            }
+                            else
+                            {
+                                player.Message("About {0}&S({1}): Online now.",
+                                                info.ClassyName,
+                                                info.Name);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (player.Can(Permission.ViewPlayerIPs))
+                    {
+                        if (info.LeaveReason != LeaveReason.Unknown)
+                        {
+                            player.Message("About {0}&S({1}): Last seen {2} ago from {3} ({4}).",
                                             info.ClassyName,
                                             info.Name,
                                             info.TimeSinceLastSeen.ToMiniString(),
                                             info.LastIP,
-                                            info.LeaveReason );
-                        } else {
-                            player.Message( "About {0}&S({1}): Last seen {2} ago from {3}.",
-                                            info.ClassyName,
-                                            info.Name,
-                                            info.TimeSinceLastSeen.ToMiniString(),
-                                            info.LastIP );
+                                            info.LeaveReason);
                         }
-                    } else {
-                        if( info.LeaveReason != LeaveReason.Unknown ) {
-                            player.Message( "About {0}&S({1}): Last seen {2} ago ({3}).",
+                        else
+                        {
+                            player.Message("About {0}&S({1}): Last seen {2} ago from {3}.",
                                             info.ClassyName,
                                             info.Name,
                                             info.TimeSinceLastSeen.ToMiniString(),
-                                            info.LeaveReason );
-                        } else {
-                            player.Message( "About {0}&S({1}): Last seen {2} ago.",
+                                            info.LastIP);
+                        }
+                    }
+                    else
+                    {
+                        if (info.LeaveReason != LeaveReason.Unknown)
+                        {
+                            player.Message("About {0}&S({1}): Last seen {2} ago ({3}).",
                                             info.ClassyName,
                                             info.Name,
-                                            info.TimeSinceLastSeen.ToMiniString() );
+                                            info.TimeSinceLastSeen.ToMiniString(),
+                                            info.LeaveReason);
+                        }
+                        else
+                        {
+                            player.Message("About {0}&S({1}): Last seen {2} ago.",
+                                            info.ClassyName,
+                                            info.Name,
+                                            info.TimeSinceLastSeen.ToMiniString());
                         }
                     }
                 }
                 // Show login information
-                player.Message( "  Logged in {0} time(s) since {1:d MMM yyyy}.",
+                player.Message("  Logged in {0} time(s) since {1:d MMM yyyy}.",
                                 info.TimesVisited,
-                                info.FirstLoginDate );
+                                info.FirstLoginDate);
             }
 
-            if( info.IsFrozen ) {
-                player.Message( "  Frozen {0} ago by {1}",
+            if (info.IsFrozen)
+            {
+                player.Message("  Frozen {0} ago by {1}",
                                 info.TimeSinceFrozen.ToMiniString(),
-                                info.FrozenByClassy );
+                                info.FrozenByClassy);
             }
 
-            if( info.IsMuted ) {
-                player.Message( "  Muted for {0} by {1}",
+            if (info.IsMuted)
+            {
+                player.Message("  Muted for {0} by {1}",
                                 info.TimeMutedLeft.ToMiniString(),
-                                info.MutedByClassy );
+                                info.MutedByClassy);
                 float blocks = ((info.BlocksBuilt + info.BlocksDrawn) - info.BlocksDeleted);
                 if (blocks < 0)
                     player.Message("  &CWARNING! {0}&S has deleted more than built!", info.ClassyName);//<---- GlennMR on Au70 Galaxy
             }
 
             // Show ban information
-            IPBanInfo ipBan = IPBanList.Get( info.LastIP );
-            switch( info.BanStatus ) {
+            IPBanInfo ipBan = IPBanList.Get(info.LastIP);
+            switch (info.BanStatus)
+            {
                 case BanStatus.Banned:
-                    if( ipBan != null ) {
-                        player.Message( "  Account and IP are &CBANNED&S. See &H/BanInfo" );
-                    } else {
-                        player.Message( "  Account is &CBANNED&S. See &H/BanInfo" );
+                    if (ipBan != null)
+                    {
+                        player.Message("  Account and IP are &CBANNED&S. See &H/BanInfo");
+                    }
+                    else
+                    {
+                        player.Message("  Account is &CBANNED&S. See &H/BanInfo");
                     }
                     break;
                 case BanStatus.IPBanExempt:
-                    if( ipBan != null ) {
-                        player.Message( "  IP is &CBANNED&S, but account is exempt. See &H/BanInfo" );
-                    } else {
-                        player.Message( "  IP is not banned, and account is exempt. See &H/BanInfo" );
+                    if (ipBan != null)
+                    {
+                        player.Message("  IP is &CBANNED&S, but account is exempt. See &H/BanInfo");
+                    }
+                    else
+                    {
+                        player.Message("  IP is not banned, and account is exempt. See &H/BanInfo");
                     }
                     break;
                 case BanStatus.NotBanned:
-                    if( ipBan != null ) {
-                        player.Message( "  IP is &CBANNED&S. See &H/BanInfo" );
+                    if (ipBan != null)
+                    {
+                        player.Message("  IP is &CBANNED&S. See &H/BanInfo");
 
                     }
                     break;
             }
 
 
-            if( !info.LastIP.Equals( IPAddress.None ) ) {
+            if (!info.LastIP.Equals(IPAddress.None))
+            {
                 // Show alts
                 List<PlayerInfo> altNames = new List<PlayerInfo>();
                 int bannedAltCount = 0;
-                foreach( PlayerInfo playerFromSameIP in PlayerDB.FindPlayers( info.LastIP ) ) {
-                    if( playerFromSameIP == info ) continue;
-                    altNames.Add( playerFromSameIP );
-                    if( playerFromSameIP.IsBanned ) {
+                foreach (PlayerInfo playerFromSameIP in PlayerDB.FindPlayers(info.LastIP))
+                {
+                    if (playerFromSameIP == info) continue;
+                    altNames.Add(playerFromSameIP);
+                    if (playerFromSameIP.IsBanned)
+                    {
                         bannedAltCount++;
                     }
                 }
 
-                if( altNames.Count > 0 ) {
-                    altNames.Sort( new PlayerInfoComparer( player ) );
-                    if( altNames.Count > MaxAltsToPrint ) {
-                        if( bannedAltCount > 0 ) {
-                            player.MessagePrefixed( "&S  ",
-                                                    "&S  Over {0} accounts ({1} banned) on IP: {2}  &Setc",
-                                                    MaxAltsToPrint,
-                                                    bannedAltCount,
-                                                    altNames.Take( 15 ).ToArray().JoinToClassyString() );
-                        } else {
-                            player.MessagePrefixed( "&S  ",
-                                                    "&S  Over {0} accounts on IP: {1} &Setc",
-                                                    MaxAltsToPrint,
-                                                    altNames.Take( 15 ).ToArray().JoinToClassyString() );
+                if (altNames.Count > 0)
+                {
+                    altNames.Sort(new PlayerInfoComparer(player));
+                    if (altNames.Count > MaxAltsToPrint)
+                    {
+                        if (bannedAltCount > 0)
+                        {
+                            player.MessagePrefixed("&S  ",
+                                "&S  Over {0} accounts ({1} banned) on IP: {2}  &Setc",
+                                MessageType.Chat,
+                                MaxAltsToPrint,
+                                bannedAltCount,
+                                altNames.Take(15).ToArray().JoinToClassyString());
                         }
-                    } else {
-                        if( bannedAltCount > 0 ) {
-                            player.MessagePrefixed( "&S  ",
-                                                    "&S  {0} accounts ({1} banned) on IP: {2}",
-                                                    altNames.Count,
-                                                    bannedAltCount,
-                                                    altNames.ToArray().JoinToClassyString() );
-                        } else {
-                            player.MessagePrefixed( "&S  ",
-                                                    "&S  {0} accounts on IP: {1}",
-                                                    altNames.Count,
-                                                    altNames.ToArray().JoinToClassyString() );
+                        else
+                        {
+                            player.MessagePrefixed("&S  ",
+                                "&S  Over {0} accounts on IP: {1} &Setc",
+                                MessageType.Chat,
+                                MaxAltsToPrint,
+                                altNames.Take(15).ToArray().JoinToClassyString());
+                        }
+                    }
+                    else
+                    {
+                        if (bannedAltCount > 0)
+                        {
+                            player.MessagePrefixed("&S  ",
+                                "&S  {0} accounts ({1} banned) on IP: {2}",
+                                MessageType.Chat,
+                                altNames.Count,
+                                bannedAltCount,
+                                altNames.ToArray().JoinToClassyString());
+                        }
+                        else
+                        {
+                            player.MessagePrefixed("&S  ",
+                                "&S  {0} accounts on IP: {1}",
+                                MessageType.Chat,
+                                altNames.Count,
+                                altNames.ToArray().JoinToClassyString());
                         }
                     }
                 }
@@ -1196,95 +1323,121 @@ THE SOFTWARE.*/
 
 
             // Stats
-            if( info.BlocksDrawn > 500000000 ) {
-                player.Message( "  Built {0} and deleted {1} blocks, drew {2}M blocks, wrote {3} messages.",
+            if (info.BlocksDrawn > 500000000)
+            {
+                player.Message("  Built {0} and deleted {1} blocks, drew {2}M blocks, wrote {3} messages.",
                                 info.BlocksBuilt,
                                 info.BlocksDeleted,
                                 info.BlocksDrawn / 1000000,
-                                info.MessagesWritten );
-            } else if( info.BlocksDrawn > 500000 ) {
-                player.Message( "  Built {0} and deleted {1} blocks, drew {2}K blocks, wrote {3} messages.",
+                                info.MessagesWritten);
+            }
+            else if (info.BlocksDrawn > 500000)
+            {
+                player.Message("  Built {0} and deleted {1} blocks, drew {2}K blocks, wrote {3} messages.",
                                 info.BlocksBuilt,
                                 info.BlocksDeleted,
                                 info.BlocksDrawn / 1000,
-                                info.MessagesWritten );
-            } else if( info.BlocksDrawn > 0 ) {
-                player.Message( "  Built {0} and deleted {1} blocks, drew {2} blocks, wrote {3} messages.",
+                                info.MessagesWritten);
+            }
+            else if (info.BlocksDrawn > 0)
+            {
+                player.Message("  Built {0} and deleted {1} blocks, drew {2} blocks, wrote {3} messages.",
                                 info.BlocksBuilt,
                                 info.BlocksDeleted,
                                 info.BlocksDrawn,
-                                info.MessagesWritten );
-            } else {
-                player.Message( "  Built {0} and deleted {1} blocks, wrote {2} messages.",
+                                info.MessagesWritten);
+            }
+            else
+            {
+                player.Message("  Built {0} and deleted {1} blocks, wrote {2} messages.",
                                 info.BlocksBuilt,
                                 info.BlocksDeleted,
-                                info.MessagesWritten );
+                                info.MessagesWritten);
             }
 
 
             // More stats
-            if( info.TimesBannedOthers > 0 || info.TimesKickedOthers > 0 || info.PromoCount > 0) {
-                player.Message( "  Kicked {0}, Promoted {1} and banned {2} players.", info.TimesKickedOthers, info.PromoCount, info.TimesBannedOthers );
+            if (info.TimesBannedOthers > 0 || info.TimesKickedOthers > 0 || info.PromoCount > 0)
+            {
+                player.Message("  Kicked {0}, Promoted {1} and banned {2} players.", info.TimesKickedOthers, info.PromoCount, info.TimesBannedOthers);
             }
 
-            if( info.TimesKicked > 0 ) {
-                if( info.LastKickDate != DateTime.MinValue ) {
-                    player.Message( "  Got kicked {0} times. Last kick {1} ago by {2}",
+            if (info.TimesKicked > 0)
+            {
+                if (info.LastKickDate != DateTime.MinValue)
+                {
+                    player.Message("  Got kicked {0} times. Last kick {1} ago by {2}",
                                     info.TimesKicked,
                                     info.TimeSinceLastKick.ToMiniString(),
-                                    info.LastKickByClassy );
-                } else {
-                    player.Message( "  Got kicked {0} times.", info.TimesKicked );
+                                    info.LastKickByClassy);
                 }
-                if( info.LastKickReason != null ) {
-                    player.Message( "  Kick reason: {0}", info.LastKickReason );
+                else
+                {
+                    player.Message("  Got kicked {0} times.", info.TimesKicked);
+                }
+                if (info.LastKickReason != null)
+                {
+                    player.Message("  Kick reason: {0}", info.LastKickReason);
                 }
             }
 
 
             // Promotion/demotion
-            if( info.PreviousRank == null ) {
-                if( info.RankChangedBy == null ) {
-                    player.Message( "  Rank is {0}&S (default).",
-                                    info.Rank.ClassyName );
-                } else {
-                    player.Message( "  Promoted to {0}&S by {1}&S {2} ago.",
+            if (info.PreviousRank == null)
+            {
+                if (info.RankChangedBy == null)
+                {
+                    player.Message("  Rank is {0}&S (default).",
+                                    info.Rank.ClassyName);
+                }
+                else
+                {
+                    player.Message("  Promoted to {0}&S by {1}&S {2} ago.",
                                     info.Rank.ClassyName,
                                     info.RankChangedByClassy,
-                                    info.TimeSinceRankChange.ToMiniString() );
-                    if( info.RankChangeReason != null ) {
-                        player.Message( "  Promotion reason: {0}", info.RankChangeReason );
+                                    info.TimeSinceRankChange.ToMiniString());
+                    if (info.RankChangeReason != null)
+                    {
+                        player.Message("  Promotion reason: {0}", info.RankChangeReason);
                     }
                 }
-            } else if( info.PreviousRank <= info.Rank ) {
-                player.Message( "  Promoted from {0}&S to {1}&S by {2}&S {3} ago.",
+            }
+            else if (info.PreviousRank <= info.Rank)
+            {
+                player.Message("  Promoted from {0}&S to {1}&S by {2}&S {3} ago.",
                                 info.PreviousRank.ClassyName,
                                 info.Rank.ClassyName,
                                 info.RankChangedByClassy,
-                                info.TimeSinceRankChange.ToMiniString() );
-                if( info.RankChangeReason != null ) {
-                    player.Message( "  Promotion reason: {0}", info.RankChangeReason );
+                                info.TimeSinceRankChange.ToMiniString());
+                if (info.RankChangeReason != null)
+                {
+                    player.Message("  Promotion reason: {0}", info.RankChangeReason);
                 }
-            } else {
-                player.Message( "  Demoted from {0}&S to {1}&S by {2}&S {3} ago.",
+            }
+            else
+            {
+                player.Message("  Demoted from {0}&S to {1}&S by {2}&S {3} ago.",
                                 info.PreviousRank.ClassyName,
                                 info.Rank.ClassyName,
                                 info.RankChangedByClassy,
-                                info.TimeSinceRankChange.ToMiniString() );
-                if( info.RankChangeReason != null ) {
-                    player.Message( "  Demotion reason: {0}", info.RankChangeReason );
+                                info.TimeSinceRankChange.ToMiniString());
+                if (info.RankChangeReason != null)
+                {
+                    player.Message("  Demotion reason: {0}", info.RankChangeReason);
                 }
             }
 
-            if( !info.LastIP.Equals( IPAddress.None ) ) {
+            if (!info.LastIP.Equals(IPAddress.None))
+            {
                 // Time on the server
                 TimeSpan totalTime = info.TotalTime;
-                if( target != null ) {
-                    totalTime = totalTime.Add( info.TimeSinceLastLogin );
+                if (target != null)
+                {
+                    totalTime = totalTime.Add(info.TimeSinceLastLogin);
                 }
-                player.Message( "  Spent a total of {0:F1} hours ({1:F1} minutes) here.",
+                player.Message("  Spent a total of {0:F1} hours ({1:F1} minutes) here.",
                                 totalTime.TotalHours,
-                                totalTime.TotalMinutes );
+                                totalTime.TotalMinutes);
             }
         }
 
@@ -1293,7 +1446,8 @@ THE SOFTWARE.*/
 
         #region BanInfo
 
-        static readonly CommandDescriptor CdBanInfo = new CommandDescriptor {
+        static readonly CommandDescriptor CdBanInfo = new CommandDescriptor
+        {
             Name = "BanInfo",
             Category = CommandCategory.Info,
             IsConsoleSafe = true,
@@ -1304,111 +1458,145 @@ THE SOFTWARE.*/
             Handler = BanInfoHandler
         };
 
-        internal static void BanInfoHandler( Player player, Command cmd ) {
+        internal static void BanInfoHandler(Player player, Command cmd)
+        {
             string name = cmd.Next();
-            if( cmd.HasNext ) {
-                CdBanInfo.PrintUsage( player );
+            if (cmd.HasNext)
+            {
+                CdBanInfo.PrintUsage(player);
                 return;
             }
 
             IPAddress address;
             PlayerInfo info = null;
 
-            if( name == null ) {
+            if (name == null)
+            {
                 name = player.Name;
-            } else if( !player.Can( Permission.ViewOthersInfo ) ) {
-                player.MessageNoAccess( Permission.ViewOthersInfo );
+            }
+            else if (!player.Can(Permission.ViewOthersInfo))
+            {
+                player.MessageNoAccess(Permission.ViewOthersInfo);
                 return;
             }
 
-            if( Server.IsIP( name ) && IPAddress.TryParse( name, out address ) ) {
-                IPBanInfo banInfo = IPBanList.Get( address );
-                if( banInfo != null ) {
-                    player.Message( "{0} was banned by {1}&S on {2:dd MMM yyyy} ({3} ago)",
+            if (Server.IsIP(name) && IPAddress.TryParse(name, out address))
+            {
+                IPBanInfo banInfo = IPBanList.Get(address);
+                if (banInfo != null)
+                {
+                    player.Message("{0} was banned by {1}&S on {2:dd MMM yyyy} ({3} ago)",
                                     banInfo.Address,
                                     banInfo.BannedByClassy,
                                     banInfo.BanDate,
-                                    banInfo.TimeSinceLastAttempt );
-                    if( !String.IsNullOrEmpty( banInfo.PlayerName ) ) {
-                        player.Message( "  Banned by association with {0}",
-                                        banInfo.PlayerNameClassy );
+                                    banInfo.TimeSinceLastAttempt);
+                    if (!String.IsNullOrEmpty(banInfo.PlayerName))
+                    {
+                        player.Message("  Banned by association with {0}",
+                                        banInfo.PlayerNameClassy);
                     }
-                    if( banInfo.Attempts > 0 ) {
-                        player.Message( "  There have been {0} attempts to log in, most recently {1} ago by {2}",
+                    if (banInfo.Attempts > 0)
+                    {
+                        player.Message("  There have been {0} attempts to log in, most recently {1} ago by {2}",
                                         banInfo.Attempts,
                                         banInfo.TimeSinceLastAttempt.ToMiniString(),
-                                        banInfo.LastAttemptNameClassy );
+                                        banInfo.LastAttemptNameClassy);
                     }
-                    if( banInfo.BanReason != null ) {
-                        player.Message( "  Ban reason: {0}", banInfo.BanReason );
+                    if (banInfo.BanReason != null)
+                    {
+                        player.Message("  Ban reason: {0}", banInfo.BanReason);
                     }
-                } else {
-                    player.Message( "{0} is currently NOT banned.", address );
+                }
+                else
+                {
+                    player.Message("{0} is currently NOT banned.", address);
                 }
 
-            } else {
-                info = PlayerDB.FindPlayerInfoOrPrintMatches( player, name );
-                if( info == null ) return;
+            }
+            else
+            {
+                info = PlayerDB.FindPlayerInfoOrPrintMatches(player, name);
+                if (info == null) return;
 
                 address = info.LastIP;
 
-                IPBanInfo ipBan = IPBanList.Get( info.LastIP );
-                switch( info.BanStatus ) {
+                IPBanInfo ipBan = IPBanList.Get(info.LastIP);
+                switch (info.BanStatus)
+                {
                     case BanStatus.Banned:
-                        if( ipBan != null ) {
-                            player.Message( "Player {0}&S and their IP are &CBANNED", info.ClassyName );
-                        } else {
-                            player.Message( "Player {0}&S is &CBANNED&S (but their IP is not).", info.ClassyName );
+                        if (ipBan != null)
+                        {
+                            player.Message("Player {0}&S and their IP are &CBANNED", info.ClassyName);
+                        }
+                        else
+                        {
+                            player.Message("Player {0}&S is &CBANNED&S (but their IP is not).", info.ClassyName);
                         }
                         break;
                     case BanStatus.IPBanExempt:
-                        if( ipBan != null ) {
-                            player.Message( "Player {0}&S is exempt from an existing IP ban.", info.ClassyName );
-                        } else {
-                            player.Message( "Player {0}&S is exempt from IP bans.", info.ClassyName );
+                        if (ipBan != null)
+                        {
+                            player.Message("Player {0}&S is exempt from an existing IP ban.", info.ClassyName);
+                        }
+                        else
+                        {
+                            player.Message("Player {0}&S is exempt from IP bans.", info.ClassyName);
                         }
                         break;
                     case BanStatus.NotBanned:
-                        if( ipBan != null ) {
-                            player.Message( "Player {0}&s is not banned, but their IP is.", info.ClassyName );
-                        } else {
-                            player.Message( "Player {0}&s is not banned.", info.ClassyName );
+                        if (ipBan != null)
+                        {
+                            player.Message("Player {0}&s is not banned, but their IP is.", info.ClassyName);
+                        }
+                        else
+                        {
+                            player.Message("Player {0}&s is not banned.", info.ClassyName);
                         }
                         break;
                 }
 
-                if( info.BanDate != DateTime.MinValue ) {
-                    player.Message( "  Last ban by {0}&S on {1:dd MMM yyyy} ({2} ago).",
+                if (info.BanDate != DateTime.MinValue)
+                {
+                    player.Message("  Last ban by {0}&S on {1:dd MMM yyyy} ({2} ago).",
                                     info.BannedByClassy,
                                     info.BanDate,
-                                    info.TimeSinceBan.ToMiniString() );
-                    if( info.BanReason != null ) {
-                        player.Message( "  Last ban reason: {0}", info.BanReason );
+                                    info.TimeSinceBan.ToMiniString());
+                    if (info.BanReason != null)
+                    {
+                        player.Message("  Last ban reason: {0}", info.BanReason);
                     }
-                } else {
-                    player.Message( "No past bans on record." );
+                }
+                else
+                {
+                    player.Message("No past bans on record.");
                 }
 
-                if( info.UnbanDate != DateTime.MinValue && !info.IsBanned ) {
-                    player.Message( "  Unbanned by {0}&S on {1:dd MMM yyyy} ({2} ago).",
+                if (info.UnbanDate != DateTime.MinValue && !info.IsBanned)
+                {
+                    player.Message("  Unbanned by {0}&S on {1:dd MMM yyyy} ({2} ago).",
                                     info.UnbannedByClassy,
                                     info.UnbanDate,
-                                    info.TimeSinceUnban.ToMiniString() );
-                    if( info.UnbanReason != null ) {
-                        player.Message( "  Last unban reason: {0}", info.UnbanReason );
+                                    info.TimeSinceUnban.ToMiniString());
+                    if (info.UnbanReason != null)
+                    {
+                        player.Message("  Last unban reason: {0}", info.UnbanReason);
                     }
                 }
 
-                if( info.BanDate != DateTime.MinValue ) {
+                if (info.BanDate != DateTime.MinValue)
+                {
                     TimeSpan banDuration;
-                    if( info.IsBanned ) {
+                    if (info.IsBanned)
+                    {
                         banDuration = info.TimeSinceBan;
-                        player.Message( "  Ban duration: {0} so far",
-                                        banDuration.ToMiniString() );
-                    } else {
-                        banDuration = info.UnbanDate.Subtract( info.BanDate );
-                        player.Message( "  Previous ban's duration: {0}",
-                                        banDuration.ToMiniString() );
+                        player.Message("  Ban duration: {0} so far",
+                                        banDuration.ToMiniString());
+                    }
+                    else
+                    {
+                        banDuration = info.UnbanDate.Subtract(info.BanDate);
+                        player.Message("  Previous ban's duration: {0}",
+                                        banDuration.ToMiniString());
                     }
                 }
             }
@@ -1416,41 +1604,57 @@ THE SOFTWARE.*/
             // Show alts
             List<PlayerInfo> altNames = new List<PlayerInfo>();
             int bannedAltCount = 0;
-            foreach( PlayerInfo playerFromSameIP in PlayerDB.FindPlayers( address ) ) {
-                if( playerFromSameIP == info ) continue;
-                altNames.Add( playerFromSameIP );
-                if( playerFromSameIP.IsBanned ) {
+            foreach (PlayerInfo playerFromSameIP in PlayerDB.FindPlayers(address))
+            {
+                if (playerFromSameIP == info) continue;
+                altNames.Add(playerFromSameIP);
+                if (playerFromSameIP.IsBanned)
+                {
                     bannedAltCount++;
                 }
             }
 
-            if( altNames.Count > 0 ) {
-                altNames.Sort( new PlayerInfoComparer( player ) );
-                if( altNames.Count > MaxAltsToPrint ) {
-                    if( bannedAltCount > 0 ) {
-                        player.MessagePrefixed( "&S  ",
-                                                "&S  Over {0} accounts ({1} banned) on IP: {2} &Setc",
-                                                MaxAltsToPrint,
-                                                bannedAltCount,
-                                                altNames.Take( 15 ).ToArray().JoinToClassyString() );
-                    } else {
-                        player.MessagePrefixed( "&S  ",
-                                                "&S  Over {0} accounts on IP: {1} &Setc",
-                                                MaxAltsToPrint,
-                                                altNames.Take( 15 ).ToArray().JoinToClassyString() );
+            if (altNames.Count > 0)
+            {
+                altNames.Sort(new PlayerInfoComparer(player));
+                if (altNames.Count > MaxAltsToPrint)
+                {
+                    if (bannedAltCount > 0)
+                    {
+                        player.MessagePrefixed("&S  ",
+                            "&S  Over {0} accounts ({1} banned) on IP: {2} &Setc",
+                            MessageType.Chat,
+                            MaxAltsToPrint,
+                            bannedAltCount,
+                            altNames.Take(15).ToArray().JoinToClassyString());
                     }
-                } else {
-                    if( bannedAltCount > 0 ) {
-                        player.MessagePrefixed( "&S  ",
-                                                "&S  {0} accounts ({1} banned) on IP: {2}",
-                                                altNames.Count,
-                                                bannedAltCount,
-                                                altNames.ToArray().JoinToClassyString() );
-                    } else {
-                        player.MessagePrefixed( "&S  ",
-                                                "&S  {0} accounts on IP: {1}",
-                                                altNames.Count,
-                                                altNames.ToArray().JoinToClassyString() );
+                    else
+                    {
+                        player.MessagePrefixed("&S  ",
+                            "&S  Over {0} accounts on IP: {1} &Setc",
+                            MessageType.Chat,
+                            MaxAltsToPrint,
+                            altNames.Take(15).ToArray().JoinToClassyString());
+                    }
+                }
+                else
+                {
+                    if (bannedAltCount > 0)
+                    {
+                        player.MessagePrefixed("&S  ",
+                            "&S  {0} accounts ({1} banned) on IP: {2}",
+                            MessageType.Chat,
+                            altNames.Count,
+                            bannedAltCount,
+                            altNames.ToArray().JoinToClassyString());
+                    }
+                    else
+                    {
+                        player.MessagePrefixed("&S  ",
+                            "&S  {0} accounts on IP: {1}",
+                            MessageType.Chat,
+                            altNames.Count,
+                            altNames.ToArray().JoinToClassyString());
                     }
                 }
             }
@@ -1461,7 +1665,8 @@ THE SOFTWARE.*/
 
         #region RankInfo
 
-        static readonly CommandDescriptor CdRankInfo = new CommandDescriptor {
+        static readonly CommandDescriptor CdRankInfo = new CommandDescriptor
+        {
             Name = "RankInfo",
             Aliases = new[] { "rinfo" },
             Category = CommandCategory.Info,
@@ -1473,75 +1678,92 @@ THE SOFTWARE.*/
         };
 
         // Shows general information about a particular rank.
-        static void RankInfoHandler( Player player, Command cmd ) {
+        static void RankInfoHandler(Player player, Command cmd)
+        {
             Rank rank;
 
             string rankName = cmd.Next();
-            if( cmd.HasNext ) {
-                CdRankInfo.PrintUsage( player );
+            if (cmd.HasNext)
+            {
+                CdRankInfo.PrintUsage(player);
                 return;
             }
 
-            if( rankName == null ) {
+            if (rankName == null)
+            {
                 rank = player.Info.Rank;
-            } else {
-                rank = RankManager.FindRank( rankName );
-                if( rank == null ) {
-                    player.Message( "No such rank: \"{0}\". See &H/Ranks", rankName );
+            }
+            else
+            {
+                rank = RankManager.FindRank(rankName);
+                if (rank == null)
+                {
+                    player.Message("No such rank: \"{0}\". See &H/Ranks", rankName);
                     return;
                 }
             }
 
             List<Permission> permissions = new List<Permission>();
-            for( int i = 0; i < rank.Permissions.Length; i++ ) {
-                if( rank.Permissions[i] ) {
-                    permissions.Add( (Permission)i );
+            for (int i = 0; i < rank.Permissions.Length; i++)
+            {
+                if (rank.Permissions[i])
+                {
+                    permissions.Add((Permission)i);
                 }
             }
 
             Permission[] sortedPermissionNames =
-                permissions.OrderBy( s => s.ToString(), StringComparer.OrdinalIgnoreCase ).ToArray();
+                permissions.OrderBy(s => s.ToString(), StringComparer.OrdinalIgnoreCase).ToArray();
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendFormat( "Players of rank {0}&S can: ", rank.ClassyName );
+                sb.AppendFormat("Players of rank {0}&S can: ", rank.ClassyName);
                 bool first = true;
-                for( int i = 0; i < sortedPermissionNames.Length; i++ ) {
+                for (int i = 0; i < sortedPermissionNames.Length; i++)
+                {
                     Permission p = sortedPermissionNames[i];
-                    if( !first ) sb.Append( ',' ).Append( ' ' );
+                    if (!first) sb.Append(',').Append(' ');
                     Rank permissionLimit = rank.PermissionLimits[(int)p];
-                    sb.Append( p );
-                    if( permissionLimit != null ) {
-                        sb.AppendFormat( "({0}&S)", permissionLimit.ClassyName );
+                    sb.Append(p);
+                    if (permissionLimit != null)
+                    {
+                        sb.AppendFormat("({0}&S)", permissionLimit.ClassyName);
                     }
                     first = false;
                 }
-                player.Message( sb.ToString() );
+                player.Message(sb.ToString());
             }
 
-            if( rank.Can( Permission.Draw ) ) {
+            if (rank.Can(Permission.Draw))
+            {
                 StringBuilder sb = new StringBuilder();
-                if( rank.DrawLimit > 0 ) {
-                    sb.AppendFormat( "Draw limit: {0} blocks.", rank.DrawLimit );
-                } else {
-                    sb.AppendFormat( "Draw limit: None (unlimited)." );
+                if (rank.DrawLimit > 0)
+                {
+                    sb.AppendFormat("Draw limit: {0} blocks.", rank.DrawLimit);
                 }
-                if( rank.Can( Permission.CopyAndPaste ) ) {
-                    sb.AppendFormat( " Copy/paste slots: {0}", rank.CopySlots );
+                else
+                {
+                    sb.AppendFormat("Draw limit: None (unlimited).");
                 }
-                player.Message( sb.ToString() );
+                if (rank.Can(Permission.CopyAndPaste))
+                {
+                    sb.AppendFormat(" Copy/paste slots: {0}", rank.CopySlots);
+                }
+                player.Message(sb.ToString());
             }
 
-            if( rank.IdleKickTimer > 0 ) {
-                player.Message( "Idle kick after {0}", TimeSpan.FromMinutes( rank.IdleKickTimer ).ToMiniString() );
+            if (rank.IdleKickTimer > 0)
+            {
+                player.Message("Idle kick after {0}", TimeSpan.FromMinutes(rank.IdleKickTimer).ToMiniString());
             }
         }
 
         #endregion
-       
+
 
         #region ServerInfo
 
-        static readonly CommandDescriptor CdServerInfo = new CommandDescriptor {
+        static readonly CommandDescriptor CdServerInfo = new CommandDescriptor
+        {
             Name = "ServerInfo",
             Aliases = new[] { "ServerReport", "Version", "SInfo" },
             Category = CommandCategory.Info,
@@ -1551,58 +1773,64 @@ THE SOFTWARE.*/
             Handler = ServerInfoHandler
         };
 
-        internal static void ServerInfoHandler( Player player, Command cmd ) {
-            if( cmd.HasNext ) {
-                CdServerInfo.PrintUsage( player );
+        internal static void ServerInfoHandler(Player player, Command cmd)
+        {
+            if (cmd.HasNext)
+            {
+                CdServerInfo.PrintUsage(player);
                 return;
             }
             Process.GetCurrentProcess().Refresh();
 
             player.Message("&8{0}", ConfigKey.ServerName.GetString());
-            player.Message( "Servers status: Up for {0:0.0} hours, using {1:0} MB",
-                            DateTime.UtcNow.Subtract( Server.StartTime ).TotalHours,
-                            (Process.GetCurrentProcess().PrivateMemorySize64 / (1024 * 1024)) );
+            player.Message("Servers status: Up for {0:0.0} hours, using {1:0} MB",
+                            DateTime.UtcNow.Subtract(Server.StartTime).TotalHours,
+                            (Process.GetCurrentProcess().PrivateMemorySize64 / (1024 * 1024)));
 
-            if( Server.IsMonitoringCPUUsage ) {
-                player.Message( "  Averaging {0:0.0}% CPU now, {1:0.0}% overall",
+            if (Server.IsMonitoringCPUUsage)
+            {
+                player.Message("  Averaging {0:0.0}% CPU now, {1:0.0}% overall",
                                 Server.CPUUsageLastMinute * 100,
-                                Server.CPUUsageTotal * 100 );
+                                Server.CPUUsageTotal * 100);
             }
 
-            if( MonoCompat.IsMono ) {
-                player.Message( " Running &5Legend&WCraft&S v{0}, under Mono {1}",
+            if (MonoCompat.IsMono)
+            {
+                player.Message(" Running &5Legend&WCraft&S v{0}, under Mono {1}",
                                 Updater.LatestStable.ToString(),
-                                MonoCompat.MonoVersionString );
-            } else {
+                                MonoCompat.MonoVersionString);
+            }
+            else
+            {
                 player.Message(" Running &5Legend&WCraft&S v{0}, under .NET {1}",
                                 Updater.LatestStable,
                                 Environment.Version);
             }
 
-            double bytesReceivedRate = Server.Players.Aggregate( 0d, ( i, p ) => i + p.BytesReceivedRate );
-            double bytesSentRate = Server.Players.Aggregate( 0d, ( i, p ) => i + p.BytesSentRate );
-            player.Message( "  Bandwidth: {0:0.0} KB/s up, {1:0.0} KB/s down",
-                            bytesSentRate / 1000, bytesReceivedRate / 1000 );
+            double bytesReceivedRate = Server.Players.Aggregate(0d, (i, p) => i + p.BytesReceivedRate);
+            double bytesSentRate = Server.Players.Aggregate(0d, (i, p) => i + p.BytesSentRate);
+            player.Message("  Bandwidth: {0:0.0} KB/s up, {1:0.0} KB/s down",
+                            bytesSentRate / 1000, bytesReceivedRate / 1000);
 
-            player.Message( "  Tracking {0} players ({1} online, {2} banned ({3:0.0}%), {4} IP-banned).",
+            player.Message("  Tracking {0} players ({1} online, {2} banned ({3:0.0}%), {4} IP-banned).",
                             PlayerDB.PlayerInfoList.Length,
-                            Server.CountVisiblePlayers( player ),
+                            Server.CountVisiblePlayers(player),
                             PlayerDB.BannedCount,
                             PlayerDB.BannedPercentage,
-                            IPBanList.Count );
+                            IPBanList.Count);
 
-            player.Message( "  Players built {0}, deleted {1}, drew {2} blocks, wrote {3} messages, issued {4} kicks, spent {5:0} hours total.",
-                            PlayerDB.PlayerInfoList.Sum( p => p.BlocksBuilt ),
-                            PlayerDB.PlayerInfoList.Sum( p => p.BlocksDeleted ),
-                            PlayerDB.PlayerInfoList.Sum( p => p.BlocksDrawn ),
-                            PlayerDB.PlayerInfoList.Sum( p => p.MessagesWritten ),
-                            PlayerDB.PlayerInfoList.Sum( p => p.TimesKickedOthers ),
-                            PlayerDB.PlayerInfoList.Sum( p => p.TotalTime.TotalHours ) );
+            player.Message("  Players built {0}, deleted {1}, drew {2} blocks, wrote {3} messages, issued {4} kicks, spent {5:0} hours total.",
+                            PlayerDB.PlayerInfoList.Sum(p => p.BlocksBuilt),
+                            PlayerDB.PlayerInfoList.Sum(p => p.BlocksDeleted),
+                            PlayerDB.PlayerInfoList.Sum(p => p.BlocksDrawn),
+                            PlayerDB.PlayerInfoList.Sum(p => p.MessagesWritten),
+                            PlayerDB.PlayerInfoList.Sum(p => p.TimesKickedOthers),
+                            PlayerDB.PlayerInfoList.Sum(p => p.TotalTime.TotalHours));
 
-            player.Message( "  There are {0} worlds available ({1} loaded, {2} hidden).",
+            player.Message("  There are {0} worlds available ({1} loaded, {2} hidden).",
                             WorldManager.Worlds.Length,
-                            WorldManager.CountLoadedWorlds( player ),
-                            WorldManager.Worlds.Count( w => w.IsHidden ) );
+                            WorldManager.CountLoadedWorlds(player),
+                            WorldManager.Worlds.Count(w => w.IsHidden));
             if (ConfigKey.IRCBotEnabled.Enabled())
             {
                 player.Message("  Website: &h{0}&s - IRC: &i{1}&s.", ConfigKey.WebsiteURL.GetString(), ConfigKey.IRCBotChannels.GetString());
@@ -1618,7 +1846,8 @@ THE SOFTWARE.*/
 
         #region Ranks
 
-        static readonly CommandDescriptor CdRanks = new CommandDescriptor {
+        static readonly CommandDescriptor CdRanks = new CommandDescriptor
+        {
             Name = "Ranks",
             Category = CommandCategory.Info,
             IsConsoleSafe = true,
@@ -1627,13 +1856,16 @@ THE SOFTWARE.*/
             Handler = RanksHandler
         };
 
-        internal static void RanksHandler( Player player, Command cmd ) {
-            if( cmd.HasNext ) {
-                CdRanks.PrintUsage( player );
+        internal static void RanksHandler(Player player, Command cmd)
+        {
+            if (cmd.HasNext)
+            {
+                CdRanks.PrintUsage(player);
                 return;
             }
-            player.Message( "Below is a list of ranks. For detail see &H{0}", CdRankInfo.Usage );
-            foreach( Rank rank in RankManager.Ranks ) {
+            player.Message("Below is a list of ranks. For detail see &H{0}", CdRankInfo.Usage);
+            foreach (Rank rank in RankManager.Ranks)
+            {
                 if (!rank.IsHidden)
                 {
                     player.Message("&S    {0}  ({1} players)",
@@ -1650,7 +1882,8 @@ THE SOFTWARE.*/
 
         const string DefaultRules = "Rules: Use common sense!";
 
-        static readonly CommandDescriptor CdRules = new CommandDescriptor {
+        static readonly CommandDescriptor CdRules = new CommandDescriptor
+        {
             Name = "Rules",
             Category = CommandCategory.Info,
             IsConsoleSafe = true,
@@ -1659,89 +1892,112 @@ THE SOFTWARE.*/
             Handler = RulesHandler
         };
 
-        internal static void RulesHandler( Player player, Command cmd ) {
+        internal static void RulesHandler(Player player, Command cmd)
+        {
             string sectionName = cmd.Next();
 
             // if no section name is given
-            if( sectionName == null ) {
-                FileInfo ruleFile = new FileInfo( Paths.RulesFileName );
+            if (sectionName == null)
+            {
+                FileInfo ruleFile = new FileInfo(Paths.RulesFileName);
 
-                if( ruleFile.Exists ) {
-                    PrintRuleFile( player, ruleFile );
-                } else {
-                    player.Message( DefaultRules );
+                if (ruleFile.Exists)
+                {
+                    PrintRuleFile(player, ruleFile);
+                }
+                else
+                {
+                    player.Message(DefaultRules);
                 }
 
                 // print a list of available sections
                 string[] sections = GetRuleSectionList();
-                if( sections != null ) {
-                    player.Message( "Rule sections: {0}. Type &H/Rules SectionName&S to read.", sections.JoinToString() );
+                if (sections != null)
+                {
+                    player.Message("Rule sections: {0}. Type &H/Rules SectionName&S to read.", sections.JoinToString());
                 }
                 return;
             }
 
             // if a section name is given, but no section files exist
-            if( !Directory.Exists( Paths.RulesPath ) ) {
-                player.Message( "There are no rule sections defined." );
+            if (!Directory.Exists(Paths.RulesPath))
+            {
+                player.Message("There are no rule sections defined.");
                 return;
             }
 
             string ruleFileName = null;
-            string[] sectionFiles = Directory.GetFiles( Paths.RulesPath,
+            string[] sectionFiles = Directory.GetFiles(Paths.RulesPath,
                                                         "*.txt",
-                                                        SearchOption.TopDirectoryOnly );
+                                                        SearchOption.TopDirectoryOnly);
 
-            for( int i = 0; i < sectionFiles.Length; i++ ) {
-                string sectionFullName = Path.GetFileNameWithoutExtension( sectionFiles[i] );
-                if( sectionFullName == null ) continue;
-                if( sectionFullName.StartsWith( sectionName, StringComparison.OrdinalIgnoreCase ) ) {
-                    if( sectionFullName.Equals( sectionName, StringComparison.OrdinalIgnoreCase ) ) {
+            for (int i = 0; i < sectionFiles.Length; i++)
+            {
+                string sectionFullName = Path.GetFileNameWithoutExtension(sectionFiles[i]);
+                if (sectionFullName == null) continue;
+                if (sectionFullName.StartsWith(sectionName, StringComparison.OrdinalIgnoreCase))
+                {
+                    if (sectionFullName.Equals(sectionName, StringComparison.OrdinalIgnoreCase))
+                    {
                         // if there is an exact match, break out of the loop early
                         ruleFileName = sectionFiles[i];
                         break;
 
-                    } else if( ruleFileName == null ) {
+                    }
+                    else if (ruleFileName == null)
+                    {
                         // if there is a partial match, keep going to check for multiple matches
                         ruleFileName = sectionFiles[i];
 
-                    } else {
-                        var matches = sectionFiles.Select( f => Path.GetFileNameWithoutExtension( f ) )
-                                                  .Where( sn => sn != null && sn.StartsWith( sectionName, StringComparison.OrdinalIgnoreCase ) );
+                    }
+                    else
+                    {
+                        var matches = sectionFiles.Select(f => Path.GetFileNameWithoutExtension(f))
+                                                  .Where(sn => sn != null && sn.StartsWith(sectionName, StringComparison.OrdinalIgnoreCase));
                         // if there are multiple matches, print a list
-                        player.Message( "Multiple rule sections matched \"{0}\": {1}",
-                                        sectionName, matches.JoinToString() );
+                        player.Message("Multiple rule sections matched \"{0}\": {1}",
+                                        sectionName, matches.JoinToString());
                         return;
                     }
                 }
             }
 
-            if( ruleFileName != null ) {
-                string sectionFullName = Path.GetFileNameWithoutExtension( ruleFileName );
+            if (ruleFileName != null)
+            {
+                string sectionFullName = Path.GetFileNameWithoutExtension(ruleFileName);
                 // ReSharper disable AssignNullToNotNullAttribute
-                player.Message( "Rule section \"{0}\":", sectionFullName );
+                player.Message("Rule section \"{0}\":", sectionFullName);
                 // ReSharper restore AssignNullToNotNullAttribute
-                PrintRuleFile( player, new FileInfo( ruleFileName ) );
+                PrintRuleFile(player, new FileInfo(ruleFileName));
 
-            } else {
+            }
+            else
+            {
                 var sectionList = GetRuleSectionList();
-                if( sectionList == null ) {
-                    player.Message( "There are no rule sections defined." );
-                } else {
-                    player.Message( "No rule section defined for \"{0}\". Available sections: {1}",
-                                    sectionName, sectionList.JoinToString() );
+                if (sectionList == null)
+                {
+                    player.Message("There are no rule sections defined.");
+                }
+                else
+                {
+                    player.Message("No rule section defined for \"{0}\". Available sections: {1}",
+                                    sectionName, sectionList.JoinToString());
                 }
             }
         }
 
 
         [CanBeNull]
-        static string[] GetRuleSectionList() {
-            if( Directory.Exists( Paths.RulesPath ) ) {
-                string[] sections = Directory.GetFiles( Paths.RulesPath, "*.txt", SearchOption.TopDirectoryOnly )
-                                             .Select( name => Path.GetFileNameWithoutExtension( name ) )
-                                             .Where( name => !String.IsNullOrEmpty( name ) )
+        static string[] GetRuleSectionList()
+        {
+            if (Directory.Exists(Paths.RulesPath))
+            {
+                string[] sections = Directory.GetFiles(Paths.RulesPath, "*.txt", SearchOption.TopDirectoryOnly)
+                                             .Select(name => Path.GetFileNameWithoutExtension(name))
+                                             .Where(name => !String.IsNullOrEmpty(name))
                                              .ToArray();
-                if( sections.Length != 0 ) {
+                if (sections.Length != 0)
+                {
                     return sections;
                 }
             }
@@ -1749,19 +2005,25 @@ THE SOFTWARE.*/
         }
 
 
-        static void PrintRuleFile( Player player, FileSystemInfo ruleFile ) {
-            try {
-                string[] ruleLines = File.ReadAllLines( ruleFile.FullName );
-                foreach( string ruleLine in ruleLines ) {
-                    if( ruleLine.Trim().Length > 0 ) {
-                        player.Message( "&R{0}", Server.ReplaceTextKeywords( player, ruleLine ) );
+        static void PrintRuleFile(Player player, FileSystemInfo ruleFile)
+        {
+            try
+            {
+                string[] ruleLines = File.ReadAllLines(ruleFile.FullName);
+                foreach (string ruleLine in ruleLines)
+                {
+                    if (ruleLine.Trim().Length > 0)
+                    {
+                        player.Message("&R{0}", Server.ReplaceTextKeywords(player, ruleLine));
                     }
                 }
-            } catch( Exception ex ) {
-                Logger.Log( LogType.Error,
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogType.Error,
                             "InfoCommands.PrintRuleFile: An error occured while trying to read {0}: {1}",
-                            ruleFile.FullName, ex );
-                player.Message( "&WError reading the rule file." );
+                            ruleFile.FullName, ex);
+                player.Message("&WError reading the rule file.");
             }
         }
 
@@ -1770,7 +2032,8 @@ THE SOFTWARE.*/
 
         #region Measure
 
-        static readonly CommandDescriptor CdMeasure = new CommandDescriptor {
+        static readonly CommandDescriptor CdMeasure = new CommandDescriptor
+        {
             Name = "Measure",
             Category = CommandCategory.Info | CommandCategory.Building,
             RepeatableSelection = true,
@@ -1778,51 +2041,58 @@ THE SOFTWARE.*/
             Handler = MeasureHandler
         };
 
-        internal static void MeasureHandler( Player player, Command cmd ) {
-            if( cmd.HasNext ) {
-                CdMeasure.PrintUsage( player );
+        internal static void MeasureHandler(Player player, Command cmd)
+        {
+            if (cmd.HasNext)
+            {
+                CdMeasure.PrintUsage(player);
                 return;
             }
-            player.SelectionStart( 2, MeasureCallback, null );
-            player.Message( "Measure: Select the area to be measured" );
+            player.SelectionStart(2, MeasureCallback, null);
+            player.Message("Measure: Select the area to be measured");
         }
 
         const int TopBlocksToList = 5;
 
-        internal static void MeasureCallback( Player player, Vector3I[] marks, object tag ) {
-            BoundingBox box = new BoundingBox( marks[0], marks[1] );
-            player.Message( "Measure: {0} x {1} wide, {2} tall, {3} blocks.",
+        internal static void MeasureCallback(Player player, Vector3I[] marks, object tag)
+        {
+            BoundingBox box = new BoundingBox(marks[0], marks[1]);
+            player.Message("Measure: {0} x {1} wide, {2} tall, {3} blocks.",
                             box.Width,
                             box.Length,
                             box.Height,
-                            box.Volume );
-            player.Message( "  Located between {0} and {1}",
+                            box.Volume);
+            player.Message("  Located between {0} and {1}",
                             box.MinVertex,
-                            box.MaxVertex );
+                            box.MaxVertex);
 
             Map map = player.WorldMap;
             Dictionary<Block, int> blockCounts = new Dictionary<Block, int>();
-            foreach( Block block in Enum.GetValues( typeof( Block ) ) ) {
+            foreach (Block block in Enum.GetValues(typeof(Block)))
+            {
                 blockCounts[block] = 0;
             }
-            for( int x = box.XMin; x <= box.XMax; x++ ) {
-                for( int y = box.YMin; y <= box.YMax; y++ ) {
-                    for( int z = box.ZMin; z <= box.ZMax; z++ ) {
-                        Block block = map.GetBlock( x, y, z );
+            for (int x = box.XMin; x <= box.XMax; x++)
+            {
+                for (int y = box.YMin; y <= box.YMax; y++)
+                {
+                    for (int z = box.ZMin; z <= box.ZMax; z++)
+                    {
+                        Block block = map.GetBlock(x, y, z);
                         blockCounts[block]++;
                     }
                 }
             }
-            var topBlocks = blockCounts.Where( p => p.Value > 0 )
-                                       .OrderByDescending( p => p.Value )
-                                       .Take( TopBlocksToList )
+            var topBlocks = blockCounts.Where(p => p.Value > 0)
+                                       .OrderByDescending(p => p.Value)
+                                       .Take(TopBlocksToList)
                                        .ToArray();
-            var blockString = topBlocks.JoinToString( p => String.Format( "{0}: {1} ({2}%)",
-                                                                          p.Key,
-                                                                          p.Value,
-                                                                          (p.Value * 100) / box.Volume ) );
-            player.Message( "  Top {0} block types: {1}",
-                            topBlocks.Length, blockString );
+            var blockString = topBlocks.JoinToString(p => String.Format("{0}: {1} ({2}%)",
+                                                                         p.Key,
+                                                                         p.Value,
+                                                                         (p.Value * 100) / box.Volume));
+            player.Message("  Top {0} block types: {1}",
+                            topBlocks.Length, blockString);
         }
 
         #endregion
@@ -1830,7 +2100,8 @@ THE SOFTWARE.*/
 
         #region Players
 
-        static readonly CommandDescriptor CdPlayers = new CommandDescriptor {
+        static readonly CommandDescriptor CdPlayers = new CommandDescriptor
+        {
             Name = "Players",
             Aliases = new[] { "who" },
             Category = CommandCategory.Info,
@@ -1841,73 +2112,91 @@ THE SOFTWARE.*/
             Handler = PlayersHandler
         };
 
-        internal static void PlayersHandler( Player player, Command cmd ) {
+        internal static void PlayersHandler(Player player, Command cmd)
+        {
             string param = cmd.Next();
             Player[] players;
             string worldName = null;
             string qualifier;
             int offset = 0;
 
-            if( param == null || Int32.TryParse( param, out offset ) ) {
+            if (param == null || Int32.TryParse(param, out offset))
+            {
                 // No world name given; Start with a list of all players.
                 players = Server.Players;
                 qualifier = "online";
-                if( cmd.HasNext ) {
-                    CdPlayers.PrintUsage( player );
+                if (cmd.HasNext)
+                {
+                    CdPlayers.PrintUsage(player);
                     return;
                 }
 
-            } else {
+            }
+            else
+            {
                 // Try to find the world
-                World world = WorldManager.FindWorldOrPrintMatches( player, param );
-                if( world == null ) return;
+                World world = WorldManager.FindWorldOrPrintMatches(player, param);
+                if (world == null) return;
 
                 worldName = param;
                 // If found, grab its player list
                 players = world.Players;
-                qualifier = String.Format( "in world {0}&S", world.ClassyName );
+                qualifier = String.Format("in world {0}&S", world.ClassyName);
 
-                if( cmd.HasNext && !cmd.NextInt( out offset ) ) {
-                    CdPlayers.PrintUsage( player );
+                if (cmd.HasNext && !cmd.NextInt(out offset))
+                {
+                    CdPlayers.PrintUsage(player);
                     return;
                 }
             }
 
-            if( players.Length > 0 ) {
+            if (players.Length > 0)
+            {
                 // Filter out hidden players, and sort
-                Player[] visiblePlayers = players.Where( player.CanSee )
-                                                 .OrderBy( p => p, PlayerListSorter.Instance )
+                Player[] visiblePlayers = players.Where(player.CanSee)
+                                                 .OrderBy(p => p, PlayerListSorter.Instance)
                                                  .ToArray();
 
 
-                if( visiblePlayers.Length == 0 ) {
-                    player.Message( "There are no players {0}", qualifier );
+                if (visiblePlayers.Length == 0)
+                {
+                    player.Message("There are no players {0}", qualifier);
 
-                } else if( visiblePlayers.Length <= PlayersPerPage || player.IsSuper ) {
-                    player.MessagePrefixed( "&S  ", "&SThere are {0} players {1}: {2}",
-                                            visiblePlayers.Length, qualifier, visiblePlayers.JoinToClassyString() );
+                }
+                else if (visiblePlayers.Length <= PlayersPerPage || player.IsSuper)
+                {
+                    player.MessagePrefixed("&S  ", "&SThere are {0} players {1}: {2}", MessageType.Chat,
+                        visiblePlayers.Length, qualifier, visiblePlayers.JoinToClassyString());
 
-                } else {
-                    if( offset >= visiblePlayers.Length ) {
-                        offset = Math.Max( 0, visiblePlayers.Length - PlayersPerPage );
+                }
+                else
+                {
+                    if (offset >= visiblePlayers.Length)
+                    {
+                        offset = Math.Max(0, visiblePlayers.Length - PlayersPerPage);
                     }
-                    Player[] playersPart = visiblePlayers.Skip( offset ).Take( PlayersPerPage ).ToArray();
-                    player.MessagePrefixed( "&S   ", "&SPlayers {0}: {1}",
-                                            qualifier, playersPart.JoinToClassyString() );
+                    Player[] playersPart = visiblePlayers.Skip(offset).Take(PlayersPerPage).ToArray();
+                    player.MessagePrefixed("&S   ", "&SPlayers {0}: {1}", MessageType.Chat,
+                                            qualifier, playersPart.JoinToClassyString());
 
-                    if( offset + playersPart.Length < visiblePlayers.Length ) {
-                        player.Message( "Showing {0}-{1} (out of {2}). Next: &H/Players {3}{1}",
+                    if (offset + playersPart.Length < visiblePlayers.Length)
+                    {
+                        player.Message("Showing {0}-{1} (out of {2}). Next: &H/Players {3}{1}",
                                         offset + 1, offset + playersPart.Length,
                                         visiblePlayers.Length,
-                                        (worldName == null ? "" : worldName + " ") );
-                    } else {
-                        player.Message( "Showing players {0}-{1} (out of {2}).",
+                                        (worldName == null ? "" : worldName + " "));
+                    }
+                    else
+                    {
+                        player.Message("Showing players {0}-{1} (out of {2}).",
                                         offset + 1, offset + playersPart.Length,
-                                        visiblePlayers.Length );
+                                        visiblePlayers.Length);
                     }
                 }
-            } else {
-                player.Message( "There are no players {0}", qualifier );
+            }
+            else
+            {
+                player.Message("There are no players {0}", qualifier);
             }
         }
 
@@ -1918,7 +2207,8 @@ THE SOFTWARE.*/
 
         const string Compass = "N . . . ne. . . E . . . se. . . S . . . sw. . . W . . . nw. . . " +
                                "N . . . ne. . . E . . . se. . . S . . . sw. . . W . . . nw. . . ";
-        static readonly CommandDescriptor CdWhere = new CommandDescriptor {
+        static readonly CommandDescriptor CdWhere = new CommandDescriptor
+        {
             Name = "Where",
             Aliases = new[] { "compass", "whereis", "whereami" },
             Category = CommandCategory.Info,
@@ -1931,51 +2221,61 @@ THE SOFTWARE.*/
             Handler = WhereHandler
         };
 
-        static void WhereHandler( Player player, Command cmd ) {
+        static void WhereHandler(Player player, Command cmd)
+        {
             string name = cmd.Next();
-            if( cmd.HasNext ) {
-                CdWhere.PrintUsage( player );
+            if (cmd.HasNext)
+            {
+                CdWhere.PrintUsage(player);
                 return;
             }
             Player target = player;
 
-            if( name != null ) {
-                target = Server.FindPlayerOrPrintMatches( player, name, false, true );
-                if( target == null ) return;
-            } else if( target.World == null ) {
-                player.Message( "When called from console, &H/Where&S requires a player name." );
+            if (name != null)
+            {
+                target = Server.FindPlayerOrPrintMatches(player, name, false, true);
+                if (target == null) return;
+            }
+            else if (target.World == null)
+            {
+                player.Message("When called from console, &H/Where&S requires a player name.");
                 return;
             }
 
-            if( target.World == null ) {
+            if (target.World == null)
+            {
                 // Chances of this happening are miniscule
-                player.Message( "Player {0}&S is not in any world." );
+                player.Message("Player {0}&S is not in any world.");
                 return;
             }
-            if (!player.Can(Permission.ViewOthersInfo) && target != player){
-                player.Message("&WYou do not have permissions to perform this task") ;
+            if (!player.Can(Permission.ViewOthersInfo) && target != player)
+            {
+                player.Message("&WYou do not have permissions to perform this task");
                 return;
-            }else{
+            }
+            else
+            {
                 player.Message("Player {0}&S is on world {1}&S:",
                                 target.ClassyName,
                                 target.World.ClassyName);
             }
 
             Vector3I targetBlockCoords = target.Position.ToBlockCoords();
-            player.Message( "{0}{1} - {2}",
+            player.Message("{0}{1} - {2}",
                             Color.Silver,
                             targetBlockCoords,
-                            GetCompassString( target.Position.R ) );
+                            GetCompassString(target.Position.R));
         }
 
 
-        public static string GetCompassString( byte rotation ) {
+        public static string GetCompassString(byte rotation)
+        {
             int offset = (int)(rotation / 255f * 64f) + 32;
 
-            return String.Format( "&F[{0}&C{1}&F{2}]",
-                                  Compass.Substring( offset - 12, 11 ),
-                                  Compass.Substring( offset - 1, 3 ),
-                                  Compass.Substring( offset + 2, 11 ) );
+            return String.Format("&F[{0}&C{1}&F{2}]",
+                                  Compass.Substring(offset - 12, 11),
+                                  Compass.Substring(offset - 1, 3),
+                                  Compass.Substring(offset + 2, 11));
         }
 
         #endregion
@@ -1985,7 +2285,8 @@ THE SOFTWARE.*/
 
         const string HelpPrefix = "&S    ";
 
-        static readonly CommandDescriptor CdHelp = new CommandDescriptor {
+        static readonly CommandDescriptor CdHelp = new CommandDescriptor
+        {
             Name = "Help",
             Aliases = new[] { "herp", "man" },
             Category = CommandCategory.Info,
@@ -1996,62 +2297,75 @@ THE SOFTWARE.*/
             Handler = HelpHandler
         };
 
-        internal static void HelpHandler( Player player, Command cmd ) {
+        internal static void HelpHandler(Player player, Command cmd)
+        {
             string commandName = cmd.Next();
 
-            if( commandName == "commands" ) {
-                CdCommands.Call( player, cmd, false );
+            if (commandName == "commands")
+            {
+                CdCommands.Call(player, cmd, false);
 
-            } else if( commandName != null ) {
-                CommandDescriptor descriptor = CommandManager.GetDescriptor( commandName, true );
-                if( descriptor == null ) {
-                    player.Message( "Unknown command: \"{0}\"", commandName );
+            }
+            else if (commandName != null)
+            {
+                CommandDescriptor descriptor = CommandManager.GetDescriptor(commandName, true);
+                if (descriptor == null)
+                {
+                    player.Message("Unknown command: \"{0}\"", commandName);
                     return;
                 }
 
                 string sectionName = cmd.Next();
-                if( sectionName != null ) {
-                    string sectionHelp;
-                    if( descriptor.HelpSections != null && descriptor.HelpSections.TryGetValue( sectionName.ToLower(), out sectionHelp ) ) {
-                        player.MessagePrefixed( HelpPrefix, sectionHelp );
-                    } else {
-                        player.Message( "No help found for \"{0}\"", sectionName );
+                if (sectionName != null)
+                {
+                    if (descriptor.HelpSections != null && descriptor.HelpSections.TryGetValue(sectionName.ToLower(), out var sectionHelp))
+                    {
+                        player.MessagePrefixed(HelpPrefix, sectionHelp, MessageType.Chat);
                     }
-                } else {
-                    StringBuilder sb = new StringBuilder( Color.Help );
-                    sb.Append( descriptor.Usage ).Append( '\n' );
+                    else
+                    {
+                        player.Message("No help found for \"{0}\"", sectionName);
+                    }
+                }
+                else
+                {
+                    StringBuilder sb = new StringBuilder(Color.Help);
+                    sb.Append(descriptor.Usage).Append('\n');
 
-                    if( descriptor.Aliases != null ) {
-                        sb.Append( "Aliases: &H" );
-                        sb.Append( descriptor.Aliases.JoinToString() );
-                        sb.Append( "\n&S" );
+                    if (descriptor.Aliases != null)
+                    {
+                        sb.Append("Aliases: &H");
+                        sb.Append(descriptor.Aliases.JoinToString());
+                        sb.Append("\n&S");
                     }
 
-                    if( String.IsNullOrEmpty( descriptor.Help ) ) {
-                        sb.Append( "No help is available for this command." );
-                    } else {
-                        sb.Append( descriptor.Help );
-                    }
+                    sb.Append(string.IsNullOrEmpty(descriptor.Help)
+                        ? "No help is available for this command."
+                        : descriptor.Help);
 
-                    player.MessagePrefixed( HelpPrefix, sb.ToString() );
+                    player.MessagePrefixed(HelpPrefix, sb.ToString(), MessageType.Chat);
 
-                    if( descriptor.Permissions != null && descriptor.Permissions.Length > 0 ) {
-                        player.MessageNoAccess( descriptor );
+                    if (descriptor.Permissions != null && descriptor.Permissions.Length > 0)
+                    {
+                        player.MessageNoAccess(descriptor);
                     }
                 }
 
-            } else {
-                player.Message( "  To see a list of all commands, write &H/Commands" );
-                player.Message( "  To see detailed help for a command, write &H/Help Command" );
-                if( player != Player.Console ) {
-                    player.Message( "  To see your stats, write &H/Info" );
+            }
+            else
+            {
+                player.Message("  To see a list of all commands, write &H/Commands");
+                player.Message("  To see detailed help for a command, write &H/Help Command");
+                if (player != Player.Console)
+                {
+                    player.Message("  To see your stats, write &H/Info");
                 }
-                player.Message( "  To list available worlds, write &H/Worlds" );
-                player.Message( "  To join a world, write &H/Join WorldName" );
-                player.Message( "  To send private messages, write &H@PlayerName Message" );
-                player.Message( "  To send rank-specific chat, write &H@@RankName Message" );
-                player.Message( "  To send world-specific chat, write &H!WorldName Message" );
-                player.Message( "  To see all $messages, write &H/MoneyMessages" );
+                player.Message("  To list available worlds, write &H/Worlds");
+                player.Message("  To join a world, write &H/Join WorldName");
+                player.Message("  To send private messages, write &H@PlayerName Message");
+                player.Message("  To send rank-specific chat, write &H@@RankName Message");
+                player.Message("  To send world-specific chat, write &H!WorldName Message");
+                player.Message("  To see all $messages, write &H/MoneyMessages");
             }
         }
 
@@ -2060,7 +2374,8 @@ THE SOFTWARE.*/
 
         #region Commands
 
-        static readonly CommandDescriptor CdCommands = new CommandDescriptor {
+        static readonly CommandDescriptor CdCommands = new CommandDescriptor
+        {
             Name = "Commands",
             Aliases = new[] { "cmds", "cmdlist" },
             Category = CommandCategory.Info,
@@ -2072,7 +2387,8 @@ THE SOFTWARE.*/
             Handler = CommandsHandler
         };
 
-        internal static void CommandsHandler( Player player, Command cmd ) {
+        internal static void CommandsHandler(Player player, Command cmd)
+        {
             string param = cmd.Next();
             CommandDescriptor[] cd;
             CommandCategory category;
@@ -2096,39 +2412,53 @@ THE SOFTWARE.*/
 
             string prefix;
 
-            if( param == null ) {
+            if (param == null)
+            {
                 prefix = "Available commands";
-                cd = CommandManager.GetCommands( player.Info.Rank, false );
+                cd = CommandManager.GetCommands(player.Info.Rank, false);
 
-            } else if( param.StartsWith( "@" ) ) {
-                string rankName = param.Substring( 1 );
-                Rank rank = RankManager.FindRank( rankName );
-                if( rank == null ) {
-                    player.Message( "Unknown rank: {0}", rankName );
+            }
+            else if (param.StartsWith("@"))
+            {
+                string rankName = param.Substring(1);
+                Rank rank = RankManager.FindRank(rankName);
+                if (rank == null)
+                {
+                    player.Message("Unknown rank: {0}", rankName);
                     return;
-                } else {
+                }
+                else
+                {
                     prefix = $"Commands available to {rank.ClassyName}&S";
-                    cd = CommandManager.GetCommands( rank, false );
+                    cd = CommandManager.GetCommands(rank, false);
                 }
 
-            } else if( param.Equals( "all", StringComparison.OrdinalIgnoreCase ) ) {
+            }
+            else if (param.Equals("all", StringComparison.OrdinalIgnoreCase))
+            {
                 prefix = "All commands";
                 cd = CommandManager.GetCommandDescriptors();
 
-            } else if( param.Equals( "hidden", StringComparison.OrdinalIgnoreCase ) ) {
+            }
+            else if (param.Equals("hidden", StringComparison.OrdinalIgnoreCase))
+            {
                 prefix = "Hidden commands";
-                cd = CommandManager.GetCommandDescriptors( true );
+                cd = CommandManager.GetCommandDescriptors(true);
 
-            } else if( EnumUtil.TryParse( param, out category, true ) ) {
+            }
+            else if (EnumUtil.TryParse(param, out category, true))
+            {
                 prefix = $"{category} commands";
-                cd = CommandManager.GetCommands( category, false );
+                cd = CommandManager.GetCommands(category, false);
 
-            } else {
-                CdCommands.PrintUsage( player );
+            }
+            else
+            {
+                CdCommands.PrintUsage(player);
                 return;
             }
 
-            player.MessagePrefixed( "&S  ", "{0}: {1}", prefix, cd.JoinToClassyString() );
+            player.MessagePrefixed("&S  ", "{0}: {1}", MessageType.Chat, prefix, cd.JoinToClassyString());
         }
 
         #endregion
@@ -2136,7 +2466,8 @@ THE SOFTWARE.*/
 
         #region Colors
 
-        static readonly CommandDescriptor CdColors = new CommandDescriptor {
+        static readonly CommandDescriptor CdColors = new CommandDescriptor
+        {
             Name = "Colors",
             Aliases = new[] { "colours" },
             Category = CommandCategory.Info | CommandCategory.Chat,
@@ -2146,18 +2477,21 @@ THE SOFTWARE.*/
             Handler = ColorsHandler
         };
 
-        internal static void ColorsHandler( Player player, Command cmd ) {
-            if( cmd.HasNext ) {
-                CdColors.PrintUsage( player );
+        internal static void ColorsHandler(Player player, Command cmd)
+        {
+            if (cmd.HasNext)
+            {
+                CdColors.PrintUsage(player);
                 return;
             }
-            StringBuilder sb = new StringBuilder( "List of colors: " );
+            StringBuilder sb = new StringBuilder("List of colors: ");
 
-            foreach( var color in Color.ColorNames ) {
-                sb.AppendFormat( "&{0}%{0} {1} ", color.Key, color.Value );
+            foreach (var color in Color.ColorNames)
+            {
+                sb.AppendFormat("&{0}%{0} {1} ", color.Key, color.Value);
             }
 
-            player.Message( sb.ToString() );
+            player.Message(sb.ToString());
         }
 
         #endregion

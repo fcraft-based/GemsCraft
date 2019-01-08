@@ -72,10 +72,10 @@ namespace GemsCraft.Players {
             if( task == null ) throw new ArgumentNullException( "task" );
             ChatTimer timer = (ChatTimer)task.UserState;
             if( task.MaxRepeats == 1 ) {
-                if( String.IsNullOrEmpty( timer.Message ) ) {
-                    Chat.SendSay( Player.Console, "(Timer Up)" );
+                if( string.IsNullOrEmpty( timer.Message ) ) {
+                    Chat.SendSay(Player.Console, "(Timer Up)", MessageType.Chat);
                 } else {
-                    Chat.SendSay( Player.Console, "(Timer Up) " + timer.Message );
+                    Chat.SendSay(Player.Console, "(Timer Up) " + timer.Message, MessageType.Chat);
                 }
                 timer.Stop();
 
@@ -91,14 +91,17 @@ namespace GemsCraft.Players {
             }
         }
 
-        void Announce( TimeSpan timeLeft ) {
-            if( String.IsNullOrEmpty( Message ) ) {
-                Chat.SendSay( Player.Console, "(Timer) " + timeLeft.ToMiniString() );
-            } else {
-                Chat.SendSay( Player.Console,
-                              String.Format( "(Timer) {0} until {1}",
-                                             timeLeft.ToMiniString(),
-                                             Message ) );
+        private void Announce(TimeSpan timeLeft)
+        {
+            if (string.IsNullOrEmpty(Message))
+            {
+                Chat.SendSay(Player.Console, "(Timer) " + timeLeft.ToMiniString(), MessageType.Chat);
+            }
+            else
+            {
+                Chat.SendSay(Player.Console,
+                    $"(Timer) {timeLeft.ToMiniString()} until {Message}",
+                    MessageType.Chat);
             }
         }
 

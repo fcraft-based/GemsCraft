@@ -280,9 +280,9 @@ namespace GemsCraft.Network {
                 if( announce ) {
                     // Announce ban on the server
                     var can = Server.Players.Can( Permission.ViewPlayerIPs );
-                    can.Message( "&W{0} was banned by {1}", targetAddress, player.ClassyName );
+                    can.Message( "&W{0} was banned by {1}", 0, targetAddress, player.ClassyName );
                     var cant = Server.Players.Cant( Permission.ViewPlayerIPs );
-                    cant.Message( "&WAn IP was banned by {0}", player.ClassyName );
+                    cant.Message( "&WAn IP was banned by {0}", 0, player.ClassyName );
                     if( ConfigKey.AnnounceKickAndBanReasons.Enabled() && reason != null ) {
                         Server.Message( "&WBanIP reason: {0}", reason );
                     }
@@ -352,22 +352,18 @@ namespace GemsCraft.Network {
                 Logger.Log( LogType.UserActivity,
                             "{0} unbanned {1} (UnbanIP {1}). Reason: {2}",
                             player.Name, targetAddress, reason ?? "" );
-                if( announce ) {
-                    var can = Server.Players.Can( Permission.ViewPlayerIPs );
-                    can.Message( "&W{0} was unbanned by {1}", targetAddress, player.ClassyName );
-                    var cant = Server.Players.Cant( Permission.ViewPlayerIPs );
-                    cant.Message( "&WAn IP was unbanned by {0}", player.ClassyName );
-                    if( ConfigKey.AnnounceKickAndBanReasons.Enabled() && reason != null ) {
-                        Server.Message( "&WUnbanIP reason: {0}", reason );
-                    }
+                if (!announce) return;
+                var can = Server.Players.Can( Permission.ViewPlayerIPs );
+                can.Message( "&W{0} was unbanned by {1}", 0, targetAddress, player.ClassyName );
+                var cant = Server.Players.Cant( Permission.ViewPlayerIPs );
+                cant.Message( "&WAn IP was unbanned by {0}", 0, player.ClassyName );
+                if( ConfigKey.AnnounceKickAndBanReasons.Enabled() && reason != null ) {
+                    Server.Message( "&WUnbanIP reason: {0}", reason );
                 }
             } else {
-                string msg;
-                if( player.Can( Permission.ViewPlayerIPs ) ) {
-                    msg = String.Format( "IP address {0} is not currently banned.", targetAddress );
-                } else {
-                    msg = String.Format( "Given IP address is not currently banned." );
-                }
+                var msg = player.Can( Permission.ViewPlayerIPs ) 
+                    ? $"IP address {targetAddress} is not currently banned." 
+                    : "Given IP address is not currently banned.";
                 string colorMsg = "&S" + msg;
                 throw new PlayerOpException( player, null, PlayerOpExceptionCode.NoActionNeeded, msg, colorMsg );
             }
@@ -423,9 +419,9 @@ namespace GemsCraft.Network {
                     // Announce ban on the server
                     if( announce ) {
                         var can = Server.Players.Can( Permission.ViewPlayerIPs );
-                        can.Message( "&W{0} was banned by {1}", targetAddress, player.ClassyName );
+                        can.Message( "&W{0} was banned by {1}", MessageType.Announcement, targetAddress, player.ClassyName );
                         var cant = Server.Players.Cant( Permission.ViewPlayerIPs );
-                        cant.Message( "&WAn IP was banned by {0}", player.ClassyName );
+                        cant.Message( "&WAn IP was banned by {0}", MessageType.Announcement, player.ClassyName );
                     }
                     somethingGotBanned = true;
                 }
@@ -522,9 +518,9 @@ namespace GemsCraft.Network {
                     // Announce unban on the server
                     if( announce ) {
                         var can = Server.Players.Can( Permission.ViewPlayerIPs );
-                        can.Message( "&W{0} was unbanned by {1}", targetAddress, player.ClassyName );
+                        can.Message( "&W{0} was unbanned by {1}", 0, targetAddress, player.ClassyName );
                         var cant = Server.Players.Cant( Permission.ViewPlayerIPs );
-                        cant.Message( "&WAn IP was unbanned by {0}", player.ClassyName );
+                        cant.Message( "&WAn IP was unbanned by {0}", 0, player.ClassyName );
                     }
 
                     somethingGotUnbanned = true;

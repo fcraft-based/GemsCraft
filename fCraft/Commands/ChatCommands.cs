@@ -99,7 +99,7 @@ THE SOFTWARE.*/
 
         internal static void SecretHandler(Player player, Command cmd)
         {
-            Server.Message("{0} is a loser", player.ClassyName);
+            Server.Message("{0} is a loser", MessageType.Announcement, player.ClassyName);
         }
         static readonly CommandDescriptor CdBarf = new CommandDescriptor    //an old plugin I made, finally fully functional
         {
@@ -117,7 +117,7 @@ THE SOFTWARE.*/
             string name = cmd.Next();                               // /barf playername
             if (string.IsNullOrEmpty(name))
             {
-                Server.Players.CanSee(player).Except(player).Message("{0} &6Barfed&s.", player.ClassyName);
+                Server.Players.CanSee(player).Except(player).Message("{0} &6Barfed&s.", 0, player.ClassyName);
                 player.Message("&sYou &6Barfed&s.");
                 player.Info.LastUsedBarf = DateTime.Now;
                 return;                                                 //stop the command here with return;
@@ -130,7 +130,7 @@ THE SOFTWARE.*/
             }
             if (target == player) //if the player name was found, check if it was the player or not
             {
-                Server.Players.CanSee(target).Except(target).Message("{1}&S just &6Barfed &sall over themsleves...", target.ClassyName, player.ClassyName);
+                Server.Players.CanSee(target).Except(target).Message("{1}&S just &6Barfed &sall over themsleves...", 0, target.ClassyName, player.ClassyName);
                 IRC.PlayerSomethingMessage(player, "barfed on", target, null);
                 player.Message("&sYou &6Barfed &sall over yourself...");
                 return; //return to stop the code
@@ -142,25 +142,25 @@ THE SOFTWARE.*/
             {
                 if (string.IsNullOrEmpty(item))
                 {
-                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas &6Barfed &son by {1}&s.", target.ClassyName, player.ClassyName);
+                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas &6Barfed &son by {1}&s.", 0,  target.ClassyName, player.ClassyName);
                     IRC.PlayerSomethingMessage(player, "barfed on", target, null);
                     player.Info.LastUsedBarf = DateTime.Now;
                     return;
                 }
                 else if (item.ToLower() == "throwup")
-                    aMessage = String.Format("{0}&s was &6Thrown Up &Son by {1}&s.", target.ClassyName, player.ClassyName);
+                    aMessage = $"{target.ClassyName}&s was &6Thrown Up &Son by {player.ClassyName}&s.";
                 else if (item.ToLower() == "puke")
-                    aMessage = String.Format("{0}&s was &6Puked &Son by {1}&s.", target.ClassyName, player.ClassyName);
+                    aMessage = $"{target.ClassyName}&s was &6Puked &Son by {player.ClassyName}&s.";
                 else if (item.ToLower() == "blowchunks")
-                    aMessage = String.Format("{1} &6Blew Chunks &son {0}&s.", target.ClassyName, player.ClassyName);
+                    aMessage = $"{player.ClassyName} &6Blew Chunks &son {target.ClassyName}&s.";
                 else
                 {
-                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas &6Barfed &son by {1}&s.", target.ClassyName, player.ClassyName);
+                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas &6Barfed &son by {1}&s.", 0, target.ClassyName, player.ClassyName);
                     IRC.PlayerSomethingMessage(player, "barfed on", target, null);
                     player.Info.LastUsedBarf = DateTime.Now;
                     return;
                 }
-                Server.Players.CanSee(target).Union(target).Message(aMessage);
+                Server.Players.CanSee(target).Union(target).Message(aMessage, 0);
                 IRC.PlayerSomethingMessage(player, "barfed on", target, null);
                 player.Info.LastUsedBarf = DateTime.Now;
                 return;
@@ -420,7 +420,7 @@ THE SOFTWARE.*/
             {
                 string rawMessage = player.ClassyName + Color.White + ": " + message;
                 message = player.ClassyName + Color.Black + ": " + message;
-                SendList.Message("&g[Global] " + rawMessage); 
+                SendList.Message("&g[Global] " + rawMessage, 0); 
                 GlobalChat.GlobalThread.SendChannelMessage(Color.ReplacePercentCodes(Color.MinecraftToIrcColors(message))); 
             }
         }
@@ -731,7 +731,7 @@ THE SOFTWARE.*/
 
             if (player.Can(Permission.Slap, target.Info.Rank))
             { //Broadcasts a server message saying the player is muted, even thought they are not.
-                Server.Players.CanSee(target).Except(target).Message("&sPlayer {0}&6*&s was muted by {1}&s for 999m.", target.ClassyName, player.ClassyName);
+                Server.Players.CanSee(target).Except(target).Message("&sPlayer {0}&6*&s was muted by {1}&s for 999m.", 0, target.ClassyName, player.ClassyName);
                 IRC.PlayerSomethingMessage(player, "muted", target, null);
                 target.Message("&sYou were muted by {0}&s for 999m.", player.ClassyName);
                 return;
@@ -795,12 +795,12 @@ THE SOFTWARE.*/
             }
             if (target == player)
             {
-                Server.Players.CanSee(target).Except(target).Message("{1}&S just tried to &8Brofist &Sthemsleves...", target.ClassyName, player.ClassyName);
+                Server.Players.CanSee(target).Except(target).Message("{1}&S just tried to &8Brofist &Sthemsleves...", 0, target.ClassyName, player.ClassyName);
                 IRC.PlayerSomethingMessage(player, "brofisted", target, null);
                 player.Message("&SYou just tried to &8Brofist &Syourself... That's sad...");
                 return;
             }
-            Server.Players.CanSee(target).Except(target).Message("{1}&S gave {0}&S a &8Brofist&S.", target.ClassyName, player.ClassyName);
+            Server.Players.CanSee(target).Except(target).Message("{1}&S gave {0}&S a &8Brofist&S.", 0, target.ClassyName, player.ClassyName);
             IRC.PlayerSomethingMessage(player, "brofisted", target, null);
             target.Message("{0}&S's fist met yours for a &8Brofist&S.", player.ClassyName);
         }
@@ -925,7 +925,7 @@ THE SOFTWARE.*/
             }
             else
             {
-                Server.Players.CanSee(target).Message("{0} &egave {1} &e{2} {3}.", player.ClassyName, target.ClassyName, itemnumber, item);
+                Server.Players.CanSee(target).Message("{0} &egave {1} &e{2} {3}.", 0, player.ClassyName, target.ClassyName, itemnumber, item);
             }
         }
         static readonly CommandDescriptor CdJelly = new CommandDescriptor
@@ -1151,7 +1151,7 @@ THE SOFTWARE.*/
 
             if (reason.Length < 1)
             {
-                Server.Players.Message("{0} &4Ragequit from the server", player.ClassyName);
+                Server.Players.Message("{0} &4Ragequit from the server", 0, player.ClassyName);
                 player.Kick(Player.Console, "Ragequit", LeaveReason.RageQuit, false, false, false);
                 IRC.SendAction(player.ClassyName + " &4Ragequit from the server");
                 return;
@@ -1159,7 +1159,7 @@ THE SOFTWARE.*/
 
             else
             {
-                Server.Players.Message("{0} &4Ragequit from the server: &C{1}",
+                Server.Players.Message("{0} &4Ragequit from the server: &C{1}", 0,
                                 player.ClassyName, reason);
                 IRC.SendAction(player.ClassyName + " &WRagequit from the server: " + reason);
                 player.Kick(Player.Console, reason, LeaveReason.RageQuit, false, false, false);
@@ -1187,7 +1187,7 @@ THE SOFTWARE.*/
                     Commands.Command_Handlers.BroMode.GetInstance().RegisterPlayer(p);
                 }
                 Commands.Command_Handlers.BroMode.Active = true;
-                Server.Players.Message("{0}&S turned Bro mode on.", player.Info.Rank.Color + player.Name);
+                Server.Players.Message("{0}&S turned Bro mode on.", 0, player.Info.Rank.Color + player.Name);
 
                 IRC.SendAction(player.Name + " turned Bro mode on.");
             }
@@ -1199,7 +1199,7 @@ THE SOFTWARE.*/
                 }
 
                 Commands.Command_Handlers.BroMode.Active = false;
-                Server.Players.Message("{0}&S turned Bro Mode off.", player.Info.Rank.Color + player.Name);
+                Server.Players.Message("{0}&S turned Bro Mode off.", 0, player.Info.Rank.Color + player.Name);
                 IRC.SendAction(player.Name + " turned Bro mode off");
             }
         }
@@ -1215,7 +1215,7 @@ THE SOFTWARE.*/
                 // Check if the player actually moved and not just rotated
                 if ((oldPos.X != newPos.X) || (oldPos.Y != newPos.Y) || (oldPos.Z != newPos.Z))
                 {
-                    Server.Players.Message("{0} &Eis back", e.Player.ClassyName);
+                    Server.Players.Message("{0} &Eis back", 0, e.Player.ClassyName);
                     e.Player.IsAway = false;
                 }
             }
@@ -1285,7 +1285,7 @@ THE SOFTWARE.*/
             }
             else
             {
-                Server.Players.Message("&S{0} &Eis away &9(Away From Keyboard)", player.ClassyName);
+                Server.Players.Message("&S{0} &Eis away &9(Away From Keyboard)", 0, player.ClassyName);
                 player.IsAway = true;
             }
         }
@@ -1320,7 +1320,7 @@ THE SOFTWARE.*/
                 player.Message("&WYou cannot high five yourself.");
                 return;
             }
-            Server.Players.CanSee(target).Except(target).Message("{0}&S was just &chigh fived &Sby {1}&S", target.ClassyName, player.ClassyName);
+            Server.Players.CanSee(target).Except(target).Message("{0}&S was just &chigh fived &Sby {1}&S", 0, target.ClassyName, player.ClassyName);
             IRC.PlayerSomethingMessage(player, "high fived", target, null);
             target.Message("{0}&S high fived you.", player.ClassyName);
         }
@@ -1392,14 +1392,15 @@ THE SOFTWARE.*/
             var recepientList = Server.Players.Can(Permission.ReadStaffChat)
                                               .NotIgnoring(player)
                                               .Union(player);
-            string message = String.Format("{0}&6 would like staff to check their build", player.ClassyName);
-            recepientList.Message(message);
+            string message = $"{player.ClassyName}&6 would like staff to check their build";
+            recepientList.Message(message, 0);
             var ReviewerNames = Server.Players
                                          .CanBeSeen(player)
                                          .Where(r => r.Can(Permission.Promote, player.Info.Rank));
-            if (ReviewerNames.Count() > 0)
+            var reviewerNames = ReviewerNames as Player[] ?? ReviewerNames.ToArray();
+            if (reviewerNames.Any())
             {
-                player.Message("&WOnline players who can review you: {0}", ReviewerNames.JoinToString(r => String.Format("{0}&S", r.ClassyName)));
+                player.Message("&WOnline players who can review you: {0}", reviewerNames.JoinToString(r => String.Format("{0}&S", r.ClassyName)));
                 return;
             }
             else
@@ -1455,7 +1456,7 @@ THE SOFTWARE.*/
             NotRepeatable = true,
             DisableLogging = true,
             Permissions = new[] { Permission.Chat, Permission.Say },
-            Usage = "/Say Message",
+            Usage = "/Say [Regular/Announcement] Message",
             Help = "&SShows a message in special color, without the player name prefix. " +
                    "Can be used for making announcements.",
             Handler = SayHandler
@@ -1473,12 +1474,20 @@ THE SOFTWARE.*/
 
             if (player.Can(Permission.Say))
             {
-                string msg = cmd.NextAll().Trim();
-                if (msg.Length > 0)
+                try
                 {
-                    Chat.SendSay(player, msg);
+                    var mType = cmd.Next().ToLower() == "announcement" ? MessageType.Announcement : MessageType.Chat;
+                    string msg = cmd.NextAll().Trim();
+                    if (msg.Length > 0)
+                    {
+                        Chat.SendSay(player, msg, mType);
+                    }
+                    else
+                    {
+                        CdSay.PrintUsage(player);
+                    }
                 }
-                else
+                catch (Exception)
                 {
                     CdSay.PrintUsage(player);
                 }
@@ -1716,7 +1725,7 @@ THE SOFTWARE.*/
 
             int num = rand.Next(min, max + 1);
             Server.Message(player,
-                            "{0}{1} rolled {2} ({3}...{4})",
+                            "{0}{1} rolled {2} ({3}...{4})", 0,
                             player.ClassyName, Color.Silver, num, min, max);
             player.Message("{0}You rolled {1} ({2}...{3})",
                             Color.Silver, num, min, max);
@@ -1849,9 +1858,9 @@ THE SOFTWARE.*/
                     else
                     {
                         timer.Stop();
-                        string abortMsg = String.Format("&Y(Timer) {0}&Y aborted a timer with {1} left: {2}",
-                                                         player.ClassyName, timer.TimeLeft.ToMiniString(), timer.Message);
-                        Chat.SendSay(player, abortMsg);
+                        string abortMsg =
+                            $"&Y(Timer) {player.ClassyName}&Y aborted a timer with {timer.TimeLeft.ToMiniString()} left: {timer.Message}";
+                        Chat.SendSay(player, abortMsg, MessageType.Chat);
                     }
                 }
                 else
@@ -1885,22 +1894,11 @@ THE SOFTWARE.*/
                 return;
             }
 
-            string sayMessage;
             string message = cmd.NextAll();
-            if (String.IsNullOrEmpty(message))
-            {
-                sayMessage = String.Format("&Y(Timer) {0}&Y started a {1} timer",
-                                            player.ClassyName,
-                                            duration.ToMiniString());
-            }
-            else
-            {
-                sayMessage = String.Format("&Y(Timer) {0}&Y started a {1} timer: {2}",
-                                            player.ClassyName,
-                                            duration.ToMiniString(),
-                                            message);
-            }
-            Chat.SendSay(player, sayMessage);
+            var sayMessage = string.IsNullOrEmpty(message) 
+                ? $"&Y(Timer) {player.ClassyName}&Y started a {duration.ToMiniString()} timer" 
+                : $"&Y(Timer) {player.ClassyName}&Y started a {duration.ToMiniString()} timer: {message}";
+            Chat.SendSay(player, sayMessage, MessageType.Chat);
             ChatTimer.Start(duration, message, player.Name);
         }
 

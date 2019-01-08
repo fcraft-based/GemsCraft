@@ -681,40 +681,61 @@ namespace GemsCraft.fSystem {
 
 
         #region Messaging / Packet Sending
+        /// <summary> Broadcasts a message to all online players.
+        /// Shorthand for Server.Players.Message </summary>
+        public static void Message([NotNull] string message)
+        {
+            Message(message, 0);
+        }
 
         /// <summary> Broadcasts a message to all online players.
         /// Shorthand for Server.Players.Message </summary>
-        public static void Message( [NotNull] string message ) {
+        public static void Message( [NotNull] string message, MessageType chat) {
             if( message == null ) throw new ArgumentNullException( "message" );
-            Players.Message( message );
+            Players.Message( message, chat);
         }
 
+        /// <summary> Broadcasts a message to all online players.
+        /// Shorthand for Server.Players.Message </summary>
+        [StringFormatMethod("message")]
+        public static void Message([NotNull] string message, [NotNull] params object[] formatArgs)
+        {
+            Message(message, 0, formatArgs);
+        }
 
         /// <summary> Broadcasts a message to all online players.
         /// Shorthand for Server.Players.Message </summary>
         [StringFormatMethod( "message" )]
-        public static void Message( [NotNull] string message, [NotNull] params object[] formatArgs ) {
+        public static void Message( [NotNull] string message, MessageType type, [NotNull] params object[] formatArgs ) {
             if( message == null ) throw new ArgumentNullException( "message" );
             if( formatArgs == null ) throw new ArgumentNullException( "formatArgs" );
-            Players.Message( message, formatArgs );
+            Players.Message( message, type, formatArgs );
+        }
+
+        /// <summary> Broadcasts a message to all online players except one.
+        /// Shorthand for Server.Players.Except(except).Message </summary>
+        public static void Message([CanBeNull] Player except, [NotNull] string message)
+        {
+            Message(except, message, 0);
+        }
+
+        /// <summary> Broadcasts a message to all online players except one.
+        /// Shorthand for Server.Players.Except(except).Message </summary>
+        public static void Message([CanBeNull] Player except, [NotNull] string message, MessageType type)
+        {
+            if (message == null) throw new ArgumentNullException("message");
+            Players.Except(except).Message(message, type);
         }
 
 
         /// <summary> Broadcasts a message to all online players except one.
         /// Shorthand for Server.Players.Except(except).Message </summary>
-        public static void Message( [CanBeNull] Player except, [NotNull] string message ) {
-            if( message == null ) throw new ArgumentNullException( "message" );
-            Players.Except( except ).Message( message );
-        }
-
-
-        /// <summary> Broadcasts a message to all online players except one.
-        /// Shorthand for Server.Players.Except(except).Message </summary>
         [StringFormatMethod( "message" )]
-        public static void Message( [CanBeNull] Player except, [NotNull] string message, [NotNull] params object[] formatArgs ) {
+        public static void Message( [CanBeNull] Player except, [NotNull] string message, MessageType? type, [NotNull] params object[] formatArgs ) {
             if( message == null ) throw new ArgumentNullException( "message" );
             if( formatArgs == null ) throw new ArgumentNullException( "formatArgs" );
-            Players.Except( except ).Message( message, formatArgs );
+            if (type == null) type = 0;
+            Players.Except( except ).Message( message, type, formatArgs);
         }
 
         #endregion
@@ -748,7 +769,7 @@ namespace GemsCraft.fSystem {
         static SchedulerTask checkIdlesTask;
         static TimeSpan checkIdlesInterval = TimeSpan.FromSeconds( 30 );
         public static TimeSpan CheckIdlesInterval {
-            get { return checkIdlesInterval; }
+            get => checkIdlesInterval;
             set {
                 if( value.Ticks < 0 ) throw new ArgumentException( "CheckIdlesInterval may not be negative." );
                 checkIdlesInterval = value;
@@ -756,16 +777,17 @@ namespace GemsCraft.fSystem {
             }
         }
 
-        static void CheckIdles( SchedulerTask task ) {
+        static void CheckIdles( SchedulerTask task )
+        {
             Player[] tempPlayerList = Players;
-            for( int i = 0; i < tempPlayerList.Length; i++ ) {
-                Player player = tempPlayerList[i];
+            foreach (var player in tempPlayerList)
+            {
                 if( player.Info.Rank.IdleKickTimer <= 0 ) continue;
 
                 if( player.IdleTime.TotalMinutes >= player.Info.Rank.IdleKickTimer ) {
-                    Message( "{0}&S was kicked for being idle for {1} min",
-                             player.ClassyName,
-                             player.Info.Rank.IdleKickTimer );
+                    Message( "{0}&S was kicked for being idle for {1} min", 0,
+                        player.ClassyName,
+                        player.Info.Rank.IdleKickTimer );
                     string kickReason = "Idle for " + player.Info.Rank.IdleKickTimer + " minutes";
                     player.Kick( Player.Console, kickReason, LeaveReason.IdleKick, false, true, false );
                     player.ResetIdleTimer(); // to prevent kick from firing more than once
@@ -1170,14 +1192,12 @@ namespace GemsCraft.fSystem {
                 Logger.Log( LogType.UserActivity,
                             "{0} left the server ({1}).", player.Name, player.LeaveReason );
                 if( player.HasRegistered && ConfigKey.ShowConnectionMessages.Enabled() ) {
-                    Players.CanSee(player).Message("&SPlayer {0}&S {1}.",
+                    Players.CanSee(player).Message("&SPlayer {0}&S {1}.", 0,
                                                       player.ClassyName, player.Info.LeaveMsg);
                     player.Info.LeaveMsg = "left the server";
                 }
 
-                if( player.World != null ) {
-                    player.World.ReleasePlayer( player );
-                }
+                player.World?.ReleasePlayer( player );
                 PlayerIndex.Remove( player.Name );
                 UpdatePlayerList();
             }

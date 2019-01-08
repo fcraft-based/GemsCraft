@@ -590,7 +590,7 @@ namespace GemsCraft.Worlds {
         public void Flush() {
             lock( SyncRoot ) {
                 if( Map == null ) return;
-                Players.Message( "&WMap is being flushed. Stay put, world will reload shortly." );
+                Players.Message( "&WMap is being flushed. Stay put, world will reload shortly.", MessageType.Chat );
                 IsFlushing = true;
             }
         }
@@ -599,7 +599,7 @@ namespace GemsCraft.Worlds {
         internal void EndFlushMapBuffer() {
             lock( SyncRoot ) {
                 IsFlushing = false;
-                Players.Message( "&WMap flushed. Reloading..." );
+                Players.Message( "&WMap flushed. Reloading...", MessageType.Chat );
                 foreach( Player player in Players ) {
                     player.JoinWorld( this, WorldChangeReason.Rejoin, player.Position );
                 }
@@ -630,11 +630,11 @@ namespace GemsCraft.Worlds {
 
                             Server.Players
                                   .CanSee( player )
-                                  .Message( "&SPlayer {0}&S was auto-kicked to make room for {1}",
+                                  .Message( "&SPlayer {0}&S was auto-kicked to make room for {1}", MessageType.Chat,
                                             idlestPlayer.ClassyName, player.ClassyName );
                             Server.Players
                                   .CantSee( player )
-                                  .Message( "{0}&S was kicked for being idle for {1} min",
+                                  .Message( "{0}&S was kicked for being idle for {1} min", MessageType.Chat,
                                             player.ClassyName, player.Info.Rank.IdleKickTimer );
                         } else {
                             return null;
@@ -670,7 +670,7 @@ namespace GemsCraft.Worlds {
                 if (!IsRealm && announce && ConfigKey.ShowJoinedWorldMessages.Enabled())
                 {
                     Server.Players.CanSee(player)
-                                  .Message("&SPlayer {0}&S joined world {1}",
+                                  .Message("&SPlayer {0}&S joined world {1}", 0,
                                             player.ClassyName, ClassyName);
 
                 }
@@ -679,7 +679,7 @@ namespace GemsCraft.Worlds {
                 if (IsRealm && announce && ConfigKey.ShowJoinedWorldMessages.Enabled())
                 {
                     Server.Players.CanSee(player)
-                                  .Message("&SPlayer {0}&S joined realm {1}",
+                                  .Message("&SPlayer {0}&S joined realm {1}", 0,
                                             player.ClassyName, ClassyName);
                 }
 
@@ -877,7 +877,7 @@ namespace GemsCraft.Worlds {
                         mapCache.ClearUpdateQueue();
                         mapCache.StopAllDrawOps();
                     }
-                    Players.Message( "&WWorld was locked by {0}", player.ClassyName );
+                    Players.Message( "&WWorld was locked by {0}", 0, player.ClassyName );
                     Logger.Log( LogType.UserActivity,
                                 "World {0} was locked by {1}",
                                 Name, player.Name );
@@ -894,7 +894,7 @@ namespace GemsCraft.Worlds {
                     UnlockedBy = player.Name;
                     UnlockedDate = DateTime.UtcNow;
                     IsLocked = false;
-                    Players.Message( "&WMap was unlocked by {0}", player.ClassyName );
+                    Players.Message( "&WMap was unlocked by {0}", MessageType.Chat, player.ClassyName );
                     Logger.Log( LogType.UserActivity,
                                 "World \"{0}\" was unlocked by {1}",
                                 Name, player.Name );

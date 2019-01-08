@@ -112,7 +112,7 @@ namespace GemsCraft.Network {
         }
 
 
-        internal static Packet MakeMessage( [NotNull] string message ) {
+        internal static Packet MakeMessage( [NotNull] string message, MessageType type) {
             if( message == null ) throw new ArgumentNullException( "message" );
 
             Packet packet = new Packet( OpCode.Message );

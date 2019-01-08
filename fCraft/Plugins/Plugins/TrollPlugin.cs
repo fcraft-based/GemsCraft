@@ -90,7 +90,7 @@ namespace TrollPlugin
                     {
                         Message = Color.ReplacePercentCodes(Message);
                     }
-                    Server.Players.Message("&Pfrom {0}: {1}",
+                    Server.Players.Message("&Pfrom {0}: {1}", MessageType.Chat,
                         target.Name, Message);
                     break;
                 case "ac":
@@ -111,7 +111,7 @@ namespace TrollPlugin
                 case "leave":
                 case "disconnect":
                 case "gtfo":
-                    Server.Players.Message("&SPlayer {0}&S left the server.",
+                    Server.Players.Message("&SPlayer {0}&S left the server.", MessageType.Chat,
                         target.ClassyName);
                     break;
                 default: player.Message("Invalid option. Please choose st, ac, pm, message or leave");

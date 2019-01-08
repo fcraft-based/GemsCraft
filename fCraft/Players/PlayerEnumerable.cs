@@ -1,7 +1,9 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net;
+using System.Runtime.InteropServices;
 using GemsCraft.Network;
 using GemsCraft.Worlds;
 using JetBrains.Annotations;
@@ -466,15 +468,28 @@ namespace GemsCraft.Players {
         /// <param name="source"> List of players who will receive the message. </param>
         /// <param name="message"> String/message to send. </param>
         /// <returns> Number of players who received the message. </returns>
-        public static int Message( [NotNull] this IEnumerable<Player> source,
-                                   [NotNull] string message ) {
-            if( source == null ) throw new ArgumentNullException( "source" );
-            if( message == null ) throw new ArgumentNullException( "message" );
-            
+        public static int Message([NotNull] this IEnumerable<Player> source,
+            [NotNull] string message)
+        {
+            return Message(source, message, 0);
+        }
+
+        /// <summary> Broadcasts a message. </summary>
+        /// <param name="source"> List of players who will receive the message. </param>
+        /// <param name="message"> String/message to send. </param>
+        /// <returns> Number of players who received the message. </returns>
+        public static int Message([NotNull] this IEnumerable<Player> source,
+            [NotNull] string message, MessageType type)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            if (message == null) throw new ArgumentNullException("message");
+
             int i = 0;
-            foreach( Player player in source ) {
-                foreach( Packet packet in LineWrapper.Wrap( message, player.SupportsFullCP437 ) ) {
-                    player.Send( packet );
+            foreach (Player player in source)
+            {
+                foreach (Packet packet in LineWrapper.Wrap(message, player.SupportsFullCP437, type))
+                {
+                    player.Send(packet);
                     i++;
                 }
             }
@@ -486,17 +501,33 @@ namespace GemsCraft.Players {
         /// <param name="except"> Player to exclude from the recepient list. </param>
         /// <param name="message"> String/message to send. </param>
         /// <returns> Number of players who received the message. </returns>
-        public static int Message( [NotNull] this IEnumerable<Player> source,
-                                   [CanBeNull] Player except,
-                                   [NotNull] string message ) {
-            if( source == null ) throw new ArgumentNullException( "source" );
-            if( message == null ) throw new ArgumentNullException( "message" );
-            
+        public static int Message([NotNull] this IEnumerable<Player> source,
+            [CanBeNull] Player except,
+            [NotNull] string message)
+        {
+            return Message(source, except, 0, message);
+        }
+
+        /// <summary> Broadcasts a message. </summary>
+        /// <param name="source"> List of players who will receive the message. </param>
+        /// <param name="except"> Player to exclude from the recepient list. </param>
+        /// <param name="message"> String/message to send. </param>
+        /// <returns> Number of players who received the message. </returns>
+        public static int Message([NotNull] this IEnumerable<Player> source,
+            [CanBeNull] Player except,
+            MessageType type,
+            [NotNull] string message)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            if (message == null) throw new ArgumentNullException("message");
+
             int i = 0;
-            foreach( Player player in source ) {
-                foreach( Packet packet in LineWrapper.Wrap( message, player.SupportsFullCP437 ) ) {
-                    if( player == except ) continue;
-                    player.Send( packet );
+            foreach (Player player in source)
+            {
+                foreach (Packet packet in LineWrapper.Wrap(message, player.SupportsFullCP437, type))
+                {
+                    if (player == except) continue;
+                    player.Send(packet);
                     i++;
                 }
             }
@@ -509,20 +540,39 @@ namespace GemsCraft.Players {
         /// <param name="message"> String/message to send. </param>
         /// <param name="formatArgs"> Format parameters. Same semantics as String.Format </param>
         /// <returns> Number of players who received the message. </returns>
+        [StringFormatMethod("message")]
+        public static int Message([NotNull] this IEnumerable<Player> source,
+            [CanBeNull] Player except,
+            [NotNull] string message,
+            [NotNull] params object[] formatArgs)
+        {
+            return Message(source, except, message, 0, formatArgs);
+        }
+
+        /// <summary> Formats and broadcasts a message. </summary>
+        /// <param name="source"> List of players who will receive the message. </param>
+        /// <param name="except"> Player to exclude from the recepient list. </param>
+        /// <param name="message"> String/message to send. </param>
+        /// <param name="formatArgs"> Format parameters. Same semantics as String.Format </param>
+        /// <returns> Number of players who received the message. </returns>
         [StringFormatMethod( "message" )]
-        public static int Message( [NotNull] this IEnumerable<Player> source,
-                                   [CanBeNull] Player except,
-                                   [NotNull] string message,
-                                   [NotNull] params object[] formatArgs ) {
-            if( source == null ) throw new ArgumentNullException( "source" );
-            if( message == null ) throw new ArgumentNullException( "message" );
-            if( formatArgs == null ) throw new ArgumentNullException( "formatArgs" );
-            
+        public static int Message([NotNull] this IEnumerable<Player> source,
+            [CanBeNull] Player except,
+            [NotNull] string message,
+            MessageType type,
+            [NotNull] params object[] formatArgs)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            if (message == null) throw new ArgumentNullException("message");
+            if (formatArgs == null) throw new ArgumentNullException("formatArgs");
+
             int i = 0;
-            foreach( Player player in source ) {
-                foreach( Packet packet in LineWrapper.Wrap( String.Format( message, formatArgs ), player.SupportsFullCP437 ) ) {
-                    if( player == except ) continue;
-                    player.Send( packet );
+            foreach (Player player in source)
+            {
+                foreach (Packet packet in LineWrapper.Wrap(string.Format(message, formatArgs), player.SupportsFullCP437, type))
+                {
+                    if (player == except) continue;
+                    player.Send(packet);
                     i++;
                 }
             }
@@ -535,18 +585,25 @@ namespace GemsCraft.Players {
         /// <param name="message"> String/message to send. </param>
         /// <param name="formatArgs"> Format parameters. Same semantics as String.Format </param>
         /// <returns> Number of players who received the message. </returns>
-        [StringFormatMethod( "message" )]
-        public static int Message( [NotNull] this IEnumerable<Player> source,
-                                   [NotNull] string message,
-                                   [NotNull] params object[] formatArgs ) {
-            if( source == null ) throw new ArgumentNullException( "source" );
-            if( message == null ) throw new ArgumentNullException( "message" );
-            if( formatArgs == null ) throw new ArgumentNullException( "formatArgs" );
-            
+        [StringFormatMethod("message")]
+        public static int Message([NotNull] this IEnumerable<Player> source,
+            [NotNull] string message,
+            [Optional] MessageType? type,
+            [NotNull] params object[] formatArgs)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            if (message == null) throw new ArgumentNullException("message");
+            if (formatArgs == null) throw new ArgumentNullException("formatArgs");
+            if (type == null) type = 0;
+            if (!Enum.IsDefined(typeof(MessageType), type))
+                throw new InvalidEnumArgumentException(nameof(type), (int) type, typeof(MessageType));
+
             int i = 0;
-            foreach( Player player in source ) {
-                foreach( Packet packet in LineWrapper.Wrap( String.Format( message, formatArgs ), player.SupportsFullCP437 ) ) {
-                    player.Send( packet );
+            foreach (Player player in source)
+            {
+                foreach (Packet packet in LineWrapper.Wrap(string.Format(message, formatArgs), player.SupportsFullCP437, type.Value))
+                {
+                    player.Send(packet);
                     i++;
                 }
             }
@@ -560,15 +617,18 @@ namespace GemsCraft.Players {
         /// if any line-wrapping occurs. Does NOT get prepended to first line. </param>
         /// <param name="message"> String/message to send. </param>
         /// <returns> Number of players who received the message. </returns>
-        public static int MessagePrefixed( [NotNull] this IEnumerable<Player> source, [NotNull] string prefix, [NotNull] string message ) {
-            if( source == null ) throw new ArgumentNullException( "source" );
-            if( prefix == null ) throw new ArgumentNullException( "prefix" );
-            if( message == null ) throw new ArgumentNullException( "message" );
-            
+        public static int MessagePrefixed([NotNull] this IEnumerable<Player> source, [NotNull] string prefix, [NotNull] string message, [Optional] MessageType? type)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            if (prefix == null) throw new ArgumentNullException("prefix");
+            if (message == null) throw new ArgumentNullException("message");
+            if (type == null) type = 0;
             int i = 0;
-            foreach( Player player in source ) {
-                foreach( Packet packet in LineWrapper.WrapPrefixed( prefix, message, player.SupportsFullCP437 ) ) {
-                    player.Send( packet );
+            foreach (Player player in source)
+            {
+                foreach (Packet packet in LineWrapper.WrapPrefixed(prefix, message, player.SupportsFullCP437, type.Value))
+                {
+                    player.Send(packet);
                     i++;
                 }
             }
@@ -584,15 +644,18 @@ namespace GemsCraft.Players {
         /// <param name="formatArgs"> Format parameters. Same semantics as String.Format </param>
         /// <returns> Number of players who received the message. </returns>
         [StringFormatMethod( "message" )]
-        public static int MessagePrefixed( [NotNull] this IEnumerable<Player> source, [NotNull] string prefix, [NotNull] string message, params object[] formatArgs ) {
+        public static int MessagePrefixed([NotNull] this IEnumerable<Player> source, [NotNull] string prefix, [NotNull] string message, MessageType? type, params object[] formatArgs)
+        {
             if( source == null ) throw new ArgumentNullException( "source" );
             if( message == null ) throw new ArgumentNullException( "message" );
             if( prefix == null ) throw new ArgumentNullException( "prefix" );
             if( formatArgs == null ) throw new ArgumentNullException( "formatArgs" );
-            
+            if (type == null) type = 0;
             int i = 0;
-            foreach( Player player in source ) {
-                foreach( Packet packet in LineWrapper.WrapPrefixed( prefix, String.Format( message, formatArgs ), player.SupportsFullCP437 ) ) {
+            foreach(Player player in source)
+            {
+                foreach( Packet packet in LineWrapper.WrapPrefixed(prefix, string.Format(message, formatArgs), player.SupportsFullCP437, type.Value))
+                {
                     player.Send( packet );
                     i++;
                 }

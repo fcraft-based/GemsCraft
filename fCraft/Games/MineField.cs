@@ -100,7 +100,7 @@ namespace GemsCraft.Games
             Server.RequestGC();
             instance = null;
             Server.Players.Message(Won ? "{0}&S Won the game of MineField!" : "{0}&S aborted the game of MineField",
-                player.ClassyName);
+                MessageType.Announcement, player.ClassyName);
         }
 
         private static void SetUpRed()

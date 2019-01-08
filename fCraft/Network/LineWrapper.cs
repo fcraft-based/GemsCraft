@@ -37,7 +37,7 @@ namespace GemsCraft.Network
         readonly string input;
         int inputIndex;
 
-        byte[] output;
+        public byte[] output;
         int outputStart, outputIndex;
 
         readonly string prefix;
@@ -47,19 +47,21 @@ namespace GemsCraft.Network
         byte wrapColor;
         bool expectingColor;
         bool supportsAllChars;
-
-
-        private LineWrapper([NotNull] string message, bool supportsAllChars)
+        private MessageType type;
+        
+        private LineWrapper([NotNull] string message, bool supportsAllChars, MessageType type)
         {
             input = message ?? throw new ArgumentNullException("message");
             prefix = DefaultPrefixString;
             this.supportsAllChars = supportsAllChars;
+            this.type = type;
             Reset();
         }
 
 
-        private LineWrapper([NotNull] string prefixString, [NotNull] string message, bool supportsAllChars)
+        private LineWrapper([NotNull] string prefixString, [NotNull] string message, bool supportsAllChars, MessageType type)
         {
+            this.type = type;
             prefix = prefixString ?? throw new ArgumentNullException("prefixString");
             if (prefix.Length > MaxPrefixSize) throw new ArgumentException("Prefix too long", "prefixString");
             input = message ?? throw new ArgumentNullException("message");
@@ -87,8 +89,9 @@ namespace GemsCraft.Network
             hadColor = false;
 
             output = new byte[PacketSize];
-            output[0] = (byte)OpCode.Message;
-
+            output[0] = (byte) OpCode.Message;
+            byte b = (byte) type;
+            output[1] = b;
             outputStart = 2;
             outputIndex = outputStart;
             spaceCount = 0;
@@ -164,15 +167,7 @@ namespace GemsCraft.Network
                     break;
 
                 case '&':
-                    if (expectingColor)
-                    {
-                        // skip double ampersands
-                        expectingColor = false;
-                    }
-                    else
-                    {
-                        expectingColor = true;
-                    }
+                    expectingColor = !expectingColor;
                     break;
 
                 case '-':
@@ -235,12 +230,10 @@ namespace GemsCraft.Network
                         }
                         if (!Append(raw))
                         {
-                            if (hadSpace)
-                            {
-                                inputIndex = wrapIndex;
-                                outputIndex = wrapOutputIndex;
-                                color = wrapColor;
-                            }// else word is too long, dont backtrack to wrap
+                            if (!hadSpace) return true;
+                            inputIndex = wrapIndex;
+                            outputIndex = wrapOutputIndex;
+                            color = wrapColor;
                             return true;
                         }
                     }
@@ -390,10 +383,7 @@ namespace GemsCraft.Network
         }
         
         
-        object IEnumerator.Current
-        {
-            get { return Current; }
-        }
+        object IEnumerator.Current => Current;
 
 
         void IDisposable.Dispose() { }
@@ -415,16 +405,16 @@ namespace GemsCraft.Network
 
 
         /// <summary> Creates a new line wrapper for a given raw string. </summary>
-        public static LineWrapper Wrap(string message, bool supportsAllChars)
+        public static LineWrapper Wrap(string message, bool supportsAllChars, MessageType type)
         {
-            return new LineWrapper(message, supportsAllChars);
+            return new LineWrapper(message, supportsAllChars, type);
         }
 
 
         /// <summary> Creates a new line wrapper for a given raw string. </summary>
-        public static LineWrapper WrapPrefixed(string prefix, string message, bool supportsAllChars)
+        public static LineWrapper WrapPrefixed(string prefix, string message, bool supportsAllChars, MessageType type)
         {
-            return new LineWrapper(prefix, message, supportsAllChars);
+            return new LineWrapper(prefix, message, supportsAllChars, type);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace GemsCraft.Players {
         }
 
 
-        void BanPlayerInfoInternal( [NotNull] Player player, [CanBeNull] string reason,
+        private void BanPlayerInfoInternal( [NotNull] Player player, [CanBeNull] string reason,
                                     bool unban, bool announce, bool raiseEvents ) {
             if( player == null ) throw new ArgumentNullException( "player" );
             if( reason != null && reason.Trim().Length == 0 ) reason = null;
@@ -81,12 +81,7 @@ namespace GemsCraft.Players {
                 }
 
                 // Actually ban
-                bool result;
-                if( unban ) {
-                    result = ProcessUnban( player.Name, reason );
-                } else {
-                    result = ProcessBan( player, player.Name, reason );
-                }
+                var result = unban ? ProcessUnban( player.Name, reason ) : ProcessBan( player, player.Name, reason );
 
                 // Check what happened
                 if( result ) {
@@ -103,18 +98,14 @@ namespace GemsCraft.Players {
                     if( target != null ) {
                         // Log and announce ban/unban
                         if( announce ) {
-                            Server.Message( target, "{0}&W was {1} by {2}",
+                            Server.Message( target, "{0}&W was {1} by {2}", 0,
                                             target.ClassyName, verb, player.ClassyName );
                         }
 
                         // Kick the target
-                        if( !unban ) {
-                            string kickReason;
-                            if( reason != null ) {
-                                kickReason = String.Format( "Banned by {0}: {1}", player.Name, reason );
-                            } else {
-                                kickReason = String.Format( "Banned by {0}", player.Name );
-                            }
+                        if( !unban )
+                        {
+                            var kickReason = reason != null ? $"Banned by {player.Name}: {reason}" : $"Banned by {player.Name}";
                             // TODO: check side effects of not using DoKick
                             target.Kick( kickReason, LeaveReason.Ban );
                         }
@@ -226,30 +217,25 @@ namespace GemsCraft.Players {
                                     player.Name, address, Name, reason ?? "" );
 
                         // Announce ban on the server
-                        if( announce ) {
-                            var can = Server.Players.Can( Permission.ViewPlayerIPs );
-                            can.Message( "&WPlayer {0}&W was IP-banned ({1}) by {2}",
-                                         ClassyName, address, player.ClassyName );
-                            var cant = Server.Players.Cant( Permission.ViewPlayerIPs );
-                            cant.Message( "&WPlayer {0}&W was IP-banned by {1}",
-                                          ClassyName, player.ClassyName );
-                            if( ConfigKey.AnnounceKickAndBanReasons.Enabled() && reason != null ) {
-                                Server.Message( "&WBanIP reason: {0}", reason );
-                            }
+                        if (!announce) return;
+                        var can = Server.Players.Can( Permission.ViewPlayerIPs );
+                        can.Message( "&WPlayer {0}&W was IP-banned ({1}) by {2}", MessageType.Announcement,
+                            ClassyName, address, player.ClassyName );
+                        var cant = Server.Players.Cant( Permission.ViewPlayerIPs );
+                        cant.Message( "&WPlayer {0}&W was IP-banned by {1}", MessageType.Announcement,
+                            ClassyName, player.ClassyName );
+                        if( ConfigKey.AnnounceKickAndBanReasons.Enabled() && reason != null ) {
+                            Server.Message( "&WBanIP reason: {0}", reason );
                         }
                     } else {
                         // IP is already banned
                         string msg, colorMsg;
                         if( player.Can( Permission.ViewPlayerIPs ) ) {
-                            msg = String.Format( "IP of player {0} ({1}) is already banned.",
-                                                 Name, address );
-                            colorMsg = String.Format( "&SIP of player {0}&S ({1}) is already banned.",
-                                                      Name, address );
+                            msg = $"IP of player {Name} ({address}) is already banned.";
+                            colorMsg = $"&SIP of player {Name}&S ({address}) is already banned.";
                         } else {
-                            msg = String.Format( "IP of player {0} is already banned.",
-                                                 Name );
-                            colorMsg = String.Format( "&SIP of player {0}&S is already banned.",
-                                                      ClassyName );
+                            msg = $"IP of player {Name} is already banned.";
+                            colorMsg = $"&SIP of player {ClassyName}&S is already banned.";
                         }
                         throw new PlayerOpException( player, null, PlayerOpExceptionCode.NoActionNeeded, msg, colorMsg );
                     }
@@ -309,10 +295,10 @@ namespace GemsCraft.Players {
                         // Announce unban on the server
                         if( announce ) {
                             var can = Server.Players.Can( Permission.ViewPlayerIPs );
-                            can.Message( "&WPlayer {0}&W was IP-unbanned ({1}) by {2}",
+                            can.Message( "&WPlayer {0}&W was IP-unbanned ({1}) by {2}", MessageType.Chat,
                                          ClassyName, address, player.ClassyName );
                             var cant = Server.Players.Cant( Permission.ViewPlayerIPs );
-                            cant.Message( "&WPlayer {0}&W was IP-unbanned by {1}",
+                            cant.Message( "&WPlayer {0}&W was IP-unbanned by {1}", MessageType.Chat,
                                           ClassyName, player.ClassyName );
                             if( ConfigKey.AnnounceKickAndBanReasons.Enabled() && reason != null ) {
                                 Server.Message( "&WUnbanIP reason: {0}", reason );
@@ -376,10 +362,10 @@ namespace GemsCraft.Players {
                         // Announce ban on the server
                         if( announce ) {
                             var can = Server.Players.Can( Permission.ViewPlayerIPs );
-                            can.Message( "&WPlayer {0}&W was IP-banned ({1}) by {2}",
+                            can.Message( "&WPlayer {0}&W was IP-banned ({1}) by {2}", 0,
                                          ClassyName, address, player.ClassyName );
                             var cant = Server.Players.Cant( Permission.ViewPlayerIPs );
-                            cant.Message( "&WPlayer {0}&W was IP-banned by {1}",
+                            cant.Message( "&WPlayer {0}&W was IP-banned by {1}", 0,
                                           ClassyName, player.ClassyName );
                         }
                         somethingGotBanned = true;
@@ -490,10 +476,10 @@ namespace GemsCraft.Players {
                         // Announce unban on the server
                         if( announce ) {
                             var can = Server.Players.Can( Permission.ViewPlayerIPs );
-                            can.Message( "&WPlayer {0}&W was IP-unbanned ({1}) by {2}",
+                            can.Message( "&WPlayer {0}&W was IP-unbanned ({1}) by {2}", MessageType.Chat,
                                          ClassyName, address, player.ClassyName );
                             var cant = Server.Players.Cant( Permission.ViewPlayerIPs );
-                            cant.Message( "&WPlayer {0}&W was IP-unbanned by {1}",
+                            cant.Message( "&WPlayer {0}&W was IP-unbanned by {1}", MessageType.Chat,
                                           ClassyName, player.ClassyName );
                         }
 
@@ -751,7 +737,7 @@ namespace GemsCraft.Players {
             if( announce ) {
                 if( ConfigKey.AnnounceRankChanges.Enabled() ) {
                     Server.Message( target,
-                                    "{0}&S {1} {2}&S from {3}&S to {4}",
+                                    "{0}&S {1} {2}&S from {3}&S to {4}", 0,
                                     player.ClassyName,
                                     verbed,
                                     ClassyName,
@@ -759,7 +745,7 @@ namespace GemsCraft.Players {
                                     newRank.ClassyName );
                     if( ConfigKey.AnnounceRankChangeReasons.Enabled() && reason != null ) {
                         Server.Message( target,
-                                        "&S{0} reason: {1}",
+                                        "&S{0} reason: {1}", 0,
                                         promoting ? "Promotion" : "Demotion",
                                         reason );
                     }
@@ -838,7 +824,7 @@ namespace GemsCraft.Players {
                     if( target != null ) {
                         target.Message( "&WYou were frozen by {0}", player.ClassyName );
                     }
-                    Server.Message( target, "&SPlayer {0}&S was frozen by {1}",
+                    Server.Message( target, "&SPlayer {0}&S was frozen by {1}", 0,
                                             ClassyName, player.ClassyName );
                 }
 
@@ -895,7 +881,7 @@ namespace GemsCraft.Players {
                     if( target != null ) {
                         target.Message( "&WYou were unfrozen by {0}", player.ClassyName );
                     }
-                    Server.Message( target, "&SPlayer {0}&S was unfrozen by {1}",
+                    Server.Message( target, "&SPlayer {0}&S was unfrozen by {1}", 0,
                                             ClassyName, player.ClassyName );
                 }
 
@@ -973,23 +959,19 @@ namespace GemsCraft.Players {
                                 Name, player.Name, duration );
                     if( announce ) {
                         Player target = PlayerObject;
-                        if( target != null ) {
-                            target.Message( "You were muted by {0}&S for {1}",
-                                            player.ClassyName, duration.ToMiniString() );
-                        }
+                        target?.Message( "You were muted by {0}&S for {1}",
+                            player.ClassyName, duration.ToMiniString() );
                         Server.Message( target,
-                                        "&SPlayer {0}&S was muted by {1}&S for {2}",
+                                        "&SPlayer {0}&S was muted by {1}&S for {2}", 0,
                                         ClassyName, player.ClassyName, duration.ToMiniString() );
                     }
 
                 } else {
                     // no action needed - already muted for same or longer duration
-                    string msg = String.Format( "Player {0} was already muted by {1} ({2} left)",
-                                                ClassyName, MutedBy,
-                                                TimeMutedLeft.ToMiniString() );
-                    string colorMsg = String.Format( "&SPlayer {0}&S was already muted by {1}&S ({2} left)",
-                                                     ClassyName, MutedByClassy,
-                                                     TimeMutedLeft.ToMiniString() );
+                    string msg =
+                        $"Player {ClassyName} was already muted by {MutedBy} ({TimeMutedLeft.ToMiniString()} left)";
+                    string colorMsg =
+                        $"&SPlayer {ClassyName}&S was already muted by {MutedByClassy}&S ({TimeMutedLeft.ToMiniString()} left)";
                     throw new PlayerOpException( player, this, PlayerOpExceptionCode.NoActionNeeded, msg, colorMsg );
                 }
             }
@@ -1021,8 +1003,8 @@ namespace GemsCraft.Players {
                 }
 
                 if( timeLeft <= TimeSpan.Zero ) {
-                    string msg = String.Format( "Player {0} is not currently muted.", Name );
-                    string msgColor = String.Format( "&SPlayer {0}&S is not currently muted.", ClassyName );
+                    string msg = $"Player {Name} is not currently muted.";
+                    string msgColor = $"&SPlayer {ClassyName}&S is not currently muted.";
                     throw new PlayerOpException( player, this, PlayerOpExceptionCode.NoActionNeeded, msg, msgColor );
                 }
 
@@ -1044,15 +1026,12 @@ namespace GemsCraft.Players {
                 Logger.Log( LogType.UserActivity,
                             "Player {0} was unmuted by {1} ({2} was left on the mute)",
                             Name, player.Name, timeLeft );
-                if( announce ) {
-                    Player target = PlayerObject;
-                    if( target != null ) {
-                        target.Message( "You were unmuted by {0}", player.ClassyName );
-                    }
-                    Server.Message( target,
-                                    "&SPlayer {0}&S was unmuted by {1}",
-                                    ClassyName, player.ClassyName );
-                }
+                if (!announce) return;
+                Player target = PlayerObject;
+                target?.Message( "You were unmuted by {0}", player.ClassyName );
+                Server.Message( target,
+                    "&SPlayer {0}&S was unmuted by {1}", 0,
+                    ClassyName, player.ClassyName );
             }
         }
 

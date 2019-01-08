@@ -75,7 +75,7 @@ namespace GemsCraft.Games
             stopwatch.Reset();
             stopwatch.Start();
             world_.gameMode = GameMode.Infection;
-            delayTask = Scheduler.NewTask(t => world_.Players.Message("&WInfection &fwill be starting in {0} seconds: &WGet ready!", (timeDelay - stopwatch.Elapsed.Seconds)));
+            delayTask = Scheduler.NewTask(t => world_.Players.Message("&WInfection &fwill be starting in {0} seconds: &WGet ready!", 0, (timeDelay - stopwatch.Elapsed.Seconds)));
             delayTask.RunRepeating(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(10), (int)Math.Floor((double)(timeDelay/10)));//Start task immediately, send message every 10s
             if (stopwatch.Elapsed.Seconds > 11)
             {
@@ -93,7 +93,7 @@ namespace GemsCraft.Games
             //world_.Players.Send(PacketWriter.MakeHackControl(1, 1, 1, 1, 1, -1)); Commented out until classicube clients support hax packet
             if (p != null && world_ != null)
             {
-                world_.Players.Message("{0}&S stopped the game of Infection on world {1}", p.ClassyName, world_.ClassyName);                    
+                world_.Players.Message("{0}&S stopped the game of Infection on world {1}", 0, p.ClassyName, world_.ClassyName);                    
             }
             stopwatch.Reset();//reset timer for next game
             RevertGame();
@@ -118,7 +118,7 @@ namespace GemsCraft.Games
             world_.gameMode = GameMode.Infection;
             stopwatch.Reset();
             stopwatch.Start();
-            Scheduler.NewTask(t => world_.Players.Message("&WInfection &fwill be starting in {0} seconds: &WGet ready!", (timeDelay - stopwatch.Elapsed.Seconds))).RunRepeating(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(10), 2);
+            Scheduler.NewTask(t => world_.Players.Message("&WInfection &fwill be starting in {0} seconds: &WGet ready!", 0, (timeDelay - stopwatch.Elapsed.Seconds))).RunRepeating(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(10), 2);
             if (stopwatch.Elapsed.Seconds > 11)
             {
                 stopwatch.Stop();
@@ -160,13 +160,13 @@ namespace GemsCraft.Games
                         }
                        
                         p.TeleportTo(new Position(x, y, z1 + 2).ToVector3I().ToPlayerCoords()); //teleport players to a random position
-                        beginGame(p);
+                        BeginGame(p);
 
                         Player.Moving += PlayerMoved;
                         Player.JoinedWorld += PlayerLeftWorld;
                         Player.Disconnected += PlayerLeftServer;
 
-                        chooseInfected();
+                        ChooseInfected();
                         
                     }
                     isOn = true;
@@ -180,18 +180,18 @@ namespace GemsCraft.Games
             {
                 if (world_.Players.Count(player => player.Info.isInfected) == world_.Players.Count())
                 {
-                    world_.Players.Message("");
-                    world_.Players.Message("&cThe Zombies have won! All humans have died off!");
+                    world_.Players.Message("", 0);
+                    world_.Players.Message("&cThe Zombies have won! All humans have died off!", 0);
                     Player.Moving -= PlayerMoved;
                     Player.JoinedWorld -= PlayerLeftWorld;
                     Player.Disconnected -= PlayerLeftServer;
                     RevertGame();
                     return;
                 }
-                if (world_.Players.Count(player => player.Info.isInfected) == 0 && world_.Players.Count() > 0)
+                if (world_.Players.Count(player => player.Info.isInfected) == 0 && world_.Players.Any())
                 {
-                    world_.Players.Message("");
-                    world_.Players.Message("&aThe Zombies have died off! The Humans win!");
+                    world_.Players.Message("", 0);
+                    world_.Players.Message("&aThe Zombies have died off! The Humans win!", 0);
                     Player.Moving -= PlayerMoved;
                     Player.JoinedWorld -= PlayerLeftWorld;
                     Player.Disconnected -= PlayerLeftServer;
@@ -200,8 +200,8 @@ namespace GemsCraft.Games
                 }
                 if (timeLeft == 0)
                 {
-                    world_.Players.Message("");
-                    world_.Players.Message("&aThe Zombies failed to infect everyone! The Humans win!");
+                    world_.Players.Message("", 0);
+                    world_.Players.Message("&aThe Zombies failed to infect everyone! The Humans win!", 0);
                     Player.Moving -= PlayerMoved;
                     Player.JoinedWorld -= PlayerLeftWorld;
                     Player.Disconnected -= PlayerLeftServer;
@@ -213,18 +213,18 @@ namespace GemsCraft.Games
 
             if (lastChecked != null && (DateTime.Now - lastChecked).TotalSeconds > 29.9 && timeLeft < timeLimit)
             {
-                world_.Players.Message("&sThere are currently {0} human(s) and {1} zombie(s) left on {2}.", world_.Players.Count() - world_.Players.Count(player => player.Info.isInfected), world_.Players.Count(player => player.Info.isInfected), world_.ClassyName);
-                world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", timeLeft);
+                world_.Players.Message("&sThere are currently {0} human(s) and {1} zombie(s) left on {2}.", 0, world_.Players.Count() - world_.Players.Count(player => player.Info.isInfected), world_.Players.Count(player => player.Info.isInfected), world_.ClassyName);
+                world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", 0, timeLeft);
                 lastChecked = DateTime.Now;
             }
         }
 
-        public static void beginGame(Player player)
+        public static void BeginGame(Player player)
         {
             player.Info.isPlayingInfection = true;
         }
        
-        public static void chooseInfected()
+        public static void ChooseInfected()
         {
             Random randInfected = new Random();
             int randNumber = randInfected.Next(0, world_.Players.Length);
@@ -232,7 +232,7 @@ namespace GemsCraft.Games
 
             if (world_.Players.Count(player => player.Info.isInfected) == 0)
             {
-                world_.Players.Message("&c{0} has been infected!", infected.Name);
+                world_.Players.Message("&c{0} has been infected!", 0, infected.Name);
             }
 
             infected.Info.isInfected = true;
@@ -243,7 +243,7 @@ namespace GemsCraft.Games
 
         public static void Infect(Player target, Player player)
         {
-            world_.Players.Message("&c{0} has infected {1}!", player.Name, target.Name);
+            world_.Players.Message("&c{0} has infected {1}!", 0, player.Name, target.Name);
             target.Info.isInfected = true;
             target.iName = "_Infected_";
             target.Info.tempDisplayedName = "&f_Infected_";

@@ -876,7 +876,7 @@ THE SOFTWARE.*/
             zones.Rename( oldZone, newName );
 
             // announce the rename
-            playerWorld.Players.Message( "&SZone \"{0}\" was renamed to \"{1}&S\" by {2}",
+            playerWorld.Players.Message( "&SZone \"{0}\" was renamed to \"{1}&S\" by {2}", 0,
                                          fullOldName, oldZone.ClassyName, player.ClassyName );
             Logger.Log( LogType.UserActivity,
                         "Player {0} renamed zone \"{1}\" to \"{2}\" on world {3}",

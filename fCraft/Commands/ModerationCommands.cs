@@ -662,7 +662,7 @@ THE SOFTWARE.*/
 
                 if (string.IsNullOrEmpty(item))
                 {
-                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas pummeled into the ground by {1}", target.ClassyName, player.ClassyName);
+                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas pummeled into the ground by {1}", 0, target.ClassyName, player.ClassyName);
                     target.Message("Do &a/Spawn&s to get back above ground.");
                     IRC.PlayerSomethingMessage(player, "beat down", target, null);
                     player.Info.LastUsedBeatDown = DateTime.Now;
@@ -682,7 +682,7 @@ THE SOFTWARE.*/
                     aMessage = String.Format("{1}&S Beat Down {0}&S like a dog", target.ClassyName, player.ClassyName);
                 else
                 {
-                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas pummeled into the ground by {1}", target.ClassyName, player.ClassyName);
+                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas pummeled into the ground by {1}", 0, target.ClassyName, player.ClassyName);
                     target.Message("Do &a/Spawn&s to get back above ground.");
                     IRC.PlayerSomethingMessage(player, "beat down", target, null);
                     player.Info.LastUsedBeatDown = DateTime.Now;
@@ -854,7 +854,7 @@ THE SOFTWARE.*/
                         int tNewMoney = target.Info.Money + amountnum;
                         player.Message("&eYou have paid &C{1}&e to {0}&e.", target.ClassyName, amountnum);
                         target.Message("&e{0} &ehas paid you {1} &ebit(s).", player.ClassyName, amountnum);
-                        Server.Players.Except(target).Except(player).Message("&e{0} &ewas paid {1} &ebit(s) from {2}&e.", target.ClassyName, amountnum, player.ClassyName);
+                        Server.Players.Except(target).Except(player).Message("&e{0} &ewas paid {1} &ebit(s) from {2}&e.", 0, target.ClassyName, amountnum, player.ClassyName);
                         player.Info.Money = pNewMoney;
                         target.Info.Money = tNewMoney;
                         return;
@@ -925,7 +925,7 @@ THE SOFTWARE.*/
                             int tNewMoney = target.Info.Money + amountnum;
                             player.Message("&eYou have given {0} &C{1} &ebit(s).", target.ClassyName, amountnum);
                             target.Message("&e{0} &ehas given you {1} &ebit(s).", player.ClassyName, amountnum);
-                            Server.Players.Except(target).Except(player).Message("&e{0} &ewas given {1} &ebit(s) from {2}&e.", target.ClassyName, amountnum, player.ClassyName);
+                            Server.Players.Except(target).Except(player).Message("&e{0} &ewas given {1} &ebit(s) from {2}&e.", 0, target.ClassyName, amountnum, player.ClassyName);
                             target.Info.Money = tNewMoney;
                             return;
                         }
@@ -976,7 +976,7 @@ THE SOFTWARE.*/
                                 player.Message("&eYou have taken &c{1}&e from {0}.", target.ClassyName, amountnum);
                                 target.Message("&e{0} &ehas taken {1} &ebit(s) from you.", player.ClassyName, amountnum);
                                 
-                                Server.Players.Except(target).Except(player).Message("&e{0} &etook {1} &ebit(s) from {2}&e.", player.ClassyName, amountnum, target.ClassyName);
+                                Server.Players.Except(target).Except(player).Message("&e{0} &etook {1} &ebit(s) from {2}&e.", 0, player.ClassyName, amountnum, target.ClassyName);
                                 target.Info.Money = tNewMoney;
                                 return;
                             }
@@ -1039,7 +1039,7 @@ THE SOFTWARE.*/
                                 int tNewMoney = target.Info.Money + amountnum;
                                 player.Message("&eYou have paid &C{1}&e to {0}&e.", target.ClassyName, amountnum);
                                 target.Message("&e{0} &ehas paid you {1} &ebit(s).", player.ClassyName, amountnum);
-                                Server.Players.Except(target).Except(player).Message("&e{0} &ewas paid {1} &ebit(s) from {2}&e.", target.ClassyName, amountnum, player.ClassyName);
+                                Server.Players.Except(target).Except(player).Message("&e{0} &ewas paid {1} &ebit(s) from {2}&e.", 0, target.ClassyName, amountnum, player.ClassyName);
                                 player.Info.Money = pNewMoney;
                                 target.Info.Money = tNewMoney;
                                 return;
@@ -1277,7 +1277,7 @@ THE SOFTWARE.*/
                 target.TeleportTo(slap);
                 if (string.IsNullOrEmpty(item))
                 {
-                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas &aPunched &Sin the &cFace &Sby {1}", target.ClassyName, player.ClassyName);
+                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas &aPunched &Sin the &cFace &Sby {1}", 0, target.ClassyName, player.ClassyName);
                     IRC.PlayerSomethingMessage(player, "punched", target, null);
                     player.Info.LastUsedSlap = DateTime.Now;
                     return;
@@ -1292,7 +1292,7 @@ THE SOFTWARE.*/
                     aMessage = String.Format("{0} &Swas &cKnocked Out &Sby {1}", target.ClassyName, player.ClassyName);
                 else
                 {
-                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas &aPunched &Sin the &cFace &Sby {1}", target.ClassyName, player.ClassyName);
+                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas &aPunched &Sin the &cFace &Sby {1}", 0, target.ClassyName, player.ClassyName);
                     IRC.PlayerSomethingMessage(player, "punched", target, null);
                     player.Info.LastUsedSlap = DateTime.Now;
                     return;
@@ -1472,11 +1472,11 @@ THE SOFTWARE.*/
         {
             if (player.Immortal){
                 player.Immortal = false;
-                Server.Players.Message("{0}&S is no longer Immortal", player.ClassyName);
+                Server.Players.Message("{0}&S is no longer Immortal", 0, player.ClassyName);
                 return;
             }
             player.Immortal = true;
-            Server.Players.Message("{0}&S is now Immortal", player.ClassyName);
+            Server.Players.Message("{0}&S is now Immortal", 0, player.ClassyName);
         }
         
         
@@ -1528,7 +1528,7 @@ THE SOFTWARE.*/
                 {
                     player.TeleportTo(player.World.Map.Spawn);
                     player.Info.LastUsedKill = DateTime.Now;
-                    Server.Players.CanSee(target).Message("{0}&C killed itself in confusion!", player);
+                    Server.Players.CanSee(target).Message("{0}&C killed itself in confusion!", 0, player);
                     return;
                 }
 
@@ -1536,14 +1536,14 @@ THE SOFTWARE.*/
                 {
                     target.TeleportTo(player.World.Map.Spawn);
                     player.Info.LastUsedKill = DateTime.Now;
-                    Server.Players.CanSee(target).Message("{0}&C was &4Killed&C by {1}", target.ClassyName, player.ClassyName);
+                    Server.Players.CanSee(target).Message("{0}&C was &4Killed&C by {1}", 0, target.ClassyName, player.ClassyName);
                     return;
                 }
                 else if (player.Can(Permission.Kill, target.Info.Rank) && reason != null)
                 {
                     target.TeleportTo(player.World.Map.Spawn);
                     player.Info.LastUsedKill = DateTime.Now;
-                    Server.Players.CanSee(target).Message("{0}&C was &4Killed&C by {1}&c: {2}", target.ClassyName, player.ClassyName, reason);
+                    Server.Players.CanSee(target).Message("{0}&C was &4Killed&C by {1}&c: {2}", 0, target.ClassyName, player.ClassyName, reason);
                 }
                 else
                 {
@@ -1598,7 +1598,7 @@ THE SOFTWARE.*/
                 target.previousWorld = null;
                 target.TeleportTo(slap);
                 if (string.IsNullOrEmpty(item)){
-                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas slapped sky high by {1}", target.ClassyName, player.ClassyName);
+                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas slapped sky high by {1}", 0, target.ClassyName, player.ClassyName);
                     IRC.PlayerSomethingMessage(player, "slapped", target, null);
                     player.Info.LastUsedSlap = DateTime.Now;
                     return;
@@ -1620,7 +1620,7 @@ THE SOFTWARE.*/
                 else if (item.ToLower() == "ho")
                     aMessage = String.Format("{1} &Sslapped {0}&S like a Pimp slaps a Ho", target.ClassyName, player.ClassyName);
                 else{
-                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas slapped sky high by {1}", target.ClassyName, player.ClassyName);
+                    Server.Players.CanSee(target).Union(target).Message("{0} &Swas slapped sky high by {1}", 0, target.ClassyName, player.ClassyName);
                     IRC.PlayerSomethingMessage(player, "slapped", target, null);
                     player.Info.LastUsedSlap = DateTime.Now;
                     return;
@@ -2022,7 +2022,7 @@ THE SOFTWARE.*/
                 {
                     Player targetPlayer = target;
                     target.Kick(player, "Manually disconnected by " + player.Name, LeaveReason.Kick, false, true, false);
-                    Server.Players.Message("{0} &Swas manually disconnected by {1}", target.ClassyName, player.ClassyName);
+                    Server.Players.Message("{0} &Swas manually disconnected by {1}", 0, target.ClassyName, player.ClassyName);
                 }
                 catch (PlayerOpException ex)
                 {
@@ -2472,7 +2472,7 @@ THE SOFTWARE.*/
 
             if( !silent ) {
                 if( ConfigKey.ShowConnectionMessages.Enabled() ) {
-                    Server.Players.CantSee( player ).Message( "&SPlayer {0}&S left the server.", player.ClassyName );
+                    Server.Players.CantSee( player ).Message( "&SPlayer {0}&S left the server.", 0, player.ClassyName );
                 }
                 if( ConfigKey.IRCBotAnnounceServerJoins.Enabled() ) {
                     IRC.PlayerDisconnectedHandler( null, new PlayerDisconnectedEventArgs( player, LeaveReason.ClientQuit, true ) );
@@ -2480,7 +2480,7 @@ THE SOFTWARE.*/
             }
 
             // for aware players: notify
-            Server.Players.CanSee( player ).Message( "&SPlayer {0}&S is now hidden.", player.ClassyName );
+            Server.Players.CanSee( player ).Message( "&SPlayer {0}&S is now hidden.", 0, player.ClassyName );
 
             Player.RaisePlayerHideChangedEvent( player );
         }
@@ -2508,7 +2508,7 @@ THE SOFTWARE.*/
             bool silent = cmd.HasNext;
 
             // for aware players: notify
-            Server.Players.CanSee( player ).Message( "&SPlayer {0}&S is no longer hidden.",
+            Server.Players.CanSee( player ).Message( "&SPlayer {0}&S is no longer hidden.", 0,
                                                      player.ClassyName );
             player.Message( "&8You are no longer hidden." );
             player.Info.IsHidden = false;

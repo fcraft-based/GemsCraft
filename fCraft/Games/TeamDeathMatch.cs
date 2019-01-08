@@ -87,7 +87,7 @@ namespace GemsCraft.Games
         {
             world_.Hax = false;
             world_.gameMode = GameMode.TeamDeathMatch; //set the game mode
-            delayTask = Scheduler.NewTask(t => world_.Players.Message("&WTEAM DEATHMATCH &fwill be starting in {0} seconds: &WGet ready!", timeDelay));
+            delayTask = Scheduler.NewTask(t => world_.Players.Message("&WTEAM DEATHMATCH &fwill be starting in {0} seconds: &WGet ready!", MessageType.Announcement, timeDelay));
             delayTask.RunRepeating(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(10), 1);                  
         }
 
@@ -99,9 +99,9 @@ namespace GemsCraft.Games
             {
                 pl.JoinWorld(world_, WorldChangeReason.Rejoin);
             }
-            if (p != null && world_ != null)
+            if (p != null)
             {
-                world_.Players.Message("{0}&S stopped the game of Team Deathmatch early on world {1}",
+                world_?.Players.Message("{0}&S stopped the game of Team Deathmatch early on world {1}", MessageType.Announcement,
                     p.ClassyName, world_.ClassyName);
             }
             if (world_.Players.Count() > 1)
@@ -148,7 +148,7 @@ namespace GemsCraft.Games
             {
                 if (world_.Players.Count() < 2) //in case players leave the world or disconnect during the start delay
                 {
-                    world_.Players.Message("&WTeam DeathMatch&s requires at least 2 people to play.");
+                    world_.Players.Message("&WTeam DeathMatch&s requires at least 2 people to play.", MessageType.Chat);
                     return;
                 }
                 if (startTime != null && (DateTime.Now - startTime).TotalSeconds > timeDelay)
@@ -158,7 +158,7 @@ namespace GemsCraft.Games
 
                         if (!manualTeams)
                         {
-                            assignTeams(p); //assigns teams (who knew?)
+                            AssignTeams(p); //assigns teams (who knew?)
                         }
                         if (p.Info.isOnRedTeam) { p.TeleportTo(TeamDeathMatch.redSpawn); } //teleport players to the team spawn
                         if (p.Info.isOnBlueTeam) { p.TeleportTo(TeamDeathMatch.blueSpawn); }
@@ -208,7 +208,7 @@ namespace GemsCraft.Games
             }
             if (blueScore == scoreLimit && redScore == scoreLimit) //if they somehow manage to tie which I am pretty sure is impossible
             {
-                world_.Players.Message("The teams tied at {0}!", redScore);
+                world_.Players.Message("The teams tied at {0}!", MessageType.Announcement, redScore);
                 Stop(null);
                 return;
             }
@@ -223,7 +223,7 @@ namespace GemsCraft.Games
                 }
                 if (redScore == blueScore)
                 {
-                    world_.Players.Message("&fThe teams tied {0} to {1}!", blueScore, redScore);
+                    world_.Players.Message("&fThe teams tied {0} to {1}!", MessageType.Announcement, blueScore, redScore);
                     Stop(null);
                     return;
                 }
@@ -242,18 +242,18 @@ namespace GemsCraft.Games
                 {
                     if (blueTeamCount == 0)
                     {
-                        if (world_.Players.Count() >= 1)
+                        if (world_.Players.Any())
                         {
-                            world_.Players.Message("&1Blue Team &fhas forfeited the game. &cRed Team &fwins!");
+                            world_.Players.Message("&1Blue Team &fhas forfeited the game. &cRed Team &fwins!", MessageType.Announcement);
                         }
                         Stop(null);
                         return;
                     }
                     if (redTeamCount == 0)
                     {
-                        if (world_.Players.Count() >= 1)
+                        if (world_.Players.Any())
                         {
-                            world_.Players.Message("&cRed Team &fhas forfeited the game. &1Blue Team &fwins!");
+                            world_.Players.Message("&cRed Team &fhas forfeited the game. &1Blue Team &fwins!", MessageType.Announcement);
                         }
                         Stop(null);
                         return;
@@ -267,39 +267,40 @@ namespace GemsCraft.Games
             }
             timeLeft = Convert.ToInt16(((timeDelay + timeLimit) - (DateTime.Now - startTime).TotalSeconds));
             //Keep the players updated about the score
-            if (lastChecked != null && (DateTime.Now - lastChecked).TotalSeconds > 29.8 && timeLeft <= timeLimit)
+            if ((DateTime.Now - lastChecked).TotalSeconds > 29.8 && timeLeft <= timeLimit)
             {               
                 if (redScore > blueScore)
                 {
-                    world_.Players.Message("&fThe &cRed Team&f is winning {0} to {1}.", redScore, blueScore);
-                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", timeLeft);
+                    world_.Players.Message("&fThe &cRed Team&f is winning {0} to {1}.", MessageType.Announcement, redScore, blueScore);
+                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", MessageType.Announcement, timeLeft);
                 }
                 if (redScore < blueScore)
                 {
-                    world_.Players.Message("&fThe &1Blue Team&f is winning {0} to {1}.", blueScore, redScore);
-                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", timeLeft);
+                    world_.Players.Message("&fThe &1Blue Team&f is winning {0} to {1}.", MessageType.Announcement, blueScore, redScore);
+                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", MessageType.Announcement, timeLeft);
                 }
                 if (redScore == blueScore)
                 {
-                    world_.Players.Message("&fThe teams are tied at {0}!", blueScore); 
-                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", timeLeft);
+                    world_.Players.Message("&fThe teams are tied at {0}!", MessageType.Announcement, blueScore); 
+                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", MessageType.Announcement, timeLeft);
                 }
                 lastChecked = DateTime.Now;
             }
             if (timeLeft == 10)
             {
-                world_.Players.Message("&WOnly 10 seconds left!");
+                world_.Players.Message("&WOnly 10 seconds left!", MessageType.Announcement);
             }
         }
 
-        static public void assignTeams(Player p)    //Assigns teams to all players in the world
+        public static void AssignTeams(Player p)    //Assigns teams to all players in the world
         {
             //if there are no players assigned to any team yet
             if (redTeamCount == 0) { AssignRed(p); return; }
             //if the red team has more players and the red team has already been assigned at least one player
             if (blueTeamCount < redTeamCount) { AssignBlue(p); return; }
             //if the teams have the same number of players, by default the next player will be assigned to the red team
-            if (blueTeamCount == redTeamCount) { AssignRed(p); return; }
+            if (blueTeamCount != redTeamCount) return;
+            AssignRed(p);
         }
 
         public static void RevertGame() //Reset game bools/stats and stop timers
@@ -327,37 +328,37 @@ namespace GemsCraft.Games
             List<PlayerInfo> TDPlayersBlue = new List<PlayerInfo>(PlayerDB.PlayerInfoList.Where(r => r.isPlayingTD).Where(r => r.isOnBlueTeam).ToArray().OrderBy(r => r.totalKillsTDM).Reverse());
             if (redScore < blueScore)
             {
-                world_.Players.Message("&1Blue Team &f{0}&1:", TeamDeathMatch.blueScore);
+                world_.Players.Message("&1Blue Team &f{0}&1:", 0, TeamDeathMatch.blueScore);
                 for (int i = 0; i < TDPlayersBlue.Count(); i++)
                 {
                     string sbNameBlue = TDPlayersBlue[i].Name;
-                    world_.Players.Message("&1{0} &f| &c{1} &fKills - &c{2} &fDeaths",
+                    world_.Players.Message("&1{0} &f| &c{1} &fKills - &c{2} &fDeaths", 0,
                         sbNameBlue, TDPlayersBlue[i].gameKills, TDPlayersBlue[i].gameDeaths);
                 }
-                world_.Players.Message("&f--------------------------------------------");
-                world_.Players.Message("&CRed Team &f{0}&1:", TeamDeathMatch.redScore);
+                world_.Players.Message("&f--------------------------------------------", 0);
+                world_.Players.Message("&CRed Team &f{0}&1:", 0, TeamDeathMatch.redScore);
                 for (int i = 0; i < TDPlayersRed.Count(); i++)
                 {
                     string sbNameRed = TDPlayersRed[i].Name;
-                    world_.Players.Message("&C{0} &f| &c{1} &fKills - &c{2} &fDeaths",
+                    world_.Players.Message("&C{0} &f| &c{1} &fKills - &c{2} &fDeaths", 0,
                         sbNameRed, TDPlayersRed[i].gameKills, TDPlayersRed[i].gameDeaths);
                 }
             }
             if (redScore >= blueScore)
             {
-                world_.Players.Message("&CRed Team &f{0}&1:", TeamDeathMatch.redScore);
+                world_.Players.Message("&CRed Team &f{0}&1:", 0, TeamDeathMatch.redScore);
                 for (int i = 0; i < TDPlayersRed.Count(); i++)
                 {
                     string sbNameRed = TDPlayersRed[i].Name;
-                    world_.Players.Message("&C{0} &f| &c{1} &fKills - &c{2} &fDeaths",
+                    world_.Players.Message("&C{0} &f| &c{1} &fKills - &c{2} &fDeaths", 0,
                         sbNameRed, TDPlayersRed[i].gameKills, TDPlayersRed[i].gameDeaths);
                 }
-                world_.Players.Message("&f--------------------------------------------");
-                world_.Players.Message("&1Blue Team &f{0}&1:", TeamDeathMatch.blueScore);
+                world_.Players.Message("&f--------------------------------------------", 0);
+                world_.Players.Message("&1Blue Team &f{0}&1:", 0, TeamDeathMatch.blueScore);
                 for (int i = 0; i < TDPlayersBlue.Count(); i++)
                 {
                     string sbNameBlue = TDPlayersBlue[i].Name;
-                    world_.Players.Message("&1{0} &f| &c{1} &fKills - &c{2} &fDeaths",
+                    world_.Players.Message("&1{0} &f| &c{1} &fKills - &c{2} &fDeaths", 0,
                         sbNameBlue, TDPlayersBlue[i].gameKills, TDPlayersBlue[i].gameDeaths);
                 }              
             }

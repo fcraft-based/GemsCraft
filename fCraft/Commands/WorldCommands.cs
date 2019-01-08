@@ -816,7 +816,7 @@ THE SOFTWARE.*/
                         {
                             world.EnableGunPhysics(player, false);
                         }
-                        Server.Players.Message("{0}&S turned ALL Physics on for {1}", player.ClassyName, world.ClassyName);
+                        Server.Players.Message("{0}&S turned ALL Physics on for {1}", MessageType.Chat, player.ClassyName, world.ClassyName);
                         Logger.Log(LogType.SystemActivity, "{0} turned ALL Physics on for {1}", player.Name, world.Name);
                     }
 
@@ -841,7 +841,7 @@ THE SOFTWARE.*/
                         {
                             world.DisableGunPhysics(player, false);
                         }
-                        Server.Players.Message("{0}&S turned ALL Physics off for {1}", player.ClassyName, world.ClassyName);
+                        Server.Players.Message("{0}&S turned ALL Physics off for {1}", MessageType.Chat, player.ClassyName, world.ClassyName);
                         Logger.Log(LogType.SystemActivity, "{0} turned ALL Physics off for {1}", player.Name, world.Name);
                     }
                     break;
@@ -1300,8 +1300,8 @@ THE SOFTWARE.*/
                             var recepientList = Server.Players.Can(Permission.ReadStaffChat)
                                                   .NotIgnoring(player)
                                                   .Union(player);
-                            string message = String.Format("{0}&C would like staff to review their realm", player.ClassyName);
-                            recepientList.Message(message);
+                            string message = $"{player.ClassyName}&C would like staff to review their realm";
+                            recepientList.Message(message, MessageType.Announcement);
                         }
                         else
                         {
@@ -1315,8 +1315,8 @@ THE SOFTWARE.*/
                             var recepientList = Server.Players.Can(Permission.ReadStaffChat)
                                                   .NotIgnoring(player)
                                                   .Union(player);
-                            string message = String.Format("{0}&C would like staff to review their realm", player.ClassyName);
-                            recepientList.Message(message);
+                            string message = $"{player.ClassyName}&C would like staff to review their realm";
+                            recepientList.Message(message, MessageType.Announcement);
                         }
 
                         else
@@ -1336,7 +1336,7 @@ THE SOFTWARE.*/
 
                     if (world.IsRealm)
                     {
-                        Server.Players.Message("{0}&S likes realm {1}.",
+                        Server.Players.Message("{0}&S likes realm {1}.", MessageType.Announcement,
                                                player.ClassyName, world.ClassyName);
                         return;
                     }
@@ -1849,8 +1849,8 @@ THE SOFTWARE.*/
 
         internal static void Guestwipe(Player player, Command cmd)
         {
-            Scheduler.NewTask(t => Server.Players.Message("&9Warning! The Guest world will be wiped in 30 seconds.")).RunOnce(TimeSpan.FromSeconds(1));
-            Scheduler.NewTask(t => Server.Players.Message("&9Warning! The Guest world will be wiped in 15 seconds.")).RunOnce(TimeSpan.FromSeconds(16));
+            Scheduler.NewTask(t => Server.Players.Message("&9Warning! The Guest world will be wiped in 30 seconds.", MessageType.Chat)).RunOnce(TimeSpan.FromSeconds(1));
+            Scheduler.NewTask(t => Server.Players.Message("&9Warning! The Guest world will be wiped in 15 seconds.", MessageType.Chat)).RunOnce(TimeSpan.FromSeconds(16));
             Scheduler.NewTask(t => player.Message("&4Prepare to use /ok when notified.")).RunOnce(TimeSpan.FromSeconds(25));
             Scheduler.NewTask(t => WorldLoadHandler(player, new Command("/wload guestwipe guest"))).RunOnce(TimeSpan.FromSeconds(27));
             return;
@@ -3294,7 +3294,7 @@ THE SOFTWARE.*/
                             player.MessageNoRank(rankName);
                             return;
                         }
-                        listName = String.Format("worlds where {0}&S+ can build", rank.ClassyName);
+                        listName = $"worlds where {rank.ClassyName}&S+ can build";
                         extraParam = "@" + rank.Name + " ";
                         worlds = WorldManager.Worlds.Where(w => (w.BuildSecurity.MinRank <= rank) && player.CanSee(w))
                                                     .ToArray();
@@ -3317,7 +3317,7 @@ THE SOFTWARE.*/
             }
             else if (worlds.Length <= WorldNamesPerPage || player.IsSuper)
             {
-                player.MessagePrefixed("&S  ", "&SThere are {0} {1}: {2}",
+                player.MessagePrefixed("&S  ", "&SThere are {0} {1}: {2}", MessageType.Chat,
                                         worlds.Length, listName, worlds.JoinToClassyString());
 
             }
@@ -3328,7 +3328,7 @@ THE SOFTWARE.*/
                     offset = Math.Max(0, worlds.Length - WorldNamesPerPage);
                 }
                 World[] worldsPart = worlds.Skip(offset).Take(WorldNamesPerPage).ToArray();
-                player.MessagePrefixed("&S   ", "&S{0}: {1}",
+                player.MessagePrefixed("&S   ", "&S{0}: {1}", MessageType.Chat,
                                         listName.UppercaseFirst(), worldsPart.JoinToClassyString());
 
                 if (offset + worldsPart.Length < worlds.Length)
@@ -4259,8 +4259,7 @@ THE SOFTWARE.*/
                 world.MapChangedBy = player.Name;
                 world.ChangeMap(map);
 
-                world.Players.Message(player, "{0}&S loaded a new map for this world.",
-                                              player.ClassyName);
+                world.Players.Message(player, "{0}&S loaded a new map for this world.", MessageType.Chat, player.ClassyName);
                 player.MessageNow("New map loaded for the world {0}", world.ClassyName);
 
                 Logger.Log(LogType.UserActivity,
@@ -4353,7 +4352,7 @@ THE SOFTWARE.*/
                             return;
                         }
 
-                        world.Players.Message(player, "{0}&S loaded a new map for the world {1}",
+                        world.Players.Message(player, "{0}&S loaded a new map for the world {1}", MessageType.Chat,
                                                player.ClassyName, world.ClassyName);
                         player.MessageNow("New map for the world {0}&S has been loaded.", world.ClassyName);
                         Logger.Log(LogType.UserActivity,
@@ -4896,7 +4895,7 @@ THE SOFTWARE.*/
 
             WorldManager.SaveWorldList();
             Server.Message(player,
-                            "{0}&S removed {1}&S from the world list.",
+                            "{0}&S removed {1}&S from the world list.", 0,
                             player.ClassyName, world.ClassyName);
             player.Message("Removed {0}&S from the world list. You can now delete the map file ({1}.fcm) manually.",
                             world.ClassyName, world.Name);

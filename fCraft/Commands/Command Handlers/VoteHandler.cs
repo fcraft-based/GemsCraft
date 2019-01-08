@@ -90,7 +90,7 @@ namespace GemsCraft.Commands.Command_Handlers
                     }
                     Voted.Clear();
                     TargetName = null;
-                    Server.Players.Message("{0} &Saborted the vote.", player.ClassyName);
+                    Server.Players.Message("{0} &Saborted the vote.", 0, player.ClassyName);
                     break;
 
                 case "yes":
@@ -129,8 +129,8 @@ namespace GemsCraft.Commands.Command_Handlers
                     break;
 
                 case "ask":
-                    string AskQuestion = cmd.NextAll();
-                    Question = AskQuestion;
+                    string askQuestion = cmd.NextAll();
+                    Question = askQuestion;
                     if (!player.Can(Permission.MakeVotes))
                     {
                         player.Message("You do not have permissions to ask a question");
@@ -151,8 +151,8 @@ namespace GemsCraft.Commands.Command_Handlers
                       {
                           NewVote();
                           VoteStarter = player.ClassyName;
-                          Server.Players.Message("{0}&S Asked: {1}", player.ClassyName, Question);
-                          Server.Players.Message("&9Vote now! &S/Vote &AYes &Sor /Vote &CNo");
+                          Server.Players.Message("{0}&S Asked: {1}", MessageType.Announcement, player.ClassyName, Question);
+                          Server.Players.Message("&9Vote now! &S/Vote &AYes &Sor /Vote &CNo", 0);
                           VoteIsOn = true;
                           Thread.Sleep(60000);
                           VoteCheck();
@@ -163,15 +163,13 @@ namespace GemsCraft.Commands.Command_Handlers
 
         private static void VoteCheck()
         {
-            if (VoteIsOn)
+            if (!VoteIsOn) return;
+            Server.Players.Message("{0}&S Asked: {1} \n&SResults are in! Yes: &A{2} &SNo: &C{3}", 0, VoteStarter,
+                Question, VotedYes, VotedNo);
+            VoteIsOn = false;
+            foreach (Player v in Voted)
             {
-                Server.Players.Message("{0}&S Asked: {1} \n&SResults are in! Yes: &A{2} &SNo: &C{3}", VoteStarter,
-                                       Question, VotedYes, VotedNo);
-                VoteIsOn = false;
-                foreach (Player V in Voted)
-                {
-                    V.Info.HasVoted = false;
-                }
+                v.Info.HasVoted = false;
             }
         }
 

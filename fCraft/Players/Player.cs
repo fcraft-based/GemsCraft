@@ -695,7 +695,7 @@ namespace GemsCraft.Players
                                                             .ToArray();
                         if (spectators.Length > 0)
                         {
-                            spectators.Message("[Spectate]: &Fto rank {0}&F: {1}", rank.ClassyName, messageText);
+                            spectators.Message("[Spectate]: &Fto rank {0}&F: {1}", MessageType.Chat, rank.ClassyName, messageText);
                         }
 
                         Chat.SendRank(this, rank, messageText);
@@ -760,7 +760,7 @@ namespace GemsCraft.Players
                                                             .ToArray();
                         if (spectators.Length > 0)
                         {
-                            spectators.Message("[Spectate]: &Fto world {0}&F: {1}", world.ClassyName, messageText);
+                            spectators.Message("[Spectate]: &Fto world {0}&F: {1}", MessageType.Chat, world.ClassyName, messageText);
                         }
                         Chat.SendWorld(this, world, messageText);
                     }
@@ -870,13 +870,13 @@ namespace GemsCraft.Players
             Player[] spectators = Server.Players.Where(p => p.spectatedPlayer == this).ToArray();
             if (spectators.Length > 0)
             {
-                spectators.Message("[Spectate]: &F" + message, args);
+                spectators.Message("[Spectate]: &F" + message, MessageType.Announcement, args);
             }
         }
 
 
         const string WoMAlertPrefix = "^detail.user.alert=";
-        public void MessageAlt([NotNull] string message)
+        public void MessageAlt([NotNull] string message, MessageType type)
         {
             if (message == null) throw new ArgumentNullException("message");
             if (this == Console)
@@ -885,14 +885,14 @@ namespace GemsCraft.Players
             }
             else if (IsUsingWoM)
             {
-                foreach (Packet p in LineWrapper.WrapPrefixed(WoMAlertPrefix, WoMAlertPrefix + Color.Sys + message, SupportsFullCP437))
+                foreach (Packet p in LineWrapper.WrapPrefixed(WoMAlertPrefix, WoMAlertPrefix + Color.Sys + message, SupportsFullCP437, type))
                 {
                     Send(p);
                 }
             }
             else
             {
-                foreach (Packet p in LineWrapper.Wrap(Color.Sys + message, SupportsFullCP437))
+                foreach (Packet p in LineWrapper.Wrap(Color.Sys + message, SupportsFullCP437, MessageType.Chat))
                 {
                     Send(p);
                 }
@@ -904,11 +904,15 @@ namespace GemsCraft.Players
         {
             if (message == null) throw new ArgumentNullException("message");
             if (args == null) throw new ArgumentNullException("args");
-            MessageAlt(String.Format(message, args));
+            MessageAlt(string.Format(message, args));
         }
 
-
         public void Message([NotNull] string message)
+        {
+            Message(message, MessageType.Chat);
+        }
+
+        public void Message([NotNull] string message, MessageType type)
         {
             if (message == null) throw new ArgumentNullException("message");
 
@@ -925,33 +929,45 @@ namespace GemsCraft.Players
             }
             else
             {
-                foreach (Packet p in LineWrapper.Wrap(Color.Sys + message, SupportsFullCP437))
+                foreach (Packet p in LineWrapper.Wrap(Color.Sys + message, SupportsFullCP437, type))
                 {
                     Send(p);
                 }
             }
         }
 
-
         [StringFormatMethod("message")]
         public void Message([NotNull] string message, [NotNull] object arg)
         {
+            Message(message, arg, MessageType.Chat);
+        }
+
+        [StringFormatMethod("message")]
+        public void Message([NotNull] string message, [NotNull] object arg, MessageType type)
+        {
             if (message == null) throw new ArgumentNullException("message");
             if (arg == null) throw new ArgumentNullException("arg");
-            Message(String.Format(message, arg));
+            // ReSharper disable once RedundantStringFormatCall
+            Message(string.Format(message, arg));
         }
 
         [StringFormatMethod("message")]
         public void Message([NotNull] string message, [NotNull] params object[] args)
         {
+            Message(message, args, MessageType.Chat);
+        }
+
+        [StringFormatMethod("message")]
+        public void Message([NotNull] string message, MessageType type, [NotNull] params object[] args)
+        {
             if (message == null) throw new ArgumentNullException("message");
             if (args == null) throw new ArgumentNullException("args");
-            Message(String.Format(message, args));
+            Message(string.Format(message, args));
         }
 
 
         [StringFormatMethod("message")]
-        public void MessagePrefixed([NotNull] string prefix, [NotNull] string message, [NotNull] params object[] args)
+        public void MessagePrefixed([NotNull] string prefix, [NotNull] string message, MessageType type, [NotNull] params object[] args)
         {
             if (prefix == null) throw new ArgumentNullException("prefix");
             if (message == null) throw new ArgumentNullException("message");
@@ -966,7 +982,7 @@ namespace GemsCraft.Players
             }
             else
             {
-                foreach (Packet p in LineWrapper.WrapPrefixed(prefix, message, SupportsFullCP437))
+                foreach (Packet p in LineWrapper.WrapPrefixed(prefix, message, SupportsFullCP437, type))
                 {
                     Send(p);
                 }
@@ -982,7 +998,7 @@ namespace GemsCraft.Players
             if (IsDeaf) return;
             if (args.Length > 0)
             {
-                message = String.Format(message, args);
+                message = string.Format(message, args);
             }
             if (this == Console)
             {
@@ -994,7 +1010,7 @@ namespace GemsCraft.Players
                 {
                     throw new InvalidOperationException("SendNow may only be called from player's own thread.");
                 }
-                foreach (Packet p in LineWrapper.Wrap(Color.Sys + message, SupportsFullCP437))
+                foreach (Packet p in LineWrapper.Wrap(Color.Sys + message, SupportsFullCP437, MessageType.Chat))
                 {
                     SendNow(p);
                 }
@@ -1003,7 +1019,7 @@ namespace GemsCraft.Players
 
 
         [StringFormatMethod("message")]
-        internal void MessageNowPrefixed([NotNull] string prefix, [NotNull] string message, [NotNull] params object[] args)
+        internal void MessageNowPrefixed([NotNull] string prefix, [NotNull] string message, MessageType type, [NotNull] params object[] args)
         {
             if (prefix == null) throw new ArgumentNullException("prefix");
             if (message == null) throw new ArgumentNullException("message");
@@ -1023,7 +1039,7 @@ namespace GemsCraft.Players
                 {
                     throw new InvalidOperationException("SendNow may only be called from player's own thread.");
                 }
-                foreach (Packet p in LineWrapper.WrapPrefixed(prefix, message, SupportsFullCP437))
+                foreach (Packet p in LineWrapper.WrapPrefixed(prefix, message, SupportsFullCP437, type))
                 {
                     Send(p);
                 }
@@ -1633,14 +1649,14 @@ namespace GemsCraft.Players
         public void Kill(World inWorld, string message)
         {
             LastTimeKilled = DateTime.UtcNow;
-            inWorld.Players.Message(message);
+            inWorld.Players.Message(message, MessageType.Announcement);
             TeleportTo(inWorld.Map.Spawn);
         }
 
         public void KillCTF(World inWorld, string message)
         {
             LastTimeKilled = DateTime.UtcNow;
-            inWorld.Players.Message(message);
+            inWorld.Players.Message(message, MessageType.Announcement);
 
             if (Info.CTFRedTeam)
             {

@@ -9,17 +9,19 @@ using GemsCraft.Players;
 using GemsCraft.Utils;
 using JetBrains.Annotations;
 
-namespace GemsCraft.Commands {
+namespace GemsCraft.Commands
+{
 
     /// <summary> Delegate for command handlers/callbacks. </summary>
     /// <param name="source"> Player who called the command. </param>
     /// <param name="cmd"> Command arguments. </param>
-    public delegate void CommandHandler( Player source, Command cmd );
+    public delegate void CommandHandler(Player source, Command cmd);
 
 
     /// <summary> Describes a chat command. Defines properties, permission requirements, and usage information.
     /// Specifies a handler method. </summary>
-    public sealed class CommandDescriptor : IClassy {
+    public sealed class CommandDescriptor : IClassy
+    {
 
         /// <summary> List of aliases. May be null or empty. Default: null </summary>
         [CanBeNull]
@@ -73,20 +75,31 @@ namespace GemsCraft.Commands {
 
 
         /// <summary> Checks whether this command may be called by players of a given rank. </summary>
-        public bool CanBeCalledBy( [NotNull] Rank rank ) {
-            if( rank == null ) throw new ArgumentNullException( "rank" );
+        public bool CanBeCalledBy([NotNull] Rank rank, bool isConsole)
+        {
+            if (rank == null && !isConsole)
+            {
+                throw new ArgumentNullException("rank");
+            }
+
+            if (isConsole) return true;
             return Permissions == null ||
-                   Permissions.All( rank.Can ) ||
-                   AnyPermission && Permissions.Any( rank.Can );
+                   Permissions.All(rank.Can) ||
+                   AnyPermission && Permissions.Any(rank.Can);
         }
 
 
-        public Rank MinRank {
-            get {
-                if( AnyPermission ) {
-                    return RankManager.GetMinRankWithAnyPermission( Permissions );
-                } else {
-                    return RankManager.GetMinRankWithAllPermissions( Permissions );
+        public Rank MinRank
+        {
+            get
+            {
+                if (AnyPermission)
+                {
+                    return RankManager.GetMinRankWithAnyPermission(Permissions);
+                }
+                else
+                {
+                    return RankManager.GetMinRankWithAllPermissions(Permissions);
                 }
             }
         }
@@ -94,19 +107,24 @@ namespace GemsCraft.Commands {
 
         /// <summary> Checks whether players of the given rank should see this command in /cmds list.
         /// Takes permissions and the hidden flag into account. </summary>
-        public bool IsVisibleTo( [NotNull] Rank rank ) {
-            if( rank == null ) throw new ArgumentNullException( "rank" );
-            return !IsHidden && CanBeCalledBy( rank );
+        public bool IsVisibleTo([NotNull] Rank rank, bool isConsole)
+        {
+            if (rank == null) throw new ArgumentNullException("rank");
+            return !IsHidden && CanBeCalledBy(rank, isConsole);
         }
 
 
         /// <summary> Prints command usage syntax to the given player. </summary>
-        public void PrintUsage( [NotNull] Player player ) {
-            if( player == null ) throw new ArgumentNullException( "player" );
-            if( Usage != null ) {
-                player.Message( "Usage: &H{0}", Usage );
-            } else {
-                player.Message( "Usage: &H/{0}", Name );
+        public void PrintUsage([NotNull] Player player)
+        {
+            if (player == null) throw new ArgumentNullException("player");
+            if (Usage != null)
+            {
+                player.Message("Usage: &H{0}", Usage);
+            }
+            else
+            {
+                player.Message("Usage: &H/{0}", Name);
             }
         }
 
@@ -117,37 +135,52 @@ namespace GemsCraft.Commands {
         /// <param name="raiseEvent"> Whether CommandCalling and CommandCalled events should be raised. </param>
         /// <returns> True if the command was called succesfully.
         /// False if the call was cancelled by the CommandCalling event. </returns>
-        public bool Call( [NotNull] Player player, [NotNull] Command cmd, bool raiseEvent ) {
-            if( player == null ) throw new ArgumentNullException( "player" );
-            if( cmd == null ) throw new ArgumentNullException( "cmd" );
-            if( raiseEvent && CommandManager.RaiseCommandCallingEvent( cmd, this, player ) ) return false;
-            Handler( player, cmd );
-            if( raiseEvent ) CommandManager.RaiseCommandCalledEvent( cmd, this, player );
+        public bool Call([NotNull] Player player, [NotNull] Command cmd, bool raiseEvent)
+        {
+            if (player == null) throw new ArgumentNullException("player");
+            if (cmd == null) throw new ArgumentNullException("cmd");
+            if (raiseEvent && CommandManager.RaiseCommandCallingEvent(cmd, this, player)) return false;
+            Handler(player, cmd);
+            if (raiseEvent) CommandManager.RaiseCommandCalledEvent(cmd, this, player);
             return true;
         }
 
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return $"CommandDescriptor({Name})";
         }
 
-        public string ClassyName {
-            get {
-                if( ConfigKey.RankColorsInChat.Enabled() ) {
+        public string ClassyName
+        {
+            get
+            {
+                if (ConfigKey.RankColorsInChat.Enabled())
+                {
                     Rank minRank;
-                    if( Permissions != null && Permissions.Length > 0 ) {
+                    if (Permissions != null && Permissions.Length > 0)
+                    {
                         minRank = MinRank;
-                    } else {
+                    }
+                    else
+                    {
                         minRank = RankManager.LowestRank;
                     }
-                    if( minRank == null ) {
+                    if (minRank == null)
+                    {
                         return Name;
-                    } else if( ConfigKey.RankPrefixesInChat.Enabled() ) {
+                    }
+                    else if (ConfigKey.RankPrefixesInChat.Enabled())
+                    {
                         return minRank.Color + minRank.Prefix + Name;
-                    } else {
+                    }
+                    else
+                    {
                         return minRank.Color + Name;
                     }
-                } else {
+                }
+                else
+                {
                     return Name;
                 }
             }

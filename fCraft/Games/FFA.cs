@@ -77,7 +77,7 @@ namespace GemsCraft.Games
         {
             world_.Hax = false;
             world_.gameMode = GameMode.FFA; //set the game mode
-            delayTask = Scheduler.NewTask(t => world_.Players.Message("&WFFA &fwill be starting in {0} seconds: &WGet ready!", (timeDelay - (DateTime.Now - startTime).ToSeconds())));
+            delayTask = Scheduler.NewTask(t => world_.Players.Message("&WFFA &fwill be starting in {0} seconds: &WGet ready!", 0, (timeDelay - (DateTime.Now - startTime).ToSeconds())));
             delayTask.RunRepeating(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(10), (timeDelay / 10));
         }
 
@@ -90,14 +90,14 @@ namespace GemsCraft.Games
             }
             //unhook event handlers
             if (world_ == null) return;                                                     
-            if (world_ != null && world_.Players.Count() > 0 && stoppedEarly)               
+            if (world_ != null && world_.Players.Any() && stoppedEarly)               
             {
-                world_.Players.Message("{0}&S stopped the game of FFA early on world {1}",
+                world_.Players.Message("{0}&S stopped the game of FFA early on world {1}", 0,
                     p.ClassyName, world_.ClassyName);
             }
             if (p != null && !stoppedEarly)
             {
-                world_.Players.Message("{0} &fhas won the game with &c{1}&f points!", p.ClassyName, p.Info.gameKillsFFA);
+                world_.Players.Message("{0} &fhas won the game with &c{1}&f points!", 0, p.ClassyName, p.Info.gameKillsFFA);
             }
             if (world_.Players.Count() > 1 && p != null)
             {
@@ -151,7 +151,7 @@ namespace GemsCraft.Games
             {
                 if (world_.Players.Count() < 2) //in case players leave the world or disconnect during the start delay
                 {
-                    world_.Players.Message("&WFFA&s requires at least 2 people to play.");
+                    world_.Players.Message("&WFFA&s requires at least 2 people to play.", 0);
                     task.Stop();
                     return;
                 }
@@ -245,19 +245,19 @@ namespace GemsCraft.Games
                 Player secondPlace = GetScoreList()[1]; //second place is - well, second place XD
                 if (isOn() && leader.Info.gameKillsFFA != secondPlace.Info.gameKillsFFA)
                 {
-                    world_.Players.Message("{0}&f is winning &c{1} &fto &c{2}", leader.ClassyName, leader.Info.gameKillsFFA, secondPlace.Info.gameKillsFFA);
-                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", timeLeft);
+                    world_.Players.Message("{0}&f is winning &c{1} &fto &c{2}", 0, leader.ClassyName, leader.Info.gameKillsFFA, secondPlace.Info.gameKillsFFA);
+                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", 0, timeLeft);
                 }
                 if (leader.Info.gameKillsFFA == secondPlace.Info.gameKillsFFA)
                 {
-                    world_.Players.Message("{1}&f and {2}&f are tied at &c{0}!", leader.Info.gameKillsFFA, leader.ClassyName, secondPlace.ClassyName);
-                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", timeLeft);
+                    world_.Players.Message("{1}&f and {2}&f are tied at &c{0}!", 0, leader.Info.gameKillsFFA, leader.ClassyName, secondPlace.ClassyName);
+                    world_.Players.Message("&fThere are &W{0}&f seconds left in the game.", 0, timeLeft);
                 }
                 lastChecked = DateTime.Now;
             }
             if (timeLeft < 10.1)
             {
-                world_.Players.Message("&WOnly 10 seconds left!");
+                world_.Players.Message("&WOnly 10 seconds left!", 0);
             }
         }
 
@@ -279,9 +279,9 @@ namespace GemsCraft.Games
         public static void DisplayScoreBoard()
         {
             var players = GetScoreList();
-            if (world_.Players.Count() > 0)
+            if (world_.Players.Any())
             {
-                world_.Players.Message("The final score of the game:");
+                world_.Players.Message("The final score of the game:", 0);
                 for (int i = 0; i < players.Count(); i++)
                 {
                     string sbName = players[i].Info.Name;
@@ -290,7 +290,7 @@ namespace GemsCraft.Games
                     {
                         color = "&f";
                     }
-                    world_.Players.Message("{3}{0} &f| &c{1} &fKills - &c{2} &fDeaths",
+                    world_.Players.Message("{3}{0} &f| &c{1} &fKills - &c{2} &fDeaths", 0,
                         sbName, players[i].Info.gameKillsFFA, players[i].Info.gameDeathsFFA, color);
                 }
             }

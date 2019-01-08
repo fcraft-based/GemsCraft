@@ -75,7 +75,7 @@ namespace GemsCraft.Commands.Command_Handlers
                 realm.MapChangedBy = player.Name;
                 realm.ChangeMap(map);
 
-                realm.Players.Message(player, "{0}&S loaded a new map for this realm.",
+                realm.Players.Message(player, "{0}&S loaded a new map for this realm.", 0,
                                               player.ClassyName);
                 player.MessageNow("New map loaded for the realm {0}", realm.ClassyName);
 
@@ -178,7 +178,7 @@ namespace GemsCraft.Commands.Command_Handlers
                             return;
                         }
 
-                        realm.Players.Message(player, "{0}&S loaded a new map for the realm {1}",
+                        realm.Players.Message(player, "{0}&S loaded a new map for the realm {1}", 0,
                                                player.ClassyName, realm.ClassyName);
                         player.MessageNow("New map for the realm {0}&S has been loaded.", realm.ClassyName);
                         Logger.Log(LogType.UserActivity,

@@ -168,7 +168,7 @@ namespace GemsCraft.Players
                         pollCounter = 0;
                         if (IsUsingWoM)
                         {
-                            MessageNowPrefixed("", "^detail.user=" + InfoCommands.GetCompassString(Position.R));
+                            MessageNowPrefixed("", "^detail.user=" + InfoCommands.GetCompassString(Position.R), MessageType.Chat);
                         }
                     }
                     pollCounter++;
@@ -1021,7 +1021,7 @@ namespace GemsCraft.Players
                 // ReSharper disable AssignNullToNotNullAttribute
                 string message = Server.MakePlayerConnectedMessage(this, firstTime, World);
                 // ReSharper restore AssignNullToNotNullAttribute
-                canSee.Message(message);
+                canSee.Message(message, MessageType.Chat);
             }
 
             //reset tempDisplName if player still has
@@ -1034,7 +1034,7 @@ namespace GemsCraft.Players
             {
                 if (Can(Permission.Hide))
                 {
-                    canSee.Message("&8Player {0}&8 logged in hidden. Pssst.", ClassyName);
+                    canSee.Message("&8Player {0}&8 logged in hidden. Pssst.", MessageType.Chat, ClassyName);
                 }
                 else
                 {
@@ -1048,7 +1048,7 @@ namespace GemsCraft.Players
                                                      .ToArray();
             if (bannedPlayerNames.Length > 0)
             {
-                canSee.Message("&WPlayer {0}&W logged in from an IP shared by banned players: {1}",
+                canSee.Message("&WPlayer {0}&W logged in from an IP shared by banned players: {1}", MessageType.Announcement,
                                 ClassyName, bannedPlayerNames.JoinToClassyString());
                 Logger.Log(LogType.SuspiciousActivity,
                             "Player {0} logged in from an IP shared by banned players: {1}",
@@ -1060,7 +1060,7 @@ namespace GemsCraft.Players
             {
                 Message("&WYou were previously muted by {0}&W, {1} left.",
                          Info.MutedByClassy, Info.TimeMutedLeft.ToMiniString());
-                canSee.Message("&WPlayer {0}&W was previously muted by {1}&W, {2} left.",
+                canSee.Message("&WPlayer {0}&W was previously muted by {1}&W, {2} left.", MessageType.Chat,
                                 ClassyName, Info.MutedByClassy, Info.TimeMutedLeft.ToMiniString());
             }
 
@@ -1072,7 +1072,7 @@ namespace GemsCraft.Players
                     Message("&WYou were previously frozen {0} ago by {1}",
                              Info.TimeSinceFrozen.ToMiniString(),
                              Info.FrozenByClassy);
-                    canSee.Message("&WPlayer {0}&W was previously frozen {1} ago by {2}",
+                    canSee.Message("&WPlayer {0}&W was previously frozen {1} ago by {2}", MessageType.Chat,
                                     ClassyName,
                                     Info.TimeSinceFrozen.ToMiniString(),
                                     Info.FrozenByClassy);
@@ -1081,7 +1081,7 @@ namespace GemsCraft.Players
                 {
                     Message("&WYou were previously frozen by {0}",
                              Info.FrozenByClassy);
-                    canSee.Message("&WPlayer {0}&W was previously frozen by {1}",
+                    canSee.Message("&WPlayer {0}&W was previously frozen by {1}", MessageType.Chat,
                                     ClassyName, Info.FrozenByClassy);
                 }
             }

@@ -71,47 +71,47 @@ namespace GemsCraft.Games
         public static void math1()
         {
             world.Games.Remove(math1);
-            world.Players.Message("&WKeyboards at the ready...");
+            world.Players.Message("&WKeyboards at the ready...", 0);
             Thread.Sleep(5000);
             mode = GameMode.math1;
             int a = new Random().Next(1, 15);
             int b = new Random().Next(1, 15);
-            world.Players.Message("&WWhat is... {0} X {1}?", a.ToString(), b.ToString());
+            world.Players.Message("&WWhat is... {0} X {1}?", 0, a.ToString(), b.ToString());
             answer = a * b;
             Thread.Sleep(15000);
-            world.Players.Message("&WThe correct answer was {0}",answer.ToString());
+            world.Players.Message("&WThe correct answer was {0}",0, answer.ToString());
             answer = 0;
             scoreCounter();
             completed.Clear();
             interval();
-            gamePicker();
+            GamePicker();
         }
 
         public static void math2()
         {
             world.Games.Remove(math2);
-            world.Players.Message("&WKeyboards at the ready... stuff is about to happen!");
+            world.Players.Message("&WKeyboards at the ready... stuff is about to happen!", 0);
             Thread.Sleep(5000);
             mode = GameMode.math2;
             int a = new Random().Next(1, 100);
             int b = new Random().Next(1, 200);
-            world.Players.Message("&WWhat is... {0} + {1}?", a.ToString(), b.ToString());
+            world.Players.Message("&WWhat is... {0} + {1}?", 0, a.ToString(), b.ToString());
             answer = a + b;
             Thread.Sleep(15000);
-            world.Players.Message("&WThe correct answer was {0}", answer.ToString());
+            world.Players.Message("&WThe correct answer was {0}", 0, answer.ToString());
             answer = 0;
             scoreCounter();
             completed.Clear();
             interval();
-            gamePicker();
+            GamePicker();
         }
 
-        public static void getOffGrass()
+        public static void GetOffGrass()
         {
-            world.Games.Remove(getOffGrass);
+            world.Games.Remove(GetOffGrass);
             mode = GameMode.getOffGrass;
             Map map = world.Map;
-            world.Players.Message("&WKEEP OFF THE GRASS!!!");
+            world.Players.Message("&WKEEP OFF THE GRASS!!!", 0);
             wait(6000);
             foreach (Player p in world.Players)
             {
@@ -137,7 +137,7 @@ namespace GemsCraft.Games
             scoreCounter();
             completed.Clear();
             interval();
-            gamePicker();
+            GamePicker();
         }
 
         public static void pinkPlatform()
@@ -156,9 +156,9 @@ namespace GemsCraft.Games
                     }
                 }
             }
-            world.Players.Message("&WYou have 30 seconds to get onto the PINK platform.... &AGO!");
+            world.Players.Message("&WYou have 30 seconds to get onto the PINK platform.... &AGO!", 0);
             wait(20000);
-            world.Players.Message("&WYou have 10 seconds left to get onto the PINK platform.");
+            world.Players.Message("&WYou have 10 seconds left to get onto the PINK platform.", 0);
             wait(10000);
             PositionCheck();
             scoreCounter();
@@ -171,7 +171,7 @@ namespace GemsCraft.Games
             }
             completed.Clear();
             interval();
-            gamePicker();
+            GamePicker();
         }
 
         public static void shootBlack()
@@ -188,9 +188,9 @@ namespace GemsCraft.Games
                     world.Map.QueueUpdate(new BlockUpdate(null, block, Block.Black));
                 }
             }
-            world.Players.Message("&WYou have 20 seconds to shoot all &8BLACK &Wblocks.... &AGO!");
+            world.Players.Message("&WYou have 20 seconds to shoot all &8BLACK &Wblocks.... &AGO!", 0);
             wait(10000);
-            world.Players.Message("&WYou have 10 seconds left to shoot all &8BLACK &Wblocks.");
+            world.Players.Message("&WYou have 10 seconds left to shoot all &8BLACK &Wblocks.", 0);
             wait(10000);
             GunModeOff();
             scoreCounter();
@@ -204,7 +204,7 @@ namespace GemsCraft.Games
                 }
             }
             interval();
-            gamePicker();
+            GamePicker();
         }
 
         //events
@@ -308,7 +308,7 @@ namespace GemsCraft.Games
             world.Games.Add(shootBlack);
             world.Games.Add(math1);
             world.Games.Add(math2);
-            world.Games.Add(getOffGrass);
+            world.Games.Add(GetOffGrass);
         }
 
         public static void scoreCounter()
@@ -316,15 +316,15 @@ namespace GemsCraft.Games
             if (world.blueScore > world.redScore)
             {
                 blueRoundsWon++;
-                world.Players.Message("&SThe &9Blues&S won that round: &9{0} &S- &C{1}", world.blueScore, world.redScore);
+                world.Players.Message("&SThe &9Blues&S won that round: &9{0} &S- &C{1}", 0, world.blueScore, world.redScore);
             } if (world.redScore > world.blueScore)
             {
                 redRoundsWon++;
-                world.Players.Message("&SThe &CReds&S won that round: &9{0} &S- &C{1}", world.blueScore, world.redScore);
+                world.Players.Message("&SThe &CReds&S won that round: &9{0} &S- &C{1}", 0, world.blueScore, world.redScore);
             }
             else
             {
-                world.Players.Message("&SIt was a tie! Both teams get a point! &9{0} &S- &C{1}", world.blueScore, world.redScore);
+                world.Players.Message("&SIt was a tie! Both teams get a point! &9{0} &S- &C{1}", 0, world.blueScore, world.redScore);
                 blueRoundsWon++; redRoundsWon++;
             }
         }
@@ -341,7 +341,7 @@ namespace GemsCraft.Games
         public static void interval()
         {
             wait(5000);
-            world.Players.Message("&SScores so far: &9Blues {0} &S- &CReds {1}", blueRoundsWon.ToString(), redRoundsWon.ToString());
+            world.Players.Message("&SScores so far: &9Blues {0} &S- &CReds {1}", 0, blueRoundsWon.ToString(), redRoundsWon.ToString());
             teamNotify();
             wait(5000);
         }
@@ -387,24 +387,24 @@ namespace GemsCraft.Games
              {
                Init(world);
                world.GameOn = true;
-               Server.Players.Message("{0}&S Started a game of MineChallenge on world {1}", 
+               Server.Players.Message("{0}&S Started a game of MineChallenge on world {1}", 0,
                    player.ClassyName, world.ClassyName);
                foreach (Player p in world.Players){
                    TeamChooser(p, world);
                }
-               Server.Players.Message("&SThe game will start in 60 Seconds.");
+               Server.Players.Message("&SThe game will start in 60 Seconds.", 0);
                GameAdder(world);
               // wait(60000);
-               world.Players.Message("&SThe game has started!.");
+               world.Players.Message("&SThe game has started!.", 0);
                wait(2000);
-               gamePicker();
+               GamePicker();
                Scheduler.NewTask(t => PositionCheck()).RunForever(TimeSpan.FromSeconds(1));
              })); GameThread.Start();
         }
 
-        public static void gamePicker()
+        public static void GamePicker()
         {
-            if (world.Games.Count() < 1)
+            if (!world.Games.Any())
             {
                 Stop(Player.Console);
                 return;
@@ -418,7 +418,7 @@ namespace GemsCraft.Games
 
         public static void Stop(Player player)
         {
-            world.Players.Message("&SThe game has ended! The scores are: \n&9Blue Team {0} &S- &CRed Team {1}", blueRoundsWon, redRoundsWon);
+            world.Players.Message("&SThe game has ended! The scores are: \n&9Blue Team {0} &S- &CRed Team {1}", 0, blueRoundsWon, redRoundsWon);
             world.GameOn = false;
             Clear();
             GameThread.Abort();

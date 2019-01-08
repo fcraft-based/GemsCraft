@@ -437,7 +437,7 @@ namespace GemsCraft.Physics
                     {
                         hitted.Info.Health -= 50;
                     }
-                    world.Players.Message("{0} landed a critical shot on {1}!", by.Name, hitted.Name);
+                    world.Players.Message("{0} landed a critical shot on {1}!", 0, by.Name, hitted.Name);
                 }
                 else
                 {
@@ -547,7 +547,7 @@ namespace GemsCraft.Physics
                 if (critical == 0)
                 {
                     hitted.Info.Health -= 50;
-                    world.Players.Message("{0} landed a critical shot on {1}!", by.Name, hitted.Name);
+                    world.Players.Message("{0} landed a critical shot on {1}!", 0, by.Name, hitted.Name);
                 }
                 else
                 {

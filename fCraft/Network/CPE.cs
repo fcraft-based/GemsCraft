@@ -47,7 +47,7 @@ namespace GemsCraft.Players
         private const int FullCP437ExtVersion = 1;
         private const string EmoteFixExtName = "EmoteFix";
         private const int EmoteFixExtVersion = 1;
-        
+
         // Note: if more levels are added, change UsesCustomBlocks from bool to int
         public bool UsesCustomBlocks { get; set; }
         public bool SupportsClickDistance = false;
@@ -63,31 +63,31 @@ namespace GemsCraft.Players
         public bool SupportsLongerMessages = false;
         public bool SupportsFullCP437 = false;
         public bool SupportsEmoteFix = false;
-        
+
         string ClientName { get; set; }
 
-        bool NegotiateProtocolExtension()
+        private bool NegotiateProtocolExtension()
         {
             writer.Write(Packet.MakeExtInfo(12).Data);
-            
+
             writer.Write(Packet.MakeExtEntry(CustomBlocksExtName, CustomBlocksExtVersion).Data);
             writer.Write(Packet.MakeExtEntry(ClickDistanceExtName, ClickDistanceExtVersion).Data);
             writer.Write(Packet.MakeExtEntry(EnvColorsExtName, EnvColorsExtVersion).Data);
-            
+
             writer.Write(Packet.MakeExtEntry(ChangeModelExtName, ChangeModelExtVersion).Data);
             writer.Write(Packet.MakeExtEntry(EnvMapAppearanceExtName, EnvMapAppearanceExtVersion).Data);
             writer.Write(Packet.MakeExtEntry(HeldBlockExtName, HeldBlockExtVersion).Data);
-            
+
             writer.Write(Packet.MakeExtEntry(ExtPlayerListExtName, ExtPlayerListExtVersion).Data);
             writer.Write(Packet.MakeExtEntry(SelectionCuboidExtName, SelectionCuboidExtVersion).Data);
             writer.Write(Packet.MakeExtEntry(MessageTypesExtName, MessageTypesExtVersion).Data);
-            
+
             writer.Write(Packet.MakeExtEntry(HackControlExtName, HackControlExtVersion).Data);
             writer.Write(Packet.MakeExtEntry(LongerMessagesExtName, LongerMessagesExtVersion).Data);
             writer.Write(Packet.MakeExtEntry(FullCP437ExtName, FullCP437ExtVersion).Data);
 
             writer.Write(Packet.MakeExtEntry(EmoteFixExtName, EmoteFixExtVersion).Data);
-            
+
             Logger.Log(LogType.Debug, "Sent ExtInfo and entry packets");
 
             // Expect ExtInfo reply from the client
@@ -323,10 +323,7 @@ namespace GemsCraft.Players
             arr[offset + 2] = (byte)((number & 0x0000ff00) >> 8);
             arr[offset + 3] = (byte)(number & 0x000000ff);
         }
-        
-        
+
+
     }
-
-
-    
 }

@@ -225,15 +225,15 @@ namespace GemsCraft.Physics
                             );
                             if (p.WorldMap.GetBlock(pos.X, pos.Y, pos.Z) == Block.Water)
                             {
-                                if (p.DrownTime == null || (DateTime.Now - p.DrownTime).TotalSeconds > 33)
+                                if ((DateTime.Now - p.DrownTime).TotalSeconds > 33)
                                 {
                                     p.DrownTime = DateTime.Now;
                                 }
-                                if ((DateTime.Now - p.DrownTime).TotalSeconds > 30)
-                                {
-                                    p.TeleportTo(p.WorldMap.Spawn);
-                                    p.World.Players.Message("{0}&S drowned and died", p.ClassyName);
-                                }
+
+                                if (!((DateTime.Now - p.DrownTime).TotalSeconds > 30)) continue;
+                                p.TeleportTo(p.WorldMap.Spawn);
+                                p.World?.Players.Message("{0}&S drowned and died", MessageType.Announcement,
+                                    p.ClassyName);
                             }
                             else
                             {

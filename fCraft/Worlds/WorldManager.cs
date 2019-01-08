@@ -759,7 +759,7 @@ namespace GemsCraft.Worlds {
                 }
 
                 Player[] worldPlayerList = worldToDelete.Players;
-                worldToDelete.Players.Message( "&SYou have been moved to the main world." );
+                worldToDelete.Players.Message( "&SYou have been moved to the main world.", MessageType.Chat );
                 foreach( Player player in worldPlayerList ) {
                     player.JoinWorld( MainWorld, WorldChangeReason.WorldRemoved );
                 }
