@@ -285,6 +285,7 @@
             this.bResetTab.TabIndex = 30;
             this.bResetTab.Text = "Reset";
             this.bResetTab.UseSelectable = true;
+            this.bResetTab.Click += new System.EventHandler(this.bResetTab_Click);
             // 
             // gboRemoteControl
             // 

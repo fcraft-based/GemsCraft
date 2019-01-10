@@ -14,7 +14,7 @@ namespace GemsCraft.Utils {
     }
     /// <summary> Checks for updates, and keeps track of current version/revision. </summary>
     public class Updater {
-        public struct Version
+        public class Version
         {
             public string Title;
             public int Major;
@@ -31,6 +31,11 @@ namespace GemsCraft.Utils {
                     int.Parse(list[3]), 
                     int.Parse(list[4]), 
                     true);
+            }
+
+            public Version()
+            {
+
             }
             public Version(string title, int major, int minor, int revision, int build, bool show)
             {
@@ -121,7 +126,7 @@ namespace GemsCraft.Utils {
             }
         }
 
-        public static Version LatestStable = new Version()
+        public static Version LatestStable = new Version
         {
             Title = "Alpha",
             Major = 0,
@@ -134,7 +139,7 @@ namespace GemsCraft.Utils {
         public static VersionResult CheckUpdates()
         {
             Version currentOnline = Version.ToVersion(
-                NetworkUtils.GetUrlSourceAsList("http://gemz.christplay.x10host.com/current.txt"));
+                NetworkUtils.GetUrlSourceAsList("http://gemz.christplay.x10host.com/current_version.txt"));
             int versionCompare = Version.Compare(LatestStable, currentOnline);
             if (versionCompare == -1) return VersionResult.Current;
             if (versionCompare == 0) return VersionResult.Developer;

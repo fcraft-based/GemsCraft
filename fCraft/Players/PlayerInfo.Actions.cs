@@ -156,7 +156,7 @@ namespace GemsCraft.Players {
                 IPAddress address = LastIP;
 
                 // Check if player is trying to ban self
-                if( player.Info == this || address.Equals( player.IP ) && !player.IsSuper ) {
+                if( player.Info == this || address.Equals( player.IP ) && !player.IsSuper() ) {
                     PlayerOpException.ThrowCannotTargetSelf( player, this, "IP-ban" );
                 }
 
@@ -262,7 +262,7 @@ namespace GemsCraft.Players {
                 IPAddress address = LastIP;
 
                 // Check if player is trying to unban self
-                if( player.Info == this || address.Equals( player.IP ) && !player.IsSuper ) {
+                if( player.Info == this || address.Equals( player.IP ) && !player.IsSuper() ) {
                     PlayerOpException.ThrowCannotTargetSelf( player, this, "IP-unban" );
                 }
 
@@ -332,7 +332,7 @@ namespace GemsCraft.Players {
                 IPAddress address = LastIP;
 
                 // Check if player is trying to ban self
-                if( player.Info == this || address.Equals( player.IP ) && !player.IsSuper ) {
+                if( player.Info == this || address.Equals( player.IP ) && !player.IsSuper() ) {
                     PlayerOpException.ThrowCannotTargetSelf( player, this, "ban-all" );
                 }
 
@@ -454,7 +454,7 @@ namespace GemsCraft.Players {
                 IPAddress address = LastIP;
 
                 // Check if player is trying to unban self
-                if( player.Info == this || address.Equals( player.IP ) && !player.IsSuper ) {
+                if( player.Info == this || address.Equals( player.IP ) && !player.IsSuper()) {
                     PlayerOpException.ThrowCannotTargetSelf( player, this, "unban-all" );
                 }
 

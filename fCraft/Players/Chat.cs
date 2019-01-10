@@ -49,6 +49,7 @@ namespace GemsCraft.Players
         {
             if (player == null) throw new ArgumentNullException("player");
             if (rawMessage == null) throw new ArgumentNullException("rawMessage");
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             string OriginalMessage = rawMessage;
             if (Server.Moderation && !Server.VoicedPlayers.Contains(player) && player.World != null)
             {
@@ -173,7 +174,7 @@ namespace GemsCraft.Players
 
 
             string formattedMessage = $"{player.ClassyName}&F: {rawMessage}";
-
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             var e = new ChatSendingEventArgs(player,
                                               rawMessage,
                                               formattedMessage,
@@ -421,7 +422,7 @@ namespace GemsCraft.Players
         {
             if (player == null) throw new ArgumentNullException("player");
             if (rawMessage == null) throw new ArgumentNullException("rawMessage");
-
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             var recepientList = Server.Players.NotIgnoring(player);
 
             string formattedMessage = Color.Say + rawMessage;
@@ -689,14 +690,15 @@ namespace GemsCraft.Events
     {
         internal ChatSendingEventArgs(Player player, string message, string formattedMessage,
                                        ChatMessageType messageType, IEnumerable<Player> recepientList,
-                                       MessageType mType)
+                                       MessageType type)
         {
             Player = player;
             Message = message;
             ChatMessageType = messageType;
             RecepientList = recepientList;
             FormattedMessage = formattedMessage;
-            MessageType = mType;
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+            MessageType = type;
         }
 
         public Player Player { get; }

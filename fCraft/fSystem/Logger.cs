@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
 using GemsCraft.fSystem.Config;
+using GemsCraft.Players;
 using GemsCraft.Utils;
 using JetBrains.Annotations;
 using Newtonsoft.Json;

@@ -38,5 +38,10 @@ namespace GemsCraft.GUI.ConfigGUI.GUI.Sections
             xMaxUndo.CheckedChanged += _instance.xMaxUndo_CheckedChanged;
             
         }
+
+        private void bResetTab_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

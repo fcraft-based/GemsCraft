@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.Cache;
 using System.Net.Sockets;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -27,6 +28,7 @@ using GemsCraft.Portals;
 using GemsCraft.Utils;
 using GemsCraft.Worlds;
 using JetBrains.Annotations;
+using ServiceStack.Text;
 using Map = GemsCraft.Worlds.Map;
 using ThreadState = System.Threading.ThreadState;
 
@@ -382,7 +384,7 @@ namespace GemsCraft.fSystem {
                 BackupData();
             }
 
-            Player.Console = new Player( ConfigKey.ConsoleName.GetString() );
+            Player.Console = new Player(ConfigKey.ConsoleName.GetString()) {Info = {Rank = RankManager.HighestRank}};
             Player.AutoRank = new Player( "(AutoRank)" );
 
             if( ConfigKey.BlockDBEnabled.Enabled() ) BlockDB.Init();
@@ -690,9 +692,10 @@ namespace GemsCraft.fSystem {
 
         /// <summary> Broadcasts a message to all online players.
         /// Shorthand for Server.Players.Message </summary>
-        public static void Message( [NotNull] string message, MessageType chat) {
+        public static void Message( [NotNull] string message, MessageType type) {
             if( message == null ) throw new ArgumentNullException( "message" );
-            Players.Message( message, chat);
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+            Players.Message( message, type);
         }
 
         /// <summary> Broadcasts a message to all online players.
@@ -705,11 +708,13 @@ namespace GemsCraft.fSystem {
 
         /// <summary> Broadcasts a message to all online players.
         /// Shorthand for Server.Players.Message </summary>
-        [StringFormatMethod( "message" )]
-        public static void Message( [NotNull] string message, MessageType type, [NotNull] params object[] formatArgs ) {
-            if( message == null ) throw new ArgumentNullException( "message" );
-            if( formatArgs == null ) throw new ArgumentNullException( "formatArgs" );
-            Players.Message( message, type, formatArgs );
+        [StringFormatMethod("message")]
+        public static void Message( [NotNull] string message, MessageType type, [NotNull] params object[] formatArgs)
+        {
+            if(message == null) throw new ArgumentNullException("message");
+            if(formatArgs == null) throw new ArgumentNullException("formatArgs");
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+            Players.Message(message, type, formatArgs);
         }
 
         /// <summary> Broadcasts a message to all online players except one.
@@ -724,6 +729,7 @@ namespace GemsCraft.fSystem {
         public static void Message([CanBeNull] Player except, [NotNull] string message, MessageType type)
         {
             if (message == null) throw new ArgumentNullException("message");
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             Players.Except(except).Message(message, type);
         }
 
@@ -731,10 +737,11 @@ namespace GemsCraft.fSystem {
         /// <summary> Broadcasts a message to all online players except one.
         /// Shorthand for Server.Players.Except(except).Message </summary>
         [StringFormatMethod( "message" )]
-        public static void Message( [CanBeNull] Player except, [NotNull] string message, MessageType? type, [NotNull] params object[] formatArgs ) {
+        public static void Message( [CanBeNull] Player except, [NotNull] string message, [Optional] MessageType? type, [NotNull] params object[] formatArgs ) {
             if( message == null ) throw new ArgumentNullException( "message" );
             if( formatArgs == null ) throw new ArgumentNullException( "formatArgs" );
             if (type == null) type = 0;
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             Players.Except( except ).Message( message, type, formatArgs);
         }
 
@@ -800,7 +807,7 @@ namespace GemsCraft.fSystem {
         static TimeSpan checkTempRanksInterval = TimeSpan.FromSeconds(10);
         public static TimeSpan CheckTempRanksInterval
         {
-            get { return checkTempRanksInterval; }
+            get => checkTempRanksInterval;
             set
             {
                 if (value.Ticks < 0) throw new ArgumentException("CheckTempRanksInterval may not be negative.");
@@ -856,14 +863,18 @@ namespace GemsCraft.fSystem {
 
 
         // shows announcements
-        static void ShowRandomAnnouncement( SchedulerTask task ) {
+        private static void ShowRandomAnnouncement( SchedulerTask task ) {
             if( !File.Exists( Paths.AnnouncementsFileName ) ) return;
             string[] lines = File.ReadAllLines( Paths.AnnouncementsFileName );
             if( lines.Length == 0 ) return;
             string line = lines[new Random().Next( 0, lines.Length )].Trim();
             if( line.Length == 0 ) return;
-            foreach( Player player in Players.Where( player => player.World != null ) ) {
-                player.Message( "&R" + ReplaceTextKeywords( player, line ) );
+            foreach(Player player in Players.Where( player => player.World != null))
+            {
+                ConfigKey.EnableAnnouncements.TryGetBool(out var res);
+                MessageType type = res ? MessageType.Announcement : MessageType.Chat;
+                if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+                player.Message("&R" + ReplaceTextKeywords(player, line), type);
             }
         }
 
@@ -1103,15 +1114,15 @@ namespace GemsCraft.fSystem {
             if( session == null ) throw new ArgumentNullException( "session" );
             int maxSessions = ConfigKey.MaxConnectionsPerIP.GetInt();
             lock( SessionLock ) {
-                if( !session.IP.Equals( IPAddress.Loopback ) && maxSessions > 0 ) {
+                if( !session.IP.Equals( IPAddress.Loopback ) && maxSessions > 0 )
+                {
                     int sessionCount = 0;
-                    for( int i = 0; i < Sessions.Count; i++ ) {
-                        Player p = Sessions[i];
-                        if( p.IP.Equals( session.IP ) ) {
-                            sessionCount++;
-                            if( sessionCount >= maxSessions ) {
-                                return false;
-                            }
+                    foreach (var p in Sessions)
+                    {
+                        if (!p.IP.Equals(session.IP)) continue;
+                        sessionCount++;
+                        if( sessionCount >= maxSessions ) {
+                            return false;
                         }
                     }
                 }
@@ -1125,9 +1136,9 @@ namespace GemsCraft.fSystem {
         // Also kicks any existing connections for this player account.
         // Returns true if player was registered succesfully.
         // Returns false if the server was full.
-        internal static bool RegisterPlayer( [NotNull] Player player ) {
-            if( player == null ) throw new ArgumentNullException( "player" );
-
+        internal static bool RegisterPlayer( [NotNull] Player player )
+        {
+            if (player == null) throw new ArgumentNullException("player");
             // Kick other sessions with same player name
             List<Player> sessionsToKick = new List<Player>();
             lock( SessionLock ) {
@@ -1155,6 +1166,10 @@ namespace GemsCraft.fSystem {
                 }
                 PlayerIndex.Add( player.Name, player );
                 player.HasRegistered = true;
+                Scheduler.NewTask(MessageTypeUtil.MessageHandler, player)
+                    .RunForever(TimeSpan.FromSeconds(1));
+                
+
             }
             return true;
         }
@@ -1169,14 +1184,9 @@ namespace GemsCraft.fSystem {
             //use this if you want to show original names for people with displayednames
             if (!firstTime && player.Info.DisplayedName != null){
 
-                return String.Format("&S{0} &S({1}&S) connected again, joined {2}",
-                                      player.ClassyName,
-                                      player.Name,
-                                      world.ClassyName);
+                return $"&S{player.ClassyName} &S({player.Name}&S) connected again, joined {world.ClassyName}";
             }else{
-                return String.Format("&S{0} &Sconnected again, joined {1}",
-                                      player.ClassyName,
-                                      world.ClassyName);
+                return $"&S{player.ClassyName} &Sconnected again, joined {world.ClassyName}";
             }
         }
 
@@ -1225,11 +1235,11 @@ namespace GemsCraft.fSystem {
         /// <summary>
         /// Find bot by name. Returns either the bot by exact name, or null.
         /// </summary>
-        public static Bot FindBot(String name)
+        public static Bot FindBot(string name)
         {
             var bot =
                from b in Bots
-               where b.Name.ToLower() == name.ToLower()
+               where string.Equals(b.Name, name, StringComparison.CurrentCultureIgnoreCase)
                select b;
 
             if (bot.Count() != 1)
@@ -1266,14 +1276,18 @@ namespace GemsCraft.fSystem {
             if( name == null ) throw new ArgumentNullException( "name" );
             Player[] tempList = Players;
             List<Player> results = new List<Player>();
-            for( int i = 0; i < tempList.Length; i++ ) {
-                if( tempList[i] == null ) continue;
-                if( tempList[i].Name.Equals( name, StringComparison.OrdinalIgnoreCase ) ) {
+            foreach (var t in tempList)
+            {
+                if (t == null) continue;
+                if (t.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+                {
                     results.Clear();
-                    results.Add( tempList[i] );
+                    results.Add(t);
                     break;
-                } else if( tempList[i].Name.StartsWith( name, StringComparison.OrdinalIgnoreCase ) ) {
-                    results.Add( tempList[i] );
+                }
+                else if (t.Name.StartsWith(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    results.Add(t);
                 }
             }
 
@@ -1376,12 +1390,14 @@ namespace GemsCraft.fSystem {
 
 
         /// <summary> Counts online players, optionally including hidden ones. </summary>
-        public static int CountPlayers( bool includeHiddenPlayers ) {
-            if( includeHiddenPlayers ) {
+        public static int CountPlayers( bool includeHiddenPlayers )
+        {
+            if( includeHiddenPlayers )
+            {
                 return Players.Length;
-            } else {
-                return Players.Count( player => !player.Info.IsHidden );
             }
+
+            return Players.Count( player => !player.Info.IsHidden );
         }
 
 
@@ -1396,8 +1412,10 @@ namespace GemsCraft.fSystem {
 
 
     /// <summary> Describes the circumstances of server shutdown. </summary>
-    public sealed class ShutdownParams {
-        public ShutdownParams( ShutdownReason reason, TimeSpan delay, bool killProcess, bool restart ) {
+    public sealed class ShutdownParams
+    {
+        public ShutdownParams( ShutdownReason reason, TimeSpan delay, bool killProcess, bool restart )
+        {
             Reason = reason;
             Delay = delay;
             KillProcess = killProcess;
@@ -1406,14 +1424,15 @@ namespace GemsCraft.fSystem {
 
         public ShutdownParams( ShutdownReason reason, TimeSpan delay, bool killProcess,
                                bool restart, [CanBeNull] string customReason, [CanBeNull] Player initiatedBy ) :
-            this( reason, delay, killProcess, restart ) {
+            this( reason, delay, killProcess, restart )
+        {
             customReasonString = customReason;
             InitiatedBy = initiatedBy;
         }
 
         public ShutdownReason Reason { get; private set; }
 
-        readonly string customReasonString;
+        private readonly string customReasonString;
         [NotNull]
         public string ReasonString => customReasonString ?? Reason.ToString();
 

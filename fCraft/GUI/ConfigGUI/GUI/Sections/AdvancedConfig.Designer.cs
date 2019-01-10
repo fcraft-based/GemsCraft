@@ -81,11 +81,11 @@
             this.gPerformance.Controls.Add(this.nThrottling);
             this.gPerformance.Controls.Add(this.lThrottling);
             this.gPerformance.Controls.Add(this.lThrottlingUnits);
-            this.gPerformance.Location = new System.Drawing.Point(26, 568);
-            this.gPerformance.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gPerformance.Location = new System.Drawing.Point(23, 454);
+            this.gPerformance.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gPerformance.Name = "gPerformance";
-            this.gPerformance.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gPerformance.Size = new System.Drawing.Size(954, 224);
+            this.gPerformance.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gPerformance.Size = new System.Drawing.Size(848, 179);
             this.gPerformance.TabIndex = 5;
             this.gPerformance.TabStop = false;
             this.gPerformance.Text = "Performance";
@@ -94,10 +94,10 @@
             // 
             this.lAdvancedWarning.AutoSize = true;
             this.lAdvancedWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lAdvancedWarning.Location = new System.Drawing.Point(22, 32);
+            this.lAdvancedWarning.Location = new System.Drawing.Point(20, 26);
             this.lAdvancedWarning.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lAdvancedWarning.Name = "lAdvancedWarning";
-            this.lAdvancedWarning.Size = new System.Drawing.Size(785, 44);
+            this.lAdvancedWarning.Size = new System.Drawing.Size(658, 36);
             this.lAdvancedWarning.TabIndex = 0;
             this.lAdvancedWarning.Text = "Warning: Altering these settings may decrease your server\'s stability and perform" +
     "ance.\r\nIf you\'re not sure what these settings do, you probably shouldn\'t change " +
@@ -106,10 +106,10 @@
             // xLowLatencyMode
             // 
             this.xLowLatencyMode.AutoSize = true;
-            this.xLowLatencyMode.Location = new System.Drawing.Point(9, 98);
-            this.xLowLatencyMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xLowLatencyMode.Location = new System.Drawing.Point(8, 78);
+            this.xLowLatencyMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.xLowLatencyMode.Name = "xLowLatencyMode";
-            this.xLowLatencyMode.Size = new System.Drawing.Size(697, 24);
+            this.xLowLatencyMode.Size = new System.Drawing.Size(627, 21);
             this.xLowLatencyMode.TabIndex = 3;
             this.xLowLatencyMode.Text = "Low-latency mode (disables Nagle\'s algorithm, reducing latency but increasing ban" +
     "dwidth use).";
@@ -118,10 +118,10 @@
             // lProcessPriority
             // 
             this.lProcessPriority.AutoSize = true;
-            this.lProcessPriority.Location = new System.Drawing.Point(28, 145);
+            this.lProcessPriority.Location = new System.Drawing.Point(25, 116);
             this.lProcessPriority.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lProcessPriority.Name = "lProcessPriority";
-            this.lProcessPriority.Size = new System.Drawing.Size(116, 20);
+            this.lProcessPriority.Size = new System.Drawing.Size(106, 17);
             this.lProcessPriority.TabIndex = 10;
             this.lProcessPriority.Text = "Process priority";
             // 
@@ -136,10 +136,10 @@
             "Normal",
             "Below Normal",
             "Low"});
-            this.cProcessPriority.Location = new System.Drawing.Point(172, 140);
-            this.cProcessPriority.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cProcessPriority.Location = new System.Drawing.Point(153, 112);
+            this.cProcessPriority.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cProcessPriority.Name = "cProcessPriority";
-            this.cProcessPriority.Size = new System.Drawing.Size(162, 28);
+            this.cProcessPriority.Size = new System.Drawing.Size(144, 24);
             this.cProcessPriority.TabIndex = 11;
             // 
             // nTickInterval
@@ -149,8 +149,8 @@
             0,
             0,
             0});
-            this.nTickInterval.Location = new System.Drawing.Point(644, 142);
-            this.nTickInterval.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nTickInterval.Location = new System.Drawing.Point(572, 114);
+            this.nTickInterval.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nTickInterval.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -162,7 +162,7 @@
             0,
             0});
             this.nTickInterval.Name = "nTickInterval";
-            this.nTickInterval.Size = new System.Drawing.Size(105, 26);
+            this.nTickInterval.Size = new System.Drawing.Size(93, 22);
             this.nTickInterval.TabIndex = 13;
             this.nTickInterval.Value = new decimal(new int[] {
             100,
@@ -173,20 +173,20 @@
             // lTickIntervalUnits
             // 
             this.lTickIntervalUnits.AutoSize = true;
-            this.lTickIntervalUnits.Location = new System.Drawing.Point(758, 145);
+            this.lTickIntervalUnits.Location = new System.Drawing.Point(674, 116);
             this.lTickIntervalUnits.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lTickIntervalUnits.Name = "lTickIntervalUnits";
-            this.lTickIntervalUnits.Size = new System.Drawing.Size(30, 20);
+            this.lTickIntervalUnits.Size = new System.Drawing.Size(26, 17);
             this.lTickIntervalUnits.TabIndex = 14;
             this.lTickIntervalUnits.Text = "ms";
             // 
             // lTickInterval
             // 
             this.lTickInterval.AutoSize = true;
-            this.lTickInterval.Location = new System.Drawing.Point(528, 145);
+            this.lTickInterval.Location = new System.Drawing.Point(469, 116);
             this.lTickInterval.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lTickInterval.Name = "lTickInterval";
-            this.lTickInterval.Size = new System.Drawing.Size(91, 20);
+            this.lTickInterval.Size = new System.Drawing.Size(84, 17);
             this.lTickInterval.TabIndex = 12;
             this.lTickInterval.Text = "Tick interval";
             // 
@@ -197,8 +197,8 @@
             0,
             0,
             0});
-            this.nThrottling.Location = new System.Drawing.Point(172, 185);
-            this.nThrottling.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nThrottling.Location = new System.Drawing.Point(153, 148);
+            this.nThrottling.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nThrottling.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -210,7 +210,7 @@
             0,
             0});
             this.nThrottling.Name = "nThrottling";
-            this.nThrottling.Size = new System.Drawing.Size(105, 26);
+            this.nThrottling.Size = new System.Drawing.Size(93, 22);
             this.nThrottling.TabIndex = 16;
             this.nThrottling.Value = new decimal(new int[] {
             2048,
@@ -221,20 +221,20 @@
             // lThrottling
             // 
             this.lThrottling.AutoSize = true;
-            this.lThrottling.Location = new System.Drawing.Point(33, 188);
+            this.lThrottling.Location = new System.Drawing.Point(29, 150);
             this.lThrottling.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lThrottling.Name = "lThrottling";
-            this.lThrottling.Size = new System.Drawing.Size(114, 20);
+            this.lThrottling.Size = new System.Drawing.Size(101, 17);
             this.lThrottling.TabIndex = 15;
             this.lThrottling.Text = "Block throttling";
             // 
             // lThrottlingUnits
             // 
             this.lThrottlingUnits.AutoSize = true;
-            this.lThrottlingUnits.Location = new System.Drawing.Point(286, 188);
+            this.lThrottlingUnits.Location = new System.Drawing.Point(254, 150);
             this.lThrottlingUnits.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lThrottlingUnits.Name = "lThrottlingUnits";
-            this.lThrottlingUnits.Size = new System.Drawing.Size(167, 20);
+            this.lThrottlingUnits.Size = new System.Drawing.Size(151, 17);
             this.lThrottlingUnits.TabIndex = 17;
             this.lThrottlingUnits.Text = "blocks / second / client";
             // 
@@ -255,11 +255,11 @@
             this.gAdvancedMisc.Controls.Add(this.xMaxUndo);
             this.gAdvancedMisc.Controls.Add(this.xRelayAllBlockUpdates);
             this.gAdvancedMisc.Controls.Add(this.xNoPartialPositionUpdates);
-            this.gAdvancedMisc.Location = new System.Drawing.Point(27, 229);
-            this.gAdvancedMisc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gAdvancedMisc.Location = new System.Drawing.Point(24, 183);
+            this.gAdvancedMisc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gAdvancedMisc.Name = "gAdvancedMisc";
-            this.gAdvancedMisc.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gAdvancedMisc.Size = new System.Drawing.Size(954, 328);
+            this.gAdvancedMisc.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gAdvancedMisc.Size = new System.Drawing.Size(848, 262);
             this.gAdvancedMisc.TabIndex = 4;
             this.gAdvancedMisc.TabStop = false;
             this.gAdvancedMisc.Text = "Miscellaneous";
@@ -267,25 +267,25 @@
             // xAutoRank
             // 
             this.xAutoRank.AutoSize = true;
-            this.xAutoRank.Location = new System.Drawing.Point(14, 289);
-            this.xAutoRank.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xAutoRank.Location = new System.Drawing.Point(12, 231);
+            this.xAutoRank.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.xAutoRank.Name = "xAutoRank";
-            this.xAutoRank.Size = new System.Drawing.Size(161, 24);
+            this.xAutoRank.Size = new System.Drawing.Size(140, 21);
             this.xAutoRank.TabIndex = 24;
             this.xAutoRank.Text = "Enable AutoRank";
             this.xAutoRank.UseVisualStyleBackColor = true;
             // 
             // nMaxUndoStates
             // 
-            this.nMaxUndoStates.Location = new System.Drawing.Point(172, 109);
-            this.nMaxUndoStates.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nMaxUndoStates.Location = new System.Drawing.Point(153, 87);
+            this.nMaxUndoStates.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nMaxUndoStates.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nMaxUndoStates.Name = "nMaxUndoStates";
-            this.nMaxUndoStates.Size = new System.Drawing.Size(87, 26);
+            this.nMaxUndoStates.Size = new System.Drawing.Size(77, 22);
             this.nMaxUndoStates.TabIndex = 23;
             this.nMaxUndoStates.Value = new decimal(new int[] {
             1,
@@ -296,10 +296,10 @@
             // lMaxUndoStates
             // 
             this.lMaxUndoStates.AutoSize = true;
-            this.lMaxUndoStates.Location = new System.Drawing.Point(268, 112);
+            this.lMaxUndoStates.Location = new System.Drawing.Point(238, 90);
             this.lMaxUndoStates.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lMaxUndoStates.Name = "lMaxUndoStates";
-            this.lMaxUndoStates.Size = new System.Drawing.Size(97, 20);
+            this.lMaxUndoStates.Size = new System.Drawing.Size(86, 17);
             this.lMaxUndoStates.TabIndex = 22;
             this.lMaxUndoStates.Text = "states, up to";
             // 
@@ -307,30 +307,30 @@
             // 
             this.lIPWarning.AutoSize = true;
             this.lIPWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lIPWarning.Location = new System.Drawing.Point(168, 202);
+            this.lIPWarning.Location = new System.Drawing.Point(149, 162);
             this.lIPWarning.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lIPWarning.Name = "lIPWarning";
-            this.lIPWarning.Size = new System.Drawing.Size(642, 20);
+            this.lIPWarning.Size = new System.Drawing.Size(542, 17);
             this.lIPWarning.TabIndex = 20;
             this.lIPWarning.Text = "Note: You do not need to specify an IP address unless you have multiple NICs or I" +
     "Ps.";
             // 
             // tIP
             // 
-            this.tIP.Location = new System.Drawing.Point(172, 165);
-            this.tIP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tIP.Location = new System.Drawing.Point(153, 132);
+            this.tIP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tIP.MaxLength = 15;
             this.tIP.Name = "tIP";
-            this.tIP.Size = new System.Drawing.Size(144, 26);
+            this.tIP.Size = new System.Drawing.Size(128, 22);
             this.tIP.TabIndex = 19;
             // 
             // xIP
             // 
             this.xIP.AutoSize = true;
-            this.xIP.Location = new System.Drawing.Point(9, 168);
-            this.xIP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xIP.Location = new System.Drawing.Point(8, 134);
+            this.xIP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.xIP.Name = "xIP";
-            this.xIP.Size = new System.Drawing.Size(136, 24);
+            this.xIP.Size = new System.Drawing.Size(118, 21);
             this.xIP.TabIndex = 18;
             this.xIP.Text = "Designated IP";
             this.xIP.UseVisualStyleBackColor = true;
@@ -338,19 +338,19 @@
             // lConsoleName
             // 
             this.lConsoleName.AutoSize = true;
-            this.lConsoleName.Location = new System.Drawing.Point(9, 248);
+            this.lConsoleName.Location = new System.Drawing.Point(8, 198);
             this.lConsoleName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lConsoleName.Name = "lConsoleName";
-            this.lConsoleName.Size = new System.Drawing.Size(111, 20);
+            this.lConsoleName.Size = new System.Drawing.Size(98, 17);
             this.lConsoleName.TabIndex = 7;
             this.lConsoleName.Text = "Console name";
             // 
             // tConsoleName
             // 
-            this.tConsoleName.Location = new System.Drawing.Point(172, 243);
-            this.tConsoleName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tConsoleName.Location = new System.Drawing.Point(153, 194);
+            this.tConsoleName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tConsoleName.Name = "tConsoleName";
-            this.tConsoleName.Size = new System.Drawing.Size(248, 26);
+            this.tConsoleName.Size = new System.Drawing.Size(221, 22);
             this.tConsoleName.TabIndex = 8;
             // 
             // nMaxUndo
@@ -360,15 +360,15 @@
             0,
             0,
             0});
-            this.nMaxUndo.Location = new System.Drawing.Point(386, 109);
-            this.nMaxUndo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nMaxUndo.Location = new System.Drawing.Point(343, 87);
+            this.nMaxUndo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nMaxUndo.Maximum = new decimal(new int[] {
             2147483647,
             0,
             0,
             0});
             this.nMaxUndo.Name = "nMaxUndo";
-            this.nMaxUndo.Size = new System.Drawing.Size(129, 26);
+            this.nMaxUndo.Size = new System.Drawing.Size(115, 22);
             this.nMaxUndo.TabIndex = 5;
             this.nMaxUndo.Value = new decimal(new int[] {
             2000000,
@@ -379,10 +379,10 @@
             // lMaxUndoUnits
             // 
             this.lMaxUndoUnits.AutoSize = true;
-            this.lMaxUndoUnits.Location = new System.Drawing.Point(524, 112);
+            this.lMaxUndoUnits.Location = new System.Drawing.Point(466, 90);
             this.lMaxUndoUnits.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lMaxUndoUnits.Name = "lMaxUndoUnits";
-            this.lMaxUndoUnits.Size = new System.Drawing.Size(337, 20);
+            this.lMaxUndoUnits.Size = new System.Drawing.Size(303, 17);
             this.lMaxUndoUnits.TabIndex = 6;
             this.lMaxUndoUnits.Text = "blocks each (up to 16.0 MB of RAM per player)";
             // 
@@ -391,10 +391,10 @@
             this.xMaxUndo.AutoSize = true;
             this.xMaxUndo.Checked = true;
             this.xMaxUndo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.xMaxUndo.Location = new System.Drawing.Point(9, 111);
-            this.xMaxUndo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xMaxUndo.Location = new System.Drawing.Point(8, 89);
+            this.xMaxUndo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.xMaxUndo.Name = "xMaxUndo";
-            this.xMaxUndo.Size = new System.Drawing.Size(130, 24);
+            this.xMaxUndo.Size = new System.Drawing.Size(115, 21);
             this.xMaxUndo.TabIndex = 4;
             this.xMaxUndo.Text = "Limit /undo to";
             this.xMaxUndo.UseVisualStyleBackColor = true;
@@ -402,10 +402,10 @@
             // xRelayAllBlockUpdates
             // 
             this.xRelayAllBlockUpdates.AutoSize = true;
-            this.xRelayAllBlockUpdates.Location = new System.Drawing.Point(9, 32);
-            this.xRelayAllBlockUpdates.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xRelayAllBlockUpdates.Location = new System.Drawing.Point(8, 26);
+            this.xRelayAllBlockUpdates.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.xRelayAllBlockUpdates.Name = "xRelayAllBlockUpdates";
-            this.xRelayAllBlockUpdates.Size = new System.Drawing.Size(725, 24);
+            this.xRelayAllBlockUpdates.Size = new System.Drawing.Size(655, 21);
             this.xRelayAllBlockUpdates.TabIndex = 1;
             this.xRelayAllBlockUpdates.Text = "When a player changes a block, send him the redundant update packet anyway (origi" +
     "nal behavior).";
@@ -414,10 +414,10 @@
             // xNoPartialPositionUpdates
             // 
             this.xNoPartialPositionUpdates.AutoSize = true;
-            this.xNoPartialPositionUpdates.Location = new System.Drawing.Point(9, 71);
-            this.xNoPartialPositionUpdates.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xNoPartialPositionUpdates.Location = new System.Drawing.Point(8, 57);
+            this.xNoPartialPositionUpdates.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.xNoPartialPositionUpdates.Name = "xNoPartialPositionUpdates";
-            this.xNoPartialPositionUpdates.Size = new System.Drawing.Size(425, 24);
+            this.xNoPartialPositionUpdates.Size = new System.Drawing.Size(382, 21);
             this.xNoPartialPositionUpdates.TabIndex = 2;
             this.xNoPartialPositionUpdates.Text = "Do not use partial position updates (opcodes 9, 10, 11).";
             this.xNoPartialPositionUpdates.UseVisualStyleBackColor = true;
@@ -428,11 +428,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gCrashReport.Controls.Add(this.xCrash);
             this.gCrashReport.Controls.Add(this.lCrashReportDisclaimer);
-            this.gCrashReport.Location = new System.Drawing.Point(27, 96);
-            this.gCrashReport.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gCrashReport.Location = new System.Drawing.Point(24, 77);
+            this.gCrashReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gCrashReport.Name = "gCrashReport";
-            this.gCrashReport.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gCrashReport.Size = new System.Drawing.Size(954, 123);
+            this.gCrashReport.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gCrashReport.Size = new System.Drawing.Size(848, 98);
             this.gCrashReport.TabIndex = 3;
             this.gCrashReport.TabStop = false;
             this.gCrashReport.Text = "Crash Reporting";
@@ -440,10 +440,10 @@
             // xCrash
             // 
             this.xCrash.AutoSize = true;
-            this.xCrash.Location = new System.Drawing.Point(38, 38);
-            this.xCrash.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xCrash.Location = new System.Drawing.Point(34, 30);
+            this.xCrash.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.xCrash.Name = "xCrash";
-            this.xCrash.Size = new System.Drawing.Size(22, 21);
+            this.xCrash.Size = new System.Drawing.Size(18, 17);
             this.xCrash.TabIndex = 2;
             this.xCrash.UseVisualStyleBackColor = true;
             // 
@@ -451,10 +451,10 @@
             // 
             this.lCrashReportDisclaimer.AutoSize = true;
             this.lCrashReportDisclaimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lCrashReportDisclaimer.Location = new System.Drawing.Point(68, 40);
+            this.lCrashReportDisclaimer.Location = new System.Drawing.Point(60, 32);
             this.lCrashReportDisclaimer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lCrashReportDisclaimer.Name = "lCrashReportDisclaimer";
-            this.lCrashReportDisclaimer.Size = new System.Drawing.Size(748, 60);
+            this.lCrashReportDisclaimer.Size = new System.Drawing.Size(631, 51);
             this.lCrashReportDisclaimer.TabIndex = 1;
             this.lCrashReportDisclaimer.Text = "Send all Crash Reports To The Developer\r\nCrash reports are when serious unexpecte" +
     "d errors occur. Being able to receive crash reports helps\r\nidentify bugs and imp" +
@@ -463,23 +463,27 @@
             // bResetTab
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.bResetTab.Location = new System.Drawing.Point(840, 800);
+            this.bResetTab.Location = new System.Drawing.Point(747, 640);
+            this.bResetTab.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bResetTab.Name = "bResetTab";
-            this.bResetTab.Size = new System.Drawing.Size(141, 37);
+            this.bResetTab.Size = new System.Drawing.Size(125, 30);
             this.bResetTab.TabIndex = 6;
             this.bResetTab.Text = "Reset";
             this.bResetTab.UseSelectable = true;
+            this.bResetTab.Click += new System.EventHandler(this.bResetTab_Click);
             // 
             // AdvancedConfig
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 854);
+            this.ClientSize = new System.Drawing.Size(892, 683);
             this.Controls.Add(this.bResetTab);
             this.Controls.Add(this.gPerformance);
             this.Controls.Add(this.gAdvancedMisc);
             this.Controls.Add(this.gCrashReport);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AdvancedConfig";
+            this.Padding = new System.Windows.Forms.Padding(18, 48, 18, 16);
             this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "GemsCraft Configuration - Advanced";
             this.gPerformance.ResumeLayout(false);

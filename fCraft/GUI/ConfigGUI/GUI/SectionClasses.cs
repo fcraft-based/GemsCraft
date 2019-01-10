@@ -24,5 +24,6 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
         internal static IRCConfig IRCConfig;
         internal static AdvancedConfig AdvancedConfig;
         internal static MiscConfig MiscConfig;
+        internal static CpeConfig CpeConfig;
     }
 }

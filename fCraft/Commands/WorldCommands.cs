@@ -3315,7 +3315,7 @@ THE SOFTWARE.*/
                 player.Message("There are no {0}.", listName);
 
             }
-            else if (worlds.Length <= WorldNamesPerPage || player.IsSuper)
+            else if (worlds.Length <= WorldNamesPerPage || player.IsSuper())
             {
                 player.MessagePrefixed("&S  ", "&SThere are {0} {1}: {2}", MessageType.Chat,
                                         worlds.Length, listName, worlds.JoinToClassyString());

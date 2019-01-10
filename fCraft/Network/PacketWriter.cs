@@ -114,7 +114,7 @@ namespace GemsCraft.Network {
 
         internal static Packet MakeMessage( [NotNull] string message, MessageType type) {
             if( message == null ) throw new ArgumentNullException( "message" );
-
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             Packet packet = new Packet( OpCode.Message );
             packet.Data[1] = 0; // unused
             Encoding.ASCII.GetBytes( message.PadRight( 64 ), 0, 64, packet.Data, 2 );
@@ -355,7 +355,7 @@ namespace GemsCraft.Network {
         internal static Packet MakeSpecialMessage(byte messageType, [NotNull] string message)
         {
             if (message == null) throw new ArgumentNullException("message");
-
+            if (!MessageTypeUtil.Enabled()) messageType = 0;
             Packet packet = new Packet(OpCode.Message);
             packet.Data[1] = messageType;
             Encoding.ASCII.GetBytes(message.PadRight(64), 0, 64, packet.Data, 2);

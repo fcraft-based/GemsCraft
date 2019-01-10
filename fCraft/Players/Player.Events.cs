@@ -190,7 +190,7 @@ namespace GemsCraft.Players {
 
         static void RaisePlayerJoinedWorldEvent( Player player, World oldWorld, WorldChangeReason reason ) {
             var h = JoinedWorld;
-            if( h != null ) h( null, new PlayerJoinedWorldEventArgs( player, oldWorld, player.World, reason ) );
+            h?.Invoke( null, new PlayerJoinedWorldEventArgs( player, oldWorld, player.World, reason ) );
         }
     }
 }
@@ -202,18 +202,17 @@ namespace GemsCraft.Events {
             Player = player;
         }
 
-        public Player Player { get; private set; }
+        public Player Player { get; }
     }
 
 
     public sealed class SessionConnectingEventArgs : EventArgs, ICancellableEvent {
         internal SessionConnectingEventArgs( [NotNull] IPAddress ip ) {
-            if( ip == null ) throw new ArgumentNullException( "ip" );
-            IP = ip;
+            IP = ip ?? throw new ArgumentNullException( "ip" );
         }
 
         [NotNull]
-        public IPAddress IP { get; private set; }
+        public IPAddress IP { get; }
         public bool Cancel { get; set; }
     }
 

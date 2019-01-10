@@ -483,8 +483,9 @@ namespace GemsCraft.Players {
         {
             if (source == null) throw new ArgumentNullException("source");
             if (message == null) throw new ArgumentNullException("message");
-
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             int i = 0;
+
             foreach (Player player in source)
             {
                 foreach (Packet packet in LineWrapper.Wrap(message, player.SupportsFullCP437, type))
@@ -520,7 +521,7 @@ namespace GemsCraft.Players {
         {
             if (source == null) throw new ArgumentNullException("source");
             if (message == null) throw new ArgumentNullException("message");
-
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             int i = 0;
             foreach (Player player in source)
             {
@@ -565,7 +566,7 @@ namespace GemsCraft.Players {
             if (source == null) throw new ArgumentNullException("source");
             if (message == null) throw new ArgumentNullException("message");
             if (formatArgs == null) throw new ArgumentNullException("formatArgs");
-
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             int i = 0;
             foreach (Player player in source)
             {
@@ -595,6 +596,7 @@ namespace GemsCraft.Players {
             if (message == null) throw new ArgumentNullException("message");
             if (formatArgs == null) throw new ArgumentNullException("formatArgs");
             if (type == null) type = 0;
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             if (!Enum.IsDefined(typeof(MessageType), type))
                 throw new InvalidEnumArgumentException(nameof(type), (int) type, typeof(MessageType));
 
@@ -624,6 +626,7 @@ namespace GemsCraft.Players {
             if (message == null) throw new ArgumentNullException("message");
             if (type == null) type = 0;
             int i = 0;
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             foreach (Player player in source)
             {
                 foreach (Packet packet in LineWrapper.WrapPrefixed(prefix, message, player.SupportsFullCP437, type.Value))
@@ -652,7 +655,8 @@ namespace GemsCraft.Players {
             if( formatArgs == null ) throw new ArgumentNullException( "formatArgs" );
             if (type == null) type = 0;
             int i = 0;
-            foreach(Player player in source)
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+            foreach (Player player in source)
             {
                 foreach( Packet packet in LineWrapper.WrapPrefixed(prefix, string.Format(message, formatArgs), player.SupportsFullCP437, type.Value))
                 {

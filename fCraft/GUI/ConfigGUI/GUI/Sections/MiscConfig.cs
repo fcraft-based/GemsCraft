@@ -88,5 +88,10 @@ namespace GemsCraft.GUI.ConfigGUI.GUI.Sections
         {
 
         }
+
+        private void bResetTab_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

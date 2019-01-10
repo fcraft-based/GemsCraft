@@ -251,6 +251,12 @@
     <Compile Include="GUI\ConfigGUI\GUI\MainForm.Tooltips.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\CpeConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ConfigGUI\GUI\Sections\CpeConfig.Designer.cs">
+      <DependentUpon>CpeConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ConfigGUI\GUI\Sections\MiscConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -579,6 +585,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ConfigGUI\GUI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ConfigGUI\GUI\Sections\CpeConfig.resx">
+      <DependentUpon>CpeConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ConfigGUI\GUI\Sections\MiscConfig.resx">
       <DependentUpon>MiscConfig.cs</DependentUpon>

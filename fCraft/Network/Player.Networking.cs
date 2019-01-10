@@ -334,7 +334,7 @@ namespace GemsCraft.Players
                 return false;
             }
 
-            if (!IsSuper && message.StartsWith("/womid "))
+            if (!IsSuper() && message.StartsWith("/womid "))
             {
                 IsUsingWoM = true;
                 return true;

@@ -86,7 +86,7 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
         internal void btnCPE_Click(object sender, EventArgs e)
         {
             _selectedTab = 10;
-            MessageBox.Show("Coming Soon!");
+            SectionClasses.CpeConfig.ShowDialog();
         }
 
         internal static MainForm _instance;
@@ -113,7 +113,7 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
             SectionClasses.IRCConfig = new IRCConfig();
             SectionClasses.AdvancedConfig = new AdvancedConfig();
             SectionClasses.MiscConfig = new MiscConfig();
-
+            SectionClasses.CpeConfig = new CpeConfig();
             SectionClasses.WorldConfig.dgvcBlockDB.TrueValue = YesNoAuto.Yes;
             SectionClasses.WorldConfig.dgvcBlockDB.FalseValue = YesNoAuto.No;
             SectionClasses.WorldConfig.dgvcBlockDB.IndeterminateValue = YesNoAuto.Auto;
@@ -1383,6 +1383,7 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
             ApplyTabIRC();
             ApplyTabAdvanced();
             ApplyTabMisc();
+            ApplyTabCpe();
         }
 
         internal void bResetTab_Click(object sender, EventArgs e)
@@ -1433,6 +1434,10 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
                 case 9:// Misc
                     Config.LoadDefaults(ConfigSection.Misc);
                     ApplyTabMisc();
+                    break;
+                case 10:
+                    Config.LoadDefaults(ConfigSection.CPE);
+                    ApplyTabCpe();
                     break;
             }
         }

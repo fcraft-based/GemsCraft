@@ -3,6 +3,7 @@
 using System.Diagnostics;
 using GemsCraft.Players;
 using GemsCraft.Utils;
+using ServiceStack.Text;
 
 namespace GemsCraft.fSystem.Config {
     /// <summary> Enumeration of available configuration keys. See comments
@@ -610,7 +611,66 @@ but will reduce bandwidth use." )]
 
         [IntKey(ConfigSection.Misc, 65509,
 @"Port Remote Control Server will use to establish external connections.")]
-        RemoteControlPort
+        RemoteControlPort,
+        #endregion
+
+        #region CPE
+        
+        [BoolKey(ConfigSection.CPE, true,
+@"If enabled, allows the use of different message types by the server and users.")]
+        EnableMessageTypes,
+
+        [BoolKey(ConfigSection.CPE, true,
+@"If enabled, announcements under 64 characters will be shown as an Announcement MessageType")]
+        EnableAnnouncements,
+
+        [BoolKey(ConfigSection.CPE, true,
+            @"If enabled, shows messages at top right of client's screen")]
+        Status1Enabled,
+
+        [StringKey(ConfigSection.CPE, "GemsCraft {version}",
+            "Messages for Message Type")]
+        Status1,
+
+        [BoolKey(ConfigSection.CPE, true,
+            @"If enabled, shows messages at top right of client's screen")]
+        Status2Enabled,
+
+        [StringKey(ConfigSection.CPE, "{servername}",
+            "Messages for Message Type")]
+        Status2,
+
+        [BoolKey(ConfigSection.CPE, true,
+            @"If enabled, shows messages at top right of client's screen")]
+        Status3Enabled,
+
+        [StringKey(ConfigSection.CPE, "{displayedname}",
+            "Messages for Message Type")]
+        Status3,
+
+        [BoolKey(ConfigSection.CPE, true,
+            @"If enabled, shows messages at bottom right of client's screen")]
+        BR3Enabled,
+
+        [StringKey(ConfigSection.CPE, "World: {world}",
+            "Messages for Message Type")]
+        BR3,
+
+        [BoolKey(ConfigSection.CPE, true,
+            @"If enabled, shows messages at bottom right of client's screen")]
+        BR2Enabled,
+
+        [StringKey(ConfigSection.CPE, "Last Command: {lastcommand}",
+            "Messages for Message Type")]
+        BR2,
+
+        [BoolKey(ConfigSection.CPE, true,
+            @"If enabled, shows messages at bottom right of client's screen")]
+        BR1Enabled,
+
+        [StringKey(ConfigSection.CPE, "Block: {block}",
+            "Messages for Message Type")]
+        BR1
         #endregion
     }
 }

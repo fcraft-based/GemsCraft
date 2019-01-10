@@ -2163,7 +2163,7 @@ THE SOFTWARE.*/
                     player.Message("There are no players {0}", qualifier);
 
                 }
-                else if (visiblePlayers.Length <= PlayersPerPage || player.IsSuper)
+                else if (visiblePlayers.Length <= PlayersPerPage || player.IsSuper())
                 {
                     player.MessagePrefixed("&S  ", "&SThere are {0} players {1}: {2}", MessageType.Chat,
                         visiblePlayers.Length, qualifier, visiblePlayers.JoinToClassyString());

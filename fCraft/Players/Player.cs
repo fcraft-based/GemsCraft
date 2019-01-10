@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Threading;
 using GemsCraft.Commands;
 using GemsCraft.Drawing;
@@ -47,7 +48,14 @@ namespace GemsCraft.Players
 
         #region Properties
 
-        public readonly bool IsSuper;
+        /// <summary>
+        ///  Determines if user is Console or AutoRank
+        /// </summary>
+        /// <returns></returns>
+        public bool IsSuper()
+        {
+            return this == Console || this == AutoRank;
+        }
 
 
         /// <summary> Whether the player has completed the login sequence. </summary>
@@ -304,7 +312,6 @@ namespace GemsCraft.Players
             IP = IPAddress.Loopback;
             ResetAllBinds();
             State = SessionState.Offline;
-            IsSuper = true;
         }
 
         // This constructor is used to create pseudoplayers (such as bots)
@@ -317,7 +324,6 @@ namespace GemsCraft.Players
             IP = IPAddress.Loopback;
             ResetAllBinds();
             State = SessionState.Online;
-            IsSuper = true;
             World = world;
         }
 
@@ -408,6 +414,7 @@ namespace GemsCraft.Players
         [CanBeNull]
         string partialMessage;
 
+        public List<string> UsedCommands = new List<string>();
         // Parses message incoming from the player
         public void ParseMessage([NotNull] string rawMessage, bool fromConsole, bool sendMessage)
         {
@@ -521,6 +528,8 @@ namespace GemsCraft.Players
                             {
                                 LastCommand = cmd;
                             }
+
+                            UsedCommands.Add(cmd.Name);
                         }
                     } break;
 
@@ -879,6 +888,7 @@ namespace GemsCraft.Players
         public void MessageAlt([NotNull] string message, MessageType type)
         {
             if (message == null) throw new ArgumentNullException("message");
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             if (this == Console)
             {
                 Logger.LogToConsole(message);
@@ -904,32 +914,36 @@ namespace GemsCraft.Players
         {
             if (message == null) throw new ArgumentNullException("message");
             if (args == null) throw new ArgumentNullException("args");
-            MessageAlt(string.Format(message, args));
+            MessageAlt(string.Format(message, args), MessageType.Chat);
         }
-
-        public void Message([NotNull] string message)
+        
+        public void Message([NotNull] string message, params object[] args)
         {
+            if (args != null && args.Length > 0) message = string.Format(message, args);
             Message(message, MessageType.Chat);
         }
 
-        public void Message([NotNull] string message, MessageType type)
+        public void Message([NotNull] string message, MessageType? type, [NotNull] params object[] args)
         {
-            if (message == null) throw new ArgumentNullException("message");
+            if (message == null) throw new ArgumentNullException(nameof(message));
+            if (type == null || !MessageTypeUtil.Enabled())
+            {
+                type = MessageType.Chat;
+            }
+            if (args != null)
+            {
+                List<string> arg = args.Select(o => o.ToString()).ToList();
+                if (arg.Count > 0)
+                    message = string.Format(message, args);
+            }
 
-            //if is console
-            if (IsSuper)
+            if (IsSuper())
             {
                 Logger.LogToConsole(message);
-
-                if (sendToWebPanel)
-                {
-                    WebPanelData += message;
-                }
-
             }
             else
             {
-                foreach (Packet p in LineWrapper.Wrap(Color.Sys + message, SupportsFullCP437, type))
+                foreach (Packet p in LineWrapper.Wrap(Color.Sys + message, SupportsFullCP437, type.Value))
                 {
                     Send(p);
                 }
@@ -937,41 +951,12 @@ namespace GemsCraft.Players
         }
 
         [StringFormatMethod("message")]
-        public void Message([NotNull] string message, [NotNull] object arg)
-        {
-            Message(message, arg, MessageType.Chat);
-        }
-
-        [StringFormatMethod("message")]
-        public void Message([NotNull] string message, [NotNull] object arg, MessageType type)
-        {
-            if (message == null) throw new ArgumentNullException("message");
-            if (arg == null) throw new ArgumentNullException("arg");
-            // ReSharper disable once RedundantStringFormatCall
-            Message(string.Format(message, arg));
-        }
-
-        [StringFormatMethod("message")]
-        public void Message([NotNull] string message, [NotNull] params object[] args)
-        {
-            Message(message, args, MessageType.Chat);
-        }
-
-        [StringFormatMethod("message")]
-        public void Message([NotNull] string message, MessageType type, [NotNull] params object[] args)
-        {
-            if (message == null) throw new ArgumentNullException("message");
-            if (args == null) throw new ArgumentNullException("args");
-            Message(string.Format(message, args));
-        }
-
-
-        [StringFormatMethod("message")]
         public void MessagePrefixed([NotNull] string prefix, [NotNull] string message, MessageType type, [NotNull] params object[] args)
         {
             if (prefix == null) throw new ArgumentNullException("prefix");
             if (message == null) throw new ArgumentNullException("message");
             if (args == null) throw new ArgumentNullException("args");
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             if (args.Length > 0)
             {
                 message = string.Format(message, args);
@@ -1024,6 +1009,7 @@ namespace GemsCraft.Players
             if (prefix == null) throw new ArgumentNullException("prefix");
             if (message == null) throw new ArgumentNullException("message");
             if (args == null) throw new ArgumentNullException("args");
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             if (IsDeaf) return;
             if (args.Length > 0)
             {
@@ -1300,7 +1286,7 @@ namespace GemsCraft.Players
 
         internal bool DetectChatSpam()
         {
-            if (IsSuper) return false;
+            if (IsSuper()) return false;
             if (spamChatLog.Count >= AntispamMessageCount)
             {
                 DateTime oldestTime = spamChatLog.Dequeue();
@@ -1754,7 +1740,7 @@ namespace GemsCraft.Players
         public bool Can([NotNull] params Permission[] permissions)
         {
             if (permissions == null) throw new ArgumentNullException("permissions");
-            return IsSuper || permissions.All(Info.Rank.Can);
+            return IsSuper() || permissions.All(Info.Rank.Can);
         }
 
 
@@ -1762,7 +1748,7 @@ namespace GemsCraft.Players
         public bool CanAny([NotNull] params Permission[] permissions)
         {
             if (permissions == null) throw new ArgumentNullException("permissions");
-            return IsSuper || permissions.Any(Info.Rank.Can);
+            return IsSuper() || permissions.Any(Info.Rank.Can);
         }
 
 
@@ -1771,7 +1757,7 @@ namespace GemsCraft.Players
         {
             try
             {
-                return IsSuper || Info.Rank.Can(permission);
+                return IsSuper() || Info.Rank.Can(permission);
             }
             catch (Exception e)
             {
@@ -1785,8 +1771,7 @@ namespace GemsCraft.Players
         /// and is allowed to affect players of the given rank. </summary>
         public bool Can(Permission permission, [NotNull] Rank other)
         {
-            if (other == null) throw new ArgumentNullException("other");
-            return IsSuper || Info.Rank.Can(permission, other);
+            return IsSuper() || Info.Rank.Can(permission, other);
         }
 
 
@@ -1795,7 +1780,7 @@ namespace GemsCraft.Players
         public bool CanDraw(int volume)
         {
             if (volume < 0) throw new ArgumentOutOfRangeException("volume");
-            return IsSuper || (Info.Rank.DrawLimit == 0) || (volume <= Info.Rank.DrawLimit);
+            return IsSuper() || (Info.Rank.DrawLimit == 0) || (volume <= Info.Rank.DrawLimit);
         }
 
 
@@ -1803,7 +1788,7 @@ namespace GemsCraft.Players
         public bool CanJoin([NotNull] World worldToJoin)
         {
             if (worldToJoin == null) throw new ArgumentNullException("worldToJoin");
-            return IsSuper || worldToJoin.AccessSecurity.Check(Info);
+            return IsSuper() || worldToJoin.AccessSecurity.Check(Info);
         }
 
 
@@ -1918,7 +1903,7 @@ namespace GemsCraft.Players
         {
             if (other == null) throw new ArgumentNullException("other");
             return other == this ||
-                   IsSuper ||
+                   IsSuper() ||
                    !other.Info.IsHidden ||
                    Info.Rank.CanSee(other.Info.Rank);
         }
@@ -1932,7 +1917,7 @@ namespace GemsCraft.Players
         {
             if (other == null) throw new ArgumentNullException("other");
             return other == this ||
-                   IsSuper ||
+                   IsSuper() ||
                    other.spectatedPlayer == null && !other.Info.IsHidden ||
                    (other.spectatedPlayer != this && Info.Rank.CanSee(other.Info.Rank));
         }

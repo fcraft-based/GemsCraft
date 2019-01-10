@@ -67,6 +67,7 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
             ApplyTabIRC();
             ApplyTabAdvanced();
             ApplyTabMisc();
+            ApplyTabCpe();
 
             AddChangeHandler(SectionClasses.GeneralConfig, SomethingChanged);
             AddChangeHandler(SectionClasses.ChatConfig, SomethingChanged);
@@ -559,6 +560,29 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
 
         }
 
+        private void ApplyTabCpe()
+        {
+            SectionClasses.CpeConfig.chkEnableMessageTypes.Checked = ConfigKey.EnableMessageTypes.Enabled();
+            SectionClasses.CpeConfig.chkShowAnnouncements.Checked = ConfigKey.EnableAnnouncements.Enabled();
+
+            SectionClasses.CpeConfig.chkStatus1.Checked = ConfigKey.Status1Enabled.Enabled();
+            SectionClasses.CpeConfig.txtStatus1.Text = ConfigKey.Status1.GetString();
+
+            SectionClasses.CpeConfig.chkStatus2.Checked = ConfigKey.Status2Enabled.Enabled();
+            SectionClasses.CpeConfig.txtStatus2.Text = ConfigKey.Status2.GetString();
+
+            SectionClasses.CpeConfig.chkStatus3.Checked = ConfigKey.Status3Enabled.Enabled();
+            SectionClasses.CpeConfig.txtStatus3.Text = ConfigKey.Status3.GetString();
+
+            SectionClasses.CpeConfig.chkBR3.Checked = ConfigKey.BR3Enabled.Enabled();
+            SectionClasses.CpeConfig.txtBR3.Text = ConfigKey.BR3.GetString();
+
+            SectionClasses.CpeConfig.chkBR2.Checked = ConfigKey.BR2Enabled.Enabled();
+            SectionClasses.CpeConfig.txtBR2.Text = ConfigKey.BR2.GetString();
+
+            SectionClasses.CpeConfig.chkBR1.Checked = ConfigKey.BR1Enabled.Enabled();
+            SectionClasses.CpeConfig.txtBR1.Text = ConfigKey.BR1.GetString();
+        }
 
         private static void ApplyEnum<TEnum>([NotNull] ListControl box, ConfigKey key, TEnum def) where TEnum : struct
         {
@@ -796,6 +820,31 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
 
             ConfigKey.ConsoleName.TrySetValue(SectionClasses.AdvancedConfig.tConsoleName.Text);
 
+            // CPE
+
+            #region Message Type Config
+            ConfigKey.EnableMessageTypes.TrySetValue(SectionClasses.CpeConfig.chkEnableMessageTypes.Checked);
+            ConfigKey.EnableAnnouncements.TrySetValue(SectionClasses.CpeConfig.chkShowAnnouncements.Checked);
+
+            ConfigKey.Status1Enabled.TrySetValue(SectionClasses.CpeConfig.chkStatus1.Checked);
+            ConfigKey.Status1.TrySetValue(SectionClasses.CpeConfig.txtStatus1.Text);
+
+            ConfigKey.Status2Enabled.TrySetValue(SectionClasses.CpeConfig.chkStatus2.Checked);
+            ConfigKey.Status2.TrySetValue(SectionClasses.CpeConfig.txtStatus2.Text);
+
+            ConfigKey.Status3Enabled.TrySetValue(SectionClasses.CpeConfig.chkStatus3.Checked);
+            ConfigKey.Status3.TrySetValue(SectionClasses.CpeConfig.txtStatus3.Text);
+
+            ConfigKey.BR3Enabled.TrySetValue(SectionClasses.CpeConfig.chkBR3.Checked);
+            ConfigKey.BR3.TrySetValue(SectionClasses.CpeConfig.txtBR3.Text);
+
+            ConfigKey.BR2Enabled.TrySetValue(SectionClasses.CpeConfig.chkBR2.Checked);
+            ConfigKey.BR2.TrySetValue(SectionClasses.CpeConfig.txtBR2.Text);
+
+            ConfigKey.BR1Enabled.TrySetValue(SectionClasses.CpeConfig.chkBR1.Checked);
+            ConfigKey.BR1.TrySetValue(SectionClasses.CpeConfig.txtBR1.Text);
+
+            #endregion
             SaveWorldList();
         }
 

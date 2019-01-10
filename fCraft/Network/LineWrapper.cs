@@ -51,6 +51,7 @@ namespace GemsCraft.Network
         
         private LineWrapper([NotNull] string message, bool supportsAllChars, MessageType type)
         {
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             input = message ?? throw new ArgumentNullException("message");
             prefix = DefaultPrefixString;
             this.supportsAllChars = supportsAllChars;
@@ -62,6 +63,7 @@ namespace GemsCraft.Network
         private LineWrapper([NotNull] string prefixString, [NotNull] string message, bool supportsAllChars, MessageType type)
         {
             this.type = type;
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             prefix = prefixString ?? throw new ArgumentNullException("prefixString");
             if (prefix.Length > MaxPrefixSize) throw new ArgumentException("Prefix too long", "prefixString");
             input = message ?? throw new ArgumentNullException("message");
@@ -407,6 +409,7 @@ namespace GemsCraft.Network
         /// <summary> Creates a new line wrapper for a given raw string. </summary>
         public static LineWrapper Wrap(string message, bool supportsAllChars, MessageType type)
         {
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             return new LineWrapper(message, supportsAllChars, type);
         }
 
@@ -414,6 +417,7 @@ namespace GemsCraft.Network
         /// <summary> Creates a new line wrapper for a given raw string. </summary>
         public static LineWrapper WrapPrefixed(string prefix, string message, bool supportsAllChars, MessageType type)
         {
+            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
             return new LineWrapper(prefix, message, supportsAllChars, type);
         }
     }

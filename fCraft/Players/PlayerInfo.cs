@@ -34,8 +34,12 @@ namespace GemsCraft.Players
         public string Name { get; internal set; }
 
         /// <summary> If set, replaces Name when printing name in chat. </summary>
-        [CanBeNull]
-        public string DisplayedName;
+        [CanBeNull] public string DisplayedName;
+
+        public string GetDisplayedName()
+        {
+            return DisplayedName ?? Name;
+        }
 
         /// <summary> If set, overrides both DisplayedName and Name. Used for temp name changes like gamemodes or /impersonation. </summary>
         [CanBeNull]

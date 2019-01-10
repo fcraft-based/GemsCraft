@@ -219,7 +219,7 @@ namespace GemsCraft.fSystem.Config {
             {
                 ConfigSection.Advanced, ConfigSection.Chat, ConfigSection.General,
                 ConfigSection.IRC, ConfigSection.Logging, ConfigSection.SavingAndBackup,
-                ConfigSection.Worlds, ConfigSection.Security, ConfigSection.Worlds
+                ConfigSection.Worlds, ConfigSection.Security, ConfigSection.Worlds, ConfigSection.CPE
             };
             return sections.SelectMany(GetKeys).ToArray();
         }
@@ -1084,6 +1084,7 @@ namespace GemsCraft.fSystem.Config {
             return KeyMetadata[(int)key].Section;
         }
 
+        
 
         /// <summary> Returns the description text for a given config key. </summary>
         public static string GetDescription( this ConfigKey key ) {
