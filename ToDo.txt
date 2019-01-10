@@ -8,4 +8,4 @@ For Alpha 0.0
 For Alpha 0.1
 - GUI pictures
 - Emotes (DONE!)
-- MessageType CPE extension (In Progress)
+- MessageType CPE extension (DONE!)
