@@ -126,7 +126,7 @@ namespace GemsCraft.MapConversion {
                     decompressor.Read( map.Blocks, 0, map.Blocks.Length );
                 }
 
-                map.RemoveUnknownBlocktypes();
+                //map.RemoveUnknownBlocktypes();
 
                 return map;
             }

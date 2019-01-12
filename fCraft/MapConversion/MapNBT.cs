@@ -80,7 +80,7 @@ namespace GemsCraft.MapConversion {
                 }
 
                 map.Blocks = mapTag["Blocks"].GetBytes();
-                map.RemoveUnknownBlocktypes();
+                //map.RemoveUnknownBlocktypes();
 
                 return map;
             }

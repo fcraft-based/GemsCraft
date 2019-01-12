@@ -14,6 +14,7 @@ using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Utils;
 using GemsCraft.Worlds;
+using GemsCraft.Worlds.CustomBlocks;
 using JetBrains.Annotations;
 using Map = GemsCraft.Worlds.Map;
 
@@ -100,7 +101,8 @@ namespace GemsCraft.Commands
         private static void TestingHandler(Player source, Command cmd)
         {
             //string x = cmd.Next();
-            Chat.SendGlobal(source, "Testing Command", MessageType.Announcement);
+            CustomBlock.InitTestBlock(source);
+            
         }
 
         #region LegendCraft

@@ -801,14 +801,7 @@ THE SOFTWARE.*/
         static void Place(Player player, Command cmd)
         {
             Block block;
-            if (player.LastUsedBlockType == Block.Undefined)
-            {
-                block = Block.Stone;
-            }
-            else
-            {
-                block = player.LastUsedBlockType;
-            }
+            block = player.LastUsedBlockType == Block.Undefined ? Block.Stone : player.LastUsedBlockType;
             Vector3I Pos = new Vector3I(player.Position.X / 32, player.Position.Y / 32, (player.Position.Z / 32) - 2);
 
             if (player.CanPlace(player.World.Map, Pos, player.GetBind(block), BlockChangeContext.Manual) != CanPlaceResult.Allowed)

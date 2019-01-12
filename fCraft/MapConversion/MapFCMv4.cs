@@ -20,21 +20,15 @@ namespace GemsCraft.MapConversion {
 
 
         /// <summary> Returns name(s) of the server(s) that uses this format. </summary>
-        public string ServerName {
-            get { return "fCraft"; }
-        }
+        public string ServerName => "fCraft";
 
 
         /// <summary> Returns the format type (file-based or directory-based). </summary>
-        public MapStorageType StorageType {
-            get { return MapStorageType.SingleFile; }
-        }
+        public MapStorageType StorageType => MapStorageType.SingleFile;
 
 
         /// <summary> Returns the format name. </summary>
-        public MapFormat Format {
-            get { return MapFormat.FCMv4; }
-        }
+        public MapFormat Format => MapFormat.FCMv4;
 
 
         /// <summary> Returns true if the filename (or directory name) matches this format's expectations. </summary>
@@ -159,16 +153,19 @@ namespace GemsCraft.MapConversion {
             int length = bs.ReadInt32();
 
             // ReSharper disable UseObjectOrCollectionInitializer
-            Map map = new Map( null, width, length, height, false );
-            // ReSharper restore UseObjectOrCollectionInitializer
+            Map map = new Map(null, width, length, height, false)
+            {
+                // ReSharper restore UseObjectOrCollectionInitializer
 
-            // spawn
-            map.Spawn = new Position {
-                X = (short)bs.ReadInt32(),
-                Z = (short)bs.ReadInt32(),
-                Y = (short)bs.ReadInt32(),
-                R = bs.ReadByte(),
-                L = bs.ReadByte()
+                // spawn
+                Spawn = new Position
+                {
+                    X = (short)bs.ReadInt32(),
+                    Z = (short)bs.ReadInt32(),
+                    Y = (short)bs.ReadInt32(),
+                    R = bs.ReadByte(),
+                    L = bs.ReadByte()
+                }
             };
 
             // creation/modification dates
@@ -206,7 +203,7 @@ namespace GemsCraft.MapConversion {
                                         "MapFCMv4: Error importing zone definition: {0}",
                                         ex );
                         }
-                        break;
+                        break; 
 
                     default:
                         map.Metadata[groupName, keyName] = value;

@@ -74,28 +74,22 @@ namespace GemsCraft.MapConversion {
         }
 
 
-        public string ServerName {
-            get { return "D3"; }
-        }
+        public string ServerName => "D3";
 
 
-        public MapStorageType StorageType {
-            get { return MapStorageType.SingleFile; }
-        }
+        public MapStorageType StorageType => MapStorageType.SingleFile;
 
 
-        public MapFormat Format {
-            get { return MapFormat.D3; }
-        }
+        public MapFormat Format => MapFormat.D3;
 
 
-        public bool ClaimsName( [NotNull] string fileName ) {
+        public bool ClaimsName( string fileName ) {
             if( fileName == null ) throw new ArgumentNullException( "fileName" );
             return fileName.EndsWith( ".map", StringComparison.OrdinalIgnoreCase );
         }
 
 
-        public bool Claims( [NotNull] string fileName ) {
+        public bool Claims( string fileName ) {
             if( fileName == null ) throw new ArgumentNullException( "fileName" );
             try {
                 using( FileStream mapStream = File.OpenRead( fileName ) ) {
@@ -112,7 +106,7 @@ namespace GemsCraft.MapConversion {
         }
 
 
-        public Map LoadHeader( [NotNull] string fileName ) {
+        public Map LoadHeader( string fileName ) {
             if( fileName == null ) throw new ArgumentNullException( "fileName" );
             using( FileStream mapStream = File.OpenRead( fileName ) ) {
                 return LoadHeaderInternal( mapStream );

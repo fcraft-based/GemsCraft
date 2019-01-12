@@ -11,15 +11,13 @@ using Newtonsoft.Json;
 
 namespace RemoteTest
 {
+    enum Hello { What = 0, To = 1, Me = 2}
     class Program
     {
         static void Main(string[] args)
         {
-            XElement x = new XElement("HelloWWorld");
-            x.Add("Hi there my friend!");
-            x.Add("I'm stupid!");
-            Console.WriteLine(x.ToString());
-
+            Hello h = (Hello) 25;
+            Console.WriteLine("WHAT" + h.ToString() + " HI!");
             Console.ReadLine();
         }
     }

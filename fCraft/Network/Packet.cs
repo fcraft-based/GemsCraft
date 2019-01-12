@@ -72,7 +72,20 @@ namespace GemsCraft.Players
             66,     //ChangeModel (29)
             69,     //EnvSetMapAppearance (30)
             2,      //EnvSetWeatherAppearance (31)
-            8       //HackControl (32)
+            8,      //HackControl (32)
+            138,    //ExtAddEntity2 (33)
+            15,     //PlayerClicked(34)
+            80,     //DefineBlock(35)
+            2,      //RemoveBlockDefinition(36)
+            88,     //DefineBlockExt(37)
+            1282,   //BulkBlockUpdate(38)
+            6,      //SetTextColor(39)
+            65,     //SetMapEnvUrl(40)
+            6,      //SetMapEnvProperty(41)
+            7,      //SetEntityProperty(42)
+            3,      //TwoWayPing(43)
+            44,      //SetInventoryOrder(44)
+
         };
     }
 }

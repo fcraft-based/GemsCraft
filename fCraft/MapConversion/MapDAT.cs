@@ -52,33 +52,18 @@ namespace GemsCraft.MapConversion
             Mapping[82] = (byte)Block.Gray;     // clay
             Mapping[83] = (byte)Block.Leaves;   // reed
             Mapping[84] = (byte)Block.Log;      // jukebox
-            Mapping[85] = (byte)Block.Wood;     // fence
             Mapping[86] = (byte)Block.Orange;   // pumpkin
-            Mapping[87] = (byte)Block.Dirt;     // netherstone
-            Mapping[88] = (byte)Block.Gravel;   // slow sand
-            Mapping[89] = (byte)Block.Sand;     // lightstone
-            Mapping[90] = (byte)Block.Violet;   // portal
-            Mapping[91] = (byte)Block.Orange;   // jack-o-lantern
             // all others default to 0/air
         }
 
 
-        public string ServerName
-        {
-            get { return "Creative/Vanilla"; }
-        }
+        public string ServerName => "Creative/Vanilla";
 
 
-        public MapStorageType StorageType
-        {
-            get { return MapStorageType.SingleFile; }
-        }
+        public MapStorageType StorageType => MapStorageType.SingleFile;
 
 
-        public MapFormat Format
-        {
-            get { return MapFormat.Creative; }
-        }
+        public MapFormat Format =>  MapFormat.Creative;
 
 
         public bool ClaimsName([NotNull] string fileName)

@@ -37,6 +37,18 @@ namespace GemsCraft.Network {
         ChangeModel = 29,
         EnvSetMapAppearance = 30,
         EnvSetWeatherAppearance = 31,
-        HackControl = 32
+        HackControl = 32,
+        ExtAddEntity2 = 33,
+        PlayerClicked = 34,
+        DefineBlock = 35,
+        RemoveBlockDefinition = 36,
+        DefineBlockExt = 37,
+        BulkBlockUpdate = 38,
+        SetTextColor = 39,
+        SetMapEnvUrl = 40,
+        SetMapEnvProperty = 41,
+        SetEntityProperty = 42,
+        TwoWayPing = 43,
+        SetInventoryOrder = 44
     }
 }

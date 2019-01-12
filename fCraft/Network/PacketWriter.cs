@@ -8,6 +8,7 @@ using GemsCraft.fSystem.Config;
 using GemsCraft.Players;
 using GemsCraft.Utils;
 using GemsCraft.Worlds;
+using GemsCraft.Worlds.CustomBlocks;
 using JetBrains.Annotations;
 using Map = GemsCraft.Worlds.Map;
 
@@ -381,12 +382,33 @@ namespace GemsCraft.Network {
             ToNetOrder((int)opacity, packet.Data, 84);
             return packet;
         }
-
-        //easiest packet I ever made
+        
         internal static Packet RemoveSelectionCuboid(byte ID)
         {
             Packet packet = new Packet(OpCode.RemoveSelectionCuboid);
             packet.Data[1] = ID;
+            return packet;
+        }
+
+        internal static Packet MakeDefineBlock(CustomBlock customBlock)
+        {
+            Packet packet = new Packet(OpCode.DefineBlock);
+            packet.Data[1] = customBlock.ID;
+            Encoding.ASCII.GetBytes(customBlock.Name, 0, customBlock.Name.Length, packet.Data, 2);
+            packet.Data[66] = (byte) customBlock.Solidity;
+            packet.Data[67] = customBlock.MovementSpeed;
+            packet.Data[68] = customBlock.Texture.TopID;
+            packet.Data[69] = customBlock.Texture.SideID;
+            packet.Data[70] = customBlock.Texture.BottomID;
+            packet.Data[71] = customBlock.TransmitsLight ? (byte) 0 : (byte) 1;
+            packet.Data[72] = (byte) customBlock.WalkSound;
+            packet.Data[73] = customBlock.FullBright ? (byte) 0 : (byte) 1;
+            packet.Data[74] = customBlock.Shape;
+            packet.Data[75] = (byte) customBlock.BlockDraw;
+            packet.Data[76] = customBlock.FogDensity;
+            packet.Data[77] = customBlock.FogR;
+            packet.Data[78] = customBlock.FogG;
+            packet.Data[79] = customBlock.FogB;
             return packet;
         }
 

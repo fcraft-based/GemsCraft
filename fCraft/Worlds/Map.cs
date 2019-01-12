@@ -15,6 +15,7 @@ using GemsCraft.Network;
 using GemsCraft.Physics.Life;
 using GemsCraft.Players;
 using GemsCraft.Utils;
+using GemsCraft.Worlds.CustomBlocks;
 using JetBrains.Annotations;
 
 namespace GemsCraft.Worlds {
@@ -45,9 +46,7 @@ namespace GemsCraft.Worlds {
         /// <summary> Default spawning point on the map. </summary>
         Position spawn;
         public Position Spawn {
-            get {
-                return spawn;
-            }
+            get => spawn;
             set {
                 spawn = value;
                 HasChangedSinceSave = true;
@@ -145,11 +144,7 @@ namespace GemsCraft.Worlds {
 
             // save to a temporary file
             try {
-                HasChangedSinceSave = false;
-                if( !MapUtility.TrySave( this, tempFileName, SaveFormat ) ) {
-                    HasChangedSinceSave = true;
-                }
-
+                HasChangedSinceSave = !MapUtility.TrySave( this, tempFileName, SaveFormat );
             } catch( IOException ex ) {
                 HasChangedSinceSave = true;
                 Logger.Log( LogType.Error,
@@ -276,9 +271,7 @@ namespace GemsCraft.Worlds {
 
 
         /// <summary> Number of blocks that are waiting to be processed. </summary>
-        public int UpdateQueueLength {
-            get { return updates.Count; }
-        }
+        public int UpdateQueueLength => updates.Count;
 
 
         /// <summary> Queues a new block update to be processed.
@@ -355,9 +348,7 @@ namespace GemsCraft.Worlds {
 
         #region Draw Operations
 
-        public int DrawQueueLength {
-            get { return drawOps.Count; }
-        }
+        public int DrawQueueLength => drawOps.Count;
 
         public int DrawQueueBlockCount {
             get {
@@ -419,22 +410,24 @@ namespace GemsCraft.Worlds {
                 maxTotalUpdates -= blocksDrawn;
 
                 // remove a completed drawOp from the list
-                if( op.IsDone ) {
-                    op.End();
-                    drawOps.RemoveAt( i );
-                    i--;
-                }
+                if (!op.IsDone) continue;
+                op.End();
+                drawOps.RemoveAt( i );
+                i--;
             }
             return blocksDrawnTotal;
         }
 
 
         public void StopAllDrawOps() {
-            lock( drawOpLock ) {
-                for( int i = 0; i < drawOps.Count; i++ ) {
-                    drawOps[i].Cancel();
-                    drawOps[i].End();
+            lock( drawOpLock )
+            {
+                foreach (var t in drawOps)
+                {
+                    t.Cancel();
+                    t.End();
                 }
+
                 drawOps.Clear();
             }
         }
@@ -592,7 +585,7 @@ namespace GemsCraft.Worlds {
             bool mapped = false;
             fixed( byte* ptr = Blocks ) {
                 for( int j = 0; j < Blocks.Length; j++ ) {
-                    if( ptr[j] > 65 ) {
+                    if( ptr[j] > 255) {
                         ptr[j] = mapping[ptr[j]];
                         mapped = true;
                     }
@@ -606,9 +599,9 @@ namespace GemsCraft.Worlds {
 
         /// <summary> Replaces all nonstandard (50-255) blocks with air. </summary>
         /// <returns> True if any blocks needed replacement. </returns>
-        public bool RemoveUnknownBlocktypes() {
+        /*public bool RemoveUnknownBlocktypes() {
             return ConvertBlockTypes( ZeroMapping );
-        }
+        }*/
 
 
         static readonly Dictionary<string, Block> BlockNames = new Dictionary<string, Block>();
@@ -622,12 +615,17 @@ namespace GemsCraft.Worlds {
                 }
             }
 
+            foreach (CustomBlock block in CustomBlock.Blocks)
+            {
+                BlockNames.Add(block.Name.ToLower(), (Block) block.ID);
+                BlockNames.Add(block.ID.ToString(), (Block) block.ID);
+            }
             // alternative names for blocks
             BlockNames["none"] = Block.Undefined;
 
             BlockNames["a"] = Block.Air; // common typo
             BlockNames["nothing"] = Block.Air;
-            BlockNames["empty"] = Block.Air;
+            BlockNames["empty"] = Block.Air; 
             BlockNames["delete"] = Block.Air;
             BlockNames["erase"] = Block.Air;
             BlockNames["blank"] = Block.Air;
@@ -804,6 +802,11 @@ namespace GemsCraft.Worlds {
             BlockNames["turqoisewool"] = Block.Turquoise;
             
             BlockNames["fancybrick"] = Block.StoneBrick;
+
+            foreach (CustomBlock b in CustomBlock.Blocks)
+            {
+                BlockNames[b.Name] = (Block) b.ID;
+            }
         }
 
 
@@ -837,14 +840,10 @@ namespace GemsCraft.Worlds {
         /// <summary> Tries to find a blocktype by name. </summary>
         /// <param name="blockName"> Name of the block. </param>
         /// <returns> Described Block, or Block.Undefined if name could not be recognized. </returns>
-        public static Block GetBlockByName( [NotNull] string blockName ) {
-            if( blockName == null ) throw new ArgumentNullException( "blockName" );
-            Block result;
-            if( BlockNames.TryGetValue( blockName.ToLower(), out result ) ) {
-                return result;
-            } else {
-                return Block.Undefined;
-            }
+        public static Block GetBlockByName( [NotNull] string blockName )
+        {
+            if( blockName == null ) throw new ArgumentNullException( nameof(blockName) );
+            return BlockNames.TryGetValue( blockName.ToLower(), out var result ) ? result : Block.Undefined;
         }
 
 

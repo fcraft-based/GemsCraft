@@ -27,6 +27,7 @@ using GemsCraft.Plugins;
 using GemsCraft.Portals;
 using GemsCraft.Utils;
 using GemsCraft.Worlds;
+using GemsCraft.Worlds.CustomBlocks;
 using JetBrains.Annotations;
 using ServiceStack.Text;
 using Map = GemsCraft.Worlds.Map;
@@ -386,7 +387,7 @@ namespace GemsCraft.fSystem {
 
             Player.Console = new Player(ConfigKey.ConsoleName.GetString()) {Info = {Rank = RankManager.HighestRank}};
             Player.AutoRank = new Player( "(AutoRank)" );
-
+            
             if( ConfigKey.BlockDBEnabled.Enabled() ) BlockDB.Init();
 
             // try to load the world list
@@ -425,6 +426,8 @@ namespace GemsCraft.fSystem {
             }
 
             Server.PlayerListChanged += Network.Remote.Server.UpdateServer;
+            CustomBlock.Blocks = CustomBlock.LoadBlocks();
+            Server.PlayerListChanged += DeployCustomBlocks;
             Server.ShutdownEnded += Network.Remote.Server.RemoveServer;
             
 
@@ -495,6 +498,19 @@ namespace GemsCraft.fSystem {
             IsRunning = true;
             fSystem.Server.RaiseEvent( fSystem.Server.Started );
             return true;
+        }
+
+        private static void DeployCustomBlocks(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= Players.Length - 1; i++)
+            {
+                if (Players[i].CustomBlocksLoaded) continue;
+                foreach (CustomBlock block in CustomBlock.Blocks)
+                {
+                    Players[i].Send(PacketWriter.MakeDefineBlock(block));
+                    Players[i].CustomBlocksLoaded = true;
+                }
+            }
         }
 
         #endregion

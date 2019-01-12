@@ -9,3 +9,6 @@ For Alpha 0.1
 - GUI pictures
 - Emotes (DONE!)
 - MessageType CPE extension (DONE!)
+- Implement BlockDefinitions (In Progress)
+- Implement BlockDefinitionsExt
+- Implement EnvMapAspect

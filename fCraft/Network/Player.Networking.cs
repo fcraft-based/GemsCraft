@@ -555,7 +555,7 @@ namespace GemsCraft.Players
             // place blocks that are not found in MC Classic. Convert them!
             if (type > 49)
             {
-                type = MapDat.MapBlock(type);
+               // type = MapDat.MapBlock(type);
             }
 
             Vector3I coords = new Vector3I(x, y, z);

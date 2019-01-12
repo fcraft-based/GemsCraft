@@ -31,7 +31,7 @@ namespace GemsCraft.Worlds {
         public string Name { get; internal set; }
 
         private GrassTask _plantTask = null;
-		private List<PhysScheduler> _physSchedulers=new List<PhysScheduler>();
+		private readonly List<PhysScheduler> _physSchedulers = new List<PhysScheduler>();
 
         /// <summary> Whether the world shows up on the /Worlds list.
         /// Can be assigned directly. </summary>
@@ -109,11 +109,7 @@ namespace GemsCraft.Worlds {
         public string LoadedBy { get; internal set; }
 
         [NotNull]
-        public string LoadedByClassy {
-            get {
-                return PlayerDB.FindExactClassyName( LoadedBy );
-            }
-        }
+        public string LoadedByClassy => PlayerDB.FindExactClassyName( LoadedBy );
 
         public DateTime MapChangedOn { get; private set; }
 
@@ -121,11 +117,7 @@ namespace GemsCraft.Worlds {
         public string MapChangedBy { get; internal set; }
 
         [NotNull]
-        public string MapChangedByClassy {
-            get {
-                return PlayerDB.FindExactClassyName( MapChangedBy );
-            }
-        }
+        public string MapChangedByClassy => PlayerDB.FindExactClassyName( MapChangedBy );
 
 
         // used to synchronize player joining/parting with map loading/saving
@@ -151,7 +143,7 @@ namespace GemsCraft.Worlds {
 
 		public bool TryAddLife(Life2DZone life)
 		{
-			if (null==life)
+			if (null == life)
 			{
 				Logger.Log(LogType.Error, "trying to add null life instance");
 				return false;
@@ -195,7 +187,7 @@ namespace GemsCraft.Worlds {
 			{
 				if (null == Map)
 					return null;
-				Life2DZone life=null;
+				Life2DZone life = null;
 				map.LifeZones.TryGetValue(name.ToLower(), out life);
 				return life;
 			}
@@ -204,7 +196,7 @@ namespace GemsCraft.Worlds {
 		{
 			lock (SyncRoot)
 			{
-				return null == Map ? null : Map.LifeZones.Values.ToList();
+				return Map?.LifeZones.Values.ToList();
 			}
 		}
 
@@ -426,9 +418,11 @@ namespace GemsCraft.Worlds {
 
         /// <summary> Map of this world. May be null if world is not loaded. </summary>
         [CanBeNull]
-        public Map Map {
-            get { return map; }
-            set {
+        public Map Map
+        {
+            get => map;
+            set
+            {
             	bool changed = !ReferenceEquals(map, value);
                 if( map != null && value == null ) StopTasks();
                 if( map == null && value != null ) StartTasks();
@@ -447,9 +441,7 @@ namespace GemsCraft.Worlds {
         public Map map;
 
         /// <summary> Whether the map is currently loaded. </summary>
-        public bool IsLoaded {
-            get { return Map != null; }
-        }
+        public bool IsLoaded => Map != null;
 
 
         /// <summary> Loads the map file, if needed.
@@ -498,18 +490,14 @@ namespace GemsCraft.Worlds {
 
 
         /// <summary> Returns the map filename, including MapPath. </summary>
-        public string MapFileName {
-            get {
-                return Path.Combine( Paths.MapPath, Name + ".fcm" );
-            }
-        }
+        public string MapFileName => Path.Combine( Paths.MapPath, Name + ".fcm" );
 
 
-        public void SaveMap() {
-            lock( SyncRoot ) {
-                if( Map != null ) {
-                    Map.Save( MapFileName );
-                }
+        public void SaveMap()
+        {
+            lock( SyncRoot )
+            {
+                Map?.Save( MapFileName );
             }
         }
 
@@ -522,8 +510,8 @@ namespace GemsCraft.Worlds {
             {
                 World newWorld = new World(Name)
                 {
-                    AccessSecurity = (SecurityController)AccessSecurity.Clone(),
-                    BuildSecurity = (SecurityController)BuildSecurity.Clone(),
+                    AccessSecurity = (SecurityController) AccessSecurity.Clone(),
+                    BuildSecurity = (SecurityController) BuildSecurity.Clone(),
                     IsHidden = IsHidden,
                     IsRealm = IsRealm,
                     BlockDB = BlockDB,
@@ -544,10 +532,10 @@ namespace GemsCraft.Worlds {
                     EdgeLevel = EdgeLevel,
                     SideBlock = SideBlock,
                     EdgeBlock = EdgeBlock,
-                    textureURL = textureURL
+                    textureURL = textureURL,
+                    Map = newMap,
+                    NeverUnload = neverUnload
                 };
-                newWorld.Map = newMap;
-                newWorld.NeverUnload = neverUnload;
                 WorldManager.ReplaceWorld( this, newWorld );
                 lock( SyncRoot ) {
                     BlockDB.Clear();
@@ -562,9 +550,7 @@ namespace GemsCraft.Worlds {
 
         bool neverUnload;
         public bool NeverUnload {
-            get {
-                return neverUnload;
-            }
+            get => neverUnload;
             set {
                 lock( SyncRoot ) {
                     if( neverUnload == value ) return;
@@ -738,22 +724,23 @@ namespace GemsCraft.Worlds {
         /// <summary>
         /// Find bot by name. Returns either the bot by exact name, or null.
         /// </summary>
-        public Bot FindBot(String name)
+        public Bot FindBot(string name)
         {
             var bot =
                from b in Server.Bots
-               where b.Name.ToLower() == name.ToLower()
+               where string.Equals(b.Name, name, StringComparison.CurrentCultureIgnoreCase)
                select b;
 
-            if (bot.Count() != 1)
+            var enumerable = bot as Bot[] ?? bot.ToArray();
+            if (enumerable.Count() != 1)
             {
                 return null;
             }
 
-            Bot bot_ = bot.First();
+            Bot bot_ = enumerable.First();
             if (bot_.World.Name == Name)
             {
-                return bot.First();
+                return enumerable.First();
             }
             return null;
         }
@@ -786,14 +773,15 @@ namespace GemsCraft.Worlds {
             if( playerName == null ) throw new ArgumentNullException( "playerName" );
             Player[] tempList = Players;
             List<Player> results = new List<Player>();
-            for( int i = 0; i < tempList.Length; i++ ) {
-                if( tempList[i] != null && player.CanSee( tempList[i] ) ) {
-                    if( tempList[i].Name.Equals( playerName, StringComparison.OrdinalIgnoreCase ) ) {
+            foreach (var t in tempList)
+            {
+                if( t != null && player.CanSee(t) ) {
+                    if( t.Name.Equals( playerName, StringComparison.OrdinalIgnoreCase ) ) {
                         results.Clear();
-                        results.Add( tempList[i] );
+                        results.Add( t );
                         break;
-                    } else if( tempList[i].Name.StartsWith( playerName, StringComparison.OrdinalIgnoreCase ) ) {
-                        results.Add( tempList[i] );
+                    } else if( t.Name.StartsWith( playerName, StringComparison.OrdinalIgnoreCase ) ) {
+                        results.Add( t );
                     }
                 }
             }
@@ -843,11 +831,7 @@ namespace GemsCraft.Worlds {
         }
 
 
-        public bool IsFull {
-            get {
-                return (Players.Length >= ConfigKey.MaxPlayersPerWorld.GetInt());
-            }
-        }
+        public bool IsFull => (Players.Length >= ConfigKey.MaxPlayersPerWorld.GetInt());
 
         #endregion
 
@@ -1098,8 +1082,8 @@ namespace GemsCraft.Worlds {
             if( name == null ) throw new ArgumentNullException( "name" );
             if( name.Length < 2 || name.Length > 16 ) return false;
             // ReSharper disable LoopCanBeConvertedToQuery
-            for( int i = 0; i < name.Length; i++ ) {
-                char ch = name[i];
+            foreach (var ch in name)
+            {
                 if( ch < '0' && ch != '-'||
                     ch > '9' && ch < 'A' ||
                     ch > 'Z' && ch < '_' ||
@@ -1107,7 +1091,7 @@ namespace GemsCraft.Worlds {
                     ch > 'z') {
                     
                     return false;
-                    }               
+                }
             }
             // ReSharper restore LoopCanBeConvertedToQuery
             return true;
@@ -1116,28 +1100,25 @@ namespace GemsCraft.Worlds {
 
         /// <summary> Returns a nicely formatted name, with optional color codes. </summary>
         public string ClassyName {
-            get {
+            get
+            {
                 if( ConfigKey.RankColorsInWorldNames.Enabled() ) {
                     Rank maxRank;
-                    if( BuildSecurity.MinRank >= AccessSecurity.MinRank ) {
-                        maxRank = BuildSecurity.MinRank;
-                    } else {
-                        maxRank = AccessSecurity.MinRank;
-                    }
+                    maxRank = BuildSecurity.MinRank >= AccessSecurity.MinRank ? BuildSecurity.MinRank : AccessSecurity.MinRank;
                     if( ConfigKey.RankPrefixesInChat.Enabled() ) {
                         return maxRank.Color + maxRank.Prefix + Name;
-                    } else {
-                        return maxRank.Color + Name;
                     }
-                } else {
-                    return Name;
+
+                    return maxRank.Color + Name;
                 }
+
+                return Name;
             }
         }
 
 
         public override string ToString() {
-            return String.Format( "World({0})", Name );
+            return $"World({Name})";
         }
     }
     public class PhysicsBlock

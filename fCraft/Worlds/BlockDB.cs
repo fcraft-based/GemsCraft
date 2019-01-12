@@ -20,9 +20,7 @@ namespace GemsCraft.Worlds {
     public sealed unsafe class BlockDB {
 
         internal BlockDB( [NotNull] World world ) {
-            if ( world == null )
-                throw new ArgumentNullException( "world" );
-            World = world;
+            World = world ?? throw new ArgumentNullException( nameof(world) );
         }
 
         /// <summary> World associated with this BlockDB. </summary>
@@ -64,11 +62,10 @@ namespace GemsCraft.Worlds {
                         }
                     }
                     enabledState = value;
-                } finally {
+                } finally
+                {
                     // release write lock, if we were holding it
-                    if ( writeLockHandle != null ) {
-                        writeLockHandle.Dispose();
-                    }
+                    writeLockHandle?.Dispose();
                 }
             }
         }
@@ -583,10 +580,9 @@ namespace GemsCraft.Worlds {
                         LimitCapacity( CacheSize );
                     }
                 }
-            } finally {
-                if ( writeLockHandle != null ) {
-                    writeLockHandle.Dispose();
-                }
+            } finally
+            {
+                writeLockHandle?.Dispose();
             }
         }
 

@@ -20,19 +20,13 @@ namespace GemsCraft.MapConversion {
 
     	private Dictionary<string, IConverterExtension> _extensions=new Dictionary<string, IConverterExtension>();
 
-        public string ServerName {
-            get { return "fCraft"; }
-        }
+        public string ServerName => "fCraft";
 
 
-        public MapStorageType StorageType {
-            get { return MapStorageType.SingleFile; }
-        }
+        public MapStorageType StorageType => MapStorageType.SingleFile;
 
 
-        public MapFormat Format {
-            get { return MapFormat.FCMv3; }
-        }
+        public MapFormat Format => MapFormat.FCMv3;
 
 
         public bool ClaimsName( [NotNull] string fileName ) {
@@ -149,7 +143,7 @@ namespace GemsCraft.MapConversion {
                     }
                     map.Blocks = new byte[map.Volume];
                     ds.Read( map.Blocks, 0, map.Blocks.Length );
-                    map.RemoveUnknownBlocktypes();
+                    //map.RemoveUnknownBlocktypes();
                 }
                 return map;
             }
@@ -230,7 +224,7 @@ namespace GemsCraft.MapConversion {
                     using( BufferedStream bs = new BufferedStream( ds ) ) {
                         // write metadata
                         metaCount = WriteMetadata( bs, mapToSave );
-                        offset = mapStream.Position; // inaccurate, but who cares
+                        offset = mapStream.Position;
                         bs.Flush();
                         MapUtility.WriteAll( blocksCache, bs );
                         compressedLength = (int)(mapStream.Position - offset);

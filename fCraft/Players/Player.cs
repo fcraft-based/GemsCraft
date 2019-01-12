@@ -18,6 +18,7 @@ using GemsCraft.Network;
 using GemsCraft.Plugins;
 using GemsCraft.Utils;
 using GemsCraft.Worlds;
+using GemsCraft.Worlds.CustomBlocks;
 using JetBrains.Annotations;
 
 namespace GemsCraft.Players
@@ -47,6 +48,8 @@ namespace GemsCraft.Players
 
 
         #region Properties
+
+        public bool CustomBlocksLoaded = false;
 
         /// <summary>
         ///  Determines if user is Console or AutoRank
@@ -1486,7 +1489,17 @@ namespace GemsCraft.Players
             {
                 type = Block.Air;
             }
-            type = bindings[(byte)type];
+
+            int integer = (int) type;
+            bool foundOne = false;
+            foreach (CustomBlock block in CustomBlock.Blocks)
+            {
+                if (block.ID == integer)
+                {
+                    foundOne = true;
+                }
+            }
+            if (!foundOne) type = bindings[(byte)type];
 
             // selection handling
             if (SelectionMarksExpected > 0)
@@ -1604,7 +1617,7 @@ namespace GemsCraft.Players
                     Zone deniedZone = WorldMap.Zones.FindDenied(coord, this);
                     if (deniedZone != null)
                     {
-                        Message(deniedZone.Message ?? string.Format("&WYou are not allowed to build in zone \"{0}\".", deniedZone.Name));
+                        Message(deniedZone.Message ?? $"&WYou are not allowed to build in zone \"{deniedZone.Name}\".");
                     }
                     else
                     {
@@ -1694,7 +1707,7 @@ namespace GemsCraft.Players
 
         #region Binding
 
-        readonly Block[] bindings = new Block[66];
+        readonly Block[] bindings = new Block[255];
 
         public void Bind(Block type, Block replacement)
         {

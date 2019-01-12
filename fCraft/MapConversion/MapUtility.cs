@@ -10,10 +10,8 @@ using JetBrains.Annotations;
 namespace GemsCraft.MapConversion {
 
     public static class MapUtility {
-
-        static readonly Dictionary<MapFormat, IMapConverter> AvailableConverters = new Dictionary<MapFormat, IMapConverter>();
-
-
+        private static readonly Dictionary<MapFormat, IMapConverter> AvailableConverters = new Dictionary<MapFormat, IMapConverter>();
+        
         static MapUtility() {
             AvailableConverters.Add( MapFormat.FCMv4, new MapFCMv4() );
             AvailableConverters.Add( MapFormat.FCMv3, new MapFCMv3().AddExtension(new ZoneConverterExtension()).AddExtension(new LifeSerialization()) );

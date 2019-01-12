@@ -464,6 +464,11 @@
     <Compile Include="Worlds\Block.cs" />
     <Compile Include="Worlds\BlockDBSearchType.cs" />
     <Compile Include="Worlds\BlockUpdate.cs" />
+    <Compile Include="Worlds\CustomBlocks\BlockDraw.cs" />
+    <Compile Include="Worlds\CustomBlocks\CustomBlock.cs" />
+    <Compile Include="Worlds\CustomBlocks\CustomBlockSolidity.cs" />
+    <Compile Include="Worlds\CustomBlocks\CustomBlockTexture.cs" />
+    <Compile Include="Worlds\CustomBlocks\WalkSound.cs" />
     <Compile Include="Worlds\Forester.cs" />
     <Compile Include="Worlds\Map.cs" />
     <Compile Include="Worlds\MapGenerator.cs">

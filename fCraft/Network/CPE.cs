@@ -47,6 +47,8 @@ namespace GemsCraft.Players
         private const int FullCP437ExtVersion = 1;
         private const string EmoteFixExtName = "EmoteFix";
         private const int EmoteFixExtVersion = 1;
+        private const string BlockDefintions = "BlockDefinitions";
+        private const int BlockDefinitionsExtVersion = 1;
 
         // Note: if more levels are added, change UsesCustomBlocks from bool to int
         public bool UsesCustomBlocks { get; set; }
@@ -63,6 +65,7 @@ namespace GemsCraft.Players
         public bool SupportsLongerMessages = false;
         public bool SupportsFullCP437 = false;
         public bool SupportsEmoteFix = false;
+        public bool SupportsBlockDefinitions = false;
 
         string ClientName { get; set; }
 
@@ -87,6 +90,7 @@ namespace GemsCraft.Players
             writer.Write(Packet.MakeExtEntry(FullCP437ExtName, FullCP437ExtVersion).Data);
 
             writer.Write(Packet.MakeExtEntry(EmoteFixExtName, EmoteFixExtVersion).Data);
+            writer.Write(Packet.MakeExtEntry(BlockDefintions, BlockDefinitionsExtVersion).Data);
 
             Logger.Log(LogType.Debug, "Sent ExtInfo and entry packets");
 
@@ -188,6 +192,11 @@ namespace GemsCraft.Players
                 else if (extName == EmoteFixExtName && extVersion == EmoteFixExtVersion)
                 {
                     SupportsEmoteFix = true;
+                    clientExts.Add(extName + " " + extVersion);
+                }
+                else if (extName == BlockDefintions && extVersion == BlockDefinitionsExtVersion)
+                {
+                    SupportsBlockDefinitions = true;
                     clientExts.Add(extName + " " + extVersion);
                 }
             }

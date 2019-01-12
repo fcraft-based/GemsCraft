@@ -465,7 +465,8 @@ namespace GemsCraft.Players
         /// </summary>
         private void updateBlock(Block blockType, Vector3I blockPosition, bool replaceWithAir, double time)//I left this class rather generic incase i used it for anything else
         {
-            BlockUpdate update = new BlockUpdate(null, blockPosition, blockType);
+            BlockUpdate update = 
+                new BlockUpdate(null, blockPosition, blockType);
             foreach (Player p in World.Players)
             {
                 p.World.Map.QueueUpdate(update);
