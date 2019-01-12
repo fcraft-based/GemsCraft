@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using GemsCraft.fSystem;
+using GemsCraft.fSystem.Config;
 using GemsCraft.Network;
 using GemsCraft.Players;
+using GemsCraft.Utils;
 using Newtonsoft.Json;
 
 namespace GemsCraft.Worlds.CustomBlocks
@@ -31,21 +37,200 @@ namespace GemsCraft.Worlds.CustomBlocks
                 if (!Path.HasExtension(file) || Path.GetExtension(file) != ".gcblock") continue;
                 try
                 {
-                    string fileContents = File.ReadAllText(file);
-                    CustomBlock block = JsonConvert.DeserializeObject<CustomBlock>(fileContents);
+                    if (!Unzip(file, out Exception ex)) throw new CustomBlockException("Failure to load gcblock", ex);
+                    const string mainFile = "Custom Blocks/Temp/block.json";
+                    if (!File.Exists(mainFile))
+                        throw new CustomBlockException($"Malformed custom block file: {file}. JSON file does not exist.");
 
-                    if (!CheckForClashes(blocks, block)) blocks.Add(block);
-                    else throw new CustomBlockException("Duplicate block ID's", block);
+                    CustomBlock block = JsonConvert.DeserializeObject<CustomBlock>(File.ReadAllText(mainFile));
+                    string bottomTexture = $"Custom Blocks/Temp/{block.Texture.BottomFilePath}";
+                    string sideTexture = $"Custom Blocks/Temp/{block.Texture.SideFilePath}";
+                    string topTexture = $"Custom Blocks/Temp/{block.Texture.SideFilePath}";
+
+                    if (!File.Exists(bottomTexture) || !File.Exists(sideTexture) || !File.Exists(topTexture))
+                    {
+                        throw new CustomBlockException(
+                            $"Malformed custom block file: {file}. One ore more textures are missing.");
+                    }
+                    // Ensures there are not block ID clashes
+                    if (CheckForClashes(blocks, block)) throw new CustomBlockException("Block with same id already exists", block);
+                    // Loads the block texture images
+                    Image bottomImg = Image.FromFile(bottomTexture);
+                    Image sideImg = Image.FromFile(sideTexture);
+                    Image topImg = Image.FromFile(topTexture);
+                    List<Image> imagesNeeded = new List<Image>();
+                    int whichOne = -1;
+
+                    // Compares images, chcks to see if they are the same
+                    if (CompareImg(bottomImg, sideImg) && CompareImg(bottomImg, topImg))
+                    {
+                        imagesNeeded.Add(bottomImg);
+                        whichOne = 4;
+                    }
+                    else if (CompareImg(bottomImg, sideImg))
+                    {
+                        imagesNeeded.Add(bottomImg);
+                        imagesNeeded.Add(topImg);
+                        whichOne = 0;
+                    }
+                    else if (CompareImg(sideImg, topImg))
+                    {
+                        imagesNeeded.Add(sideImg);
+                        imagesNeeded.Add(bottomImg);
+                        whichOne = 1;
+                    }
+                    else if (CompareImg(bottomImg, topImg))
+                    {
+                        imagesNeeded.Add(bottomImg);
+                        imagesNeeded.Add(sideImg);
+                        whichOne = 2;
+                    }
+                    else // All images are different
+                    {
+                        imagesNeeded.Add(bottomImg);
+                        imagesNeeded.Add(sideImg);
+                        imagesNeeded.Add(topImg);
+                        whichOne = 3;
+                    }
+
+                    List<ImageGeneratorData> data = new List<ImageGeneratorData>();
+                    foreach (Image img in imagesNeeded)
+                    {
+                        int spot = DetermineNextInt();
+                        data.Add(new ImageGeneratorData
+                        {
+                            Spot = spot,
+                            Image = img
+                        });
+                    }
+
+                    switch (whichOne) // Sets terrain.png ID's of textures based on which images are the same and which are not
+                    {
+                        case 0: // Cases 0 through 2 only 2 of the images are the same
+                            block.Texture.BottomID = (byte) data[0].Spot;
+                            block.Texture.SideID = (byte) data[0].Spot;
+                            block.Texture.TopID = (byte) data[1].Spot;
+                            break;
+                        case 1:
+                            block.Texture.BottomID = (byte)data[1].Spot;
+                            block.Texture.SideID = (byte)data[0].Spot;
+                            block.Texture.TopID = (byte)data[0].Spot;
+                            break;
+                        case 2:
+                            block.Texture.BottomID = (byte)data[0].Spot;
+                            block.Texture.SideID = (byte)data[1].Spot;
+                            block.Texture.TopID = (byte)data[0].Spot;
+                            break;
+                        case 3: // This case all images are different
+                            block.Texture.BottomID = (byte)data[0].Spot;
+                            block.Texture.SideID = (byte)data[1].Spot;
+                            block.Texture.TopID = (byte)data[2].Spot;
+                            break;
+                        case 4: // This case all images are the same
+                            block.Texture.BottomID = (byte)data[0].Spot;
+                            block.Texture.SideID = (byte)data[0].Spot;
+                            block.Texture.TopID = (byte)data[0].Spot;
+                            break;
+                    }
+
+                    TerrainGenerator.Generate(data); // Saves to output_terrain.png
+                    if (!UploadToWeb(out Exception e)) // Sends to GemsCraft server and sends url to classicube
+                    {
+                        throw new CustomBlockException("Unable to upload output_terrain.png", e);
+                    }
                 }
-                catch (Exception e)
+                catch (JsonReaderException e)
                 {
-                    Logger.Log(LogType.Error, $"Unable to load custom block file {file}");
+                    Logger.Log(LogType.Error, $"Malformed custom block file: {file}.");
                     Console.WriteLine(e);
                 }
             }
             return blocks;
         }
 
+        private static bool UploadToWeb(out Exception e)
+        {
+            try
+            {
+                string md5 = (Server.ExternalIP.ToString() + ConfigKey.Port.GetInt()).HashMD5();
+                string urlFile = $"http://gemz.christplay.x10host.com/textures/{md5}.png";
+                string url = "http://gemz.christplay.x10host.com/upload.aspx";
+                string file = "output_terrain.png";
+                WebClient wc = new WebClient();
+                wc.UploadFile(url, "post", file);
+                e = null;
+                return true;
+            }
+            catch (Exception exception)
+            {
+                e = exception;
+                return false;
+            }
+        }
+        private static bool CompareImg(Image img1, Image img2)
+        {
+            bool equals = true;
+            Rectangle rect = new Rectangle(0, 0, img1.Width, img1.Height);
+            Bitmap bmp1 = (Bitmap) img1;
+            Bitmap bmp2 = (Bitmap) img2;
+            BitmapData bmpData1 = bmp1.LockBits(rect, ImageLockMode.ReadOnly, bmp1.PixelFormat);
+            BitmapData bmpData2 = bmp2.LockBits(rect, ImageLockMode.ReadOnly, bmp2.PixelFormat);
+            unsafe
+            {
+                byte* ptr1 = (byte*)bmpData1.Scan0.ToPointer();
+                byte* ptr2 = (byte*)bmpData2.Scan0.ToPointer();
+                int width = rect.Width * 3; // for 24bpp pixel data
+                for (int y = 0; equals && y < rect.Height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        if (*ptr1 != *ptr2)
+                        {
+                            equals = false;
+                            break;
+                        }
+                        ptr1++;
+                        ptr2++;
+                    }
+                    ptr1 += bmpData1.Stride - width;
+                    ptr2 += bmpData2.Stride - width;
+                }
+            }
+            bmp1.UnlockBits(bmpData1);
+            bmp2.UnlockBits(bmpData2);
+            return equals;
+        }
+        /// <summary>
+        /// Determines next spot on Terrain map that the software will render
+        /// </summary>
+        /// <returns></returns>
+        private static int DetermineNextInt()
+        {
+            int lastInt = spotsTaken.Last();
+            int selected = -1;
+            if (!spotsTaken.Any()) selected = 85;
+            if (lastInt == 85) selected = 87;
+            if (lastInt > 86 && lastInt < 239) selected = lastInt + 1;
+            if (lastInt == 239) selected = 250;
+            selected = lastInt + 1;
+            spotsTaken.Add(selected);
+            return selected;
+        }
+        private static List<int> spotsTaken = new List<int>();
+        private static bool Unzip(string file, out Exception ex)
+        {
+            try
+            {
+                ZipFile.ExtractToDirectory(file, "Custom Blocks/Temp/");
+                ex = null;
+                return true;
+            }
+            catch (Exception e)
+            {
+                ex = e;
+                return false;
+            }
+        }
         private static bool CheckForClashes(IEnumerable<CustomBlock> blocks, CustomBlock block)
         {
             if (blocks.Any(b => b.ID == block.ID))
@@ -53,11 +238,7 @@ namespace GemsCraft.Worlds.CustomBlocks
                 return true;
             }
 
-            return block.ID <= 84 || block.ID == 86 || block.ID == 103 ||
-                   block.ID == 104 || block.ID == 119 || block.ID == 120 ||
-                   block.ID == 135 || block.ID == 136 || block.ID == 148 ||
-                   block.ID == 149 || block.ID == 164 || block.ID == 165 ||
-                   (block.ID < 250 && block.ID > 239);
+            return block.ID <= 84 || block.ID == 86 || (block.ID >= 240 && block.ID <=249);
         }
 
         public static void InitTestBlock(Player p)

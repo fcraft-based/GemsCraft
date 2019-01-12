@@ -7,7 +7,6 @@ namespace RemoteTest
     {
         static void Main(string[] args)
         {
-            TerrainGenerator.Generate();
             Console.ReadLine();
         }
     }
