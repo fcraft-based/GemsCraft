@@ -468,6 +468,7 @@
     <Compile Include="Worlds\CustomBlocks\CustomBlock.cs" />
     <Compile Include="Worlds\CustomBlocks\CustomBlockSolidity.cs" />
     <Compile Include="Worlds\CustomBlocks\CustomBlockTexture.cs" />
+    <Compile Include="Worlds\CustomBlocks\TerrainGenerator.cs" />
     <Compile Include="Worlds\CustomBlocks\WalkSound.cs" />
     <Compile Include="Worlds\Forester.cs" />
     <Compile Include="Worlds\Map.cs" />
@@ -671,6 +672,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="GUI\ConfigGUI\ChatBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\terrain.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

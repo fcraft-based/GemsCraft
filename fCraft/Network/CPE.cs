@@ -49,6 +49,9 @@ namespace GemsCraft.Players
         private const int EmoteFixExtVersion = 1;
         private const string BlockDefintions = "BlockDefinitions";
         private const int BlockDefinitionsExtVersion = 1;
+        private const string EnvMapAspect = "EnvMapAspect";
+        private const int EnvMapAspectVer = 1;
+
 
         // Note: if more levels are added, change UsesCustomBlocks from bool to int
         public bool UsesCustomBlocks { get; set; }
@@ -66,6 +69,7 @@ namespace GemsCraft.Players
         public bool SupportsFullCP437 = false;
         public bool SupportsEmoteFix = false;
         public bool SupportsBlockDefinitions = false;
+        public bool SupportsEnvMapAspect = false;
 
         string ClientName { get; set; }
 
@@ -91,7 +95,7 @@ namespace GemsCraft.Players
 
             writer.Write(Packet.MakeExtEntry(EmoteFixExtName, EmoteFixExtVersion).Data);
             writer.Write(Packet.MakeExtEntry(BlockDefintions, BlockDefinitionsExtVersion).Data);
-
+            writer.Write(Packet.MakeExtEntry(EnvMapAspect, EnvMapAspectVer).Data);
             Logger.Log(LogType.Debug, "Sent ExtInfo and entry packets");
 
             // Expect ExtInfo reply from the client
@@ -197,6 +201,11 @@ namespace GemsCraft.Players
                 else if (extName == BlockDefintions && extVersion == BlockDefinitionsExtVersion)
                 {
                     SupportsBlockDefinitions = true;
+                    clientExts.Add(extName + " " + extVersion);
+                }
+                else if (extName == EnvMapAspect && extVersion == EnvMapAspectVer)
+                {
+                    SupportsEnvMapAspect = true;
                     clientExts.Add(extName + " " + extVersion);
                 }
             }

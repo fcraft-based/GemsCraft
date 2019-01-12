@@ -114,12 +114,11 @@ namespace GemsCraft.fSystem {
         /// Returns an empty string array if no arguments were set. </returns>
         public static string[] GetArgList() {
             List<string> argList = new List<string>();
-            foreach( var pair in Args ) {
-                if( pair.Value != null ) {
-                    argList.Add( String.Format( "--{0}=\"{1}\"", pair.Key.ToString().ToLower(), pair.Value ) );
-                } else {
-                    argList.Add( String.Format( "--{0}", pair.Key.ToString().ToLower() ) );
-                }
+            foreach( var pair in Args )
+            {
+                argList.Add(pair.Value != null
+                    ? $"--{pair.Key.ToString().ToLower()}=\"{pair.Value}\""
+                    : $"--{pair.Key.ToString().ToLower()}");
             }
             return argList.ToArray();
         }
@@ -505,6 +504,7 @@ namespace GemsCraft.fSystem {
             for (int i = 0; i <= Players.Length - 1; i++)
             {
                 if (Players[i].CustomBlocksLoaded) continue;
+                Players[i].Send(PacketWriter.SetMapEnvUrl()); // Also send texture pack url
                 foreach (CustomBlock block in CustomBlock.Blocks)
                 {
                     Players[i].Send(PacketWriter.MakeDefineBlock(block));
