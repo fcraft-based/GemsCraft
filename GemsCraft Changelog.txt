@@ -1,4 +1,10 @@
 GemsCraft Changelog
+Alpha 0.1.0.0
+- Fixed a crash again when loading custom blocks
+
+Alpha 0.1.0
+- Fixed a crash when loading custom blocks
+
 Alpha 0.1
 - Emotes added to chat
 - MessageType CPE Extension added
