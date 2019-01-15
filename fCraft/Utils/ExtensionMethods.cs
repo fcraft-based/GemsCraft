@@ -16,6 +16,14 @@ using JetBrains.Annotations;
 
 namespace GemsCraft.Utils
 {
+    public static class ByteUtil
+    {
+        public static string GetString(this byte[] bytes)
+        {
+            return System.Text.Encoding.UTF8.GetString(bytes);
+        }
+    }
+
     public static class PlayerUtil
     {
 

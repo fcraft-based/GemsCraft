@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,10 +19,11 @@ namespace GemsCraft.Worlds.CustomBlocks
     /// </summary>
     public class TerrainGenerator
     {
+        public const string Output = "output_terrain.png";
         public static Point GetPoint(int spot)
         {
-            int x = spot / 16; // Divided int gives x value
-            int y = spot % 16; // Modulus int gives y value
+            int x = (spot / 16) * 16; // Divided int gives x value
+            int y = (spot % 16) * 16; // Modulus int gives y value
             return new Point(x, y);
         }
         /// <summary>
@@ -35,11 +37,12 @@ namespace GemsCraft.Worlds.CustomBlocks
             {
                 foreach (ImageGeneratorData d in data)
                 {
-                    g.DrawImage(d.Image, GetPoint(d.Spot));
+                    Point p = GetPoint(d.Spot);
+                    g.DrawImage(d.Image, p);
                 }
             }
 
-            baseImage.Save("output_terrain.png");
+            baseImage.Save(Output);
         }
     }
 }

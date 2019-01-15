@@ -412,10 +412,9 @@ namespace GemsCraft.Network {
             return packet;
         }
 
-        internal static Packet SetMapEnvUrl()
+        internal static Packet SetMapEnvUrl(string url)
         {
             Packet packet = new Packet(OpCode.SetMapEnvUrl);
-            string url = "http://gemz.christplay.x10host.com/output_terrain.png";
             Encoding.ASCII.GetBytes(url, 0, url.Length, packet.Data, 1);
             return packet;
         }

@@ -504,7 +504,7 @@ namespace GemsCraft.fSystem {
             for (int i = 0; i <= Players.Length - 1; i++)
             {
                 if (Players[i].CustomBlocksLoaded) continue;
-                Players[i].Send(PacketWriter.SetMapEnvUrl()); // Also send texture pack url
+                Players[i].Send(PacketWriter.SetMapEnvUrl(TexturePack)); // Also send texture pack url
                 foreach (CustomBlock block in CustomBlock.Blocks)
                 {
                     Players[i].Send(PacketWriter.MakeDefineBlock(block));
@@ -513,6 +513,7 @@ namespace GemsCraft.fSystem {
             }
         }
 
+        internal static string TexturePack;
         #endregion
 
 

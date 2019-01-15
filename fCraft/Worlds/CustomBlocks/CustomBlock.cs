@@ -5,7 +5,9 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Management;
 using System.Net;
+using System.Windows.Forms;
 using GemsCraft.fSystem;
 using GemsCraft.fSystem.Config;
 using GemsCraft.Network;
@@ -37,15 +39,17 @@ namespace GemsCraft.Worlds.CustomBlocks
                 if (!Path.HasExtension(file) || Path.GetExtension(file) != ".gcblock") continue;
                 try
                 {
-                    if (!Unzip(file, out Exception ex)) throw new CustomBlockException("Failure to load gcblock", ex);
-                    const string mainFile = "Custom Blocks/Temp/block.json";
-                    if (!File.Exists(mainFile))
+                    int x = new Random().Next();
+                    string dir = $"Custom Blocks/Temp{x}/";
+                    if (!Unzip(file, x, out Exception ex)) throw new CustomBlockException("Failure to load gcblock", ex);
+                    string tempOTemp = $"{dir}block.json";
+                    if (!File.Exists(tempOTemp))
                         throw new CustomBlockException($"Malformed custom block file: {file}. JSON file does not exist.");
 
-                    CustomBlock block = JsonConvert.DeserializeObject<CustomBlock>(File.ReadAllText(mainFile));
-                    string bottomTexture = $"Custom Blocks/Temp/{block.Texture.BottomFilePath}";
-                    string sideTexture = $"Custom Blocks/Temp/{block.Texture.SideFilePath}";
-                    string topTexture = $"Custom Blocks/Temp/{block.Texture.SideFilePath}";
+                    CustomBlock block = JsonConvert.DeserializeObject<CustomBlock>(File.ReadAllText(tempOTemp));
+                    string bottomTexture = dir + block.Texture.BottomFilePath;
+                    string sideTexture = dir + block.Texture.SideFilePath;
+                    string topTexture = dir + block.Texture.TopFilePath;
 
                     if (!File.Exists(bottomTexture) || !File.Exists(sideTexture) || !File.Exists(topTexture))
                     {
@@ -58,6 +62,7 @@ namespace GemsCraft.Worlds.CustomBlocks
                     Image bottomImg = Image.FromFile(bottomTexture);
                     Image sideImg = Image.FromFile(sideTexture);
                     Image topImg = Image.FromFile(topTexture);
+                    
                     List<Image> imagesNeeded = new List<Image>();
                     int whichOne = -1;
 
@@ -93,16 +98,12 @@ namespace GemsCraft.Worlds.CustomBlocks
                         whichOne = 3;
                     }
 
-                    List<ImageGeneratorData> data = new List<ImageGeneratorData>();
-                    foreach (Image img in imagesNeeded)
-                    {
-                        int spot = DetermineNextInt();
-                        data.Add(new ImageGeneratorData
+                    List<ImageGeneratorData> data = (from img in imagesNeeded
+                        let spot = DetermineNextInt()
+                        select new ImageGeneratorData
                         {
-                            Spot = spot,
-                            Image = img
-                        });
-                    }
+                            Spot = spot, Image = img
+                        }).ToList();
 
                     switch (whichOne) // Sets terrain.png ID's of textures based on which images are the same and which are not
                     {
@@ -132,12 +133,14 @@ namespace GemsCraft.Worlds.CustomBlocks
                             block.Texture.TopID = (byte)data[0].Spot;
                             break;
                     }
-
+                    
                     TerrainGenerator.Generate(data); // Saves to output_terrain.png
                     if (!UploadToWeb(out Exception e)) // Sends to GemsCraft server and sends url to classicube
                     {
                         throw new CustomBlockException("Unable to upload output_terrain.png", e);
                     }
+
+                    blocks.Add(block);
                 }
                 catch (JsonReaderException e)
                 {
@@ -148,16 +151,27 @@ namespace GemsCraft.Worlds.CustomBlocks
             return blocks;
         }
 
+        private static void DeleteDir(string dir)
+        {
+            if (!Directory.Exists(dir)) return;
+            foreach (string file in Directory.GetFiles(dir))
+            {
+                File.Delete(file);
+            }
+
+            Directory.Delete(dir);
+        }
         private static bool UploadToWeb(out Exception e)
         {
             try
             {
-                string md5 = (Server.ExternalIP.ToString() + ConfigKey.Port.GetInt()).HashMD5();
-                string urlFile = $"http://gemz.christplay.x10host.com/textures/{md5}.png";
-                string url = "http://gemz.christplay.x10host.com/upload.aspx";
-                string file = "output_terrain.png";
-                WebClient wc = new WebClient();
-                wc.UploadFile(url, "post", file);
+                int name = new Random().Next();
+                Server.TexturePack = "http://gemz.christplay.x10host.com/textures/" + name + ".png";
+                byte[] res = FileUploading.UploadFile(
+                    $"http://gemz.christplay.x10host.com/texture.php?new={name}.png",
+                    TerrainGenerator.Output);
+            
+                MessageBox.Show(res.GetString());
                 e = null;
                 return true;
             }
@@ -167,6 +181,7 @@ namespace GemsCraft.Worlds.CustomBlocks
                 return false;
             }
         }
+
         private static bool CompareImg(Image img1, Image img2)
         {
             bool equals = true;
@@ -206,9 +221,10 @@ namespace GemsCraft.Worlds.CustomBlocks
         /// <returns></returns>
         private static int DetermineNextInt()
         {
-            int lastInt = spotsTaken.Last();
+            int lastInt = 0;
+            if (!spotsTaken.Any()) return 85;
+            lastInt = spotsTaken.Last();
             int selected = -1;
-            if (!spotsTaken.Any()) selected = 85;
             if (lastInt == 85) selected = 87;
             if (lastInt > 86 && lastInt < 239) selected = lastInt + 1;
             if (lastInt == 239) selected = 250;
@@ -217,11 +233,13 @@ namespace GemsCraft.Worlds.CustomBlocks
             return selected;
         }
         private static List<int> spotsTaken = new List<int>();
-        private static bool Unzip(string file, out Exception ex)
+        private static bool Unzip(string file, int rnd, out Exception ex)
         {
             try
             {
-                ZipFile.ExtractToDirectory(file, "Custom Blocks/Temp/");
+                string dir = $"Custom Blocks/Temp{rnd}/";
+                if (Directory.Exists(dir)) Directory.Delete(dir);
+                ZipFile.ExtractToDirectory(file, $"Custom Blocks/Temp{rnd}/");
                 ex = null;
                 return true;
             }
