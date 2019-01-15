@@ -1,4 +1,4 @@
-﻿Alpha 0.1
+﻿Alpha 0.1.0
 #GemsCraft
 ![GemsCraft](http://godispower.us/main.png "Shining Gems")<br />
 

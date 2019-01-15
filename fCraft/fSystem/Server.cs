@@ -503,12 +503,19 @@ namespace GemsCraft.fSystem {
         {
             for (int i = 0; i <= Players.Length - 1; i++)
             {
-                if (Players[i].CustomBlocksLoaded) continue;
-                Players[i].Send(PacketWriter.SetMapEnvUrl(TexturePack)); // Also send texture pack url
-                foreach (CustomBlock block in CustomBlock.Blocks)
+                try
                 {
-                    Players[i].Send(PacketWriter.MakeDefineBlock(block));
-                    Players[i].CustomBlocksLoaded = true;
+                    if (Players[i].CustomBlocksLoaded) continue;
+                    Players[i].Send(PacketWriter.SetMapEnvUrl(TexturePack)); // Also send texture pack url
+                    foreach (CustomBlock block in CustomBlock.Blocks)
+                    {
+                        Players[i].Send(PacketWriter.MakeDefineBlock(block));
+                        Players[i].CustomBlocksLoaded = true;
+                    }
+                }
+                catch (NullReferenceException ex)
+                {
+                    DeployCustomBlocks(sender, e); // Retry until player fully connected
                 }
             }
         }

@@ -7,6 +7,7 @@ Alpha 0.1
 - Added Custom Blocks defined by server owners
 - Added Custom Block Designer in CPE Config
 - Various bug fixes
+- Code Improvements
 
 Alpha 0.0
 - Moved fCraftGUI to fCraft

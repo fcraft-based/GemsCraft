@@ -11,7 +11,7 @@ For Alpha 0.1
 - Implement BlockDefinitions (DONE!)
 - Implement EnvMapAspect (DONE!)
 
-For Alpha 0.1.0
+For Alpha 0.1.1
 - Update WinForm Icons
 - Add Executable Icon for GemsCraftGUI
 
