@@ -1,5 +1,5 @@
 ﻿using System;
-using GemsCraft.Worlds.CustomBlocks;
+using GemsCraft.GUI.BlockDesigner;
 
 namespace RemoteTest
 {
@@ -7,6 +7,7 @@ namespace RemoteTest
     {
         static void Main(string[] args)
         {
+            new BlockDesigner().ShowDialog();
             Console.ReadLine();
         }
     }

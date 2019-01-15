@@ -150,17 +150,7 @@ namespace GemsCraft.Worlds.CustomBlocks
             }
             return blocks;
         }
-
-        private static void DeleteDir(string dir)
-        {
-            if (!Directory.Exists(dir)) return;
-            foreach (string file in Directory.GetFiles(dir))
-            {
-                File.Delete(file);
-            }
-
-            Directory.Delete(dir);
-        }
+        
         private static bool UploadToWeb(out Exception e)
         {
             try
@@ -171,7 +161,6 @@ namespace GemsCraft.Worlds.CustomBlocks
                     $"http://gemz.christplay.x10host.com/texture.php?new={name}.png",
                     TerrainGenerator.Output);
             
-                MessageBox.Show(res.GetString());
                 e = null;
                 return true;
             }
@@ -181,7 +170,7 @@ namespace GemsCraft.Worlds.CustomBlocks
                 return false;
             }
         }
-
+        
         private static bool CompareImg(Image img1, Image img2)
         {
             bool equals = true;
@@ -349,6 +338,11 @@ namespace GemsCraft.Worlds.CustomBlocks
         /// Blue component of fog. Only applies if FogDensity is above 0.
         /// </summary>
         public byte FogB;
+
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 
     public class CustomBlockException : Exception

@@ -217,6 +217,12 @@
     <Compile Include="GUI\AboutWindow.Designer.cs">
       <DependentUpon>AboutWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\BlockDesigner\BlockDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\BlockDesigner\BlockDesigner.Designer.cs">
+      <DependentUpon>BlockDesigner.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ConfigGUI\AddWorldPopup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -580,6 +586,9 @@
       <DependentUpon>AboutWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\BlockDesigner\BlockDesigner.resx">
+      <DependentUpon>BlockDesigner.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\ConfigGUI\AddWorldPopup.resx">
       <DependentUpon>AddWorldPopup.cs</DependentUpon>
     </EmbeddedResource>
@@ -678,6 +687,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\terrain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green-154264_960_720.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

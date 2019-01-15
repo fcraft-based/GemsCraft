@@ -1,4 +1,4 @@
-﻿Alpha 0.0
+﻿Alpha 0.1
 #GemsCraft
 ![GemsCraft](https://imgur.com/a/qnBScf6 "Shining Gems")<br />
 

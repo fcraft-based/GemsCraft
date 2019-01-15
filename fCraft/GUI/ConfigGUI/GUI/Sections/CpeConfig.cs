@@ -52,5 +52,15 @@ namespace GemsCraft.GUI.ConfigGUI.GUI.Sections
         {
 
         }
+
+        private void btnDefineNewBlock_Click(object sender, EventArgs e)
+        {
+            new BlockDesigner.BlockDesigner().ShowDialog();
+        }
+
+        private void gboCustomBlocks_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

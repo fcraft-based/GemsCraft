@@ -45,14 +45,17 @@
             this.chkShowAnnouncements = new MetroFramework.Controls.MetroCheckBox();
             this.chkEnableMessageTypes = new MetroFramework.Controls.MetroCheckBox();
             this.lblMTInformation = new MetroFramework.Controls.MetroLabel();
+            this.gboCustomBlocks = new System.Windows.Forms.GroupBox();
+            this.btnDefineNewBlock = new System.Windows.Forms.Button();
             this.gboMessageType.SuspendLayout();
+            this.gboCustomBlocks.SuspendLayout();
             this.SuspendLayout();
             // 
             // bResetTab
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.bResetTab.Location = new System.Drawing.Point(559, 427);
-            this.bResetTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bResetTab.Margin = new System.Windows.Forms.Padding(2);
             this.bResetTab.Name = "bResetTab";
             this.bResetTab.Size = new System.Drawing.Size(94, 24);
             this.bResetTab.TabIndex = 30;
@@ -90,10 +93,10 @@
             // 
             // 
             this.txtStatus1.CustomButton.Image = null;
-            this.txtStatus1.CustomButton.Location = new System.Drawing.Point(88, 1);
-            this.txtStatus1.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtStatus1.CustomButton.Location = new System.Drawing.Point(117, 1);
+            this.txtStatus1.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus1.CustomButton.Name = "";
-            this.txtStatus1.CustomButton.Size = new System.Drawing.Size(13, 14);
+            this.txtStatus1.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.txtStatus1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtStatus1.CustomButton.TabIndex = 1;
             this.txtStatus1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -102,7 +105,7 @@
             this.txtStatus1.Lines = new string[] {
         "metroTextBox6"};
             this.txtStatus1.Location = new System.Drawing.Point(207, 108);
-            this.txtStatus1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtStatus1.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus1.MaxLength = 32767;
             this.txtStatus1.Name = "txtStatus1";
             this.txtStatus1.PasswordChar = '\0';
@@ -124,10 +127,10 @@
             // 
             // 
             this.txtStatus2.CustomButton.Image = null;
-            this.txtStatus2.CustomButton.Location = new System.Drawing.Point(88, 1);
-            this.txtStatus2.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtStatus2.CustomButton.Location = new System.Drawing.Point(117, 1);
+            this.txtStatus2.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus2.CustomButton.Name = "";
-            this.txtStatus2.CustomButton.Size = new System.Drawing.Size(13, 14);
+            this.txtStatus2.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.txtStatus2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtStatus2.CustomButton.TabIndex = 1;
             this.txtStatus2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -136,7 +139,7 @@
             this.txtStatus2.Lines = new string[] {
         "metroTextBox5"};
             this.txtStatus2.Location = new System.Drawing.Point(207, 132);
-            this.txtStatus2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtStatus2.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus2.MaxLength = 32767;
             this.txtStatus2.Name = "txtStatus2";
             this.txtStatus2.PasswordChar = '\0';
@@ -158,10 +161,10 @@
             // 
             // 
             this.txtStatus3.CustomButton.Image = null;
-            this.txtStatus3.CustomButton.Location = new System.Drawing.Point(88, 1);
-            this.txtStatus3.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtStatus3.CustomButton.Location = new System.Drawing.Point(117, 1);
+            this.txtStatus3.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus3.CustomButton.Name = "";
-            this.txtStatus3.CustomButton.Size = new System.Drawing.Size(13, 14);
+            this.txtStatus3.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.txtStatus3.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtStatus3.CustomButton.TabIndex = 1;
             this.txtStatus3.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -170,7 +173,7 @@
             this.txtStatus3.Lines = new string[] {
         "metroTextBox4"};
             this.txtStatus3.Location = new System.Drawing.Point(207, 155);
-            this.txtStatus3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtStatus3.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus3.MaxLength = 32767;
             this.txtStatus3.Name = "txtStatus3";
             this.txtStatus3.PasswordChar = '\0';
@@ -192,10 +195,10 @@
             // 
             // 
             this.txtBR3.CustomButton.Image = null;
-            this.txtBR3.CustomButton.Location = new System.Drawing.Point(88, 1);
-            this.txtBR3.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBR3.CustomButton.Location = new System.Drawing.Point(117, 1);
+            this.txtBR3.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtBR3.CustomButton.Name = "";
-            this.txtBR3.CustomButton.Size = new System.Drawing.Size(13, 14);
+            this.txtBR3.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.txtBR3.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtBR3.CustomButton.TabIndex = 1;
             this.txtBR3.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -204,7 +207,7 @@
             this.txtBR3.Lines = new string[] {
         "metroTextBox3"};
             this.txtBR3.Location = new System.Drawing.Point(207, 186);
-            this.txtBR3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBR3.Margin = new System.Windows.Forms.Padding(2);
             this.txtBR3.MaxLength = 32767;
             this.txtBR3.Name = "txtBR3";
             this.txtBR3.PasswordChar = '\0';
@@ -226,10 +229,10 @@
             // 
             // 
             this.txtBR2.CustomButton.Image = null;
-            this.txtBR2.CustomButton.Location = new System.Drawing.Point(88, 1);
-            this.txtBR2.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBR2.CustomButton.Location = new System.Drawing.Point(117, 1);
+            this.txtBR2.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtBR2.CustomButton.Name = "";
-            this.txtBR2.CustomButton.Size = new System.Drawing.Size(13, 14);
+            this.txtBR2.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.txtBR2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtBR2.CustomButton.TabIndex = 1;
             this.txtBR2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -238,7 +241,7 @@
             this.txtBR2.Lines = new string[] {
         "metroTextBox2"};
             this.txtBR2.Location = new System.Drawing.Point(207, 210);
-            this.txtBR2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBR2.Margin = new System.Windows.Forms.Padding(2);
             this.txtBR2.MaxLength = 32767;
             this.txtBR2.Name = "txtBR2";
             this.txtBR2.PasswordChar = '\0';
@@ -260,10 +263,10 @@
             // 
             // 
             this.txtBR1.CustomButton.Image = null;
-            this.txtBR1.CustomButton.Location = new System.Drawing.Point(88, 1);
-            this.txtBR1.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBR1.CustomButton.Location = new System.Drawing.Point(117, 1);
+            this.txtBR1.CustomButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtBR1.CustomButton.Name = "";
-            this.txtBR1.CustomButton.Size = new System.Drawing.Size(13, 14);
+            this.txtBR1.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.txtBR1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtBR1.CustomButton.TabIndex = 1;
             this.txtBR1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -272,7 +275,7 @@
             this.txtBR1.Lines = new string[] {
         "metroTextBox1"};
             this.txtBR1.Location = new System.Drawing.Point(207, 233);
-            this.txtBR1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBR1.Margin = new System.Windows.Forms.Padding(2);
             this.txtBR1.MaxLength = 32767;
             this.txtBR1.Name = "txtBR1";
             this.txtBR1.PasswordChar = '\0';
@@ -292,7 +295,7 @@
             // 
             this.chkBR1.AutoSize = true;
             this.chkBR1.Location = new System.Drawing.Point(6, 238);
-            this.chkBR1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBR1.Margin = new System.Windows.Forms.Padding(2);
             this.chkBR1.Name = "chkBR1";
             this.chkBR1.Size = new System.Drawing.Size(202, 15);
             this.chkBR1.TabIndex = 39;
@@ -303,7 +306,7 @@
             // 
             this.chkBR2.AutoSize = true;
             this.chkBR2.Location = new System.Drawing.Point(6, 215);
-            this.chkBR2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBR2.Margin = new System.Windows.Forms.Padding(2);
             this.chkBR2.Name = "chkBR2";
             this.chkBR2.Size = new System.Drawing.Size(202, 15);
             this.chkBR2.TabIndex = 38;
@@ -314,7 +317,7 @@
             // 
             this.chkBR3.AutoSize = true;
             this.chkBR3.Location = new System.Drawing.Point(6, 191);
-            this.chkBR3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkBR3.Margin = new System.Windows.Forms.Padding(2);
             this.chkBR3.Name = "chkBR3";
             this.chkBR3.Size = new System.Drawing.Size(202, 15);
             this.chkBR3.TabIndex = 37;
@@ -325,7 +328,7 @@
             // 
             this.chkStatus3.AutoSize = true;
             this.chkStatus3.Location = new System.Drawing.Point(6, 159);
-            this.chkStatus3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkStatus3.Margin = new System.Windows.Forms.Padding(2);
             this.chkStatus3.Name = "chkStatus3";
             this.chkStatus3.Size = new System.Drawing.Size(182, 15);
             this.chkStatus3.TabIndex = 36;
@@ -337,7 +340,7 @@
             // 
             this.chkStatus2.AutoSize = true;
             this.chkStatus2.Location = new System.Drawing.Point(6, 136);
-            this.chkStatus2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkStatus2.Margin = new System.Windows.Forms.Padding(2);
             this.chkStatus2.Name = "chkStatus2";
             this.chkStatus2.Size = new System.Drawing.Size(182, 15);
             this.chkStatus2.TabIndex = 35;
@@ -348,7 +351,7 @@
             // 
             this.chkStatus1.AutoSize = true;
             this.chkStatus1.Location = new System.Drawing.Point(6, 112);
-            this.chkStatus1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkStatus1.Margin = new System.Windows.Forms.Padding(2);
             this.chkStatus1.Name = "chkStatus1";
             this.chkStatus1.Size = new System.Drawing.Size(182, 15);
             this.chkStatus1.TabIndex = 34;
@@ -359,7 +362,7 @@
             // 
             this.chkShowAnnouncements.AutoSize = true;
             this.chkShowAnnouncements.Location = new System.Drawing.Point(6, 93);
-            this.chkShowAnnouncements.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkShowAnnouncements.Margin = new System.Windows.Forms.Padding(2);
             this.chkShowAnnouncements.Name = "chkShowAnnouncements";
             this.chkShowAnnouncements.Size = new System.Drawing.Size(283, 15);
             this.chkShowAnnouncements.TabIndex = 33;
@@ -370,7 +373,7 @@
             // 
             this.chkEnableMessageTypes.AutoSize = true;
             this.chkEnableMessageTypes.Location = new System.Drawing.Point(6, 75);
-            this.chkEnableMessageTypes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkEnableMessageTypes.Margin = new System.Windows.Forms.Padding(2);
             this.chkEnableMessageTypes.Name = "chkEnableMessageTypes";
             this.chkEnableMessageTypes.Size = new System.Drawing.Size(140, 15);
             this.chkEnableMessageTypes.TabIndex = 32;
@@ -389,20 +392,43 @@
     "ou can configure all but announcements and chat.";
             this.lblMTInformation.WrapToLine = true;
             // 
+            // gboCustomBlocks
+            // 
+            this.gboCustomBlocks.Controls.Add(this.btnDefineNewBlock);
+            this.gboCustomBlocks.Location = new System.Drawing.Point(377, 63);
+            this.gboCustomBlocks.Name = "gboCustomBlocks";
+            this.gboCustomBlocks.Size = new System.Drawing.Size(220, 50);
+            this.gboCustomBlocks.TabIndex = 31;
+            this.gboCustomBlocks.TabStop = false;
+            this.gboCustomBlocks.Text = "Custom Blocks";
+            this.gboCustomBlocks.Enter += new System.EventHandler(this.gboCustomBlocks_Enter);
+            // 
+            // btnDefineNewBlock
+            // 
+            this.btnDefineNewBlock.Location = new System.Drawing.Point(6, 19);
+            this.btnDefineNewBlock.Name = "btnDefineNewBlock";
+            this.btnDefineNewBlock.Size = new System.Drawing.Size(206, 23);
+            this.btnDefineNewBlock.TabIndex = 0;
+            this.btnDefineNewBlock.Text = "Define New Block";
+            this.btnDefineNewBlock.UseVisualStyleBackColor = true;
+            this.btnDefineNewBlock.Click += new System.EventHandler(this.btnDefineNewBlock_Click);
+            // 
             // CpeConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 461);
+            this.Controls.Add(this.gboCustomBlocks);
             this.Controls.Add(this.bResetTab);
             this.Controls.Add(this.gboMessageType);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CpeConfig";
-            this.Padding = new System.Windows.Forms.Padding(14, 49, 14, 13);
+            this.Padding = new System.Windows.Forms.Padding(14, 60, 14, 13);
             this.Style = MetroFramework.MetroColorStyle.Brown;
             this.Text = "GemsCraft Configuration - CPE";
             this.gboMessageType.ResumeLayout(false);
             this.gboMessageType.PerformLayout();
+            this.gboCustomBlocks.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -426,5 +452,7 @@
         internal MetroFramework.Controls.MetroTextBox txtBR3;
         internal MetroFramework.Controls.MetroTextBox txtBR2;
         internal MetroFramework.Controls.MetroTextBox txtBR1;
+        private System.Windows.Forms.GroupBox gboCustomBlocks;
+        private System.Windows.Forms.Button btnDefineNewBlock;
     }
 }

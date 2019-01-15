@@ -6,9 +6,16 @@ For Alpha 0.0
 - Commands to edit config (DONE!)
 
 For Alpha 0.1
-- GUI pictures
 - Emotes (DONE!)
 - MessageType CPE extension (DONE!)
-- Implement BlockDefinitions (In Progress)
-- Implement BlockDefinitionsExt
-- Implement EnvMapAspect
+- Implement BlockDefinitions (DONE!)
+- Implement EnvMapAspect (DONE!)
+
+For Alpha 0.1.0
+- Update WinForm Icons
+- Add Executable Icon for GemsCraftGUI
+
+For Alpha 0.2
+- GUI Pictures
+- More CPE Configs (ClickDistance, HeldBlocks)
+- Update Cuboid/Draw Operations to use SelectionCuboid Extension
