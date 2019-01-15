@@ -515,7 +515,7 @@ namespace GemsCraft.fSystem {
                 }
                 catch (NullReferenceException ex)
                 {
-                    DeployCustomBlocks(sender, e); // Retry until player fully connected
+                    Logger.Log(LogType.SystemActivity, "No Custom Blocks Found.");
                 }
             }
         }

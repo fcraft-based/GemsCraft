@@ -132,7 +132,7 @@ namespace GemsCraft.Utils {
             Major = 0,
             Minor = 1,
             Revision = 0,
-            Build = -1,
+            Build = 0,
             ShowTitle = true
         };
 
