@@ -56,8 +56,8 @@ Public Class MainForm
 
             ZipFile.ExtractToDirectory(zipPath, extractPath)
             MsgBox("Update successful! You may now close this and open GemsCraft :D")
-        Catch
-            MsgBox("Update failed. Try again")
+        Catch ex As Exception
+            MsgBox("Update failed. Try again. " + ex.ToString())
         End Try
     End Sub
 End Class

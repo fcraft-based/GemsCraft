@@ -78,6 +78,25 @@ namespace GemsCraft.Commands
             CommandManager.RegisterCommand(CdJump);
             CommandManager.RegisterCommand(CdHax);
             CommandManager.RegisterCommand(CdMessageBlock);
+
+            CommandManager.RegisterCommand(CdHub);
+        }
+
+        private static readonly CommandDescriptor CdHub = new CommandDescriptor
+        {
+            Name = "Hub",
+            Aliases = new[] { "ServerSpawn", "Main" },
+            Category = CommandCategory.World,
+            IsConsoleSafe = false,
+            Permissions = new[] { Permission.ManageWorlds },
+            Usage = "/Hub",
+            Help = "Teleports player to server spawn",
+            Handler = HubHandler
+        };
+
+        private static void HubHandler(Player source, Command cmd)
+        {
+            source.JoinWorld(WorldManager.MainWorld, WorldChangeReason.ManualJoin);
         }
 
         #region LegendCraft
@@ -3204,20 +3223,37 @@ THE SOFTWARE.*/
         {
             Name = "Spawn",
             Category = CommandCategory.World,
-            Help = "Teleports you to the current map's spawn.",
+            Usage = "/Spawn [Optional: \"World\"]",
+            Help = "Teleports you to the server spawn, or if world specified, the world's spawn",
             Handler = SpawnHandler
         };
 
         static void SpawnHandler(Player player, Command cmd)
         {
-            if (player.World == null) PlayerOpException.ThrowNoWorld(player);
-            if (player.Info.isPlayingCTF)
+            try
             {
-                return;
+                string cmdString = cmd.Next();
+                if (cmdString.ToLower() == "world")
+                {
+                    if (player.World == null) PlayerOpException.ThrowNoWorld(player);
+                    if (player.Info.isPlayingCTF)
+                    {
+                        return;
+                    }
+
+                    player.previousLocation = player.Position;
+                    player.previousWorld = null;
+                    player.TeleportTo(player.World.LoadMap().Spawn);
+                }
+                else
+                {
+                    CdSpawn.PrintUsage(player);
+                }
             }
-            player.previousLocation = player.Position;
-            player.previousWorld = null;
-            player.TeleportTo(player.World.LoadMap().Spawn);
+            catch (Exception)
+            {
+                player.JoinWorld(WorldManager.MainWorld, WorldChangeReason.ManualJoin);
+            }
         }
 
         #endregion

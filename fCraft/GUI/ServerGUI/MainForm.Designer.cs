@@ -39,13 +39,13 @@
             this.logBox = new System.Windows.Forms.RichTextBox();
             this.bVoice = new System.Windows.Forms.Button();
             this.URLLabel = new System.Windows.Forms.Label();
-            this.console = new ConsoleBox();
+            this.console = new GemsCraft.GUI.ServerGUI.ConsoleBox();
             this.PlayerOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // uriDisplay
             // 
-            this.uriDisplay.Location = new System.Drawing.Point(46, 11);
+            this.uriDisplay.Location = new System.Drawing.Point(51, 63);
             this.uriDisplay.Name = "uriDisplay";
             this.uriDisplay.Size = new System.Drawing.Size(476, 20);
             this.uriDisplay.TabIndex = 7;
@@ -57,21 +57,21 @@
             this.playerList.BackColor = System.Drawing.Color.White;
             this.playerList.FormattingEnabled = true;
             this.playerList.IntegralHeight = false;
-            this.playerList.Location = new System.Drawing.Point(628, 58);
+            this.playerList.Location = new System.Drawing.Point(628, 104);
             this.playerList.Name = "playerList";
-            this.playerList.Size = new System.Drawing.Size(144, 368);
+            this.playerList.Size = new System.Drawing.Size(144, 319);
             this.playerList.TabIndex = 4;
             // 
             // playerListLabel
             // 
             this.playerListLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.playerListLabel.AutoSize = true;
-            this.playerListLabel.BackColor = System.Drawing.Color.Brown;
-            this.playerListLabel.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playerListLabel.BackColor = System.Drawing.Color.White;
+            this.playerListLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playerListLabel.ForeColor = System.Drawing.Color.Black;
-            this.playerListLabel.Location = new System.Drawing.Point(628, 42);
+            this.playerListLabel.Location = new System.Drawing.Point(628, 88);
             this.playerListLabel.Name = "playerListLabel";
-            this.playerListLabel.Size = new System.Drawing.Size(65, 12);
+            this.playerListLabel.Size = new System.Drawing.Size(62, 13);
             this.playerListLabel.TabIndex = 6;
             this.playerListLabel.Text = "Player list";
             // 
@@ -82,7 +82,7 @@
             this.bPlay.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.bPlay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.bPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bPlay.Location = new System.Drawing.Point(528, 9);
+            this.bPlay.Location = new System.Drawing.Point(540, 61);
             this.bPlay.Name = "bPlay";
             this.bPlay.Size = new System.Drawing.Size(48, 23);
             this.bPlay.TabIndex = 2;
@@ -99,7 +99,7 @@
             "Normal",
             "Big",
             "Large"});
-            this.SizeBox.Location = new System.Drawing.Point(628, 10);
+            this.SizeBox.Location = new System.Drawing.Point(631, 63);
             this.SizeBox.Name = "SizeBox";
             this.SizeBox.Size = new System.Drawing.Size(56, 21);
             this.SizeBox.TabIndex = 8;
@@ -119,7 +119,7 @@
             "Green",
             "Purple",
             "Grey"});
-            this.ThemeBox.Location = new System.Drawing.Point(690, 10);
+            this.ThemeBox.Location = new System.Drawing.Point(690, 63);
             this.ThemeBox.Name = "ThemeBox";
             this.ThemeBox.Size = new System.Drawing.Size(82, 21);
             this.ThemeBox.TabIndex = 9;
@@ -171,10 +171,10 @@
             this.logBox.BackColor = System.Drawing.Color.Black;
             this.logBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logBox.HideSelection = false;
-            this.logBox.Location = new System.Drawing.Point(12, 39);
+            this.logBox.Location = new System.Drawing.Point(12, 104);
             this.logBox.Name = "logBox";
             this.logBox.ReadOnly = true;
-            this.logBox.Size = new System.Drawing.Size(610, 387);
+            this.logBox.Size = new System.Drawing.Size(610, 319);
             this.logBox.TabIndex = 7;
             this.logBox.Text = "";
             this.logBox.TextChanged += new System.EventHandler(this.logBox_TextChanged);
@@ -188,7 +188,7 @@
             this.bVoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bVoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bVoice.Image = ((System.Drawing.Image)(resources.GetObject("bVoice.Image")));
-            this.bVoice.Location = new System.Drawing.Point(735, 429);
+            this.bVoice.Location = new System.Drawing.Point(735, 426);
             this.bVoice.Name = "bVoice";
             this.bVoice.Size = new System.Drawing.Size(37, 29);
             this.bVoice.TabIndex = 10;
@@ -198,11 +198,11 @@
             // URLLabel
             // 
             this.URLLabel.AutoSize = true;
-            this.URLLabel.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.URLLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.URLLabel.ForeColor = System.Drawing.Color.Black;
-            this.URLLabel.Location = new System.Drawing.Point(9, 15);
+            this.URLLabel.Location = new System.Drawing.Point(9, 66);
             this.URLLabel.Name = "URLLabel";
-            this.URLLabel.Size = new System.Drawing.Size(31, 12);
+            this.URLLabel.Size = new System.Drawing.Size(36, 13);
             this.URLLabel.TabIndex = 5;
             this.URLLabel.Text = "URL:";
             // 
@@ -211,7 +211,7 @@
             this.console.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.console.Enabled = false;
-            this.console.Location = new System.Drawing.Point(13, 433);
+            this.console.Location = new System.Drawing.Point(13, 430);
             this.console.Name = "console";
             this.console.Size = new System.Drawing.Size(716, 20);
             this.console.TabIndex = 0;
@@ -221,9 +221,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Brown;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(784, 464);
+            this.ClientSize = new System.Drawing.Size(784, 480);
             this.Controls.Add(this.URLLabel);
             this.Controls.Add(this.bVoice);
             this.Controls.Add(this.ThemeBox);
@@ -237,7 +236,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(500, 150);
             this.Name = "MainForm";
+            this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "GemsCraft";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.PlayerOptions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

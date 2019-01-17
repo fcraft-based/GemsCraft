@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GemsCraft", "fCraft\GemsCra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerCLI", "ServerCLI\ServerCLI.csproj", "{315FB33C-6C57-4A89-ABFB-C083F2015880}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GemsCraftGUI", "GemsCraft\GemsCraftGUI.csproj", "{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Updater", "Updater\Updater.vbproj", "{AADB978D-C022-44A4-91F5-4886CD377583}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteTest", "RemoteTest\RemoteTest.csproj", "{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Launcher", "Launcher\Launcher.csproj", "{8926AD2D-FFE3-4846-A01F-88472CA074A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,16 +42,6 @@ Global
 		{315FB33C-6C57-4A89-ABFB-C083F2015880}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{315FB33C-6C57-4A89-ABFB-C083F2015880}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{315FB33C-6C57-4A89-ABFB-C083F2015880}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}.Debug_Events|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}.Debug_Events|Any CPU.Build.0 = Debug|Any CPU
-		{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}.Debug_IRC|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}.Debug_IRC|Any CPU.Build.0 = Debug|Any CPU
-		{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}.Debug_Scheduler|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}.Debug_Scheduler|Any CPU.Build.0 = Debug|Any CPU
-		{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D58644F-CB14-42A0-9E57-95FA7F80EFDF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AADB978D-C022-44A4-91F5-4886CD377583}.Debug_Events|Any CPU.ActiveCfg = Debug|Any CPU
 		{AADB978D-C022-44A4-91F5-4886CD377583}.Debug_Events|Any CPU.Build.0 = Debug|Any CPU
 		{AADB978D-C022-44A4-91F5-4886CD377583}.Debug_IRC|Any CPU.ActiveCfg = Debug|Any CPU
@@ -72,6 +62,16 @@ Global
 		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F5DDD0B-A29B-46A1-9F36-A00A21BEBD44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8926AD2D-FFE3-4846-A01F-88472CA074A1}.Debug_Events|Any CPU.ActiveCfg = Debug|Any CPU
+		{8926AD2D-FFE3-4846-A01F-88472CA074A1}.Debug_Events|Any CPU.Build.0 = Debug|Any CPU
+		{8926AD2D-FFE3-4846-A01F-88472CA074A1}.Debug_IRC|Any CPU.ActiveCfg = Debug|Any CPU
+		{8926AD2D-FFE3-4846-A01F-88472CA074A1}.Debug_IRC|Any CPU.Build.0 = Debug|Any CPU
+		{8926AD2D-FFE3-4846-A01F-88472CA074A1}.Debug_Scheduler|Any CPU.ActiveCfg = Debug|Any CPU
+		{8926AD2D-FFE3-4846-A01F-88472CA074A1}.Debug_Scheduler|Any CPU.Build.0 = Debug|Any CPU
+		{8926AD2D-FFE3-4846-A01F-88472CA074A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8926AD2D-FFE3-4846-A01F-88472CA074A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8926AD2D-FFE3-4846-A01F-88472CA074A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8926AD2D-FFE3-4846-A01F-88472CA074A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

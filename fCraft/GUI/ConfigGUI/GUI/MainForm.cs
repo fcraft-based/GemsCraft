@@ -143,7 +143,7 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
             FillIrcNetworkList(false);
 
             // Initialize GemsCraft's args, paths, and logging backend
-            Server.InitLibrary(Environment.GetCommandLineArgs());
+            Server.InitLibrary(Environment.GetCommandLineArgs(), true);
 
             SectionClasses.WorldConfig.dgvWorlds.DataError += WorldListErrorHandler;
 

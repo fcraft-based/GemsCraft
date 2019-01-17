@@ -131,8 +131,8 @@ namespace GemsCraft.Utils {
             Title = "Alpha",
             Major = 0,
             Minor = 1,
-            Revision = 0,
-            Build = 0,
+            Revision = 1,
+            Build = -1,
             ShowTitle = true
         };
 

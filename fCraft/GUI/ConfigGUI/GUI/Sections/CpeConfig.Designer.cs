@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CpeConfig));
             this.bResetTab = new MetroFramework.Controls.MetroButton();
             this.gboMessageType = new System.Windows.Forms.GroupBox();
             this.txtStatus1 = new MetroFramework.Controls.MetroTextBox();
@@ -421,6 +422,7 @@
             this.Controls.Add(this.gboCustomBlocks);
             this.Controls.Add(this.bResetTab);
             this.Controls.Add(this.gboMessageType);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CpeConfig";
             this.Padding = new System.Windows.Forms.Padding(14, 60, 14, 13);

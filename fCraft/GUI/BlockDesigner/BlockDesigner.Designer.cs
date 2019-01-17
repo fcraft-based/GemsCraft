@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BlockDesigner));
             this.lblDesigner = new System.Windows.Forms.Label();
             this.picCube = new System.Windows.Forms.PictureBox();
             this.gboSettings = new System.Windows.Forms.GroupBox();
@@ -382,6 +383,7 @@
             this.Controls.Add(this.gboSettings);
             this.Controls.Add(this.lblDesigner);
             this.Controls.Add(this.picCube);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BlockDesigner";
             this.Text = "GemsCraft Block Designer";
             ((System.ComponentModel.ISupportInitialize)(this.picCube)).EndInit();

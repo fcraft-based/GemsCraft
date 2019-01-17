@@ -14,11 +14,12 @@ using GemsCraft.fSystem.Config;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Utils;
+using MetroFramework.Forms;
 
 namespace GemsCraft.GUI.ServerGUI
 {
 
-    public sealed partial class MainForm : Form
+    public sealed partial class MainForm : MetroForm
     {
         volatile bool shutdownPending, startupComplete, shutdownComplete;
         const int MaxLinesInLog = 2000,
@@ -30,6 +31,20 @@ namespace GemsCraft.GUI.ServerGUI
             InitializeComponent();
             Shown += StartUp;
             console.OnCommand += console_Enter;            
+            logBox.LinkClicked += new LinkClickedEventHandler(Link_Clicked);
+            MenuItem[] menuItems = new MenuItem[] { new MenuItem("Copy", new EventHandler(CopyMenuOnClickHandler)) };
+            logBox.ContextMenu = new ContextMenu(menuItems);
+            logBox.ContextMenu.Popup += new EventHandler(CopyMenuPopupHandler);
+            playerList.MouseDoubleClick += new MouseEventHandler(playerList_MouseDoubleClick);
+        }
+
+        public bool IsLauncher = false;
+        public MainForm(bool isLauncher)
+        {
+            InitializeComponent();
+            IsLauncher = isLauncher;
+            Shown += StartUp;
+            console.OnCommand += console_Enter;
             logBox.LinkClicked += new LinkClickedEventHandler(Link_Clicked);
             MenuItem[] menuItems = new MenuItem[] { new MenuItem("Copy", new EventHandler(CopyMenuOnClickHandler)) };
             logBox.ContextMenu = new ContextMenu(menuItems);
@@ -59,10 +74,10 @@ namespace GemsCraft.GUI.ServerGUI
             {
 #endif
                 
-                Server.InitLibrary(Environment.GetCommandLineArgs());
+                Server.InitLibrary(Environment.GetCommandLineArgs(), IsLauncher);
                 if (shutdownPending) return;
 
-                Server.InitServer();
+                Server.InitServer(IsLauncher);
                 if (shutdownPending) return;
 
                 BeginInvoke((Action)OnInitSuccess);
@@ -650,22 +665,26 @@ namespace GemsCraft.GUI.ServerGUI
 
         }
 
-      /*public void tabChat_tabSelected(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            if (tabChat.SelectedTab == tabServer)
-            {
-                onGlobal = false;
-                return;
-            }
-            if (tabChat.SelectedTab == tabGlobal)
-            {
-                onGlobal = true;
-                return;
-            }
-        }*/
+        }
+
+        /*public void tabChat_tabSelected(object sender, EventArgs e)
+          {
+              if (tabChat.SelectedTab == tabServer)
+              {
+                  onGlobal = false;
+                  return;
+              }
+              if (tabChat.SelectedTab == tabGlobal)
+              {
+                  onGlobal = true;
+                  return;
+              }
+          }*/
 
         #region PlayerViewer
-      
+
         private void playerList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             try

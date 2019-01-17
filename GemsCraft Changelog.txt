@@ -1,4 +1,10 @@
 GemsCraft Changelog
+Alpha 0.1.1
+- Updated Icons
+- Renamed GemsGraftGUI to GemsCraftLauncher
+- Reintroduced the GUI for the server
+- Launcher has options to open Config, CLI, or GUI
+
 Alpha 0.1.0.0
 - Fixed a crash again when loading custom blocks
 

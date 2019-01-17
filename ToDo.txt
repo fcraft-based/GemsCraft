@@ -12,8 +12,9 @@ For Alpha 0.1
 - Implement EnvMapAspect (DONE!)
 
 For Alpha 0.1.1
-- Update WinForm Icons
-- Add Executable Icon for GemsCraftGUI
+- Update WinForm Icons (DONE!)
+- Add Executable Icon for GemsCraftGUI (renamed to Launcher [GemsCraftLauncher.exe]) (DONE!)
+- Executable to open CLI or GUI (DONE!)
 
 For Alpha 0.2
 - GUI Pictures

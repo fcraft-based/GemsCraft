@@ -141,10 +141,10 @@ namespace GemsCraft.fSystem {
         /// <param name="rawArgs"> string arguments passed to the frontend (if any). </param>
         /// <exception cref="System.InvalidOperationException"> If library is already initialized. </exception>
         /// <exception cref="System.IO.IOException"> Working path, log path, or map path could not be set. </exception>
-        public static void InitLibrary([NotNull] IEnumerable<string> rawArgs)
+        public static void InitLibrary([NotNull] IEnumerable<string> rawArgs, bool isLauncher)
         {
             if (rawArgs == null) throw new ArgumentNullException("rawArgs");
-            if (libraryInitialized)
+            if (libraryInitialized && !isLauncher)
             {
                 throw new InvalidOperationException("GemsCraft library is already initialized");
             }
@@ -281,9 +281,9 @@ namespace GemsCraft.fSystem {
         /// Raises Server.Initializing and Server.Initialized events, and possibly Logger.Logged events.
         /// Throws exceptions on failure. </summary>
         /// <exception cref="System.InvalidOperationException"> Library is not initialized, or server is already initialzied. </exception>
-        public static void InitServer() {
-            if( serverInitialized ) {
-                throw new InvalidOperationException( "Server is already initialized" );
+        public static void InitServer(bool fromGui) {
+            if( serverInitialized) {
+                if (!fromGui) throw new InvalidOperationException( "Server is already initialized" );
             }
             if( !libraryInitialized ) {
                 throw new InvalidOperationException( "Server.InitLibrary must be called before Server.InitServer" );

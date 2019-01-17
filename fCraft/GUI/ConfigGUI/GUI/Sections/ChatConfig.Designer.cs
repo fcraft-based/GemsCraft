@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatConfig));
             this.gChatColors = new System.Windows.Forms.GroupBox();
             this.lColorMe = new System.Windows.Forms.Label();
             this.bColorGlobal = new System.Windows.Forms.Button();
@@ -76,11 +77,9 @@
             this.gChatColors.Controls.Add(this.lColorAnnouncement);
             this.gChatColors.Controls.Add(this.bColorHelp);
             this.gChatColors.Controls.Add(this.bColorSay);
-            this.gChatColors.Location = new System.Drawing.Point(26, 96);
-            this.gChatColors.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gChatColors.Location = new System.Drawing.Point(17, 62);
             this.gChatColors.Name = "gChatColors";
-            this.gChatColors.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gChatColors.Size = new System.Drawing.Size(954, 214);
+            this.gChatColors.Size = new System.Drawing.Size(636, 139);
             this.gChatColors.TabIndex = 1;
             this.gChatColors.TabStop = false;
             this.gChatColors.Text = "Colors";
@@ -88,160 +87,144 @@
             // lColorMe
             // 
             this.lColorMe.AutoSize = true;
-            this.lColorMe.Location = new System.Drawing.Point(603, 126);
-            this.lColorMe.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lColorMe.Location = new System.Drawing.Point(402, 82);
             this.lColorMe.Name = "lColorMe";
-            this.lColorMe.Size = new System.Drawing.Size(147, 20);
+            this.lColorMe.Size = new System.Drawing.Size(102, 13);
             this.lColorMe.TabIndex = 12;
             this.lColorMe.Text = "/Me command color";
             // 
             // bColorGlobal
             // 
             this.bColorGlobal.BackColor = System.Drawing.Color.White;
-            this.bColorGlobal.Location = new System.Drawing.Point(788, 171);
-            this.bColorGlobal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bColorGlobal.Location = new System.Drawing.Point(525, 111);
             this.bColorGlobal.Name = "bColorGlobal";
-            this.bColorGlobal.Size = new System.Drawing.Size(150, 35);
+            this.bColorGlobal.Size = new System.Drawing.Size(100, 23);
             this.bColorGlobal.TabIndex = 13;
             this.bColorGlobal.UseVisualStyleBackColor = false;
             // 
             // bColorMe
             // 
             this.bColorMe.BackColor = System.Drawing.Color.White;
-            this.bColorMe.Location = new System.Drawing.Point(788, 120);
-            this.bColorMe.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bColorMe.Location = new System.Drawing.Point(525, 78);
             this.bColorMe.Name = "bColorMe";
-            this.bColorMe.Size = new System.Drawing.Size(150, 35);
+            this.bColorMe.Size = new System.Drawing.Size(100, 23);
             this.bColorMe.TabIndex = 13;
             this.bColorMe.UseVisualStyleBackColor = false;
             // 
             // lColorWarning
             // 
             this.lColorWarning.AutoSize = true;
-            this.lColorWarning.Location = new System.Drawing.Point(104, 82);
-            this.lColorWarning.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lColorWarning.Location = new System.Drawing.Point(69, 53);
             this.lColorWarning.Name = "lColorWarning";
-            this.lColorWarning.Size = new System.Drawing.Size(151, 20);
+            this.lColorWarning.Size = new System.Drawing.Size(105, 13);
             this.lColorWarning.TabIndex = 2;
             this.lColorWarning.Text = "Warning / error color";
             // 
             // bColorWarning
             // 
             this.bColorWarning.BackColor = System.Drawing.Color.White;
-            this.bColorWarning.Location = new System.Drawing.Point(290, 75);
-            this.bColorWarning.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bColorWarning.Location = new System.Drawing.Point(193, 49);
             this.bColorWarning.Name = "bColorWarning";
-            this.bColorWarning.Size = new System.Drawing.Size(150, 35);
+            this.bColorWarning.Size = new System.Drawing.Size(100, 23);
             this.bColorWarning.TabIndex = 3;
             this.bColorWarning.UseVisualStyleBackColor = false;
             // 
             // bColorSys
             // 
             this.bColorSys.BackColor = System.Drawing.Color.White;
-            this.bColorSys.Location = new System.Drawing.Point(290, 31);
-            this.bColorSys.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bColorSys.Location = new System.Drawing.Point(193, 20);
             this.bColorSys.Name = "bColorSys";
-            this.bColorSys.Size = new System.Drawing.Size(150, 35);
+            this.bColorSys.Size = new System.Drawing.Size(100, 23);
             this.bColorSys.TabIndex = 1;
             this.bColorSys.UseVisualStyleBackColor = false;
             // 
             // lColorSys
             // 
             this.lColorSys.AutoSize = true;
-            this.lColorSys.Location = new System.Drawing.Point(84, 37);
-            this.lColorSys.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lColorSys.Location = new System.Drawing.Point(56, 24);
             this.lColorSys.Name = "lColorSys";
-            this.lColorSys.Size = new System.Drawing.Size(169, 20);
+            this.lColorSys.Size = new System.Drawing.Size(112, 13);
             this.lColorSys.TabIndex = 0;
             this.lColorSys.Text = "System message color";
             // 
             // bColorPM
             // 
             this.bColorPM.BackColor = System.Drawing.Color.White;
-            this.bColorPM.Location = new System.Drawing.Point(290, 120);
-            this.bColorPM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bColorPM.Location = new System.Drawing.Point(193, 78);
             this.bColorPM.Name = "bColorPM";
-            this.bColorPM.Size = new System.Drawing.Size(150, 35);
+            this.bColorPM.Size = new System.Drawing.Size(100, 23);
             this.bColorPM.TabIndex = 5;
             this.bColorPM.UseVisualStyleBackColor = false;
             // 
             // lColorHelp
             // 
             this.lColorHelp.AutoSize = true;
-            this.lColorHelp.Location = new System.Drawing.Point(105, 171);
-            this.lColorHelp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lColorHelp.Location = new System.Drawing.Point(70, 111);
             this.lColorHelp.Name = "lColorHelp";
-            this.lColorHelp.Size = new System.Drawing.Size(149, 20);
+            this.lColorHelp.Size = new System.Drawing.Size(100, 13);
             this.lColorHelp.TabIndex = 6;
             this.lColorHelp.Text = "Help message color";
             // 
             // lColorPM
             // 
             this.lColorPM.AutoSize = true;
-            this.lColorPM.Location = new System.Drawing.Point(39, 126);
-            this.lColorPM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lColorPM.Location = new System.Drawing.Point(26, 82);
             this.lColorPM.Name = "lColorPM";
-            this.lColorPM.Size = new System.Drawing.Size(207, 20);
+            this.lColorPM.Size = new System.Drawing.Size(143, 13);
             this.lColorPM.TabIndex = 4;
             this.lColorPM.Text = "Private / rank message color";
             // 
             // IColorGlobal
             // 
             this.IColorGlobal.AutoSize = true;
-            this.IColorGlobal.Location = new System.Drawing.Point(603, 171);
-            this.IColorGlobal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.IColorGlobal.Location = new System.Drawing.Point(402, 111);
             this.IColorGlobal.Name = "IColorGlobal";
-            this.IColorGlobal.Size = new System.Drawing.Size(134, 20);
+            this.IColorGlobal.Size = new System.Drawing.Size(89, 13);
             this.IColorGlobal.TabIndex = 10;
             this.IColorGlobal.Text = "Global Chat Color";
             // 
             // lColorSay
             // 
             this.lColorSay.AutoSize = true;
-            this.lColorSay.Location = new System.Drawing.Point(610, 82);
-            this.lColorSay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lColorSay.Location = new System.Drawing.Point(407, 53);
             this.lColorSay.Name = "lColorSay";
-            this.lColorSay.Size = new System.Drawing.Size(147, 20);
+            this.lColorSay.Size = new System.Drawing.Size(101, 13);
             this.lColorSay.TabIndex = 10;
             this.lColorSay.Text = "/Say message color";
             // 
             // bColorAnnouncement
             // 
             this.bColorAnnouncement.BackColor = System.Drawing.Color.White;
-            this.bColorAnnouncement.Location = new System.Drawing.Point(788, 31);
-            this.bColorAnnouncement.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bColorAnnouncement.Location = new System.Drawing.Point(525, 20);
             this.bColorAnnouncement.Name = "bColorAnnouncement";
-            this.bColorAnnouncement.Size = new System.Drawing.Size(150, 35);
+            this.bColorAnnouncement.Size = new System.Drawing.Size(100, 23);
             this.bColorAnnouncement.TabIndex = 9;
             this.bColorAnnouncement.UseVisualStyleBackColor = false;
             // 
             // lColorAnnouncement
             // 
             this.lColorAnnouncement.AutoSize = true;
-            this.lColorAnnouncement.Location = new System.Drawing.Point(513, 37);
-            this.lColorAnnouncement.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lColorAnnouncement.Location = new System.Drawing.Point(342, 24);
             this.lColorAnnouncement.Name = "lColorAnnouncement";
-            this.lColorAnnouncement.Size = new System.Drawing.Size(236, 20);
+            this.lColorAnnouncement.Size = new System.Drawing.Size(161, 13);
             this.lColorAnnouncement.TabIndex = 8;
             this.lColorAnnouncement.Text = "Announcement and /Rules color";
             // 
             // bColorHelp
             // 
             this.bColorHelp.BackColor = System.Drawing.Color.White;
-            this.bColorHelp.Location = new System.Drawing.Point(290, 165);
-            this.bColorHelp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bColorHelp.Location = new System.Drawing.Point(193, 107);
             this.bColorHelp.Name = "bColorHelp";
-            this.bColorHelp.Size = new System.Drawing.Size(150, 35);
+            this.bColorHelp.Size = new System.Drawing.Size(100, 23);
             this.bColorHelp.TabIndex = 7;
             this.bColorHelp.UseVisualStyleBackColor = false;
             // 
             // bColorSay
             // 
             this.bColorSay.BackColor = System.Drawing.Color.White;
-            this.bColorSay.Location = new System.Drawing.Point(788, 75);
-            this.bColorSay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bColorSay.Location = new System.Drawing.Point(525, 49);
             this.bColorSay.Name = "bColorSay";
-            this.bColorSay.Size = new System.Drawing.Size(150, 35);
+            this.bColorSay.Size = new System.Drawing.Size(100, 23);
             this.bColorSay.TabIndex = 11;
             this.bColorSay.UseVisualStyleBackColor = false;
             // 
@@ -253,11 +236,9 @@
             this.gAppearence.Controls.Add(this.xRankPrefixesInList);
             this.gAppearence.Controls.Add(this.xRankPrefixesInChat);
             this.gAppearence.Controls.Add(this.xRankColorsInChat);
-            this.gAppearence.Location = new System.Drawing.Point(26, 320);
-            this.gAppearence.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gAppearence.Location = new System.Drawing.Point(17, 208);
             this.gAppearence.Name = "gAppearence";
-            this.gAppearence.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gAppearence.Size = new System.Drawing.Size(956, 149);
+            this.gAppearence.Size = new System.Drawing.Size(637, 97);
             this.gAppearence.TabIndex = 2;
             this.gAppearence.TabStop = false;
             this.gAppearence.Text = "Appearence Tweaks";
@@ -265,10 +246,9 @@
             // xShowConnectionMessages
             // 
             this.xShowConnectionMessages.AutoSize = true;
-            this.xShowConnectionMessages.Location = new System.Drawing.Point(488, 69);
-            this.xShowConnectionMessages.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xShowConnectionMessages.Location = new System.Drawing.Point(325, 45);
             this.xShowConnectionMessages.Name = "xShowConnectionMessages";
-            this.xShowConnectionMessages.Size = new System.Drawing.Size(398, 24);
+            this.xShowConnectionMessages.Size = new System.Drawing.Size(272, 17);
             this.xShowConnectionMessages.TabIndex = 4;
             this.xShowConnectionMessages.Text = "Show a message when players join/leave SERVER.";
             this.xShowConnectionMessages.UseVisualStyleBackColor = true;
@@ -276,10 +256,9 @@
             // xShowJoinedWorldMessages
             // 
             this.xShowJoinedWorldMessages.AutoSize = true;
-            this.xShowJoinedWorldMessages.Location = new System.Drawing.Point(488, 31);
-            this.xShowJoinedWorldMessages.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xShowJoinedWorldMessages.Location = new System.Drawing.Point(325, 20);
             this.xShowJoinedWorldMessages.Name = "xShowJoinedWorldMessages";
-            this.xShowJoinedWorldMessages.Size = new System.Drawing.Size(334, 24);
+            this.xShowJoinedWorldMessages.Size = new System.Drawing.Size(227, 17);
             this.xShowJoinedWorldMessages.TabIndex = 3;
             this.xShowJoinedWorldMessages.Text = "Show a message when players join worlds.";
             this.xShowJoinedWorldMessages.UseVisualStyleBackColor = true;
@@ -287,10 +266,9 @@
             // xRankColorsInWorldNames
             // 
             this.xRankColorsInWorldNames.AutoSize = true;
-            this.xRankColorsInWorldNames.Location = new System.Drawing.Point(488, 108);
-            this.xRankColorsInWorldNames.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xRankColorsInWorldNames.Location = new System.Drawing.Point(325, 70);
             this.xRankColorsInWorldNames.Name = "xRankColorsInWorldNames";
-            this.xRankColorsInWorldNames.Size = new System.Drawing.Size(311, 24);
+            this.xRankColorsInWorldNames.Size = new System.Drawing.Size(211, 17);
             this.xRankColorsInWorldNames.TabIndex = 5;
             this.xRankColorsInWorldNames.Text = "Color world names based on build rank.";
             this.xRankColorsInWorldNames.UseVisualStyleBackColor = true;
@@ -298,10 +276,9 @@
             // xRankPrefixesInList
             // 
             this.xRankPrefixesInList.AutoSize = true;
-            this.xRankPrefixesInList.Location = new System.Drawing.Point(66, 108);
-            this.xRankPrefixesInList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xRankPrefixesInList.Location = new System.Drawing.Point(44, 70);
             this.xRankPrefixesInList.Name = "xRankPrefixesInList";
-            this.xRankPrefixesInList.Size = new System.Drawing.Size(282, 24);
+            this.xRankPrefixesInList.Size = new System.Drawing.Size(191, 17);
             this.xRankPrefixesInList.TabIndex = 2;
             this.xRankPrefixesInList.Text = "Prefixes in player list (breaks skins).";
             this.xRankPrefixesInList.UseVisualStyleBackColor = true;
@@ -309,10 +286,9 @@
             // xRankPrefixesInChat
             // 
             this.xRankPrefixesInChat.AutoSize = true;
-            this.xRankPrefixesInChat.Location = new System.Drawing.Point(38, 69);
-            this.xRankPrefixesInChat.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xRankPrefixesInChat.Location = new System.Drawing.Point(25, 45);
             this.xRankPrefixesInChat.Name = "xRankPrefixesInChat";
-            this.xRankPrefixesInChat.Size = new System.Drawing.Size(173, 24);
+            this.xRankPrefixesInChat.Size = new System.Drawing.Size(119, 17);
             this.xRankPrefixesInChat.TabIndex = 1;
             this.xRankPrefixesInChat.Text = "Show rank prefixes.";
             this.xRankPrefixesInChat.UseVisualStyleBackColor = true;
@@ -320,31 +296,33 @@
             // xRankColorsInChat
             // 
             this.xRankColorsInChat.AutoSize = true;
-            this.xRankColorsInChat.Location = new System.Drawing.Point(38, 31);
-            this.xRankColorsInChat.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xRankColorsInChat.Location = new System.Drawing.Point(25, 20);
             this.xRankColorsInChat.Name = "xRankColorsInChat";
-            this.xRankColorsInChat.Size = new System.Drawing.Size(160, 24);
+            this.xRankColorsInChat.Size = new System.Drawing.Size(111, 17);
             this.xRankColorsInChat.TabIndex = 0;
             this.xRankColorsInChat.Text = "Show rank colors.";
             this.xRankColorsInChat.UseVisualStyleBackColor = true;
             // 
             // chatPreview
             // 
-            this.chatPreview.Location = new System.Drawing.Point(26, 482);
-            this.chatPreview.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.chatPreview.Location = new System.Drawing.Point(17, 313);
+            this.chatPreview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chatPreview.Name = "chatPreview";
-            this.chatPreview.Size = new System.Drawing.Size(954, 328);
+            this.chatPreview.Size = new System.Drawing.Size(636, 213);
             this.chatPreview.TabIndex = 3;
             // 
             // ChatConfig
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 875);
+            this.ClientSize = new System.Drawing.Size(669, 569);
             this.Controls.Add(this.chatPreview);
             this.Controls.Add(this.gAppearence);
             this.Controls.Add(this.gChatColors);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ChatConfig";
+            this.Padding = new System.Windows.Forms.Padding(13, 39, 13, 13);
             this.Text = "GemsCraft Configuration - Chat";
             this.gChatColors.ResumeLayout(false);
             this.gChatColors.PerformLayout();

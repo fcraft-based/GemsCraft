@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoggingConfig));
             this.gLogFile = new System.Windows.Forms.GroupBox();
             this.lLogFileOptionsDescription = new System.Windows.Forms.Label();
             this.xLogLimit = new System.Windows.Forms.CheckBox();
@@ -57,11 +58,9 @@
             this.gLogFile.Controls.Add(this.nLogLimit);
             this.gLogFile.Controls.Add(this.cLogMode);
             this.gLogFile.Controls.Add(this.lLogMode);
-            this.gLogFile.Location = new System.Drawing.Point(508, 96);
-            this.gLogFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gLogFile.Location = new System.Drawing.Point(339, 62);
             this.gLogFile.Name = "gLogFile";
-            this.gLogFile.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gLogFile.Size = new System.Drawing.Size(472, 651);
+            this.gLogFile.Size = new System.Drawing.Size(315, 423);
             this.gLogFile.TabIndex = 3;
             this.gLogFile.TabStop = false;
             this.gLogFile.Text = "Log File";
@@ -69,10 +68,9 @@
             // lLogFileOptionsDescription
             // 
             this.lLogFileOptionsDescription.AutoSize = true;
-            this.lLogFileOptionsDescription.Location = new System.Drawing.Point(40, 34);
-            this.lLogFileOptionsDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lLogFileOptionsDescription.Location = new System.Drawing.Point(27, 22);
             this.lLogFileOptionsDescription.Name = "lLogFileOptionsDescription";
-            this.lLogFileOptionsDescription.Size = new System.Drawing.Size(275, 40);
+            this.lLogFileOptionsDescription.Size = new System.Drawing.Size(185, 26);
             this.lLogFileOptionsDescription.TabIndex = 0;
             this.lLogFileOptionsDescription.Text = "Types of messages that will be written\r\nto the log file on disk.";
             // 
@@ -80,10 +78,9 @@
             // 
             this.xLogLimit.AutoSize = true;
             this.xLogLimit.Enabled = false;
-            this.xLogLimit.Location = new System.Drawing.Point(27, 600);
-            this.xLogLimit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xLogLimit.Location = new System.Drawing.Point(18, 390);
             this.xLogLimit.Name = "xLogLimit";
-            this.xLogLimit.Size = new System.Drawing.Size(105, 24);
+            this.xLogLimit.Size = new System.Drawing.Size(74, 17);
             this.xLogLimit.TabIndex = 4;
             this.xLogLimit.Text = "Only keep";
             this.xLogLimit.UseVisualStyleBackColor = true;
@@ -95,11 +92,10 @@
             this.columnHeader2});
             this.vLogFileOptions.GridLines = true;
             this.vLogFileOptions.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.vLogFileOptions.Location = new System.Drawing.Point(117, 91);
-            this.vLogFileOptions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.vLogFileOptions.Location = new System.Drawing.Point(78, 59);
             this.vLogFileOptions.Name = "vLogFileOptions";
             this.vLogFileOptions.ShowItemToolTips = true;
-            this.vLogFileOptions.Size = new System.Drawing.Size(240, 450);
+            this.vLogFileOptions.Size = new System.Drawing.Size(161, 294);
             this.vLogFileOptions.TabIndex = 1;
             this.vLogFileOptions.UseCompatibleStateImageBehavior = false;
             this.vLogFileOptions.View = System.Windows.Forms.View.Details;
@@ -111,25 +107,23 @@
             // lLogLimitUnits
             // 
             this.lLogLimitUnits.AutoSize = true;
-            this.lLogLimitUnits.Location = new System.Drawing.Point(249, 602);
-            this.lLogLimitUnits.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lLogLimitUnits.Location = new System.Drawing.Point(166, 391);
             this.lLogLimitUnits.Name = "lLogLimitUnits";
-            this.lLogLimitUnits.Size = new System.Drawing.Size(168, 20);
+            this.lLogLimitUnits.Size = new System.Drawing.Size(112, 13);
             this.lLogLimitUnits.TabIndex = 6;
             this.lLogLimitUnits.Text = "of most recent log files";
             // 
             // nLogLimit
             // 
             this.nLogLimit.Enabled = false;
-            this.nLogLimit.Location = new System.Drawing.Point(156, 598);
-            this.nLogLimit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nLogLimit.Location = new System.Drawing.Point(104, 389);
             this.nLogLimit.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.nLogLimit.Name = "nLogLimit";
-            this.nLogLimit.Size = new System.Drawing.Size(84, 26);
+            this.nLogLimit.Size = new System.Drawing.Size(56, 20);
             this.nLogLimit.TabIndex = 5;
             // 
             // cLogMode
@@ -141,19 +135,17 @@
             "One long file",
             "Multiple files, split by session",
             "Multiple files, split by day"});
-            this.cLogMode.Location = new System.Drawing.Point(156, 554);
-            this.cLogMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cLogMode.Location = new System.Drawing.Point(104, 360);
             this.cLogMode.Name = "cLogMode";
-            this.cLogMode.Size = new System.Drawing.Size(276, 28);
+            this.cLogMode.Size = new System.Drawing.Size(185, 21);
             this.cLogMode.TabIndex = 3;
             // 
             // lLogMode
             // 
             this.lLogMode.AutoSize = true;
-            this.lLogMode.Location = new System.Drawing.Point(52, 558);
-            this.lLogMode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lLogMode.Location = new System.Drawing.Point(35, 363);
             this.lLogMode.Name = "lLogMode";
-            this.lLogMode.Size = new System.Drawing.Size(80, 20);
+            this.lLogMode.Size = new System.Drawing.Size(54, 13);
             this.lLogMode.TabIndex = 2;
             this.lLogMode.Text = "Log mode";
             // 
@@ -161,11 +153,9 @@
             // 
             this.gConsole.Controls.Add(this.lLogConsoleOptionsDescription);
             this.gConsole.Controls.Add(this.vConsoleOptions);
-            this.gConsole.Location = new System.Drawing.Point(25, 96);
-            this.gConsole.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gConsole.Location = new System.Drawing.Point(17, 62);
             this.gConsole.Name = "gConsole";
-            this.gConsole.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gConsole.Size = new System.Drawing.Size(472, 651);
+            this.gConsole.Size = new System.Drawing.Size(315, 423);
             this.gConsole.TabIndex = 2;
             this.gConsole.TabStop = false;
             this.gConsole.Text = "Console";
@@ -173,10 +163,9 @@
             // lLogConsoleOptionsDescription
             // 
             this.lLogConsoleOptionsDescription.AutoSize = true;
-            this.lLogConsoleOptionsDescription.Location = new System.Drawing.Point(14, 32);
-            this.lLogConsoleOptionsDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lLogConsoleOptionsDescription.Location = new System.Drawing.Point(9, 21);
             this.lLogConsoleOptionsDescription.Name = "lLogConsoleOptionsDescription";
-            this.lLogConsoleOptionsDescription.Size = new System.Drawing.Size(275, 40);
+            this.lLogConsoleOptionsDescription.Size = new System.Drawing.Size(185, 26);
             this.lLogConsoleOptionsDescription.TabIndex = 0;
             this.lLogConsoleOptionsDescription.Text = "Types of messages that will be written\r\ndirectly to console.";
             // 
@@ -187,11 +176,10 @@
             this.columnHeader3});
             this.vConsoleOptions.GridLines = true;
             this.vConsoleOptions.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.vConsoleOptions.Location = new System.Drawing.Point(114, 91);
-            this.vConsoleOptions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.vConsoleOptions.Location = new System.Drawing.Point(76, 59);
             this.vConsoleOptions.Name = "vConsoleOptions";
             this.vConsoleOptions.ShowItemToolTips = true;
-            this.vConsoleOptions.Size = new System.Drawing.Size(240, 450);
+            this.vConsoleOptions.Size = new System.Drawing.Size(161, 294);
             this.vConsoleOptions.TabIndex = 1;
             this.vConsoleOptions.UseCompatibleStateImageBehavior = false;
             this.vConsoleOptions.View = System.Windows.Forms.View.Details;
@@ -203,22 +191,26 @@
             // bResetTab
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.bResetTab.Location = new System.Drawing.Point(838, 755);
+            this.bResetTab.Location = new System.Drawing.Point(559, 491);
+            this.bResetTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.bResetTab.Name = "bResetTab";
-            this.bResetTab.Size = new System.Drawing.Size(142, 37);
+            this.bResetTab.Size = new System.Drawing.Size(95, 24);
             this.bResetTab.TabIndex = 7;
             this.bResetTab.Text = "Reset";
             this.bResetTab.UseSelectable = true;
             // 
             // LoggingConfig
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 803);
+            this.ClientSize = new System.Drawing.Size(669, 522);
             this.Controls.Add(this.bResetTab);
             this.Controls.Add(this.gLogFile);
             this.Controls.Add(this.gConsole);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "LoggingConfig";
+            this.Padding = new System.Windows.Forms.Padding(13, 39, 13, 13);
             this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "GemsCraft Configuration - Logging";
             this.gLogFile.ResumeLayout(false);

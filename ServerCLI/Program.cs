@@ -54,10 +54,10 @@ namespace GemsCraft.ServerCLI {
 #if !DEBUG
             try {
 #endif
-                Server.InitLibrary( args );
+                Server.InitLibrary( args, false);
                 useColor = !Server.HasArg( ArgKey.NoConsoleColor );
 
-                Server.InitServer();
+                Server.InitServer(false);
 
                 if (ConfigKey.CheckForUpdates.GetString() == "True")
                 {

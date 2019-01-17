@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorldConfig));
             this.xWoMEnableEnvExtensions = new System.Windows.Forms.CheckBox();
             this.bMapPath = new System.Windows.Forms.Button();
             this.xMapPath = new System.Windows.Forms.CheckBox();
@@ -57,10 +58,9 @@
             // 
             this.xWoMEnableEnvExtensions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.xWoMEnableEnvExtensions.AutoSize = true;
-            this.xWoMEnableEnvExtensions.Location = new System.Drawing.Point(24, 781);
-            this.xWoMEnableEnvExtensions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xWoMEnableEnvExtensions.Location = new System.Drawing.Point(16, 507);
             this.xWoMEnableEnvExtensions.Name = "xWoMEnableEnvExtensions";
-            this.xWoMEnableEnvExtensions.Size = new System.Drawing.Size(243, 24);
+            this.xWoMEnableEnvExtensions.Size = new System.Drawing.Size(168, 17);
             this.xWoMEnableEnvExtensions.TabIndex = 34;
             this.xWoMEnableEnvExtensions.Text = "Enable Env Extensions (/Env)";
             this.xWoMEnableEnvExtensions.UseVisualStyleBackColor = true;
@@ -73,10 +73,9 @@
             this.bMapPath.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.bMapPath.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.bMapPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bMapPath.Location = new System.Drawing.Point(892, 734);
-            this.bMapPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bMapPath.Location = new System.Drawing.Point(595, 477);
             this.bMapPath.Name = "bMapPath";
-            this.bMapPath.Size = new System.Drawing.Size(93, 35);
+            this.bMapPath.Size = new System.Drawing.Size(62, 23);
             this.bMapPath.TabIndex = 33;
             this.bMapPath.Text = "Browse";
             this.bMapPath.UseVisualStyleBackColor = false;
@@ -85,10 +84,9 @@
             // 
             this.xMapPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.xMapPath.AutoSize = true;
-            this.xMapPath.Location = new System.Drawing.Point(24, 739);
-            this.xMapPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.xMapPath.Location = new System.Drawing.Point(16, 479);
             this.xMapPath.Name = "xMapPath";
-            this.xMapPath.Size = new System.Drawing.Size(248, 24);
+            this.xMapPath.Size = new System.Drawing.Size(165, 17);
             this.xMapPath.TabIndex = 31;
             this.xMapPath.Text = "Custom path for storing maps:";
             this.xMapPath.UseVisualStyleBackColor = true;
@@ -99,20 +97,18 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tMapPath.Enabled = false;
             this.tMapPath.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tMapPath.Location = new System.Drawing.Point(316, 737);
-            this.tMapPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tMapPath.Location = new System.Drawing.Point(211, 479);
             this.tMapPath.Name = "tMapPath";
-            this.tMapPath.Size = new System.Drawing.Size(565, 25);
+            this.tMapPath.Size = new System.Drawing.Size(378, 19);
             this.tMapPath.TabIndex = 32;
             // 
             // lDefaultBuildRank
             // 
             this.lDefaultBuildRank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lDefaultBuildRank.AutoSize = true;
-            this.lDefaultBuildRank.Location = new System.Drawing.Point(48, 691);
-            this.lDefaultBuildRank.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lDefaultBuildRank.Location = new System.Drawing.Point(32, 449);
             this.lDefaultBuildRank.Name = "lDefaultBuildRank";
-            this.lDefaultBuildRank.Size = new System.Drawing.Size(437, 20);
+            this.lDefaultBuildRank.Size = new System.Drawing.Size(293, 13);
             this.lDefaultBuildRank.TabIndex = 29;
             this.lDefaultBuildRank.Text = "Default rank requirement for building on newly-loaded worlds:";
             // 
@@ -122,10 +118,9 @@
             this.cDefaultBuildRank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cDefaultBuildRank.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cDefaultBuildRank.FormattingEnabled = true;
-            this.cDefaultBuildRank.Location = new System.Drawing.Point(570, 687);
-            this.cDefaultBuildRank.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cDefaultBuildRank.Location = new System.Drawing.Point(380, 447);
             this.cDefaultBuildRank.Name = "cDefaultBuildRank";
-            this.cDefaultBuildRank.Size = new System.Drawing.Size(180, 28);
+            this.cDefaultBuildRank.Size = new System.Drawing.Size(121, 21);
             this.cDefaultBuildRank.TabIndex = 30;
             // 
             // cMainWorld
@@ -133,20 +128,18 @@
             this.cMainWorld.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cMainWorld.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cMainWorld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cMainWorld.Location = new System.Drawing.Point(827, 104);
-            this.cMainWorld.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cMainWorld.Location = new System.Drawing.Point(551, 68);
             this.cMainWorld.Name = "cMainWorld";
-            this.cMainWorld.Size = new System.Drawing.Size(151, 28);
+            this.cMainWorld.Size = new System.Drawing.Size(102, 21);
             this.cMainWorld.TabIndex = 28;
             // 
             // lMainWorld
             // 
             this.lMainWorld.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lMainWorld.AutoSize = true;
-            this.lMainWorld.Location = new System.Drawing.Point(712, 109);
-            this.lMainWorld.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lMainWorld.Location = new System.Drawing.Point(475, 71);
             this.lMainWorld.Name = "lMainWorld";
-            this.lMainWorld.Size = new System.Drawing.Size(88, 20);
+            this.lMainWorld.Size = new System.Drawing.Size(61, 13);
             this.lMainWorld.TabIndex = 27;
             this.lMainWorld.Text = "Main world:";
             // 
@@ -157,10 +150,9 @@
             this.bWorldEdit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.bWorldEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.bWorldEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bWorldEdit.Location = new System.Drawing.Point(182, 96);
-            this.bWorldEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bWorldEdit.Location = new System.Drawing.Point(121, 62);
             this.bWorldEdit.Name = "bWorldEdit";
-            this.bWorldEdit.Size = new System.Drawing.Size(150, 43);
+            this.bWorldEdit.Size = new System.Drawing.Size(100, 28);
             this.bWorldEdit.TabIndex = 25;
             this.bWorldEdit.Text = "Edit";
             this.bWorldEdit.UseVisualStyleBackColor = false;
@@ -171,10 +163,9 @@
             this.bAddWorld.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.bAddWorld.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.bAddWorld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bAddWorld.Location = new System.Drawing.Point(24, 96);
-            this.bAddWorld.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bAddWorld.Location = new System.Drawing.Point(16, 62);
             this.bAddWorld.Name = "bAddWorld";
-            this.bAddWorld.Size = new System.Drawing.Size(150, 43);
+            this.bAddWorld.Size = new System.Drawing.Size(100, 28);
             this.bAddWorld.TabIndex = 24;
             this.bAddWorld.Text = "Add World";
             this.bAddWorld.UseVisualStyleBackColor = false;
@@ -186,10 +177,9 @@
             this.bWorldDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.bWorldDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.bWorldDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bWorldDelete.Location = new System.Drawing.Point(340, 96);
-            this.bWorldDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bWorldDelete.Location = new System.Drawing.Point(227, 62);
             this.bWorldDelete.Name = "bWorldDelete";
-            this.bWorldDelete.Size = new System.Drawing.Size(150, 43);
+            this.bWorldDelete.Size = new System.Drawing.Size(100, 28);
             this.bWorldDelete.TabIndex = 26;
             this.bWorldDelete.Text = "Delete World";
             this.bWorldDelete.UseVisualStyleBackColor = false;
@@ -212,15 +202,14 @@
             this.dgvcBackup,
             this.dgvcHidden,
             this.dgvcBlockDB});
-            this.dgvWorlds.Location = new System.Drawing.Point(24, 149);
-            this.dgvWorlds.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvWorlds.Location = new System.Drawing.Point(16, 97);
             this.dgvWorlds.MultiSelect = false;
             this.dgvWorlds.Name = "dgvWorlds";
             this.dgvWorlds.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.dgvWorlds.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            this.dgvWorlds.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvWorlds.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvWorlds.Size = new System.Drawing.Size(954, 528);
+            this.dgvWorlds.Size = new System.Drawing.Size(636, 343);
             this.dgvWorlds.TabIndex = 23;
             // 
             // dgvcName
@@ -274,8 +263,8 @@
             // dgvcBlockDB
             // 
             this.dgvcBlockDB.DataPropertyName = "BlockDBEnabled";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvcBlockDB.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvcBlockDB.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvcBlockDB.HeaderText = "BlockDB";
             this.dgvcBlockDB.Name = "dgvcBlockDB";
             this.dgvcBlockDB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -285,18 +274,19 @@
             // bResetTab
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.bResetTab.Location = new System.Drawing.Point(497, 96);
+            this.bResetTab.Location = new System.Drawing.Point(331, 62);
+            this.bResetTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.bResetTab.Name = "bResetTab";
-            this.bResetTab.Size = new System.Drawing.Size(142, 43);
+            this.bResetTab.Size = new System.Drawing.Size(95, 28);
             this.bResetTab.TabIndex = 35;
             this.bResetTab.Text = "Reset";
             this.bResetTab.UseSelectable = true;
             // 
             // WorldConfig
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 812);
+            this.ClientSize = new System.Drawing.Size(669, 528);
             this.Controls.Add(this.bResetTab);
             this.Controls.Add(this.xWoMEnableEnvExtensions);
             this.Controls.Add(this.bMapPath);
@@ -310,7 +300,10 @@
             this.Controls.Add(this.bAddWorld);
             this.Controls.Add(this.bWorldDelete);
             this.Controls.Add(this.dgvWorlds);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "WorldConfig";
+            this.Padding = new System.Windows.Forms.Padding(13, 39, 13, 13);
             this.Style = MetroFramework.MetroColorStyle.Magenta;
             this.Text = "GemsCraft Configuration - Worlds";
             ((System.ComponentModel.ISupportInitialize)(this.dgvWorlds)).EndInit();
