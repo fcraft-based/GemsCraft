@@ -718,7 +718,7 @@ namespace GemsCraft.fSystem {
         /// Shorthand for Server.Players.Message </summary>
         public static void Message( [NotNull] string message, MessageType type) {
             if( message == null ) throw new ArgumentNullException( "message" );
-            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+            if (!MessageTypeUtil.Enabled() || message.Length >= 64) type = MessageType.Chat;
             Players.Message( message, type);
         }
 
@@ -737,7 +737,7 @@ namespace GemsCraft.fSystem {
         {
             if(message == null) throw new ArgumentNullException("message");
             if(formatArgs == null) throw new ArgumentNullException("formatArgs");
-            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+            if (!MessageTypeUtil.Enabled() || message.Length >= 64) type = MessageType.Chat;
             Players.Message(message, type, formatArgs);
         }
 
@@ -753,7 +753,7 @@ namespace GemsCraft.fSystem {
         public static void Message([CanBeNull] Player except, [NotNull] string message, MessageType type)
         {
             if (message == null) throw new ArgumentNullException("message");
-            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+            if (!MessageTypeUtil.Enabled() || message.Length >= 64) type = MessageType.Chat;
             Players.Except(except).Message(message, type);
         }
 
@@ -765,7 +765,7 @@ namespace GemsCraft.fSystem {
             if( message == null ) throw new ArgumentNullException( "message" );
             if( formatArgs == null ) throw new ArgumentNullException( "formatArgs" );
             if (type == null) type = 0;
-            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+            if (!MessageTypeUtil.Enabled() || message.Length >= 64) type = MessageType.Chat;
             Players.Except( except ).Message( message, type, formatArgs);
         }
 
@@ -897,7 +897,7 @@ namespace GemsCraft.fSystem {
             {
                 ConfigKey.EnableAnnouncements.TryGetBool(out var res);
                 MessageType type = res ? MessageType.Announcement : MessageType.Chat;
-                if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+                if (!MessageTypeUtil.Enabled() || line.Length >= 64) type = MessageType.Chat;
                 player.Message("&R" + ReplaceTextKeywords(player, line), type);
             }
         }

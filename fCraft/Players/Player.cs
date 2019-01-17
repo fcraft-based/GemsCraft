@@ -891,7 +891,7 @@ namespace GemsCraft.Players
         public void MessageAlt([NotNull] string message, MessageType type)
         {
             if (message == null) throw new ArgumentNullException("message");
-            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+            if (!MessageTypeUtil.Enabled() || message.Length >= 64) type = MessageType.Chat;
             if (this == Console)
             {
                 Logger.LogToConsole(message);
@@ -929,7 +929,7 @@ namespace GemsCraft.Players
         public void Message([NotNull] string message, MessageType? type, [NotNull] params object[] args)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
-            if (type == null || !MessageTypeUtil.Enabled())
+            if (type == null || !MessageTypeUtil.Enabled() || message.Length >= 64)
             {
                 type = MessageType.Chat;
             }
@@ -959,7 +959,7 @@ namespace GemsCraft.Players
             if (prefix == null) throw new ArgumentNullException("prefix");
             if (message == null) throw new ArgumentNullException("message");
             if (args == null) throw new ArgumentNullException("args");
-            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+            if (!MessageTypeUtil.Enabled() || message.Length >= 64) type = MessageType.Chat;
             if (args.Length > 0)
             {
                 message = string.Format(message, args);
@@ -1012,7 +1012,7 @@ namespace GemsCraft.Players
             if (prefix == null) throw new ArgumentNullException("prefix");
             if (message == null) throw new ArgumentNullException("message");
             if (args == null) throw new ArgumentNullException("args");
-            if (!MessageTypeUtil.Enabled()) type = MessageType.Chat;
+            if (!MessageTypeUtil.Enabled() || message.Length >= 64) type = MessageType.Chat;
             if (IsDeaf) return;
             if (args.Length > 0)
             {

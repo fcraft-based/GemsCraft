@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace Launcher
         public MainForm()
         {
             InitializeComponent();
+            if (File.Exists("GemsCraftGUI.exe")) File.Delete("GemsCraftGUI.exe"); // Delete the Legacy GUI
         }
         private const string CliExe = "ServerCli.exe";
         private void btnConfig_Click(object sender, EventArgs e)
