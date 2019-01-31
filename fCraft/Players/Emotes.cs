@@ -123,7 +123,7 @@ namespace GemsCraft.Players
         private static readonly Emote Hole = new Emote
         {
             Item = "◘",
-            Keywords = new[] {"{Wonderland}", "{hole}"}
+            Keywords = new[] {"{wonderland}", "{hole}"}
         };
 
         private static readonly Emote Circle = new Emote

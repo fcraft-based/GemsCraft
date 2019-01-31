@@ -58,6 +58,7 @@
             this.xCrash = new System.Windows.Forms.CheckBox();
             this.lCrashReportDisclaimer = new System.Windows.Forms.Label();
             this.bResetTab = new MetroFramework.Controls.MetroButton();
+            this.picBackground = new System.Windows.Forms.PictureBox();
             this.gPerformance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nTickInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nThrottling)).BeginInit();
@@ -65,6 +66,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nMaxUndoStates)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nMaxUndo)).BeginInit();
             this.gCrashReport.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // gPerformance
@@ -72,6 +74,7 @@
             this.gPerformance.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gPerformance.BackColor = System.Drawing.Color.Transparent;
             this.gPerformance.Controls.Add(this.lAdvancedWarning);
             this.gPerformance.Controls.Add(this.xLowLatencyMode);
             this.gPerformance.Controls.Add(this.lProcessPriority);
@@ -231,6 +234,7 @@
             // 
             this.gAdvancedMisc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gAdvancedMisc.BackColor = System.Drawing.Color.Transparent;
             this.gAdvancedMisc.Controls.Add(this.xAutoRank);
             this.gAdvancedMisc.Controls.Add(this.nMaxUndoStates);
             this.gAdvancedMisc.Controls.Add(this.lMaxUndoStates);
@@ -400,6 +404,7 @@
             // 
             this.gCrashReport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gCrashReport.BackColor = System.Drawing.Color.Transparent;
             this.gCrashReport.Controls.Add(this.xCrash);
             this.gCrashReport.Controls.Add(this.lCrashReportDisclaimer);
             this.gCrashReport.Location = new System.Drawing.Point(18, 63);
@@ -434,13 +439,23 @@
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.bResetTab.Location = new System.Drawing.Point(560, 520);
-            this.bResetTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bResetTab.Margin = new System.Windows.Forms.Padding(2);
             this.bResetTab.Name = "bResetTab";
             this.bResetTab.Size = new System.Drawing.Size(94, 24);
             this.bResetTab.TabIndex = 6;
             this.bResetTab.Text = "Reset";
             this.bResetTab.UseSelectable = true;
             this.bResetTab.Click += new System.EventHandler(this.bResetTab_Click);
+            // 
+            // picBackground
+            // 
+            this.picBackground.BackgroundImage = global::GemsCraft.Properties.Resources.Black;
+            this.picBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picBackground.Location = new System.Drawing.Point(0, 55);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(670, 503);
+            this.picBackground.TabIndex = 7;
+            this.picBackground.TabStop = false;
             // 
             // AdvancedConfig
             // 
@@ -451,10 +466,11 @@
             this.Controls.Add(this.gPerformance);
             this.Controls.Add(this.gAdvancedMisc);
             this.Controls.Add(this.gCrashReport);
+            this.Controls.Add(this.picBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdvancedConfig";
-            this.Padding = new System.Windows.Forms.Padding(14, 49, 14, 13);
+            this.Padding = new System.Windows.Forms.Padding(14, 60, 14, 13);
             this.Style = MetroFramework.MetroColorStyle.Black;
             this.Text = "GemsCraft Configuration - Advanced";
             this.gPerformance.ResumeLayout(false);
@@ -467,6 +483,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nMaxUndo)).EndInit();
             this.gCrashReport.ResumeLayout(false);
             this.gCrashReport.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -502,5 +519,6 @@
         internal System.Windows.Forms.CheckBox xCrash;
         internal System.Windows.Forms.Label lCrashReportDisclaimer;
         internal MetroFramework.Controls.MetroButton bResetTab;
+        private System.Windows.Forms.PictureBox picBackground;
     }
 }

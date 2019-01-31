@@ -9,35 +9,32 @@ using JetBrains.Annotations;
 
 namespace GemsCraft.AutoRank
 {
-    public sealed class fCraftCriterion : ICloneable
+    public sealed class FCraftCriterion : ICloneable
     {
         public Rank FromRank { get; set; }
         public Rank ToRank { get; set; }
         public ConditionSet Condition { get; set; }
 
-        public fCraftCriterion() { }
+        public FCraftCriterion() { }
 
-        public fCraftCriterion([NotNull] fCraftCriterion other)
+        public FCraftCriterion([NotNull] FCraftCriterion other)
         {
-            if (other == null) throw new ArgumentNullException("other");
+            if (other == null) throw new ArgumentNullException(nameof(other));
             FromRank = other.FromRank;
             ToRank = other.ToRank;
             Condition = other.Condition;
         }
 
-        public fCraftCriterion([NotNull] Rank fromRank, [NotNull] Rank toRank, [NotNull] ConditionSet condition)
+        public FCraftCriterion([NotNull] Rank fromRank, [NotNull] Rank toRank, [NotNull] ConditionSet condition)
         {
-            if (fromRank == null) throw new ArgumentNullException("fromRank");
-            if (toRank == null) throw new ArgumentNullException("toRank");
-            if (condition == null) throw new ArgumentNullException("condition");
-            FromRank = fromRank;
-            ToRank = toRank;
-            Condition = condition;
+            FromRank = fromRank ?? throw new ArgumentNullException(nameof(fromRank));
+            ToRank = toRank ?? throw new ArgumentNullException(nameof(toRank));
+            Condition = condition ?? throw new ArgumentNullException(nameof(condition));
         }
 
-        public fCraftCriterion([NotNull] XElement el)
+        public FCraftCriterion([NotNull] XElement el)
         {
-            if (el == null) throw new ArgumentNullException("el");
+            if (el == null) throw new ArgumentNullException(nameof(el));
 
             // ReSharper disable PossibleNullReferenceException
             FromRank = Rank.Parse(el.Attribute("fromRank").Value);
@@ -49,20 +46,17 @@ namespace GemsCraft.AutoRank
             // ReSharper restore PossibleNullReferenceException
             if (ToRank == null) throw new FormatException("Could not parse \"toRank\"");
 
-            Condition = (ConditionSet)AutoRank.fCraftConditions.Parse(el.Elements().First());
+            Condition = (ConditionSet)AutoRank.FCraftConditions.Parse(el.Elements().First());
         }
 
         public object Clone()
         {
-            return new fCraftCriterion(this);
+            return new FCraftCriterion(this);
         }
 
         public override string ToString()
         {
-            return String.Format("Criteria( {0} from {1} to {2} )",
-                                  (FromRank < ToRank ? "promote" : "demote"),
-                                  FromRank.Name,
-                                  ToRank.Name);
+            return $"Criteria( {(FromRank < ToRank ? "promote" : "demote")} from {FromRank.Name} to {ToRank.Name} )";
         }
 
         public XElement Serialize()

@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
 using GemsCraft.fSystem.Config;
+
 using GemsCraft.Players;
 using GemsCraft.Utils;
 using JetBrains.Annotations;
@@ -129,7 +130,10 @@ namespace GemsCraft.fSystem
         [DebuggerStepThrough]
         public static void Log(LogType type, [NotNull] string message)
         {
-            if (message == null) throw new ArgumentNullException("message");
+            if (message == null)
+            {
+                throw new ArgumentNullException("message");
+            }
             if (!Enabled) return;
             string line = DateTime.Now.ToLongTimeString() + " > " + GetPrefix(type) + message; // localized
             Network.Remote.Server.Logs.Add(line);
@@ -171,6 +175,8 @@ namespace GemsCraft.fSystem
                     return "Warning: ";
                 case LogType.IRC:
                     return "IRC: ";
+                case LogType.Discord:
+                    return "Discord: ";
                 default:
                     return string.Empty;
             }
@@ -384,7 +390,7 @@ namespace GemsCraft.fSystem
                 else if (ex.Message.Contains("libMonoPosixHelper") ||
                          ex is EntryPointNotFoundException && ex.Message.Contains("CreateZStream"))
                 {
-                    message = "800Craft could not locate Mono's compression functionality. " +
+                    message = "GemsCraft could not locate Mono's compression functionality. " +
                               "Please make sure that you have zlib (sometimes called \"libz\" or just \"z\") installed. " +
                               "Some versions of Mono may also require \"libmono-posix-2.0-cil\" package to be installed.";
                     return true;
@@ -392,7 +398,7 @@ namespace GemsCraft.fSystem
                 }
                 else if (ex is MissingMemberException || ex is TypeLoadException)
                 {
-                    message = "Something is incompatible with the current revision of 800Craft. " +
+                    message = "Something is incompatible with the current revision of GemsCraft. " +
                               "If you installed third-party modifications, " +
                               "make sure to use the correct revision (as specified by mod developers). " +
                               "If your own modifications stopped working, your may need to make some updates.";
@@ -401,14 +407,14 @@ namespace GemsCraft.fSystem
                 }
                 else if (ex is UnauthorizedAccessException)
                 {
-                    message = "800Craft was blocked from accessing a file or resource. " +
-                              "Make sure that correct permissions are set for the 800Craft files, folders, and processes.";
+                    message = "GemsCraft was blocked from accessing a file or resource. " +
+                              "Make sure that correct permissions are set for the GemsCraft files, folders, and processes.";
                     return true;
 
                 }
                 else if (ex is OutOfMemoryException)
                 {
-                    message = "800Craft ran out of memory. Make sure there is enough RAM to run.";
+                    message = "GemsCraft ran out of memory. Make sure there is enough RAM to run.";
                     return true;
 
                 }
@@ -420,14 +426,14 @@ namespace GemsCraft.fSystem
                 }
                 else if (ex is InvalidOperationException && ex.StackTrace.Contains("MD5CryptoServiceProvider"))
                 {
-                    message = "Some Windows settings are preventing 800Craft from doing player name verification. " +
+                    message = "Some Windows settings are preventing GemsCraft from doing player name verification. " +
                               "See http://support.microsoft.com/kb/811833";
                     return true;
 
                 }
                 else if (ex.StackTrace.Contains("__Error.WinIOError"))
                 {
-                    message = "A filesystem-related error has occured. Make sure that only one instance of 800Craft is running, " +
+                    message = "A filesystem-related error has occured. Make sure that only one instance of GemsCraft is running, " +
                               "and that no other processes are using server's files or directories.";
                     return true;
 
@@ -670,7 +676,12 @@ namespace GemsCraft.fSystem
         Debug,
 
         /// <summary> Special-purpose messages related to event tracing (never logged). </summary>
-        Trace
+        Trace,
+
+        /// <summary>
+        /// Messages sent to Discord Channel
+        /// </summary>
+        Discord
     }
 
 

@@ -105,7 +105,17 @@ namespace GemsCraft.Worlds {
         }
 
         private bool ShouldBeAutoEnabled {
-            get { return ( World.BuildSecurity.MinRank <= RankManager.BlockDBAutoEnableRank ); }
+            get
+            {
+                try
+                {
+                    return World.BuildSecurity.MinRank <= RankManager.BlockDBAutoEnableRank;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
         }
 
         /// <summary> Full path to the file where BlockDB data is stored. </summary>

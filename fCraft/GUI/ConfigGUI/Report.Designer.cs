@@ -41,7 +41,9 @@
             // 
             // panelRequest
             // 
-            this.panelRequest.BackColor = System.Drawing.SystemColors.Control;
+            this.panelRequest.BackColor = System.Drawing.Color.Transparent;
+            this.panelRequest.BackgroundImage = global::GemsCraft.Properties.Resources.Green;
+            this.panelRequest.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelRequest.Controls.Add(this.bCancel);
             this.panelRequest.Controls.Add(this.bSubmit);
             this.panelRequest.Controls.Add(this.tReport);

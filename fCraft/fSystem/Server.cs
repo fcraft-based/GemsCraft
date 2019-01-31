@@ -332,6 +332,12 @@ namespace GemsCraft.fSystem {
                             "Enable name verification as soon as possible." );
             }
 
+            // Load Default Ranks in Config Doesn't exist
+            if (!File.Exists("config.json"))
+            {
+                Config.Config.LoadRankList(Config.Config._defaultRanks);
+            }
+
             // load player DB
             PlayerDB.Load();
             IPBanList.Load();
@@ -352,7 +358,7 @@ namespace GemsCraft.fSystem {
             HeartbeatSaverUtil.Init();
             Network.Remote.Server.Start(); // Starting the remote control server
             fSystem.Server.RaiseEvent( fSystem.Server.Initialized );
-
+            
             serverInitialized = true;
         }
 
@@ -378,12 +384,12 @@ namespace GemsCraft.fSystem {
             cpuUsageStartingOffset = Process.GetCurrentProcess().TotalProcessorTime;
             Players = new Player[0];
 
-            fSystem.Server.RaiseEvent( fSystem.Server.Starting );
+            RaiseEvent(Starting);
 
             if( ConfigKey.BackupDataOnStartup.Enabled() ) {
                 BackupData();
             }
-
+            Logger.Log(LogType.Discord, "Attempting to connect to Discord");
             Player.Console = new Player(ConfigKey.ConsoleName.GetString()) {Info = {Rank = RankManager.HighestRank}};
             Player.AutoRank = new Player( "(AutoRank)" );
             
@@ -428,17 +434,19 @@ namespace GemsCraft.fSystem {
             CustomBlock.Blocks = CustomBlock.LoadBlocks();
             Server.PlayerListChanged += DeployCustomBlocks;
             Server.ShutdownEnded += Network.Remote.Server.RemoveServer;
-            
 
+            
             // list loaded worlds
             WorldManager.UpdateWorldList();
             Logger.Log( LogType.SystemActivity,
                         "All available worlds: {0}",
                         WorldManager.Worlds.JoinToString( ", ", w => w.Name ) );
 
-            Logger.Log( LogType.SystemActivity,
-                        "Main world: {0}; default rank: {1}",
-                        WorldManager.MainWorld.Name, RankManager.DefaultRank.Name );
+            Logger.Log(LogType.SystemActivity,
+                RankManager.DefaultRank == null
+                    ? $"Main World: {WorldManager.MainWorld.Name}"
+                    : $"Main world: {WorldManager.MainWorld.Name}; default rank: {RankManager.DefaultRank.Name}");
+
 
             // Check for incoming connections (every 250ms)
             _checkConnectionsTask = Scheduler.NewTask( CheckConnections ).RunForever( CheckConnectionsInterval );
@@ -1498,6 +1506,11 @@ namespace GemsCraft.fSystem {
         ShuttingDown,
 
         /// <summary> Server process is being closed/killed. </summary>
-        ProcessClosing
+        ProcessClosing,
+
+        /// <summary>
+        /// Server is shutting down to be updated
+        /// </summary>
+        Updating
     }
 }

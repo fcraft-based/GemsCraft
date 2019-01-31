@@ -32,6 +32,8 @@
             this.btnConfig = new MetroFramework.Controls.MetroButton();
             this.btnServerCli = new MetroFramework.Controls.MetroButton();
             this.btnServerGui = new MetroFramework.Controls.MetroButton();
+            this.picBackground = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // btnConfig
@@ -64,6 +66,16 @@
             this.btnServerGui.UseSelectable = true;
             this.btnServerGui.Click += new System.EventHandler(this.btnServerGui_Click);
             // 
+            // picBackground
+            // 
+            this.picBackground.Image = ((System.Drawing.Image)(resources.GetObject("picBackground.Image")));
+            this.picBackground.Location = new System.Drawing.Point(0, 55);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(552, 159);
+            this.picBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBackground.TabIndex = 15;
+            this.picBackground.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -72,10 +84,12 @@
             this.Controls.Add(this.btnServerGui);
             this.Controls.Add(this.btnServerCli);
             this.Controls.Add(this.btnConfig);
+            this.Controls.Add(this.picBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "GemsCraft Launcher";
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -85,6 +99,7 @@
         private MetroFramework.Controls.MetroButton btnConfig;
         private MetroFramework.Controls.MetroButton btnServerCli;
         private MetroFramework.Controls.MetroButton btnServerGui;
+        private System.Windows.Forms.PictureBox picBackground;
     }
 }
 

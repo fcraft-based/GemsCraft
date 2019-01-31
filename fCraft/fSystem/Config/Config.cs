@@ -1182,7 +1182,7 @@ namespace GemsCraft.fSystem.Config {
 
         #region Ranks
 
-        private static string _defaultRanks = @"<Ranks>
+        public static string _defaultRanks = @"<Ranks>
     <Rank name='owner' id='YDz1ZqWANf8B3Bj2' color='red' prefix='+' antiGriefBlocks='0' antiGriefSeconds='0' reserveSlot='true' allowSecurityCircumvention='true' copySlots='4' fillLimit='2048'>
       <Chat />
       <Build />
@@ -1331,7 +1331,7 @@ namespace GemsCraft.fSystem.Config {
       <UseSpeedHack />
     </Rank>
   </Ranks>";
-        private static void LoadRankList(string xml)
+        public static void LoadRankList(string xml)
         {
             XElement rankList = null;
             XElement[] rankDefinitionList;

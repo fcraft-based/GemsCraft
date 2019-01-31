@@ -14,7 +14,7 @@ using Player = GemsCraft.Players.Player;
 
 namespace GemsCraft.Commands
 {
-    static class ChatCommands
+    internal static class ChatCommands
     {
         const int PlayersPerPage = 20;
 
@@ -62,10 +62,35 @@ namespace GemsCraft.Commands
             CommandManager.RegisterCommand(CdPlugin);
             CommandManager.RegisterCommand(CdBarf);
             CommandManager.RegisterCommand(CdSecret);
+            CommandManager.RegisterCommand(CdDiscordSend);
 
-
-            Player.Moved += new EventHandler<Events.PlayerMovedEventArgs>(Player_IsBack);
+            Player.Moved += Player_IsBack;
         }
+        static readonly CommandDescriptor CdDiscordSend = new CommandDescriptor
+        {
+            Name = "DiscordSend",
+            Category = CommandCategory.Chat,
+            Permissions = new[] { Permission.Chat },
+            Usage = "/DiscordSend",
+            Help = "&SDon't tell anyone!!!",
+            Handler = DiscordSendHandler
+        };
+
+        private static void DiscordSendHandler(Player source, Command cmd)
+        {
+            try
+            {
+                
+            }
+            catch (InvalidOperationException ex)
+            {
+                if (ex.Message == "_started")
+                {
+                    source.Message("&4Discord already sent");
+                }
+            }
+        }
+
         #region LegendCraft
         /* Copyright (c) <2012-2014> <LeChosenOne, DingusBungus>
 Permission is hereby granted, free of charge, to any person obtaining a copy

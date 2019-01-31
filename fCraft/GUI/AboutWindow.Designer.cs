@@ -41,11 +41,10 @@
             this.lSubheader.AutoSize = true;
             this.lSubheader.BackColor = System.Drawing.Color.Transparent;
             this.lSubheader.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lSubheader.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lSubheader.Location = new System.Drawing.Point(20, 246);
-            this.lSubheader.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lSubheader.ForeColor = System.Drawing.Color.Black;
+            this.lSubheader.Location = new System.Drawing.Point(13, 160);
             this.lSubheader.Name = "lSubheader";
-            this.lSubheader.Size = new System.Drawing.Size(393, 160);
+            this.lSubheader.Size = new System.Drawing.Size(262, 104);
             this.lSubheader.TabIndex = 2;
             this.lSubheader.Text = "Free, open-source ClassiCube game software\r\nBased on fCraft, 800Craft, and Legend" +
     "Craft\r\nDeveloped by apotter96\r\n\r\n800Craft:\r\nfCraft:\r\nLegendCraft:\r\nGemsCraft:\r\n";
@@ -54,10 +53,9 @@
             // 
             this.lfCraft.AutoSize = true;
             this.lfCraft.BackColor = System.Drawing.Color.Transparent;
-            this.lfCraft.Location = new System.Drawing.Point(147, 346);
-            this.lfCraft.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lfCraft.Location = new System.Drawing.Point(98, 225);
             this.lfCraft.Name = "lfCraft";
-            this.lfCraft.Size = new System.Drawing.Size(49, 20);
+            this.lfCraft.Size = new System.Drawing.Size(32, 13);
             this.lfCraft.TabIndex = 3;
             this.lfCraft.TabStop = true;
             this.lfCraft.Text = "fCraft";
@@ -66,10 +64,9 @@
             // 
             this.l800Craft.AutoSize = true;
             this.l800Craft.BackColor = System.Drawing.Color.Transparent;
-            this.l800Craft.Location = new System.Drawing.Point(147, 326);
-            this.l800Craft.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.l800Craft.Location = new System.Drawing.Point(98, 212);
             this.l800Craft.Name = "l800Craft";
-            this.l800Craft.Size = new System.Drawing.Size(71, 20);
+            this.l800Craft.Size = new System.Drawing.Size(47, 13);
             this.l800Craft.TabIndex = 4;
             this.l800Craft.TabStop = true;
             this.l800Craft.Text = "800Craft";
@@ -79,11 +76,10 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(9, 25);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(6, 16);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(264, 40);
+            this.label3.Size = new System.Drawing.Size(176, 26);
             this.label3.TabIndex = 6;
             this.label3.Text = "A ClassiCube Server Software\r\nDeveloped by apotter96";
             // 
@@ -92,11 +88,10 @@
             this.lThank.AutoSize = true;
             this.lThank.BackColor = System.Drawing.Color.Transparent;
             this.lThank.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lThank.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lThank.Location = new System.Drawing.Point(20, 437);
-            this.lThank.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lThank.ForeColor = System.Drawing.Color.Black;
+            this.lThank.Location = new System.Drawing.Point(13, 284);
             this.lThank.Name = "lThank";
-            this.lThank.Size = new System.Drawing.Size(280, 20);
+            this.lThank.Size = new System.Drawing.Size(190, 13);
             this.lThank.TabIndex = 8;
             this.lThank.Text = "Copyright (c) 2018 by apotter96.";
             this.lThank.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -105,18 +100,16 @@
             // 
             this.lLegendCraft.AutoSize = true;
             this.lLegendCraft.BackColor = System.Drawing.Color.Transparent;
-            this.lLegendCraft.Location = new System.Drawing.Point(147, 366);
-            this.lLegendCraft.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lLegendCraft.Location = new System.Drawing.Point(98, 238);
             this.lLegendCraft.Name = "lLegendCraft";
-            this.lLegendCraft.Size = new System.Drawing.Size(98, 20);
+            this.lLegendCraft.Size = new System.Drawing.Size(65, 13);
             this.lLegendCraft.TabIndex = 11;
             this.lLegendCraft.TabStop = true;
             this.lLegendCraft.Text = "LegendCraft";
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.DimGray;
-            this.groupBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox1.BackgroundImage")));
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.picLogo);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.lThank);
@@ -124,11 +117,9 @@
             this.groupBox1.Controls.Add(this.l800Craft);
             this.groupBox1.Controls.Add(this.lfCraft);
             this.groupBox1.Controls.Add(this.lSubheader);
-            this.groupBox1.Location = new System.Drawing.Point(18, 51);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Location = new System.Drawing.Point(12, 33);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(554, 483);
+            this.groupBox1.Size = new System.Drawing.Size(369, 314);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             // 
@@ -136,26 +127,27 @@
             // 
             this.picLogo.BackColor = System.Drawing.Color.Transparent;
             this.picLogo.Image = global::GemsCraft.Properties.Resources.main;
-            this.picLogo.Location = new System.Drawing.Point(13, 69);
+            this.picLogo.Location = new System.Drawing.Point(9, 45);
+            this.picLogo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(524, 160);
+            this.picLogo.Size = new System.Drawing.Size(349, 104);
             this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picLogo.TabIndex = 12;
             this.picLogo.TabStop = false;
             // 
             // AboutWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Firebrick;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(582, 552);
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = global::GemsCraft.Properties.Resources.Green;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(388, 359);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(289, 278);
+            this.MinimumSize = new System.Drawing.Size(198, 194);
             this.Name = "AboutWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "About GemsCraft";

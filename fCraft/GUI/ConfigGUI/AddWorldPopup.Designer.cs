@@ -504,6 +504,7 @@
             // lName
             // 
             this.lName.AutoSize = true;
+            this.lName.BackColor = System.Drawing.Color.Transparent;
             this.lName.Location = new System.Drawing.Point(43, 15);
             this.lName.Name = "lName";
             this.lName.Size = new System.Drawing.Size(64, 13);
@@ -513,6 +514,7 @@
             // lAccess
             // 
             this.lAccess.AutoSize = true;
+            this.lAccess.BackColor = System.Drawing.Color.Transparent;
             this.lAccess.Location = new System.Drawing.Point(13, 41);
             this.lAccess.Name = "lAccess";
             this.lAccess.Size = new System.Drawing.Size(94, 13);
@@ -522,6 +524,7 @@
             // lBuild
             // 
             this.lBuild.AutoSize = true;
+            this.lBuild.BackColor = System.Drawing.Color.Transparent;
             this.lBuild.Location = new System.Drawing.Point(25, 68);
             this.lBuild.Name = "lBuild";
             this.lBuild.Size = new System.Drawing.Size(82, 13);
@@ -531,6 +534,7 @@
             // lBackup
             // 
             this.lBackup.AutoSize = true;
+            this.lBackup.BackColor = System.Drawing.Color.Transparent;
             this.lBackup.Location = new System.Drawing.Point(243, 15);
             this.lBackup.Name = "lBackup";
             this.lBackup.Size = new System.Drawing.Size(44, 13);
@@ -571,12 +575,13 @@
             // xHidden
             // 
             this.xHidden.AutoSize = true;
+            this.xHidden.BackColor = System.Drawing.Color.Transparent;
             this.xHidden.Location = new System.Drawing.Point(246, 40);
             this.xHidden.Name = "xHidden";
             this.xHidden.Size = new System.Drawing.Size(132, 17);
             this.xHidden.TabIndex = 8;
             this.xHidden.Text = "Hide from the world list";
-            this.xHidden.UseVisualStyleBackColor = true;
+            this.xHidden.UseVisualStyleBackColor = false;
             this.xHidden.CheckedChanged += new System.EventHandler(this.xHidden_CheckedChanged);
             // 
             // statusStrip
@@ -2280,6 +2285,7 @@
             // 
             this.lCreateMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lCreateMap.AutoSize = true;
+            this.lCreateMap.BackColor = System.Drawing.Color.Transparent;
             this.lCreateMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lCreateMap.ForeColor = System.Drawing.Color.Red;
             this.lCreateMap.Location = new System.Drawing.Point(610, 539);
@@ -2295,19 +2301,22 @@
             // xBlockDB
             // 
             this.xBlockDB.AutoSize = true;
+            this.xBlockDB.BackColor = System.Drawing.Color.Transparent;
             this.xBlockDB.Location = new System.Drawing.Point(246, 67);
             this.xBlockDB.Name = "xBlockDB";
             this.xBlockDB.Size = new System.Drawing.Size(68, 17);
             this.xBlockDB.TabIndex = 9;
             this.xBlockDB.Text = "BlockDB";
             this.xBlockDB.ThreeState = true;
-            this.xBlockDB.UseVisualStyleBackColor = true;
+            this.xBlockDB.UseVisualStyleBackColor = false;
             this.xBlockDB.CheckStateChanged += new System.EventHandler(this.xBlockDB_CheckStateChanged);
             // 
             // AddWorldPopup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::GemsCraft.Properties.Resources.Green;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(984, 583);
             this.Controls.Add(this.xBlockDB);
             this.Controls.Add(this.lCreateMap);

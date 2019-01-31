@@ -52,7 +52,7 @@ namespace GemsCraft.Commands
             CommandManager.RegisterCommand(CdSetModel);
             CommandManager.RegisterCommand(CdBot);
             CommandManager.RegisterCommand(CdCTF);
-
+            CommandManager.RegisterCommand(CdTroll);
             Player.Moving += PlayerMoved;
         }
 

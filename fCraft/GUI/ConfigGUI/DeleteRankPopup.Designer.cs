@@ -34,6 +34,7 @@
             // lWarning
             // 
             this.lWarning.AutoSize = true;
+            this.lWarning.BackColor = System.Drawing.Color.Transparent;
             this.lWarning.Location = new System.Drawing.Point(12, 9);
             this.lWarning.Name = "lWarning";
             this.lWarning.Size = new System.Drawing.Size(393, 39);
@@ -43,6 +44,7 @@
             // lSubstitute
             // 
             this.lSubstitute.AutoSize = true;
+            this.lSubstitute.BackColor = System.Drawing.Color.Transparent;
             this.lSubstitute.Location = new System.Drawing.Point(12, 69);
             this.lSubstitute.Name = "lSubstitute";
             this.lSubstitute.Size = new System.Drawing.Size(81, 13);
@@ -85,6 +87,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::GemsCraft.Properties.Resources.Green;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(421, 149);
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.bDelete);

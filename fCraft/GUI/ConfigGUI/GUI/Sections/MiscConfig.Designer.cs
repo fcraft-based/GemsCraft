@@ -260,8 +260,8 @@
             // bResetTab
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.bResetTab.Location = new System.Drawing.Point(559, 427);
-            this.bResetTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bResetTab.Location = new System.Drawing.Point(16, 455);
+            this.bResetTab.Margin = new System.Windows.Forms.Padding(2);
             this.bResetTab.Name = "bResetTab";
             this.bResetTab.Size = new System.Drawing.Size(94, 24);
             this.bResetTab.TabIndex = 30;
@@ -277,18 +277,19 @@
             this.gboRemoteControl.Controls.Add(this.chkRequireLogin);
             this.gboRemoteControl.Controls.Add(this.chkEnableRemoteControl);
             this.gboRemoteControl.Location = new System.Drawing.Point(16, 362);
-            this.gboRemoteControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gboRemoteControl.Margin = new System.Windows.Forms.Padding(2);
             this.gboRemoteControl.Name = "gboRemoteControl";
-            this.gboRemoteControl.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gboRemoteControl.Padding = new System.Windows.Forms.Padding(2);
             this.gboRemoteControl.Size = new System.Drawing.Size(321, 89);
             this.gboRemoteControl.TabIndex = 31;
             this.gboRemoteControl.TabStop = false;
             this.gboRemoteControl.Text = "Remote Control (Mobile)";
+            this.gboRemoteControl.Visible = false;
             // 
             // numPort
             // 
             this.numPort.Location = new System.Drawing.Point(35, 61);
-            this.numPort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numPort.Margin = new System.Windows.Forms.Padding(2);
             this.numPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -313,7 +314,7 @@
             // btnSetLogin
             // 
             this.btnSetLogin.Location = new System.Drawing.Point(166, 38);
-            this.btnSetLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSetLogin.Margin = new System.Windows.Forms.Padding(2);
             this.btnSetLogin.Name = "btnSetLogin";
             this.btnSetLogin.Size = new System.Drawing.Size(79, 19);
             this.btnSetLogin.TabIndex = 33;
@@ -325,7 +326,7 @@
             // 
             this.chkRequireLogin.AutoSize = true;
             this.chkRequireLogin.Location = new System.Drawing.Point(5, 40);
-            this.chkRequireLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkRequireLogin.Margin = new System.Windows.Forms.Padding(2);
             this.chkRequireLogin.Name = "chkRequireLogin";
             this.chkRequireLogin.Size = new System.Drawing.Size(158, 17);
             this.chkRequireLogin.TabIndex = 32;
@@ -337,7 +338,7 @@
             // 
             this.chkEnableRemoteControl.AutoSize = true;
             this.chkEnableRemoteControl.Location = new System.Drawing.Point(5, 18);
-            this.chkEnableRemoteControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkEnableRemoteControl.Margin = new System.Windows.Forms.Padding(2);
             this.chkEnableRemoteControl.Name = "chkEnableRemoteControl";
             this.chkEnableRemoteControl.Size = new System.Drawing.Size(161, 17);
             this.chkEnableRemoteControl.TabIndex = 0;
@@ -349,15 +350,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 461);
+            this.ClientSize = new System.Drawing.Size(669, 487);
             this.Controls.Add(this.gboRemoteControl);
             this.Controls.Add(this.bResetTab);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MiscConfig";
-            this.Padding = new System.Windows.Forms.Padding(14, 49, 14, 13);
+            this.Padding = new System.Windows.Forms.Padding(14, 60, 14, 13);
             this.Style = MetroFramework.MetroColorStyle.Purple;
             this.Text = "GemsCraft Configuration - Misc";
             this.groupBox3.ResumeLayout(false);

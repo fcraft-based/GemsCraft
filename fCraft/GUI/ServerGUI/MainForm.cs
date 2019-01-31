@@ -18,53 +18,74 @@ using MetroFramework.Forms;
 
 namespace GemsCraft.GUI.ServerGUI
 {
-
     public sealed partial class MainForm : MetroForm
     {
-        volatile bool shutdownPending, startupComplete, shutdownComplete;
-        const int MaxLinesInLog = 2000,
+        internal static MainForm Instance;
+        private volatile bool _shutdownPending, _startupComplete, _shutdownComplete;
+
+        private const int MaxLinesInLog = 2000,
                   LinesToTrimWhenExceeded = 50;
-        bool listening = false;
+
+        private bool _listening;
+
+        public bool IsLauncher;
+        public MainForm(bool isLauncher)
+        {
+            Instance = this;
+            IsLauncher = isLauncher;
+            Init();
+        }
 
         public MainForm()
         {
-            InitializeComponent();
-            Shown += StartUp;
-            console.OnCommand += console_Enter;            
-            logBox.LinkClicked += new LinkClickedEventHandler(Link_Clicked);
-            MenuItem[] menuItems = new MenuItem[] { new MenuItem("Copy", new EventHandler(CopyMenuOnClickHandler)) };
-            logBox.ContextMenu = new ContextMenu(menuItems);
-            logBox.ContextMenu.Popup += new EventHandler(CopyMenuPopupHandler);
-            playerList.MouseDoubleClick += new MouseEventHandler(playerList_MouseDoubleClick);
+            Instance = this;
+            IsLauncher = false;
+            Init();
         }
 
-        public bool IsLauncher = false;
-        public MainForm(bool isLauncher)
+        private void Init()
         {
             InitializeComponent();
-            IsLauncher = isLauncher;
             Shown += StartUp;
             console.OnCommand += console_Enter;
-            logBox.LinkClicked += new LinkClickedEventHandler(Link_Clicked);
-            MenuItem[] menuItems = new MenuItem[] { new MenuItem("Copy", new EventHandler(CopyMenuOnClickHandler)) };
+            logBox.LinkClicked += Link_Clicked;
+            MenuItem[] menuItems = { new MenuItem("Copy", CopyMenuOnClickHandler) };
             logBox.ContextMenu = new ContextMenu(menuItems);
-            logBox.ContextMenu.Popup += new EventHandler(CopyMenuPopupHandler);
-            playerList.MouseDoubleClick += new MouseEventHandler(playerList_MouseDoubleClick);
+            logBox.ContextMenu.Popup += CopyMenuPopupHandler;
+            playerList.MouseDoubleClick += playerList_MouseDoubleClick;
+            lblGemVersion.Text = "Version: " + Updater.LatestStable;
+            SetDefTheme();
         }
 
+        public string Title
+        {
+            get
+            {
+                try
+                {
+                    return lblTitle.Text;
+                }
+                catch
+                {
+                    return "Server is Offline D:";
+                }
+            }
+            set => lblTitle.Text = value;
+        }
+       
         #region Startup
-        Thread startupThread;
+        private Thread _startupThread;
 
-        void StartUp(object sender, EventArgs a)
+        private void StartUp(object sender, EventArgs a)
         {
             /*tabChat.SelectedIndexChanged += tabChat_tabSelected;*/
             Logger.Logged += OnLogged;
             Heartbeat.UriChanged += OnHeartbeatUriChanged;
             Server.PlayerListChanged += OnPlayerListChanged;
             Server.ShutdownEnded += OnServerShutdownEnded;
-            Text = "GemsCraft v" + Updater.LatestStable + " - starting...";
-            startupThread = new Thread(StartupThread) {Name = "GemsCraft ServerGUI Startup"};
-            startupThread.Start();
+            Title = "v" + Updater.LatestStable + " - starting...";
+            _startupThread = new Thread(StartupThread) {Name = "GemsCraft ServerGUI Startup"};
+            _startupThread.Start();
         }
 
         private void StartupThread()
@@ -73,12 +94,12 @@ namespace GemsCraft.GUI.ServerGUI
             try
             {
 #endif
-                
+               
                 Server.InitLibrary(Environment.GetCommandLineArgs(), IsLauncher);
-                if (shutdownPending) return;
+                if (_shutdownPending) return;
 
                 Server.InitServer(IsLauncher);
-                if (shutdownPending) return;
+                if (_shutdownPending) return;
 
                 BeginInvoke((Action)OnInitSuccess);
                 if (ConfigKey.CheckForUpdates.GetString() == "True")
@@ -101,10 +122,10 @@ namespace GemsCraft.GUI.ServerGUI
                     }
                 }
 
-                if (shutdownPending) return;
+                if (_shutdownPending) return;
                 if (Server.StartServer())
                 {
-                    startupComplete = true;
+                    _startupComplete = true;
                     BeginInvoke((Action)OnStartupSuccess);
                 }
                 else
@@ -124,60 +145,38 @@ namespace GemsCraft.GUI.ServerGUI
 
         private void OnInitSuccess()
         {
-            Text = "GemsCraft " + " - " + ConfigKey.ServerName.GetString();
+            Title = ConfigKey.ServerName.GetString();
         }
 
         private void UpdateCheck()
         {
             Logger.Log(LogType.SystemActivity, "Checking for GemsCraft updates...");
-            try
+            string title = null;
+            string message = null;
+            if (Updater.CheckUpdates() == VersionResult.Outdated)
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://raw.githubusercontent.com/apotter96/GemsCraft/master/README.md");
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    using (Stream stream = response.GetResponseStream())
-                    {
-                        if (stream != null)
-                        {
-                            StreamReader streamReader = new StreamReader(stream);
-                            string version = streamReader.ReadLine();
-                            //update is available, prompt for a download
-                            if (Updater.CheckUpdates() == VersionResult.Outdated)
-                            {
-
-                                Logger.Log(LogType.SystemActivity, "Server.Run: Your GemsCraft version is out of date. A GemsCraft Update is available!");
-
-                                DialogResult answer = MessageBox.Show("Would you like to download the latest GemsCraft Version? (" + version + ")", "GemsCraft Updater", MessageBoxButtons.YesNo);
-                                if (answer == DialogResult.Yes)
-                                {
-                                    Process.Start("Updater.exe");
-                                    Application.Exit();
-                                }
-                                else
-                                {
-                                    Logger.Log(LogType.SystemActivity, "Update ignored. To ignore future GemsCraft update requests, uncheck the box in configGUI.");
-                                }
-
-                            }
-                            else
-                            {
-                                Logger.Log(LogType.SystemActivity, "Your GemsCraft version is up to date!");
-                            }
-                        }
-                    }
-                }
+                title = "Outdated";
+                message = "A GemsCraft Update is available! Would you like to update now?";
+            }
+            else if (Updater.CheckUpdates() == VersionResult.Developer)
+            {
+                title = "Unreleased Version";
+                message = "This GemsCraft version is not supported and it is not recommended to keep using it.\n" +
+                          "Potential data loss could happen. Would you like to update to a more recent version?";
             }
 
-            catch (WebException)
+            if (title == null)
             {
-                Console.WriteLine("There was an internet connection error. Server was unable to check for updates.");
+                Logger.Log(LogType.SystemActivity, "GemsCraft is up to date!");
+                return;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("There was an error in trying to check for updates:\n\r " + e);
-            }
+
+            DialogResult result = MessageBox.Show(message, title, MessageBoxButtons.YesNo);
+            if (result != DialogResult.Yes) return;
+
+            // Starts the update process
+            Process.Start("Updater.exe");
+            Shutdown(ShutdownReason.Updating, true);
         }
 
         void OnStartupSuccess()
@@ -203,7 +202,7 @@ namespace GemsCraft.GUI.ServerGUI
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (startupThread != null && !shutdownComplete)
+            if (_startupThread != null && !_shutdownComplete)
             {
                 Shutdown(ShutdownReason.ProcessClosing, true);
                 e.Cancel = true;
@@ -217,15 +216,15 @@ namespace GemsCraft.GUI.ServerGUI
 
         void Shutdown(ShutdownReason reason, bool quit)
         {
-            if (shutdownPending) return;
-            shutdownPending = true;
+            if (_shutdownPending) return;
+            _shutdownPending = true;
             console.Enabled = false;
             console.Text = "Shutting down...";
-            Text = "GemsCraft " + " - shutting down...";
+            Title = "Shutting down...";
             uriDisplay.Enabled = false;
-            if (!startupComplete)
+            if (!_startupComplete)
             {
-                startupThread.Join();
+                _startupThread.Join();
             }
             Server.Shutdown(new ShutdownParams(reason, TimeSpan.Zero, quit, false), false);
         }
@@ -237,7 +236,7 @@ namespace GemsCraft.GUI.ServerGUI
             {
                 BeginInvoke((Action)delegate
                 {
-                    shutdownComplete = true;
+                    _shutdownComplete = true;
                     switch (e.ShutdownParams.Reason)
                     {
                         case ShutdownReason.FailedToInitialize:
@@ -268,7 +267,7 @@ namespace GemsCraft.GUI.ServerGUI
             if (!e.WriteToConsole) return;
             try
             {
-                if (shutdownComplete) return;
+                if (_shutdownComplete) return;
                 if (logBox.InvokeRequired)
                 {
                     BeginInvoke((EventHandler<LogEventArgs>)OnLogged, sender, e);
@@ -296,95 +295,6 @@ namespace GemsCraft.GUI.ServerGUI
                         logBox.AppendText(msgToAppend);
                     }
                     logBox.Select(oldLength, msgToAppend.Length);
-                    switch (e.MessageType)
-                    {
-                        case LogType.PrivateChat:
-                            logBox.SelectionColor = System.Drawing.Color.Teal;
-                            break;
-                        case LogType.IRC:
-                            if (ThemeBox.SelectedItem == null)
-                            {
-                                logBox.SelectionColor = System.Drawing.Color.FromName(Color.GetName(Color.IRC));
-                            }
-                            else
-                            {
-                                switch (ThemeBox.SelectedItem.ToString())
-                                {
-                                    default:
-                                        logBox.SelectionColor = System.Drawing.Color.LightSkyBlue;
-                                        break;
-                                    case "Default LC":
-                                        logBox.SelectionColor = System.Drawing.Color.Navy;
-                                        break;
-                                }
-                            }
-                            break;
-                        case LogType.ChangedWorld:
-                            logBox.SelectionColor = System.Drawing.Color.Orange;
-                            break;
-                        case LogType.Warning:
-                            if (ThemeBox.SelectedItem == null)
-                            {
-                                logBox.SelectionColor = System.Drawing.Color.Yellow;
-                            }
-                            else
-                            {
-                                switch (ThemeBox.SelectedItem.ToString())
-                                {
-                                    default:
-                                        logBox.SelectionColor = System.Drawing.Color.MediumOrchid;
-                                        break;
-                                    case "Default LC":
-                                        logBox.SelectionColor = System.Drawing.Color.Yellow;
-                                        break;
-                                }
-                            }
-                            break;
-                        case LogType.Debug:
-                            logBox.SelectionColor = System.Drawing.Color.DarkGray;
-                            break;
-                        case LogType.Error:
-                        case LogType.SeriousError:
-                            logBox.SelectionColor = System.Drawing.Color.Red;
-                            break;
-                        case LogType.ConsoleInput:
-                        case LogType.ConsoleOutput:
-                            if (ThemeBox.SelectedItem == null)
-                            {
-                                logBox.SelectionColor = System.Drawing.Color.White;
-                            }
-                            else
-                            {
-                                switch (ThemeBox.SelectedItem.ToString())
-                                {
-                                    default:
-                                        logBox.SelectionColor = System.Drawing.Color.Black;
-                                        break;
-                                    case "Default LC":
-                                        logBox.SelectionColor = System.Drawing.Color.White;
-                                        break;
-                                }
-                            }
-                            break;
-                        default:
-                            if (ThemeBox.SelectedItem == null)
-                            {
-                                logBox.SelectionColor = System.Drawing.Color.LightGray;
-                            }
-                            else
-                            {
-                                switch (ThemeBox.SelectedItem.ToString())
-                                {
-                                    default:
-                                        logBox.SelectionColor = System.Drawing.Color.Black;
-                                        break;
-                                    case "Default LC":
-                                        logBox.SelectionColor = System.Drawing.Color.LightGray;
-                                        break;
-                                }
-                            }
-                            break;
-                    }
 
                     // cut off the log, if too long
                     if (logBox.Lines.Length > MaxLinesInLog)
@@ -394,7 +304,7 @@ namespace GemsCraft.GUI.ServerGUI
                         userSelectionStart -= logBox.SelectionLength;
                         if (userSelectionStart < 0) userSelecting = false;
                         string textToAdd = "----- cut off, see " + Logger.CurrentLogFileName + " for complete log -----" + Environment.NewLine;
-                        logBox.SelectedText = textToAdd;
+                        logBox.Text = textToAdd;
                         userSelectionStart += textToAdd.Length;
                         logBox.SelectionColor = System.Drawing.Color.DarkGray;
                     }
@@ -422,7 +332,7 @@ namespace GemsCraft.GUI.ServerGUI
         {
             try
             {
-                if (shutdownPending) return;
+                if (_shutdownPending) return;
                 if (uriDisplay.InvokeRequired)
                 {
                     BeginInvoke((EventHandler<UriChangedEventArgs>)OnHeartbeatUriChanged,
@@ -446,7 +356,7 @@ namespace GemsCraft.GUI.ServerGUI
         {
             try
             {
-                if (shutdownPending) return;
+                if (_shutdownPending) return;
                 if (playerList.InvokeRequired)
                 {
                     BeginInvoke((EventHandler)OnPlayerListChanged, null, EventArgs.Empty);
@@ -564,19 +474,6 @@ namespace GemsCraft.GUI.ServerGUI
                 menu.MenuItems[0].Enabled = (logBox.SelectedText.Length > 0);
             }
         }
-
-
-        private void ThemeBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ThemeBox.SelectedItem.ToString().Equals("Default LC")) { SetDefTheme(); }
-            if (ThemeBox.SelectedItem.ToString().Equals("Alternate LC")) { SetAltTheme(); }
-            if (ThemeBox.SelectedItem.ToString().Equals("Pink")) { SetPinkTheme(); }
-            if (ThemeBox.SelectedItem.ToString().Equals("Yellow")) { SetYellowTheme(); }
-            if (ThemeBox.SelectedItem.ToString().Equals("Green")) { SetGreenTheme(); }
-            if (ThemeBox.SelectedItem.ToString().Equals("Purple")) { SetPurpleTheme(); }
-            if (ThemeBox.SelectedItem.ToString().Equals("Grey")) { SetGreyTheme(); }
-        }
-
 
         public void SetDefTheme()
         {
@@ -717,9 +614,9 @@ namespace GemsCraft.GUI.ServerGUI
             }
 
             //if button was already clicked, cancel
-            if (listening)
+            if (_listening)
             {
-                listening = false;
+                _listening = false;
                 bVoice.ForeColor = System.Drawing.Color.Black;
                 return;
             }
@@ -731,7 +628,7 @@ namespace GemsCraft.GUI.ServerGUI
                 System.Speech.Recognition.Grammar gr = new System.Speech.Recognition.Grammar(new System.Speech.Recognition.GrammarBuilder(commands));
                 try
                 {
-                    listening = true;
+                    _listening = true;
                     engine.RequestRecognizerUpdate();
                     engine.LoadGrammar(gr);
                     engine.SpeechRecognized += engine_SpeechRecognized;
@@ -754,7 +651,7 @@ namespace GemsCraft.GUI.ServerGUI
                 engine = new System.Speech.Recognition.SpeechRecognitionEngine();
                 String message = "";
                 String results = e.Result.Text;
-                if (!listening)
+                if (!_listening)
                 {
                     return;
                 }
@@ -767,7 +664,7 @@ namespace GemsCraft.GUI.ServerGUI
                         results = "";
                         engine.RecognizeAsyncStop();
                         engine.Dispose();
-                        listening = false;
+                        _listening = false;
                         break;
                     case "restart":
                         reader.Speak("The server is now restarting.");
@@ -777,7 +674,7 @@ namespace GemsCraft.GUI.ServerGUI
                         results = "";
                         engine.RecognizeAsyncStop();
                         engine.Dispose();
-                        listening = false;
+                        _listening = false;
                         break;
                     case "shutdown":
                         reader.Speak("The server is now shutting down.");
@@ -786,7 +683,7 @@ namespace GemsCraft.GUI.ServerGUI
                         results = "";
                         engine.RecognizeAsyncStop();
                         engine.Dispose();
-                        listening = false;
+                        _listening = false;
                         break;
                     case "status report":
                         reader.Speak("Server has been up for " + Math.Round(DateTime.UtcNow.Subtract(Server.StartTime).TotalHours, 1, MidpointRounding.AwayFromZero) + " hours.");
@@ -795,7 +692,7 @@ namespace GemsCraft.GUI.ServerGUI
                         results = "";
                         engine.RecognizeAsyncStop();
                         engine.Dispose();
-                        listening = false;
+                        _listening = false;
                         break;
                     case "players":
                         foreach (Player p in Server.Players)
@@ -808,14 +705,14 @@ namespace GemsCraft.GUI.ServerGUI
                         results = "";
                         engine.RecognizeAsyncStop();
                         engine.Dispose();
-                        listening = false;
+                        _listening = false;
                         break;
                     default:
                         bVoice.ForeColor = System.Drawing.Color.Black;
                         results = "";
                         engine.RecognizeAsyncStop();
                         engine.Dispose();
-                        listening = false;
+                        _listening = false;
                         break;
                 }
             }

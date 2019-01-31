@@ -2,12 +2,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Speech.Recognition.SrgsGrammar;
 using System.Text;
 using GemsCraft.Network;
 using JetBrains.Annotations;
 
-namespace GemsCraft.Utils {
+namespace GemsCraft.Utils
+{
     public enum VersionResult
     {
         Outdated, Current, Developer
@@ -131,11 +133,22 @@ namespace GemsCraft.Utils {
             Title = "Alpha",
             Major = 0,
             Minor = 1,
-            Revision = 1,
+            Revision = 0,
             Build = -1,
             ShowTitle = true
         };
 
+        private const string File1 = "GemsCraftUpdater.exe";
+        private const string File2 = "Updater.exe";
+        public static void CheckUpdaters()
+        {
+            if (File.Exists(File1))
+            {
+                if (File.Exists(File2)) File.Delete(File2);
+                File.Copy(File1, File2);
+                File.Delete(File1);
+            }
+        }
         public static VersionResult CheckUpdates()
         {
             Version currentOnline = Version.ToVersion(

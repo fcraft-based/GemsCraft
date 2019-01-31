@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
+using GemsCraft.Utils;
 
 namespace Launcher
 {
@@ -18,12 +17,30 @@ namespace Launcher
             Application.SetCompatibleTextRenderingDefault(false);
             try
             {
+                DialogResult result = DialogResult.None;
+                if (Updater.CheckUpdates() == VersionResult.Developer)
+                {
+                    result = MessageBox.Show("You are using an unreleased developer version of GemsCraft. " +
+                                    "Would you like to download the current version?", "Unreleased Version", MessageBoxButtons.YesNo);
+                    
+                }
+                else if (Updater.CheckUpdates() == VersionResult.Outdated)
+                {
+                    result = MessageBox.Show("You are using an outdated version of GemsCraft. " +
+                                             "Would you like to download the current version?", "Outdated Version", MessageBoxButtons.YesNo);
+                }
+
+                if (result == DialogResult.Yes)
+                {
+                    Updater.CheckUpdaters(); // Moves updater downloaded if it hasn't been done yet
+                    Process.Start("Updater.exe");
+
+                }
                 Application.Run(new MainForm());
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
-                throw;
             }
            
         }

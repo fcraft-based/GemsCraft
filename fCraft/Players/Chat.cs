@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Runtime.Remoting.Channels;
 using GemsCraft.fSystem;
 using GemsCraft.fSystem.Config;
 using GemsCraft.Network.Remote;
@@ -31,32 +32,8 @@ namespace GemsCraft.Players
             "░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌" +
             "█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩≡±≥≤⌠⌡÷≈°∙·√ⁿ²■\u00a0";
 
-
-        /// <summary> Sends a global (white) chat as a normal message (MessageType.Chat)</summary>
-        /// <param name="player"> Player writing the message. </param>
-        /// <param name="rawMessage"> Message text. </param>
-        /// <returns> True if message was sent, false if it was cancelled by an event callback. </returns>
-        public static bool SendGlobal([NotNull] Player player, [NotNull] string rawMessage)
+        private static string FormatMessage(string rawMessage, Player player)
         {
-            return SendGlobal(player, rawMessage, MessageType.Chat);
-        }
-        /// <summary> Sends a global (white) chat as specified message type</summary>
-        /// <param name="player"> Player writing the message. </param>
-        /// <param name="rawMessage"> Message text. </param>
-        /// <param name="type">MessageType</param>
-        /// <returns> True if message was sent, false if it was cancelled by an event callback. </returns>
-        public static bool SendGlobal([NotNull] Player player, [NotNull] string rawMessage, MessageType type)
-        {
-            if (player == null) throw new ArgumentNullException("player");
-            if (rawMessage == null) throw new ArgumentNullException("rawMessage");
-            if (!MessageTypeUtil.Enabled() || rawMessage.Length >= 64) type = MessageType.Chat;
-            string OriginalMessage = rawMessage;
-            if (Server.Moderation && !Server.VoicedPlayers.Contains(player) && player.World != null)
-            {
-                player.Message("&WError: Server Moderation is activated. Message failed to send");
-                return false;
-            }
-
             rawMessage = EmoteHandler.Process(rawMessage);
             rawMessage = rawMessage.Replace("$name", player.ClassyName + "&f");
             rawMessage = rawMessage.Replace("$kicks", player.Info.TimesKickedOthers.ToString());
@@ -80,7 +57,6 @@ namespace GemsCraft.Players
                 string dis = active[rndPlayer].Info.DisplayedName ?? active[rndPlayer].Name;
                 rawMessage = rawMessage.Replace("$moron", dis + "&r is a complete and total moron.");
             }
-
 
             rawMessage = rawMessage.Replace("$irc", ConfigKey.IRCBotEnabled.Enabled() ? ConfigKey.IRCBotChannels.GetString() : "No IRC");
 
@@ -126,22 +102,11 @@ namespace GemsCraft.Players
                 if (!File.Exists("SwearWords.txt"))
                 {
                     StringBuilder sb = new StringBuilder();
-                    sb.AppendLine("#This txt file should be filled with bad words that you want to be filtered out");
-                    sb.AppendLine("#I have included some examples, excuse my language :P");
-                    sb.AppendLine("fuck");
-                    sb.AppendLine("fucking");
-                    sb.AppendLine("fucked");
-                    sb.AppendLine("dick");
-                    sb.AppendLine("bitch");
-                    sb.AppendLine("shit");
-                    sb.AppendLine("shitting");
-                    sb.AppendLine("shithead");
-                    sb.AppendLine("cunt");
-                    sb.AppendLine("nigger");
-                    sb.AppendLine("wanker");
-                    sb.AppendLine("wank");
-                    sb.AppendLine("wanking");
-                    sb.AppendLine("piss");
+                    string[] words = new Uri("http://gemz.christplay.x10host.com/download/swears.txt").GetUrlSourceAsList().ToArray();
+                    foreach (string word in words)
+                    {
+                        sb.Append(word);
+                    }
                     File.WriteAllText("SwearWords.txt", sb.ToString());
                 }
                 string CensoredText = Color.ReplacePercentCodes(ConfigKey.SwearName.GetString()) + Color.White;
@@ -156,7 +121,7 @@ namespace GemsCraft.Players
                 if (Swears.Count == 0)
                 {
                     Swears.AddRange(File.ReadAllLines("SwearWords.txt").
-                        Where(line => line.StartsWith("#") == false || line.Trim().Equals(String.Empty)));
+                        Where(line => line.StartsWith("#") == false || line.Trim().Equals(string.Empty)));
                 }
 
                 if (badWordMatchers == null)
@@ -166,10 +131,38 @@ namespace GemsCraft.Players
                 }
 
                 string output = badWordMatchers.
-                   Aggregate(rawMessage, (current, matcher) => matcher.Replace(current, CensoredText));
+                    Aggregate(rawMessage, (current, matcher) => matcher.Replace(current, CensoredText));
                 rawMessage = output;
             }
-            
+
+            return rawMessage;
+        }
+        /// <summary> Sends a global (white) chat as a normal message (MessageType.Chat)</summary>
+        /// <param name="player"> Player writing the message. </param>
+        /// <param name="rawMessage"> Message text. </param>
+        /// <returns> True if message was sent, false if it was cancelled by an event callback. </returns>
+        public static bool SendGlobal([NotNull] Player player, [NotNull] string rawMessage)
+        {
+            return SendGlobal(player, rawMessage, MessageType.Chat);
+        }
+        /// <summary> Sends a global (white) chat as specified message type</summary>
+        /// <param name="player"> Player writing the message. </param>
+        /// <param name="rawMessage"> Message text. </param>
+        /// <param name="type">MessageType</param>
+        /// <returns> True if message was sent, false if it was cancelled by an event callback. </returns>
+        public static bool SendGlobal([NotNull] Player player, [NotNull] string rawMessage, MessageType type)
+        {
+            if (player == null) throw new ArgumentNullException("player");
+            if (rawMessage == null) throw new ArgumentNullException("rawMessage");
+            if (!MessageTypeUtil.Enabled() || rawMessage.Length >= 64) type = MessageType.Chat;
+            string OriginalMessage = rawMessage;
+            if (Server.Moderation && !Server.VoicedPlayers.Contains(player) && player.World != null)
+            {
+                player.Message("&WError: Server Moderation is activated. Message failed to send");
+                return false;
+            }
+
+            rawMessage = FormatMessage(rawMessage, player); 
             var recepientList = Server.Players.NotIgnoring(player); //if (player.World.WorldOnlyChat) recepientList = player.World.Players.NotIgnoring(player);
 
 
@@ -196,7 +189,7 @@ namespace GemsCraft.Players
                         "{0}: {1}", player.Name, OriginalMessage);
             return true;
         }
-
+        
         public static bool SendAdmin(Player player, string rawMessage)
         {
             if (player == null) throw new ArgumentNullException("player");
@@ -204,7 +197,7 @@ namespace GemsCraft.Players
 
             var recepientList = Server.Players.Can(Permission.ReadAdminChat)
                                               .NotIgnoring(player);
-
+            rawMessage = FormatMessage(rawMessage, player);
             string formattedMessage = $"&9(Admin){player.ClassyName}&b: {rawMessage}";
 
             var e = new ChatSendingEventArgs(player,
@@ -235,7 +228,7 @@ namespace GemsCraft.Players
 
             var recepientList = Server.Players.Can(Permission.ReadCustomChat)
                                               .NotIgnoring(player);
-
+            rawMessage = FormatMessage(rawMessage, player);
             string formattedMessage = string.Format(Color.Custom + "({2}){0}&b: {1}",
                                                      player.ClassyName,
                                                      rawMessage, ConfigKey.CustomChatName.GetString());
@@ -271,7 +264,7 @@ namespace GemsCraft.Players
             if (rawMessage == null) throw new ArgumentNullException("rawMessage");
 
             var recepientList = Server.Players.NotIgnoring(player);
-
+            rawMessage = FormatMessage(rawMessage, player);
             string formattedMessage = $"&M*{player.Name} {rawMessage}";
 
             var e = new ChatSendingEventArgs(player,
@@ -308,7 +301,7 @@ namespace GemsCraft.Players
             if (rawMessage == null) throw new ArgumentNullException("rawMessage");
             var recepientList = new[] { to };
 
-            string formattedMessage = $"&Pfrom {@from.Name}: {rawMessage}";
+            string formattedMessage = $"&Pfrom {from.Name}: {rawMessage}";
 
             var e = new ChatSendingEventArgs(from,
                 rawMessage,
@@ -346,7 +339,7 @@ namespace GemsCraft.Players
             if (rawMessage == null) throw new ArgumentNullException("rawMessage");
 
             var recepientList = rank.Players.NotIgnoring(player).Union(player);
-
+            rawMessage = FormatMessage(rawMessage, player);
             string formattedMessage = $"&P({rank.ClassyName}&P){player.Name}: {rawMessage}";
 
             var e = new ChatSendingEventArgs(player,
@@ -391,7 +384,7 @@ namespace GemsCraft.Players
             if (rawMessage == null) throw new ArgumentNullException("rawMessage");
 
             var recepientList = world.Players.NotIgnoring(player).Union(player);
-
+            rawMessage = FormatMessage(rawMessage, player);
             string formattedMessage = $"&P({world.ClassyName}&P){player.Name}: {rawMessage}";
 
             var e = new ChatSendingEventArgs(player,
@@ -424,7 +417,7 @@ namespace GemsCraft.Players
             if (rawMessage == null) throw new ArgumentNullException("rawMessage");
             if (!MessageTypeUtil.Enabled() || rawMessage.Length >= 64) type = MessageType.Chat;
             var recepientList = Server.Players.NotIgnoring(player);
-
+            rawMessage = FormatMessage(rawMessage, player);
             string formattedMessage = Color.Say + rawMessage;
 
             var e = new ChatSendingEventArgs(player,
@@ -461,7 +454,7 @@ namespace GemsCraft.Players
             var recepientList = PlayerEnumerable.Can(Server.Players, Permission.ReadStaffChat)
                                               .NotIgnoring(player)
                                               .Union(player);
-
+            rawMessage = FormatMessage(rawMessage, player);
             string formattedMessage = $"&P(staff){player.ClassyName}&P: {rawMessage}";
 
             var e = new ChatSendingEventArgs(player,

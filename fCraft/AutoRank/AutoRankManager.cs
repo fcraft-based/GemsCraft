@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
 using System.Xml.Linq;
 using System.IO;
-using GemsCraft;
 using GemsCraft.fSystem;
 using GemsCraft.Players;
 using GemsCraft.Utils;
@@ -14,7 +10,7 @@ namespace GemsCraft.AutoRank
 {
     public static class AutoRankManager
     {
-        public static List<Condition> conditionList = new List<Condition>();
+        public static List<Condition> ConditionList = new List<Condition>();
 
         public static void Load()
         {
@@ -22,7 +18,7 @@ namespace GemsCraft.AutoRank
             {
                 if (!File.Exists(Paths.AutoRankFileName))
                 {
-                    //autorank was never set up
+                    // auto rank was never set up
                     return;
                 }
 
@@ -30,6 +26,7 @@ namespace GemsCraft.AutoRank
                 XElement docConfig = doc.Root;
 
                 //load each rank change
+                if (docConfig == null) return;
                 foreach (XElement mainElement in docConfig.Elements())
                 {
                     string startingRank = mainElement.Name.ToString().Split('-')[0];
@@ -40,12 +37,7 @@ namespace GemsCraft.AutoRank
                         string op = GetOperator(condition.Value);
                         string value = GetValue(condition.Value);
                         Condition generatedCondition = new Condition(startingRank, endingRank, cond, op, value);
-                        conditionList.Add(generatedCondition);
-                    }
-                    //load each condition in each rank change
-                    foreach (XAttribute conditional in mainElement.Attributes())
-                    {
-                        //load the operator and the value
+                        ConditionList.Add(generatedCondition);
                     }
                 }
             }
@@ -53,7 +45,7 @@ namespace GemsCraft.AutoRank
             {
                 if (ex is IndexOutOfRangeException)
                 {
-                    //chill, autorank is just empty and stuff
+                    // chill, auto rank is just empty and stuff
                 }
                 else
                 {
@@ -103,112 +95,107 @@ namespace GemsCraft.AutoRank
         }
 
         /// <summary>
-        /// Check if a player is eligible for an autorank promotion/demotion
+        /// Check if a player is eligible for an auto rank promotion/demotion
         /// </summary>
         public static void Check(Player player)
         {
             //loop through every condition in the conditions list
-            foreach (Condition condTest in conditionList)
+            foreach (Condition condTest in ConditionList)
             {
                 //make sure the player's rank matches up with any of the starting ranks for each conditions
-                if (player.Info.Rank.Name == condTest.startingRank)
+                if (player.Info.Rank.Name != condTest.StartingRank) continue;
+                bool rankUp = true;
+
+                //loop through each AND item in the condition, if one AND item is not met, player will not rank up
+                foreach (var item in condTest.Conditions)
                 {
-                    bool rankUp = true;
-
-                    //loop through each AND item in the condition, if one AND item is not met, player will not rank up
-                    foreach (var item in condTest.conditions)
+                    //type of condition
+                    switch (item.Key)
                     {
-                        //type of condition
-                        switch (item.Key)
-                        {
-                            case "Since_First_Login":
-                                if(!item.Value.Item1.Operator(player.Info.TimeSinceFirstLogin.Days, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            case "Since_Last_Login":
-                                if (!item.Value.Item1.Operator(player.Info.TimeSinceLastLogin.Days, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            case "Last_Seen":
-                                if (!item.Value.Item1.Operator(player.Info.TimeSinceLastLogin.Days, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            case "Total_Time":
-                                if (!item.Value.Item1.Operator((long)player.Info.TotalTime.TotalHours, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            case "Blocks_Built":
-                                if (!item.Value.Item1.Operator(player.Info.BlocksBuilt, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            case "Blocks_Deleted":
-                                if (!item.Value.Item1.Operator(player.Info.BlocksDeleted, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            case "Blocks_Changed":
-                                if (!item.Value.Item1.Operator(player.Info.BlocksBuilt + player.Info.BlocksDeleted + player.Info.BlocksDrawn, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            case "Blocks_Drawn":
-                                if (!item.Value.Item1.Operator(player.Info.BlocksDrawn, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            case "Visits":
-                                if (!item.Value.Item1.Operator(player.Info.TimesVisited, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            case "Messages":
-                                if (!item.Value.Item1.Operator(player.Info.MessagesWritten, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            case "Times_Kicked":
-                                if (!item.Value.Item1.Operator(player.Info.TimesKicked, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            case "Since_Rank_Change":
-                                if (!item.Value.Item1.Operator(player.Info.TimeSinceRankChange.Days, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            case "Since_Last_Kick":
-                                if (!item.Value.Item1.Operator(player.Info.TimeSinceLastKick.Days, item.Value.Item2))
-                                {
-                                    rankUp = false;
-                                }
-                                break;
-                            default:
-                                //shouldn't happen
-                                break;
-                        }
+                        case "Since_First_Login":
+                            if(!item.Value.Item1.Operator(player.Info.TimeSinceFirstLogin.Days, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                        case "Since_Last_Login":
+                            if (!item.Value.Item1.Operator(player.Info.TimeSinceLastLogin.Days, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                        case "Last_Seen":
+                            if (!item.Value.Item1.Operator(player.Info.TimeSinceLastLogin.Days, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                        case "Total_Time":
+                            if (!item.Value.Item1.Operator((long)player.Info.TotalTime.TotalHours, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                        case "Blocks_Built":
+                            if (!item.Value.Item1.Operator(player.Info.BlocksBuilt, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                        case "Blocks_Deleted":
+                            if (!item.Value.Item1.Operator(player.Info.BlocksDeleted, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                        case "Blocks_Changed":
+                            if (!item.Value.Item1.Operator(player.Info.BlocksBuilt + player.Info.BlocksDeleted + player.Info.BlocksDrawn, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                        case "Blocks_Drawn":
+                            if (!item.Value.Item1.Operator(player.Info.BlocksDrawn, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                        case "Visits":
+                            if (!item.Value.Item1.Operator(player.Info.TimesVisited, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                        case "Messages":
+                            if (!item.Value.Item1.Operator(player.Info.MessagesWritten, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                        case "Times_Kicked":
+                            if (!item.Value.Item1.Operator(player.Info.TimesKicked, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                        case "Since_Rank_Change":
+                            if (!item.Value.Item1.Operator(player.Info.TimeSinceRankChange.Days, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                        case "Since_Last_Kick":
+                            if (!item.Value.Item1.Operator(player.Info.TimeSinceLastKick.Days, item.Value.Item2))
+                            {
+                                rankUp = false;
+                            }
+                            break;
+                    }
 
-                    }
-                    if (rankUp)
-                    {
-                        player.Info.ChangeRank(Player.Console, Rank.Parse(condTest.endingRank), "AutoRank System", true, true, true);
-                    }
+                }
+                if (rankUp)
+                {
+                    player.Info.ChangeRank(Player.Console, Rank.Parse(condTest.EndingRank) ?? throw new InvalidOperationException(), "AutoRank System", true, true, true);
                 }
             }
         }

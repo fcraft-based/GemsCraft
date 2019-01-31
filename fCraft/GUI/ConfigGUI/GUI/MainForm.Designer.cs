@@ -43,13 +43,15 @@
             this.btnSave = new MetroFramework.Controls.MetroButton();
             this.bResetAll = new MetroFramework.Controls.MetroButton();
             this.bApply = new MetroFramework.Controls.MetroButton();
+            this.picBackground = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGeneral
             // 
             this.btnGeneral.ActiveControl = null;
             this.btnGeneral.Location = new System.Drawing.Point(15, 63);
-            this.btnGeneral.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnGeneral.Margin = new System.Windows.Forms.Padding(2);
             this.btnGeneral.Name = "btnGeneral";
             this.btnGeneral.Size = new System.Drawing.Size(142, 88);
             this.btnGeneral.TabIndex = 0;
@@ -62,7 +64,7 @@
             // 
             this.btnChat.ActiveControl = null;
             this.btnChat.Location = new System.Drawing.Point(162, 63);
-            this.btnChat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChat.Margin = new System.Windows.Forms.Padding(2);
             this.btnChat.Name = "btnChat";
             this.btnChat.Size = new System.Drawing.Size(142, 88);
             this.btnChat.TabIndex = 1;
@@ -75,7 +77,7 @@
             // 
             this.btnWorlds.ActiveControl = null;
             this.btnWorlds.Location = new System.Drawing.Point(309, 63);
-            this.btnWorlds.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnWorlds.Margin = new System.Windows.Forms.Padding(2);
             this.btnWorlds.Name = "btnWorlds";
             this.btnWorlds.Size = new System.Drawing.Size(142, 88);
             this.btnWorlds.TabIndex = 2;
@@ -88,7 +90,7 @@
             // 
             this.btnRanks.ActiveControl = null;
             this.btnRanks.Location = new System.Drawing.Point(455, 63);
-            this.btnRanks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRanks.Margin = new System.Windows.Forms.Padding(2);
             this.btnRanks.Name = "btnRanks";
             this.btnRanks.Size = new System.Drawing.Size(142, 88);
             this.btnRanks.TabIndex = 3;
@@ -101,7 +103,7 @@
             // 
             this.btnSecurity.ActiveControl = null;
             this.btnSecurity.Location = new System.Drawing.Point(15, 154);
-            this.btnSecurity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSecurity.Margin = new System.Windows.Forms.Padding(2);
             this.btnSecurity.Name = "btnSecurity";
             this.btnSecurity.Size = new System.Drawing.Size(142, 88);
             this.btnSecurity.TabIndex = 4;
@@ -114,7 +116,7 @@
             // 
             this.btnSavingAndBackup.ActiveControl = null;
             this.btnSavingAndBackup.Location = new System.Drawing.Point(162, 154);
-            this.btnSavingAndBackup.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSavingAndBackup.Margin = new System.Windows.Forms.Padding(2);
             this.btnSavingAndBackup.Name = "btnSavingAndBackup";
             this.btnSavingAndBackup.Size = new System.Drawing.Size(142, 88);
             this.btnSavingAndBackup.TabIndex = 5;
@@ -127,7 +129,7 @@
             // 
             this.btnLogging.ActiveControl = null;
             this.btnLogging.Location = new System.Drawing.Point(309, 154);
-            this.btnLogging.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLogging.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogging.Name = "btnLogging";
             this.btnLogging.Size = new System.Drawing.Size(142, 88);
             this.btnLogging.TabIndex = 6;
@@ -140,7 +142,7 @@
             // 
             this.btnIRC.ActiveControl = null;
             this.btnIRC.Location = new System.Drawing.Point(455, 154);
-            this.btnIRC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnIRC.Margin = new System.Windows.Forms.Padding(2);
             this.btnIRC.Name = "btnIRC";
             this.btnIRC.Size = new System.Drawing.Size(142, 88);
             this.btnIRC.TabIndex = 7;
@@ -153,7 +155,7 @@
             // 
             this.btnAdvanced.ActiveControl = null;
             this.btnAdvanced.Location = new System.Drawing.Point(15, 245);
-            this.btnAdvanced.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdvanced.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdvanced.Name = "btnAdvanced";
             this.btnAdvanced.Size = new System.Drawing.Size(142, 88);
             this.btnAdvanced.TabIndex = 8;
@@ -166,7 +168,7 @@
             // 
             this.btnMisc.ActiveControl = null;
             this.btnMisc.Location = new System.Drawing.Point(162, 245);
-            this.btnMisc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnMisc.Margin = new System.Windows.Forms.Padding(2);
             this.btnMisc.Name = "btnMisc";
             this.btnMisc.Size = new System.Drawing.Size(142, 88);
             this.btnMisc.TabIndex = 9;
@@ -179,7 +181,7 @@
             // 
             this.btnCPE.ActiveControl = null;
             this.btnCPE.Location = new System.Drawing.Point(309, 245);
-            this.btnCPE.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCPE.Margin = new System.Windows.Forms.Padding(2);
             this.btnCPE.Name = "btnCPE";
             this.btnCPE.Size = new System.Drawing.Size(142, 88);
             this.btnCPE.TabIndex = 10;
@@ -192,7 +194,7 @@
             // 
             this.btnSave.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.btnSave.Location = new System.Drawing.Point(456, 246);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(142, 24);
             this.btnSave.TabIndex = 11;
@@ -204,7 +206,7 @@
             // 
             this.bResetAll.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.bResetAll.Location = new System.Drawing.Point(456, 278);
-            this.bResetAll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bResetAll.Margin = new System.Windows.Forms.Padding(2);
             this.bResetAll.Name = "bResetAll";
             this.bResetAll.Size = new System.Drawing.Size(142, 24);
             this.bResetAll.TabIndex = 12;
@@ -215,12 +217,22 @@
             // 
             this.bApply.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.bApply.Location = new System.Drawing.Point(456, 309);
-            this.bApply.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bApply.Margin = new System.Windows.Forms.Padding(2);
             this.bApply.Name = "bApply";
             this.bApply.Size = new System.Drawing.Size(142, 24);
             this.bApply.TabIndex = 13;
             this.bApply.Text = "Apply";
             this.bApply.UseSelectable = true;
+            // 
+            // picBackground
+            // 
+            this.picBackground.Image = global::GemsCraft.Properties.Resources.Green;
+            this.picBackground.Location = new System.Drawing.Point(0, 55);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(621, 289);
+            this.picBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBackground.TabIndex = 14;
+            this.picBackground.TabStop = false;
             // 
             // MainForm
             // 
@@ -241,13 +253,15 @@
             this.Controls.Add(this.btnWorlds);
             this.Controls.Add(this.btnChat);
             this.Controls.Add(this.btnGeneral);
+            this.Controls.Add(this.picBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
-            this.Padding = new System.Windows.Forms.Padding(14, 49, 14, 13);
+            this.Padding = new System.Windows.Forms.Padding(14, 60, 14, 13);
             this.Style = MetroFramework.MetroColorStyle.Lime;
             this.Text = "GemsCraft Configuration";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -268,5 +282,6 @@
         internal MetroFramework.Controls.MetroButton btnSave;
         internal MetroFramework.Controls.MetroButton bResetAll;
         internal MetroFramework.Controls.MetroButton bApply;
+        private System.Windows.Forms.PictureBox picBackground;
     }
 }

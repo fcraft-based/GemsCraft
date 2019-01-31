@@ -12,11 +12,11 @@ namespace GemsCraft.AutoRank
 {
 
     /// <summary> Base class for all AutoRank conditions. </summary>
-    public abstract class fCraftConditions
+    public abstract class FCraftConditions
     {
         public abstract bool Eval(PlayerInfo info);
 
-        public static fCraftConditions Parse(XElement el)
+        public static FCraftConditions Parse(XElement el)
         {
             switch (el.Name.ToString())
             {
@@ -44,7 +44,7 @@ namespace GemsCraft.AutoRank
 
 
     /// <summary> Class for checking ranges of countable PlayerInfo fields (see ConditionField enum). </summary>
-    public sealed class ConditionIntRange : fCraftConditions
+    public sealed class ConditionIntRange : FCraftConditions
     {
         public ConditionField Field { get; set; }
         public ComparisonOp Comparison { get; set; }
@@ -55,31 +55,22 @@ namespace GemsCraft.AutoRank
             Comparison = ComparisonOp.Eq;
         }
 
-        public ConditionIntRange([NotNull] XElement el)
-            : this()
+        public ConditionIntRange([NotNull] XElement el) : this()
         {
             // ReSharper disable PossibleNullReferenceException
-            if (el == null) throw new ArgumentNullException("el");
+            if (el == null) throw new ArgumentNullException(nameof(el));
             Field = (ConditionField)Enum.Parse(typeof(ConditionField), el.Attribute("field").Value, true);
-            Value = Int32.Parse(el.Attribute("val").Value);
+            Value = int.Parse(el.Attribute("val").Value);
             if (el.Attribute("op") != null)
             {
                 Comparison = (ComparisonOp)Enum.Parse(typeof(ComparisonOp), el.Attribute("op").Value, true);
             }
             // ReSharper restore PossibleNullReferenceException
         }
-
-
-        public ConditionIntRange(ConditionField field, ComparisonOp comparison, int value)
-        {
-            Field = field;
-            Comparison = comparison;
-            Value = value;
-        }
-
+        
         public override bool Eval([NotNull] PlayerInfo info)
         {
-            if (info == null) throw new ArgumentNullException("info");
+            if (info == null) throw new ArgumentNullException(nameof(info));
             long givenValue;
             switch (Field)
             {
@@ -156,27 +147,20 @@ namespace GemsCraft.AutoRank
 
         public override string ToString()
         {
-            return String.Format("ConditionIntRange( {0} {1} {2} )",
-                                  Field,
-                                  Comparison,
-                                  Value);
+            return $"ConditionIntRange( {Field} {Comparison} {Value} )";
         }
     }
 
 
+    /// <inheritdoc />
     /// <summary> Checks what caused player's last rank change (see RankChangeType enum). </summary>
-    public sealed class ConditionRankChangeType : fCraftConditions
+    public sealed class ConditionRankChangeType : FCraftConditions
     {
         public RankChangeType Type { get; set; }
 
-        public ConditionRankChangeType(RankChangeType type)
-        {
-            Type = type;
-        }
-
         public ConditionRankChangeType([NotNull] XElement el)
         {
-            if (el == null) throw new ArgumentNullException("el");
+            if (el == null) throw new ArgumentNullException(nameof(el));
             // ReSharper disable PossibleNullReferenceException
             Type = (RankChangeType)Enum.Parse(typeof(RankChangeType), el.Attribute("val").Value, true);
             // ReSharper restore PossibleNullReferenceException
@@ -184,7 +168,7 @@ namespace GemsCraft.AutoRank
 
         public override bool Eval([NotNull] PlayerInfo info)
         {
-            if (info == null) throw new ArgumentNullException("info");
+            if (info == null) throw new ArgumentNullException(nameof(info));
             return (info.RankChangeType == Type);
         }
 
@@ -197,27 +181,17 @@ namespace GemsCraft.AutoRank
     }
 
 
+    /// <inheritdoc />
     /// <summary> Checks what rank the player held previously. </summary>
-    public sealed class ConditionPreviousRank : fCraftConditions
+    public sealed class ConditionPreviousRank : FCraftConditions
     {
         public Rank Rank { get; set; }
         public ComparisonOp Comparison { get; set; }
 
-        public ConditionPreviousRank([NotNull] Rank rank, ComparisonOp comparison)
-        {
-            if (rank == null) throw new ArgumentNullException("rank");
-            if (!Enum.IsDefined(typeof(ComparisonOp), comparison))
-            {
-                throw new ArgumentOutOfRangeException("comparison", "Unknown comparison type");
-            }
-            Rank = rank;
-            Comparison = comparison;
-        }
-
         public ConditionPreviousRank([NotNull] XElement el)
         {
             // ReSharper disable PossibleNullReferenceException
-            if (el == null) throw new ArgumentNullException("el");
+            if (el == null) throw new ArgumentNullException(nameof(el));
             Rank = Rank.Parse(el.Attribute("val").Value);
             Comparison = (ComparisonOp)Enum.Parse(typeof(ComparisonOp), el.Attribute("op").Value, true);
             // ReSharper restore PossibleNullReferenceException
@@ -225,7 +199,7 @@ namespace GemsCraft.AutoRank
 
         public override bool Eval([NotNull] PlayerInfo info)
         {
-            if (info == null) throw new ArgumentNullException("info");
+            if (info == null) throw new ArgumentNullException(nameof(info));
             Rank prevRank = info.PreviousRank ?? info.Rank;
             switch (Comparison)
             {
@@ -258,26 +232,26 @@ namespace GemsCraft.AutoRank
 
     #region Condition Sets
 
+    /// <inheritdoc />
     /// <summary> Base class for condition sets/combinations. </summary>
-    public class ConditionSet : fCraftConditions
+    public class ConditionSet : FCraftConditions
     {
         protected ConditionSet()
         {
-            Conditions = new List<fCraftConditions>();
+            Conditions = new List<FCraftConditions>();
         }
 
-        public List<fCraftConditions> Conditions { get; private set; }
+        public List<FCraftConditions> Conditions { get; }
 
-        protected ConditionSet([NotNull] IEnumerable<fCraftConditions> conditions)
+        protected ConditionSet([NotNull] IEnumerable<FCraftConditions> conditions)
         {
-            if (conditions == null) throw new ArgumentNullException("conditions");
+            if (conditions == null) throw new ArgumentNullException(nameof(conditions));
             Conditions = conditions.ToList();
         }
 
-        protected ConditionSet([NotNull] XContainer el)
-            : this()
+        protected ConditionSet([NotNull] XContainer el) : this()
         {
-            if (el == null) throw new ArgumentNullException("el");
+            if (el == null) throw new ArgumentNullException(nameof(el));
             foreach (XElement cel in el.Elements())
             {
                 Add(Parse(cel));
@@ -289,9 +263,9 @@ namespace GemsCraft.AutoRank
             throw new NotImplementedException();
         }
 
-        public void Add([NotNull] fCraftConditions condition)
+        public void Add([NotNull] FCraftConditions condition)
         {
-            if (condition == null) throw new ArgumentNullException("condition");
+            if (condition == null) throw new ArgumentNullException(nameof(condition));
             Conditions.Add(condition);
         }
 
@@ -306,7 +280,7 @@ namespace GemsCraft.AutoRank
     public sealed class ConditionAND : ConditionSet
     {
         public ConditionAND() { }
-        public ConditionAND(IEnumerable<fCraftConditions> conditions) : base(conditions) { }
+        public ConditionAND(IEnumerable<FCraftConditions> conditions) : base(conditions) { }
         public ConditionAND(XContainer el) : base(el) { }
 
         public override bool Eval(PlayerInfo info)
@@ -318,7 +292,7 @@ namespace GemsCraft.AutoRank
         public override XElement Serialize()
         {
             XElement el = new XElement("AND");
-            foreach (fCraftConditions cond in Conditions)
+            foreach (FCraftConditions cond in Conditions)
             {
                 el.Add(cond.Serialize());
             }
@@ -331,7 +305,7 @@ namespace GemsCraft.AutoRank
     public sealed class ConditionNAND : ConditionSet
     {
         public ConditionNAND() { }
-        public ConditionNAND(IEnumerable<fCraftConditions> conditions) : base(conditions) { }
+        public ConditionNAND(IEnumerable<FCraftConditions> conditions) : base(conditions) { }
         public ConditionNAND(XContainer el) : base(el) { }
 
         public override bool Eval([NotNull] PlayerInfo info)
@@ -344,7 +318,7 @@ namespace GemsCraft.AutoRank
         public override XElement Serialize()
         {
             XElement el = new XElement("NAND");
-            foreach (fCraftConditions cond in Conditions)
+            foreach (FCraftConditions cond in Conditions)
             {
                 el.Add(cond.Serialize());
             }
@@ -357,7 +331,7 @@ namespace GemsCraft.AutoRank
     public sealed class ConditionOR : ConditionSet
     {
         public ConditionOR() { }
-        public ConditionOR(IEnumerable<fCraftConditions> conditions) : base(conditions) { }
+        public ConditionOR(IEnumerable<FCraftConditions> conditions) : base(conditions) { }
         public ConditionOR(XContainer el) : base(el) { }
 
         public override bool Eval([NotNull] PlayerInfo info)
@@ -370,7 +344,7 @@ namespace GemsCraft.AutoRank
         public override XElement Serialize()
         {
             XElement el = new XElement("OR");
-            foreach (fCraftConditions cond in Conditions)
+            foreach (FCraftConditions cond in Conditions)
             {
                 el.Add(cond.Serialize());
             }
@@ -383,7 +357,7 @@ namespace GemsCraft.AutoRank
     public sealed class ConditionNOR : ConditionSet
     {
         public ConditionNOR() { }
-        public ConditionNOR(IEnumerable<fCraftConditions> conditions) : base(conditions) { }
+        public ConditionNOR(IEnumerable<FCraftConditions> conditions) : base(conditions) { }
         public ConditionNOR(XContainer el) : base(el) { }
 
         public override bool Eval([NotNull] PlayerInfo info)
@@ -396,7 +370,7 @@ namespace GemsCraft.AutoRank
         public override XElement Serialize()
         {
             XElement el = new XElement("NOR");
-            foreach (fCraftConditions cond in Conditions)
+            foreach (FCraftConditions cond in Conditions)
             {
                 el.Add(cond.Serialize());
             }

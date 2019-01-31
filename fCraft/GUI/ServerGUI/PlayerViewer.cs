@@ -420,6 +420,7 @@ namespace GemsCraft.GUI.ServerGUI
             // ReasonLabel
             // 
             this.ReasonLabel.AutoSize = true;
+            this.ReasonLabel.BackColor = System.Drawing.Color.Transparent;
             this.ReasonLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ReasonLabel.Location = new System.Drawing.Point(10, 249);
             this.ReasonLabel.Name = "ReasonLabel";
@@ -430,6 +431,7 @@ namespace GemsCraft.GUI.ServerGUI
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Location = new System.Drawing.Point(12, 231);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(229, 13);
@@ -438,7 +440,9 @@ namespace GemsCraft.GUI.ServerGUI
             // 
             // PlayerViewer
             // 
-            this.BackColor = System.Drawing.Color.Green;
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = global::GemsCraft.Properties.Resources.Green;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(251, 345);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ReasonLabel);

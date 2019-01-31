@@ -183,64 +183,42 @@ namespace GemsCraft.ServerCLI {
 
         static void CheckForUpdates()
         {
+            VersionResult vr = Updater.CheckUpdates();
             Console.WriteLine("Checking for GemsCraft updates...");
             try
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://raw.githubusercontent.com/apotter96/GemsCraft/master/README.md");
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                //update is available, prompt for a download
 
-                if (response.StatusCode == HttpStatusCode.OK)
+                if (vr != VersionResult.Current)
                 {
-                    using (Stream stream = response.GetResponseStream())
+                    string premier = vr == VersionResult.Outdated
+                        ? "Server.Run: Your GemsCraft version is out of date. A GemsCraft Update is available!"
+                        : "Server.Run: You are using an unreleased version of GemsCraft.";
+                    Console.WriteLine(vr);
+                    Console.WriteLine("Download the latest GemsCraft version and restart the server? (Y/N)");
+                    string answer = Console.ReadLine();
+                    if (answer.ToLower() == "y" || answer.ToLower() == "yes" || answer.ToLower() == "yup" ||
+                        answer.ToLower() == "yeah") //preparedness at its finest
                     {
-                        if (stream != null)
-                        {
-                            StreamReader streamReader = new StreamReader(stream);
-                            string version = streamReader.ReadLine();
-
-                            //update is available, prompt for a download
-                            if (version != null && version != Updater.LatestStable.ToString())
-                            {
-
-                                Console.WriteLine("Server.Run: Your GemsCraft version is out of date. A GemsCraft Update is available!");
-                                Console.WriteLine("Download the latest GemsCraft version and restart the server? (Y/N)");
-                                string answer = Console.ReadLine();
-                                if (answer.ToLower() == "y" || answer.ToLower() == "yes" || answer.ToLower() == "yup" || answer.ToLower() == "yeah")//preparedness at its finest
-                                {
-                                    using (var client = new WebClient())
-                                    {
-                                        try
-                                        {
-                                            //download new zip in current directory
-                                            Process.Start("http://www.legend-craft.tk/download/latest");
-                                            Console.WriteLine("Downloading the latest GemsCraft Version. Please replace all the files (not folders) in your current folder with the new ones after shutting down.");
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Console.WriteLine("Update error: " + ex);
-                                        }
-
-                                    }
-
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Update ignored. To ignore future GemsCraft update requests, uncheck the box in configGUI.");
-                                }
-
-                            }
-                            else
-                            {
-                                Console.WriteLine("Your GemsCraft version is up to date!");
-                            }
-                        }
+                        Process.Start("Updater.exe");
                     }
+                    else
+                    {
+                        Console.WriteLine(
+                            "Update ignored. To ignore future GemsCraft update requests, uncheck the box in configGUI.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Your GemsCraft version is up to date!");
                 }
             }
 
             catch (WebException error)
             {
-                Console.WriteLine("There was an internet connection error. Server was unable to check for updates. Error: \n\r" + error);
+                Console.WriteLine(
+                    "There was an internet connection error. Server was unable to check for updates. Error: \n\r" +
+                    error);
             }
             catch (Exception e)
             {
@@ -250,9 +228,7 @@ namespace GemsCraft.ServerCLI {
 
 
         static void RestartForUpdate() {
-            string restartArgs = String.Format( "{0} --restart=\"{1}\"",
-                                                Server.GetArgString(),
-                                                MonoCompat.PrependMono( "ServerCLI.exe" ) );
+            string restartArgs = $"{Server.GetArgString()} --restart=\"{MonoCompat.PrependMono("ServerCLI.exe")}\"";
             MonoCompat.StartDotNetProcess( Paths.UpdaterFileName, restartArgs, true );
         }
 

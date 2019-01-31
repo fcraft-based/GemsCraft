@@ -27,9 +27,7 @@ namespace GemsCraft.Plugins {
         /// <summary> Lowest allowed player rank. </summary>
         [NotNull]
         public Rank MinRank {
-            get {
-                return minRank ?? RankManager.LowestRank;
-            }
+            get => minRank ?? RankManager.LowestRank;
             set {
                 if( value == null ) throw new ArgumentNullException( "value" );
                 if( minRank != value ) {
@@ -59,15 +57,30 @@ namespace GemsCraft.Plugins {
         /// (per-rank or per-player). </summary>
         public bool HasRestrictions {
             get {
-                return MinRank > RankManager.LowestRank ||
-                       ExceptionList.Excluded.Length > 0;
+                try
+                {
+                    return MinRank > RankManager.LowestRank ||
+                           ExceptionList.Excluded.Length > 0;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+                
             }
         }
 
 
         /// <summary> Creates a new controller with no restrictions. </summary>
         public SecurityController() {
-            UpdatePlayerListCache();
+            try
+            {
+                UpdatePlayerListCache();
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
 

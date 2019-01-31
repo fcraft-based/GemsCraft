@@ -16,6 +16,7 @@ local.properties
 .settings/
 .loadpath
 fCraft/Resources/terrain.png
+fCraft/Network/Discord/DiscordKey.cs
 # External tool builders
 .externalToolBuilders/
 

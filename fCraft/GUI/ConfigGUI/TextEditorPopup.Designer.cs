@@ -103,6 +103,7 @@
             // lWarning
             // 
             this.lWarning.AutoSize = true;
+            this.lWarning.BackColor = System.Drawing.Color.Transparent;
             this.lWarning.Location = new System.Drawing.Point(12, 283);
             this.lWarning.Name = "lWarning";
             this.lWarning.Size = new System.Drawing.Size(272, 13);
@@ -113,6 +114,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::GemsCraft.Properties.Resources.Green;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(510, 314);
             this.Controls.Add(this.bReset);
             this.Controls.Add(this.bInsertColor);

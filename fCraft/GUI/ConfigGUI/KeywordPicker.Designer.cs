@@ -33,6 +33,7 @@
             this.pFlow.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pFlow.BackColor = System.Drawing.Color.Transparent;
             this.pFlow.Location = new System.Drawing.Point(13, 13);
             this.pFlow.Name = "pFlow";
             this.pFlow.Size = new System.Drawing.Size(159, 318);
@@ -53,6 +54,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::GemsCraft.Properties.Resources.Green;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CancelButton = this.bCancel;
             this.ClientSize = new System.Drawing.Size(184, 372);
             this.Controls.Add(this.bCancel);

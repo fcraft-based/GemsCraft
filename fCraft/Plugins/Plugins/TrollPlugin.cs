@@ -35,40 +35,28 @@ namespace TrollPlugin
         //your plugin name
         public string Name
         {
-            get
-            {
-                return "TrollPlugin";
-            }
-            set
-            {
-                Name = value;
-            }
+            get => "TrollPlugin";
+            set => Name = value;
         }
 
         //your plugin version
         public string Version
         {
-            get
-            {
-                return "1.0";
-            }
-            set
-            {
-                Version = value;
-            }
+            get => "1.0";
+            set => Version = value;
         }
 
         static void TrollHandler(Player player, Command cmd)
         {
-            string Name = cmd.Next();
-            if (Name == null)
+            string name = cmd.Next();
+            if (name == null)
             {
                 player.Message("Player not found. Please specify valid name.");
                 return;
             }
-            if (!Player.IsValidName(Name))
+            if (!Player.IsValidName(name))
                 return;
-            Player target = Server.FindPlayerOrPrintMatches(player, Name, true, true);
+            Player target = Server.FindPlayerOrPrintMatches(player, name, true, true);
             if (target == null)
                 return;
             string options = cmd.Next();

@@ -1798,13 +1798,13 @@ THE SOFTWARE.*/
 
             if (MonoCompat.IsMono)
             {
-                player.Message(" Running &5Legend&WCraft&S v{0}, under Mono {1}",
+                player.Message(" Running &1Gems&2Craft&S v{0}, under Mono {1}",
                                 Updater.LatestStable.ToString(),
                                 MonoCompat.MonoVersionString);
             }
             else
             {
-                player.Message(" Running &5Legend&WCraft&S v{0}, under .NET {1}",
+                player.Message(" Running &1Gems&2Craft&S v{0}, under .NET {1}",
                                 Updater.LatestStable,
                                 Environment.Version);
             }

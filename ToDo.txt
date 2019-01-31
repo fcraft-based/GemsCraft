@@ -17,11 +17,21 @@ For Alpha 0.1.1
 - Executable to open CLI or GUI (DONE!)
 
 For Alpha 0.1.2
-- Fix Announcement message type for lines over 64 characters
+- Fix Announcement message type for lines over 64 characters (DONE!)
+- Hide Remote Config Section (DONE!)
+- Remove LegendCraft References (DONE!)
+- Fix Updater (DONE!)
+
+For Alpha 0.2
+- *Am I a pretty Girl?* (In Progress)
+- More CPE Configs (ClickDistance, HeldBlocks)
+- Update Cuboid/Draw Operations to use SelectionCuboid Extension
 - Custom Blocks upload .zip to include animations as well instead of .png
 - Server Defined Texture packs (if (textpack != null) // Load saved file else load default.zip
 
-For Alpha 0.2
-- GUI Pictures
-- More CPE Configs (ClickDistance, HeldBlocks)
-- Update Cuboid/Draw Operations to use SelectionCuboid Extension
+For Alpha 0.3
+- More CPE (To Be Determined)
+- Tutorial
+
+For Alpha 0.4
+- Remote Control Revisited

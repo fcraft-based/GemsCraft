@@ -10,31 +10,29 @@ using GemsCraft.fSystem.Config;
 
 using GemsCraft.Players;
 using JetBrains.Annotations;
+// ReSharper disable UnusedMember.Global
 
-//legacy autorank support for fCraft
+// legacy autorank support for fCraft
 
 namespace GemsCraft.AutoRank
 {
-    public static class fCraftAutoManager
+    public static class FCraftAutoManager
     {
 
         internal static readonly TimeSpan TickInterval = TimeSpan.FromSeconds(60);
 
-        public static readonly List<fCraftCriterion> Criteria = new List<fCraftCriterion>();
+        public static readonly List<FCraftCriterion> Criteria = new List<FCraftCriterion>();
 
         public const string TagName = "fCraftAutoRankConfig";
 
         /// <summary> Whether any criteria are defined. </summary>
-        public static bool HasCriteria
-        {
-            get { return Criteria.Count > 0; }
-        }
+        public static bool HasCriteria => Criteria.Count > 0;
 
 
         /// <summary> Adds a new criterion to the list. Throws an ArgumentException on duplicates. </summary>
-        public static void Add([NotNull] fCraftCriterion criterion)
+        public static void Add([NotNull] FCraftCriterion criterion)
         {
-            if (criterion == null) throw new ArgumentNullException("criterion");
+            if (criterion == null) throw new ArgumentNullException(nameof(criterion));
             if (Criteria.Contains(criterion)) throw new ArgumentException("This criterion has already been added.");
             Criteria.Add(criterion);
         }
@@ -46,16 +44,16 @@ namespace GemsCraft.AutoRank
         [CanBeNull]
         public static Rank Check([NotNull] PlayerInfo info)
         {
-            if (info == null) throw new ArgumentNullException("info");
+            if (info == null) throw new ArgumentNullException(nameof(info));
             // ReSharper disable LoopCanBeConvertedToQuery
-            for (int i = 0; i < Criteria.Count; i++)
+            foreach (var t in Criteria)
             {
-                if (Criteria[i].FromRank == info.Rank &&
+                if (t.FromRank == info.Rank &&
                     !info.IsBanned &&
-                    Criteria[i].Condition.Eval(info))
+                    t.Condition.Eval(info))
                 {
 
-                    return Criteria[i].ToRank;
+                    return t.ToRank;
                 }
             }
             // ReSharper restore LoopCanBeConvertedToQuery
@@ -70,54 +68,68 @@ namespace GemsCraft.AutoRank
             DoAutoRankAll(Player.Console, onlinePlayers, "AutoRank System", true);
         }
 
-        internal static void DoAutoRankAll( [NotNull] Player player, [NotNull] PlayerInfo[] list, string message, bool auto ) {
-            if( player == null ) throw new ArgumentNullException( "player" );
-            if( list == null ) throw new ArgumentNullException( "list" );
+        internal static void DoAutoRankAll([NotNull] Player player, [NotNull] PlayerInfo[] list, string message, bool auto)
+        {
+            if(player == null) throw new ArgumentNullException(nameof(player));
+            if(list == null) throw new ArgumentNullException(nameof(list));
 
-            if( !HasCriteria ) {
-                if( !auto ) {
-                    player.Message( "AutoRankAll: No criteria found." );
+            if(!HasCriteria)
+            {
+                if(!auto)
+                {
+                    player.Message("AutoRankAll: No criteria found.");
                 }
                 return;
             }
 
-            if( !auto ) {
-                player.Message( "AutoRankAll: Evaluating {0} players...", list.Length );
+            if(!auto)
+            {
+                player.Message("AutoRankAll: Evaluating {0} players...", list.Length);
             }
 
             Stopwatch sw = Stopwatch.StartNew();
             int promoted = 0,
                 demoted = 0;
-            for( int i = 0; i < list.Length; i++ ) {
-                Rank newRank = Check( list[i] );
-                if( newRank != null ) {
-                    if( newRank > list[i].Rank ) {
-                        promoted++;
-                    } else if( newRank < list[i].Rank ) {
-                        demoted++;
+            foreach (var t in list)
+            {
+                Rank newRank = Check(t);
+                if (newRank == null) continue;
+                if (newRank > t.Rank)
+                {
+                    promoted++;
+                }
+                else if (newRank < t.Rank)
+                {
+                    demoted++;
+                }
+                try
+                {
+                    t.ChangeRank(player, newRank, message, true, true, true);
+                }
+                catch (PlayerOpException ex)
+                {
+                    if(auto)
+                    {
+                        Logger.Log(LogType.Error, "AutoRank: Could not change player's rank: {0}", ex.Message);
                     }
-                    try {
-                        list[i].ChangeRank( player, newRank, message, true, true, true );
-                    } catch( PlayerOpException ex ) {
-                        if( auto ) {
-                            Logger.Log( LogType.Error, "AutoRank: Could not change player's rank: {0}", ex.Message );
-                        } else {
-                            player.Message( ex.MessageColored );
-                        }
+                    else {
+                        player.Message(ex.MessageColored);
                     }
                 }
             }
             sw.Stop();
-            String resultMsg = String.Format( "AutoRankAll: Worked for {0}ms, {1} players promoted, {2} demoted.",
-                                              sw.ElapsedMilliseconds,
-                                              promoted,
-                                              demoted );
-            if( auto ) {
-                if( promoted > 0 || demoted > 0 ) {
-                    Logger.Log( LogType.SystemActivity, resultMsg );
+            string resultMsg =
+                $"AutoRankAll: Worked for {sw.ElapsedMilliseconds}ms, {promoted} players promoted, {demoted} demoted.";
+            if(auto)
+            {
+                if(promoted > 0 || demoted > 0)
+                {
+                    Logger.Log(LogType.SystemActivity, resultMsg);
                 }
-            } else {
-                player.Message( resultMsg );
+            }
+            else
+            {
+                player.Message(resultMsg);
             }
         }    
 
@@ -136,7 +148,7 @@ namespace GemsCraft.AutoRank
                     {
                         try
                         {
-                            Add(new fCraftCriterion(el));
+                            Add(new FCraftCriterion(el));
                         }
                         catch (Exception ex)
                         {
@@ -157,11 +169,9 @@ namespace GemsCraft.AutoRank
                     return false;
                 }
             }
-            else
-            {
-                Logger.Log(LogType.Warning, "AutoRank.Init: fCraftAutorank.xml not found. No criteria loaded.");
-                return false;
-            }
+
+            Logger.Log(LogType.Warning, "AutoRank.Init: fCraftAutorank.xml not found. No criteria loaded.");
+            return false;
         }
     }
 
@@ -172,10 +182,10 @@ namespace GemsCraft.AutoRank
     public enum ComparisonOp
     {
 
-        /// <summary> EQuals to </summary>
+        /// <summary> Equals to </summary>
         Eq,
 
-        /// <summary> Not EQual to </summary>
+        /// <summary> Not Equal to </summary>
         Neq,
 
         /// <summary> Greater Than </summary>
