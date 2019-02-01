@@ -67,6 +67,7 @@
             this.lPermissions = new System.Windows.Forms.Label();
             this.vRanks = new System.Windows.Forms.ListBox();
             this.bResetTab = new MetroFramework.Controls.MetroButton();
+            this.picBackground = new System.Windows.Forms.PictureBox();
             this.gPermissionLimits.SuspendLayout();
             this.gRankOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nFillLimit)).BeginInit();
@@ -75,6 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nDrawLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nKickIdle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nAntiGriefBlocks)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // gPermissionLimits
@@ -509,12 +511,22 @@
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.bResetTab.Location = new System.Drawing.Point(557, 541);
-            this.bResetTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bResetTab.Margin = new System.Windows.Forms.Padding(2);
             this.bResetTab.Name = "bResetTab";
             this.bResetTab.Size = new System.Drawing.Size(95, 24);
             this.bResetTab.TabIndex = 20;
             this.bResetTab.Text = "Reset";
             this.bResetTab.UseSelectable = true;
+            // 
+            // picBackground
+            // 
+            this.picBackground.Image = global::GemsCraft.Properties.Resources.Yellow;
+            this.picBackground.Location = new System.Drawing.Point(0, 55);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(669, 520);
+            this.picBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBackground.TabIndex = 21;
+            this.picBackground.TabStop = false;
             // 
             // RankConfig
             // 
@@ -532,10 +544,11 @@
             this.Controls.Add(this.bAddRank);
             this.Controls.Add(this.lPermissions);
             this.Controls.Add(this.vRanks);
+            this.Controls.Add(this.picBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "RankConfig";
-            this.Padding = new System.Windows.Forms.Padding(13, 39, 13, 13);
+            this.Padding = new System.Windows.Forms.Padding(13, 60, 13, 13);
             this.Style = MetroFramework.MetroColorStyle.Yellow;
             this.Text = "GemsCraft Configuration - Ranks";
             this.gPermissionLimits.ResumeLayout(false);
@@ -547,6 +560,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nDrawLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nKickIdle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nAntiGriefBlocks)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -592,5 +606,6 @@
         internal System.Windows.Forms.Label lPermissions;
         internal System.Windows.Forms.ListBox vRanks;
         internal MetroFramework.Controls.MetroButton bResetTab;
+        private System.Windows.Forms.PictureBox picBackground;
     }
 }

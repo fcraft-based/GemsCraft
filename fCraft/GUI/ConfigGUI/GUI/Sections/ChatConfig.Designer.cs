@@ -54,8 +54,10 @@
             this.xRankPrefixesInChat = new System.Windows.Forms.CheckBox();
             this.xRankColorsInChat = new System.Windows.Forms.CheckBox();
             this.chatPreview = new GemsCraft.GUI.ConfigGUI.ChatPreview();
+            this.picBackground = new System.Windows.Forms.PictureBox();
             this.gChatColors.SuspendLayout();
             this.gAppearence.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // gChatColors
@@ -230,6 +232,7 @@
             // 
             // gAppearence
             // 
+            this.gAppearence.BackColor = System.Drawing.Color.Transparent;
             this.gAppearence.Controls.Add(this.xShowConnectionMessages);
             this.gAppearence.Controls.Add(this.xShowJoinedWorldMessages);
             this.gAppearence.Controls.Add(this.xRankColorsInWorldNames);
@@ -311,6 +314,16 @@
             this.chatPreview.Size = new System.Drawing.Size(636, 213);
             this.chatPreview.TabIndex = 3;
             // 
+            // picBackground
+            // 
+            this.picBackground.BackgroundImage = global::GemsCraft.Properties.Resources.Blue;
+            this.picBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picBackground.Location = new System.Drawing.Point(0, 55);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(671, 514);
+            this.picBackground.TabIndex = 4;
+            this.picBackground.TabStop = false;
+            // 
             // ChatConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -319,15 +332,17 @@
             this.Controls.Add(this.chatPreview);
             this.Controls.Add(this.gAppearence);
             this.Controls.Add(this.gChatColors);
+            this.Controls.Add(this.picBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ChatConfig";
-            this.Padding = new System.Windows.Forms.Padding(13, 39, 13, 13);
+            this.Padding = new System.Windows.Forms.Padding(13, 60, 13, 13);
             this.Text = "GemsCraft Configuration - Chat";
             this.gChatColors.ResumeLayout(false);
             this.gChatColors.PerformLayout();
             this.gAppearence.ResumeLayout(false);
             this.gAppearence.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -359,5 +374,6 @@
         internal System.Windows.Forms.CheckBox xRankPrefixesInChat;
         internal System.Windows.Forms.CheckBox xRankColorsInChat;
         internal ChatPreview chatPreview;
+        private System.Windows.Forms.PictureBox picBackground;
     }
 }

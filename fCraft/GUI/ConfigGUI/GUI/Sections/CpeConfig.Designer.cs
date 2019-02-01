@@ -48,8 +48,10 @@
             this.lblMTInformation = new MetroFramework.Controls.MetroLabel();
             this.gboCustomBlocks = new System.Windows.Forms.GroupBox();
             this.btnDefineNewBlock = new System.Windows.Forms.Button();
+            this.picBackground = new System.Windows.Forms.PictureBox();
             this.gboMessageType.SuspendLayout();
             this.gboCustomBlocks.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // bResetTab
@@ -414,6 +416,16 @@
             this.btnDefineNewBlock.UseVisualStyleBackColor = true;
             this.btnDefineNewBlock.Click += new System.EventHandler(this.btnDefineNewBlock_Click);
             // 
+            // picBackground
+            // 
+            this.picBackground.BackgroundImage = global::GemsCraft.Properties.Resources.Brown;
+            this.picBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picBackground.Location = new System.Drawing.Point(0, 55);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(669, 406);
+            this.picBackground.TabIndex = 32;
+            this.picBackground.TabStop = false;
+            // 
             // CpeConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -422,6 +434,7 @@
             this.Controls.Add(this.gboCustomBlocks);
             this.Controls.Add(this.bResetTab);
             this.Controls.Add(this.gboMessageType);
+            this.Controls.Add(this.picBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CpeConfig";
@@ -431,6 +444,7 @@
             this.gboMessageType.ResumeLayout(false);
             this.gboMessageType.PerformLayout();
             this.gboCustomBlocks.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -456,5 +470,6 @@
         internal MetroFramework.Controls.MetroTextBox txtBR1;
         private System.Windows.Forms.GroupBox gboCustomBlocks;
         private System.Windows.Forms.Button btnDefineNewBlock;
+        private System.Windows.Forms.PictureBox picBackground;
     }
 }

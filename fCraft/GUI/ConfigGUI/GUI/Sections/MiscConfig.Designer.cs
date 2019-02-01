@@ -53,11 +53,13 @@
             this.btnSetLogin = new System.Windows.Forms.Button();
             this.chkRequireLogin = new System.Windows.Forms.CheckBox();
             this.chkEnableRemoteControl = new System.Windows.Forms.CheckBox();
+            this.picBackground = new System.Windows.Forms.PictureBox();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxCapsValue)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gboRemoteControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -346,6 +348,16 @@
             this.chkEnableRemoteControl.UseVisualStyleBackColor = true;
             this.chkEnableRemoteControl.CheckedChanged += new System.EventHandler(this.chkEnableRemoteControl_CheckedChanged);
             // 
+            // picBackground
+            // 
+            this.picBackground.BackgroundImage = global::GemsCraft.Properties.Resources.Purple;
+            this.picBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picBackground.Location = new System.Drawing.Point(0, 55);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(670, 433);
+            this.picBackground.TabIndex = 32;
+            this.picBackground.TabStop = false;
+            // 
             // MiscConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -355,6 +367,7 @@
             this.Controls.Add(this.bResetTab);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.picBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MiscConfig";
@@ -369,6 +382,7 @@
             this.gboRemoteControl.ResumeLayout(false);
             this.gboRemoteControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -399,5 +413,6 @@
         internal System.Windows.Forms.Button btnSetLogin;
         internal System.Windows.Forms.NumericUpDown numPort;
         internal System.Windows.Forms.Label lblRemotePort;
+        private System.Windows.Forms.PictureBox picBackground;
     }
 }

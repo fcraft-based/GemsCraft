@@ -45,5 +45,10 @@ namespace GemsCraft.GUI.ConfigGUI.GUI.Sections
             bReadme.Click += _instance.bReadme_Click;
             bChangelog.Click += _instance.bChangelog_Click;
         }
+
+        private void picLogo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

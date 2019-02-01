@@ -51,19 +51,22 @@
             this.dgvcHidden = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgvcBlockDB = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.bResetTab = new MetroFramework.Controls.MetroButton();
+            this.picBackground = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWorlds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // xWoMEnableEnvExtensions
             // 
             this.xWoMEnableEnvExtensions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.xWoMEnableEnvExtensions.AutoSize = true;
+            this.xWoMEnableEnvExtensions.BackColor = System.Drawing.Color.Transparent;
             this.xWoMEnableEnvExtensions.Location = new System.Drawing.Point(16, 507);
             this.xWoMEnableEnvExtensions.Name = "xWoMEnableEnvExtensions";
             this.xWoMEnableEnvExtensions.Size = new System.Drawing.Size(168, 17);
             this.xWoMEnableEnvExtensions.TabIndex = 34;
             this.xWoMEnableEnvExtensions.Text = "Enable Env Extensions (/Env)";
-            this.xWoMEnableEnvExtensions.UseVisualStyleBackColor = true;
+            this.xWoMEnableEnvExtensions.UseVisualStyleBackColor = false;
             // 
             // bMapPath
             // 
@@ -84,12 +87,13 @@
             // 
             this.xMapPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.xMapPath.AutoSize = true;
+            this.xMapPath.BackColor = System.Drawing.Color.Transparent;
             this.xMapPath.Location = new System.Drawing.Point(16, 479);
             this.xMapPath.Name = "xMapPath";
             this.xMapPath.Size = new System.Drawing.Size(165, 17);
             this.xMapPath.TabIndex = 31;
             this.xMapPath.Text = "Custom path for storing maps:";
-            this.xMapPath.UseVisualStyleBackColor = true;
+            this.xMapPath.UseVisualStyleBackColor = false;
             // 
             // tMapPath
             // 
@@ -106,6 +110,7 @@
             // 
             this.lDefaultBuildRank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lDefaultBuildRank.AutoSize = true;
+            this.lDefaultBuildRank.BackColor = System.Drawing.Color.Transparent;
             this.lDefaultBuildRank.Location = new System.Drawing.Point(32, 449);
             this.lDefaultBuildRank.Name = "lDefaultBuildRank";
             this.lDefaultBuildRank.Size = new System.Drawing.Size(293, 13);
@@ -275,12 +280,22 @@
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.bResetTab.Location = new System.Drawing.Point(331, 62);
-            this.bResetTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bResetTab.Margin = new System.Windows.Forms.Padding(2);
             this.bResetTab.Name = "bResetTab";
             this.bResetTab.Size = new System.Drawing.Size(95, 28);
             this.bResetTab.TabIndex = 35;
             this.bResetTab.Text = "Reset";
             this.bResetTab.UseSelectable = true;
+            // 
+            // picBackground
+            // 
+            this.picBackground.Image = global::GemsCraft.Properties.Resources.Pink;
+            this.picBackground.Location = new System.Drawing.Point(0, 55);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(671, 478);
+            this.picBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBackground.TabIndex = 36;
+            this.picBackground.TabStop = false;
             // 
             // WorldConfig
             // 
@@ -300,13 +315,15 @@
             this.Controls.Add(this.bAddWorld);
             this.Controls.Add(this.bWorldDelete);
             this.Controls.Add(this.dgvWorlds);
+            this.Controls.Add(this.picBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WorldConfig";
-            this.Padding = new System.Windows.Forms.Padding(13, 39, 13, 13);
+            this.Padding = new System.Windows.Forms.Padding(13, 60, 13, 13);
             this.Style = MetroFramework.MetroColorStyle.Magenta;
             this.Text = "GemsCraft Configuration - Worlds";
             ((System.ComponentModel.ISupportInitialize)(this.dgvWorlds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -334,5 +351,6 @@
         internal System.Windows.Forms.DataGridViewCheckBoxColumn dgvcHidden;
         internal System.Windows.Forms.DataGridViewCheckBoxColumn dgvcBlockDB;
         internal MetroFramework.Controls.MetroButton bResetTab;
+        private System.Windows.Forms.PictureBox picBackground;
     }
 }

@@ -62,8 +62,8 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.bWiki = new System.Windows.Forms.Button();
             this.bWeb = new System.Windows.Forms.Button();
-            this.picLogo = new System.Windows.Forms.PictureBox();
             this.bResetTab = new MetroFramework.Controls.MetroButton();
+            this.picBackground = new System.Windows.Forms.PictureBox();
             this.gBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nMaxPlayersPerWorld)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nPort)).BeginInit();
@@ -73,11 +73,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nAnnouncements)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // gBasic
             // 
+            this.gBasic.BackColor = System.Drawing.Color.Transparent;
             this.gBasic.Controls.Add(this.nMaxPlayersPerWorld);
             this.gBasic.Controls.Add(this.lMaxPlayersPerWorld);
             this.gBasic.Controls.Add(this.lPort);
@@ -533,27 +534,26 @@
             this.bWeb.Text = "Website";
             this.bWeb.UseVisualStyleBackColor = false;
             // 
-            // picLogo
-            // 
-            this.picLogo.Image = global::GemsCraft.Properties.Resources.main;
-            this.picLogo.Location = new System.Drawing.Point(275, 322);
-            this.picLogo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(377, 83);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLogo.TabIndex = 7;
-            this.picLogo.TabStop = false;
-            // 
             // bResetTab
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.bResetTab.Location = new System.Drawing.Point(557, 434);
-            this.bResetTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bResetTab.Margin = new System.Windows.Forms.Padding(2);
             this.bResetTab.Name = "bResetTab";
             this.bResetTab.Size = new System.Drawing.Size(95, 24);
             this.bResetTab.TabIndex = 8;
             this.bResetTab.Text = "Reset";
             this.bResetTab.UseSelectable = true;
+            // 
+            // picBackground
+            // 
+            this.picBackground.BackgroundImage = global::GemsCraft.Properties.Resources.Green;
+            this.picBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picBackground.Location = new System.Drawing.Point(0, 55);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(669, 411);
+            this.picBackground.TabIndex = 9;
+            this.picBackground.TabStop = false;
             // 
             // GeneralConfig
             // 
@@ -561,15 +561,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 465);
             this.Controls.Add(this.bResetTab);
-            this.Controls.Add(this.picLogo);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gInformation);
             this.Controls.Add(this.gBasic);
+            this.Controls.Add(this.picBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GeneralConfig";
-            this.Padding = new System.Windows.Forms.Padding(13, 39, 13, 13);
+            this.Padding = new System.Windows.Forms.Padding(13, 60, 13, 13);
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "GemsCraft Configuration - General";
             this.Theme = MetroFramework.MetroThemeStyle.Default;
@@ -584,7 +584,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nAnnouncements)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -624,7 +624,7 @@
         internal System.Windows.Forms.GroupBox groupBox4;
         internal System.Windows.Forms.Button bWiki;
         internal System.Windows.Forms.Button bWeb;
-        internal System.Windows.Forms.PictureBox picLogo;
         internal MetroFramework.Controls.MetroButton bResetTab;
+        private System.Windows.Forms.PictureBox picBackground;
     }
 }

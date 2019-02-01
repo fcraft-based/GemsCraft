@@ -62,6 +62,7 @@
             this.lVerifyNames = new System.Windows.Forms.Label();
             this.cVerifyNames = new System.Windows.Forms.ComboBox();
             this.bResetTab = new MetroFramework.Controls.MetroButton();
+            this.picBackground = new System.Windows.Forms.PictureBox();
             this.gBlockDB.SuspendLayout();
             this.gSecurityMisc.SuspendLayout();
             this.gSpamChat.SuspendLayout();
@@ -71,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nAntispamMessageCount)).BeginInit();
             this.gVerify.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nMaxConnectionsPerIP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // gBlockDB
@@ -446,12 +448,22 @@
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.bResetTab.Location = new System.Drawing.Point(559, 528);
-            this.bResetTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bResetTab.Margin = new System.Windows.Forms.Padding(2);
             this.bResetTab.Name = "bResetTab";
             this.bResetTab.Size = new System.Drawing.Size(95, 24);
             this.bResetTab.TabIndex = 8;
             this.bResetTab.Text = "Reset";
             this.bResetTab.UseSelectable = true;
+            // 
+            // picBackground
+            // 
+            this.picBackground.Image = global::GemsCraft.Properties.Resources.Brown;
+            this.picBackground.Location = new System.Drawing.Point(0, 55);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(671, 507);
+            this.picBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBackground.TabIndex = 9;
+            this.picBackground.TabStop = false;
             // 
             // SecurityConfig
             // 
@@ -463,10 +475,11 @@
             this.Controls.Add(this.gSecurityMisc);
             this.Controls.Add(this.gSpamChat);
             this.Controls.Add(this.gVerify);
+            this.Controls.Add(this.picBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SecurityConfig";
-            this.Padding = new System.Windows.Forms.Padding(13, 39, 13, 13);
+            this.Padding = new System.Windows.Forms.Padding(13, 60, 13, 13);
             this.Style = MetroFramework.MetroColorStyle.Brown;
             this.Text = "GemsCraft Configuration - Security";
             this.gBlockDB.ResumeLayout(false);
@@ -482,6 +495,7 @@
             this.gVerify.ResumeLayout(false);
             this.gVerify.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nMaxConnectionsPerIP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -521,5 +535,6 @@
         internal System.Windows.Forms.Label lVerifyNames;
         internal System.Windows.Forms.ComboBox cVerifyNames;
         internal MetroFramework.Controls.MetroButton bResetTab;
+        private System.Windows.Forms.PictureBox picBackground;
     }
 }

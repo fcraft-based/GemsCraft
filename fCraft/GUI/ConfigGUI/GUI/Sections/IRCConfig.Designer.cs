@@ -68,11 +68,13 @@
             this.xIRCBotEnabled = new System.Windows.Forms.CheckBox();
             this.cIRCList = new System.Windows.Forms.ComboBox();
             this.bResetTab = new MetroFramework.Controls.MetroButton();
+            this.picBackground = new System.Windows.Forms.PictureBox();
             this.gIRCAdv.SuspendLayout();
             this.gIRCOptions.SuspendLayout();
             this.gIRCNetwork.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nIRCDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nIRCBotPort)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // gIRCAdv
@@ -496,12 +498,22 @@
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.bResetTab.Location = new System.Drawing.Point(551, 489);
-            this.bResetTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bResetTab.Margin = new System.Windows.Forms.Padding(2);
             this.bResetTab.Name = "bResetTab";
             this.bResetTab.Size = new System.Drawing.Size(95, 24);
             this.bResetTab.TabIndex = 14;
             this.bResetTab.Text = "Reset";
             this.bResetTab.UseSelectable = true;
+            // 
+            // picBackground
+            // 
+            this.picBackground.BackgroundImage = global::GemsCraft.Properties.Resources.Orange;
+            this.picBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picBackground.Location = new System.Drawing.Point(0, 55);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(670, 466);
+            this.picBackground.TabIndex = 15;
+            this.picBackground.TabStop = false;
             // 
             // IRCConfig
             // 
@@ -516,10 +528,11 @@
             this.Controls.Add(this.lIRCList);
             this.Controls.Add(this.xIRCBotEnabled);
             this.Controls.Add(this.cIRCList);
+            this.Controls.Add(this.picBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "IRCConfig";
-            this.Padding = new System.Windows.Forms.Padding(13, 39, 13, 13);
+            this.Padding = new System.Windows.Forms.Padding(13, 60, 13, 13);
             this.Style = MetroFramework.MetroColorStyle.Orange;
             this.Text = "GemsCraft Configuration - IRC";
             this.gIRCAdv.ResumeLayout(false);
@@ -530,6 +543,7 @@
             this.gIRCNetwork.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nIRCDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nIRCBotPort)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -576,5 +590,6 @@
         internal System.Windows.Forms.CheckBox xIRCBotEnabled;
         internal System.Windows.Forms.ComboBox cIRCList;
         internal MetroFramework.Controls.MetroButton bResetTab;
+        private System.Windows.Forms.PictureBox picBackground;
     }
 }

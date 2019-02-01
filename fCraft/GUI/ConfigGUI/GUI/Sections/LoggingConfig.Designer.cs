@@ -43,9 +43,11 @@
             this.vConsoleOptions = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.bResetTab = new MetroFramework.Controls.MetroButton();
+            this.picBackground = new System.Windows.Forms.PictureBox();
             this.gLogFile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nLogLimit)).BeginInit();
             this.gConsole.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // gLogFile
@@ -192,12 +194,22 @@
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.bResetTab.Location = new System.Drawing.Point(559, 491);
-            this.bResetTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bResetTab.Margin = new System.Windows.Forms.Padding(2);
             this.bResetTab.Name = "bResetTab";
             this.bResetTab.Size = new System.Drawing.Size(95, 24);
             this.bResetTab.TabIndex = 7;
             this.bResetTab.Text = "Reset";
             this.bResetTab.UseSelectable = true;
+            // 
+            // picBackground
+            // 
+            this.picBackground.BackgroundImage = global::GemsCraft.Properties.Resources.Red;
+            this.picBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picBackground.Location = new System.Drawing.Point(0, 55);
+            this.picBackground.Name = "picBackground";
+            this.picBackground.Size = new System.Drawing.Size(671, 467);
+            this.picBackground.TabIndex = 8;
+            this.picBackground.TabStop = false;
             // 
             // LoggingConfig
             // 
@@ -207,10 +219,11 @@
             this.Controls.Add(this.bResetTab);
             this.Controls.Add(this.gLogFile);
             this.Controls.Add(this.gConsole);
+            this.Controls.Add(this.picBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LoggingConfig";
-            this.Padding = new System.Windows.Forms.Padding(13, 39, 13, 13);
+            this.Padding = new System.Windows.Forms.Padding(13, 60, 13, 13);
             this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "GemsCraft Configuration - Logging";
             this.gLogFile.ResumeLayout(false);
@@ -218,6 +231,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nLogLimit)).EndInit();
             this.gConsole.ResumeLayout(false);
             this.gConsole.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -238,5 +252,6 @@
         internal System.Windows.Forms.ListView vConsoleOptions;
         internal System.Windows.Forms.ColumnHeader columnHeader3;
         internal MetroFramework.Controls.MetroButton bResetTab;
+        private System.Windows.Forms.PictureBox picBackground;
     }
 }

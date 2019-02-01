@@ -73,6 +73,26 @@ namespace GemsCraft.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Blue {
+            get {
+                object obj = ResourceManager.GetObject("Blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Brown {
+            get {
+                object obj = ResourceManager.GetObject("Brown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap ChatBackground {
             get {
                 object obj = ResourceManager.GetObject("ChatBackground", resourceCulture);
@@ -153,9 +173,59 @@ namespace GemsCraft.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Orange {
+            get {
+                object obj = ResourceManager.GetObject("Orange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Pink {
+            get {
+                object obj = ResourceManager.GetObject("Pink", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Polygon_1 {
             get {
                 object obj = ResourceManager.GetObject("Polygon_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Purple {
+            get {
+                object obj = ResourceManager.GetObject("Purple", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Red {
+            get {
+                object obj = ResourceManager.GetObject("Red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Teal {
+            get {
+                object obj = ResourceManager.GetObject("Teal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,6 +256,16 @@ namespace GemsCraft.Properties {
         public static System.Drawing.Bitmap TilesetShadowed {
             get {
                 object obj = ResourceManager.GetObject("TilesetShadowed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Yellow {
+            get {
+                object obj = ResourceManager.GetObject("Yellow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

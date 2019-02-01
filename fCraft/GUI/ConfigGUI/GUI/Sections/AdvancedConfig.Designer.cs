@@ -449,6 +449,7 @@
             // 
             // picBackground
             // 
+            this.picBackground.BackColor = System.Drawing.Color.Transparent;
             this.picBackground.BackgroundImage = global::GemsCraft.Properties.Resources.Black;
             this.picBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picBackground.Location = new System.Drawing.Point(0, 55);
