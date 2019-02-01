@@ -615,7 +615,8 @@ but will reduce bandwidth use." )]
         #endregion
 
         #region CPE
-        
+
+        #region MessageTypes
         [BoolKey(ConfigSection.CPE, true,
 @"If enabled, allows the use of different message types by the server and users.")]
         EnableMessageTypes,
@@ -670,7 +671,24 @@ but will reduce bandwidth use." )]
 
         [StringKey(ConfigSection.CPE, "Block: {block}",
             "Messages for Message Type")]
-        BR1
+        BR1,
+        #endregion
+
+        #region ClickDistance
+
+        [BoolKey(ConfigSection.CPE, true,
+@"How far and how short player's click distance can be set. Determines how many blocks away a player can click.")]
+        ClickDistanceEnabled,
+
+        [IntKey(ConfigSection.CPE, 1,
+@"Min. Click Distance that can be set.")]
+        MinClickDistance,
+
+        [IntKey(ConfigSection.CPE, 5,
+@"Max. Click Distance that can be set.")]
+        MaxClickDistance
+
+        #endregion
         #endregion
     }
 }

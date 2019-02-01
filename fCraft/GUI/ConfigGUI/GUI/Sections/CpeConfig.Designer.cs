@@ -49,15 +49,25 @@
             this.gboCustomBlocks = new System.Windows.Forms.GroupBox();
             this.btnDefineNewBlock = new System.Windows.Forms.Button();
             this.picBackground = new System.Windows.Forms.PictureBox();
+            this.gboClickDistance = new System.Windows.Forms.GroupBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.chkEnableClickDistance = new MetroFramework.Controls.MetroCheckBox();
+            this.lblMinDistance = new MetroFramework.Controls.MetroLabel();
+            this.numMinDistance = new System.Windows.Forms.NumericUpDown();
+            this.numMaxDistance = new System.Windows.Forms.NumericUpDown();
+            this.lblMaxDistance = new MetroFramework.Controls.MetroLabel();
             this.gboMessageType.SuspendLayout();
             this.gboCustomBlocks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
+            this.gboClickDistance.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMinDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxDistance)).BeginInit();
             this.SuspendLayout();
             // 
             // bResetTab
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.bResetTab.Location = new System.Drawing.Point(559, 427);
+            this.bResetTab.Location = new System.Drawing.Point(553, 301);
             this.bResetTab.Margin = new System.Windows.Forms.Padding(2);
             this.bResetTab.Name = "bResetTab";
             this.bResetTab.Size = new System.Drawing.Size(94, 24);
@@ -389,7 +399,7 @@
             this.lblMTInformation.Location = new System.Drawing.Point(5, 15);
             this.lblMTInformation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMTInformation.Name = "lblMTInformation";
-            this.lblMTInformation.Size = new System.Drawing.Size(309, 58);
+            this.lblMTInformation.Size = new System.Drawing.Size(337, 58);
             this.lblMTInformation.TabIndex = 31;
             this.lblMTInformation.Text = "Message Types displays messages in different areas of the client\'s screen. Here y" +
     "ou can configure all but announcements and chat.";
@@ -400,7 +410,7 @@
             this.gboCustomBlocks.Controls.Add(this.btnDefineNewBlock);
             this.gboCustomBlocks.Location = new System.Drawing.Point(377, 63);
             this.gboCustomBlocks.Name = "gboCustomBlocks";
-            this.gboCustomBlocks.Size = new System.Drawing.Size(220, 50);
+            this.gboCustomBlocks.Size = new System.Drawing.Size(276, 50);
             this.gboCustomBlocks.TabIndex = 31;
             this.gboCustomBlocks.TabStop = false;
             this.gboCustomBlocks.Text = "Custom Blocks";
@@ -410,7 +420,7 @@
             // 
             this.btnDefineNewBlock.Location = new System.Drawing.Point(6, 19);
             this.btnDefineNewBlock.Name = "btnDefineNewBlock";
-            this.btnDefineNewBlock.Size = new System.Drawing.Size(206, 23);
+            this.btnDefineNewBlock.Size = new System.Drawing.Size(264, 23);
             this.btnDefineNewBlock.TabIndex = 0;
             this.btnDefineNewBlock.Text = "Define New Block";
             this.btnDefineNewBlock.UseVisualStyleBackColor = true;
@@ -422,15 +432,122 @@
             this.picBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picBackground.Location = new System.Drawing.Point(0, 55);
             this.picBackground.Name = "picBackground";
-            this.picBackground.Size = new System.Drawing.Size(669, 406);
+            this.picBackground.Size = new System.Drawing.Size(669, 275);
             this.picBackground.TabIndex = 32;
             this.picBackground.TabStop = false;
+            // 
+            // gboClickDistance
+            // 
+            this.gboClickDistance.Controls.Add(this.numMaxDistance);
+            this.gboClickDistance.Controls.Add(this.lblMaxDistance);
+            this.gboClickDistance.Controls.Add(this.numMinDistance);
+            this.gboClickDistance.Controls.Add(this.lblMinDistance);
+            this.gboClickDistance.Controls.Add(this.chkEnableClickDistance);
+            this.gboClickDistance.Controls.Add(this.metroLabel1);
+            this.gboClickDistance.Location = new System.Drawing.Point(377, 119);
+            this.gboClickDistance.Name = "gboClickDistance";
+            this.gboClickDistance.Size = new System.Drawing.Size(276, 150);
+            this.gboClickDistance.TabIndex = 33;
+            this.gboClickDistance.TabStop = false;
+            this.gboClickDistance.Text = "Click Distance";
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.Location = new System.Drawing.Point(6, 19);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(264, 58);
+            this.metroLabel1.TabIndex = 32;
+            this.metroLabel1.Text = "How far and how short player\'s click distance can be set. Determines how many blo" +
+    "cks away a player can click.";
+            this.metroLabel1.WrapToLine = true;
+            // 
+            // chkEnableClickDistance
+            // 
+            this.chkEnableClickDistance.AutoSize = true;
+            this.chkEnableClickDistance.Location = new System.Drawing.Point(6, 80);
+            this.chkEnableClickDistance.Margin = new System.Windows.Forms.Padding(2);
+            this.chkEnableClickDistance.Name = "chkEnableClickDistance";
+            this.chkEnableClickDistance.Size = new System.Drawing.Size(135, 15);
+            this.chkEnableClickDistance.TabIndex = 33;
+            this.chkEnableClickDistance.Text = "Enable Click Distance";
+            this.chkEnableClickDistance.UseSelectable = true;
+            this.chkEnableClickDistance.CheckedChanged += new System.EventHandler(this.chkEnableClickDistance_CheckedChanged);
+            // 
+            // lblMinDistance
+            // 
+            this.lblMinDistance.AutoSize = true;
+            this.lblMinDistance.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblMinDistance.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblMinDistance.Location = new System.Drawing.Point(6, 102);
+            this.lblMinDistance.Name = "lblMinDistance";
+            this.lblMinDistance.Size = new System.Drawing.Size(79, 15);
+            this.lblMinDistance.TabIndex = 34;
+            this.lblMinDistance.Text = "Min. Distance";
+            // 
+            // numMinDistance
+            // 
+            this.numMinDistance.Location = new System.Drawing.Point(86, 97);
+            this.numMinDistance.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numMinDistance.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMinDistance.Name = "numMinDistance";
+            this.numMinDistance.Size = new System.Drawing.Size(55, 20);
+            this.numMinDistance.TabIndex = 35;
+            this.numMinDistance.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMinDistance.ValueChanged += new System.EventHandler(this.numMinDistance_ValueChanged);
+            // 
+            // numMaxDistance
+            // 
+            this.numMaxDistance.Location = new System.Drawing.Point(86, 123);
+            this.numMaxDistance.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numMaxDistance.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMaxDistance.Name = "numMaxDistance";
+            this.numMaxDistance.Size = new System.Drawing.Size(55, 20);
+            this.numMaxDistance.TabIndex = 37;
+            this.numMaxDistance.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numMaxDistance.ValueChanged += new System.EventHandler(this.numMaxDistance_ValueChanged);
+            // 
+            // lblMaxDistance
+            // 
+            this.lblMaxDistance.AutoSize = true;
+            this.lblMaxDistance.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblMaxDistance.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblMaxDistance.Location = new System.Drawing.Point(6, 128);
+            this.lblMaxDistance.Name = "lblMaxDistance";
+            this.lblMaxDistance.Size = new System.Drawing.Size(80, 15);
+            this.lblMaxDistance.TabIndex = 36;
+            this.lblMaxDistance.Text = "Max. Distance";
             // 
             // CpeConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 461);
+            this.ClientSize = new System.Drawing.Size(669, 328);
+            this.Controls.Add(this.gboClickDistance);
             this.Controls.Add(this.gboCustomBlocks);
             this.Controls.Add(this.bResetTab);
             this.Controls.Add(this.gboMessageType);
@@ -445,6 +562,10 @@
             this.gboMessageType.PerformLayout();
             this.gboCustomBlocks.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
+            this.gboClickDistance.ResumeLayout(false);
+            this.gboClickDistance.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMinDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxDistance)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -471,5 +592,12 @@
         private System.Windows.Forms.GroupBox gboCustomBlocks;
         private System.Windows.Forms.Button btnDefineNewBlock;
         private System.Windows.Forms.PictureBox picBackground;
+        private System.Windows.Forms.GroupBox gboClickDistance;
+        internal MetroFramework.Controls.MetroLabel metroLabel1;
+        internal MetroFramework.Controls.MetroCheckBox chkEnableClickDistance;
+        private MetroFramework.Controls.MetroLabel lblMaxDistance;
+        private MetroFramework.Controls.MetroLabel lblMinDistance;
+        internal System.Windows.Forms.NumericUpDown numMaxDistance;
+        internal System.Windows.Forms.NumericUpDown numMinDistance;
     }
 }

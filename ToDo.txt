@@ -23,8 +23,8 @@ For Alpha 0.1.2
 - Fix Updater (DONE!)
 
 For Alpha 0.2
-- *Am I a pretty Girl?* (In Progress)
-- More CPE Configs (ClickDistance, HeldBlocks)
+- *Am I a pretty Girl?* (DONE!)
+- More CPE Configs (ClickDistance, HeldBlocks) (In Progress)
 - Update Cuboid/Draw Operations to use SelectionCuboid Extension
 - Custom Blocks upload .zip to include animations as well instead of .png
 - Server Defined Texture packs (if (textpack != null) // Load saved file else load default.zip

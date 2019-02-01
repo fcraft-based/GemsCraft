@@ -57,6 +57,24 @@ namespace GemsCraft.Players
         /// </summary>
         public Block HeldBlock;
 
+        private int click;
+        /// <summary>
+        /// The distance the player can click
+        /// </summary>
+        public int ClickDistance
+        {
+            get => ConfigKey.ClickDistanceEnabled.Enabled() ? click : 5;
+            set
+            {
+                if (!ConfigKey.ClickDistanceEnabled.Enabled()) return;
+                int min = ConfigKey.MinClickDistance.GetInt();
+                int max = ConfigKey.MaxClickDistance.GetInt();
+                if (value < min || value < 1) click = min;
+                else if (value > max || value > 20) click = max;
+                else click = value;
+            }
+        }
+
         /// <summary> First time the player ever logged in, UTC.
         /// May be DateTime.MinValue if player has never been online. </summary>
         public DateTime FirstLoginDate;

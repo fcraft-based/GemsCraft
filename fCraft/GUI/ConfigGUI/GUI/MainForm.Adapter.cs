@@ -562,6 +562,7 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
 
         private void ApplyTabCpe()
         {
+            #region MessageTypes
             SectionClasses.CpeConfig.chkEnableMessageTypes.Checked = ConfigKey.EnableMessageTypes.Enabled();
             SectionClasses.CpeConfig.chkShowAnnouncements.Checked = ConfigKey.EnableAnnouncements.Enabled();
 
@@ -582,6 +583,22 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
 
             SectionClasses.CpeConfig.chkBR1.Checked = ConfigKey.BR1Enabled.Enabled();
             SectionClasses.CpeConfig.txtBR1.Text = ConfigKey.BR1.GetString();
+            #endregion
+
+            bool cdEnabled = ConfigKey.ClickDistanceEnabled.Enabled();
+            SectionClasses.CpeConfig.chkEnableClickDistance.Checked = cdEnabled;
+            if (cdEnabled)
+            {
+                SectionClasses.CpeConfig.numMinDistance.Value =
+                    ConfigKey.MinClickDistance.GetInt();
+                SectionClasses.CpeConfig.numMaxDistance.Value =
+                    ConfigKey.MaxClickDistance.GetInt();
+            }
+            else
+            {
+                SectionClasses.CpeConfig.numMinDistance.Value = 1;
+                SectionClasses.CpeConfig.numMaxDistance.Value = 5;
+            }
         }
 
         private static void ApplyEnum<TEnum>([NotNull] ListControl box, ConfigKey key, TEnum def) where TEnum : struct
@@ -822,7 +839,7 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
 
             // CPE
 
-            #region Message Type Config
+            #region MessageTypes
             ConfigKey.EnableMessageTypes.TrySetValue(SectionClasses.CpeConfig.chkEnableMessageTypes.Checked);
             ConfigKey.EnableAnnouncements.TrySetValue(SectionClasses.CpeConfig.chkShowAnnouncements.Checked);
 
@@ -843,6 +860,17 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
 
             ConfigKey.BR1Enabled.TrySetValue(SectionClasses.CpeConfig.chkBR1.Checked);
             ConfigKey.BR1.TrySetValue(SectionClasses.CpeConfig.txtBR1.Text);
+
+            #endregion
+
+            #region ClickDistance
+
+            bool cdEnabled = SectionClasses.CpeConfig.chkEnableClickDistance.Checked;
+            ConfigKey.ClickDistanceEnabled.TrySetValue(cdEnabled);
+            ConfigKey.MinClickDistance.TrySetValue(
+                cdEnabled ? SectionClasses.CpeConfig.numMinDistance.Value : 1);
+            ConfigKey.MaxClickDistance.TrySetValue(
+                cdEnabled ? SectionClasses.CpeConfig.numMaxDistance.Value : 5);
 
             #endregion
             SaveWorldList();

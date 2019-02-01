@@ -19,8 +19,8 @@ namespace GemsCraft.Commands {
     /// <summary>
     /// Most commands for server moderation - kick, ban, rank change, etc - are here.
     /// </summary>
-    static class ModerationCommands {
-        const string BanCommonHelp = "Ban information can be viewed with &H/BanInfo";
+    internal static class ModerationCommands {
+        private const string BanCommonHelp = "Ban information can be viewed with &H/BanInfo";
 
         internal static void Init() {
             CdBan.Help += BanCommonHelp;
@@ -116,7 +116,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.*/
 
-        static readonly CommandDescriptor CdGetBlock = new CommandDescriptor
+        private static readonly CommandDescriptor CdGetBlock = new CommandDescriptor
         {
             Name = "GetBlock",
             IsConsoleSafe = true,
@@ -130,7 +130,7 @@ THE SOFTWARE.*/
         private static void GetBlockHandler(Player player, Command cmd)
         {
             string target = cmd.Next();
-            if (String.IsNullOrEmpty(target))
+            if (string.IsNullOrEmpty(target))
             {
                 CdGetBlock.PrintUsage(player);
                 return;
@@ -383,8 +383,15 @@ THE SOFTWARE.*/
 
         private static void SetClickHandler(Player player, Command cmd)
         {
+            if (!ConfigKey.ClickDistanceEnabled.Enabled())
+            {
+                player.Message("&4Click Distance is not enabled on this server.");
+                return;
+            }
+
+            
             string targetName = cmd.Next();
-            if (String.IsNullOrEmpty(targetName))
+            if (string.IsNullOrEmpty(targetName))
             {
                 CdSetClickDistance.PrintUsage(player);
                 return;
@@ -407,18 +414,22 @@ THE SOFTWARE.*/
                 target.hasCustomClickDistance = false;
                 return;
             }
-            int distance;
-            if (String.IsNullOrEmpty(number) || !Int32.TryParse(number, out distance))
+
+            if (string.IsNullOrEmpty(number) || !int.TryParse(number, out var distance))
             {
                 CdSetClickDistance.PrintUsage(player);
                 return;
             }
-            if (distance > 20 || distance < 1)
+
+            int max = ConfigKey.MaxClickDistance.GetInt();
+            int min = ConfigKey.MinClickDistance.GetInt();
+            if (distance > max || distance < min)
             {
-                player.Message("Accepted values are between 1 and 20!");
+                player.Message($"Accepted values are between {min} and {max}!");
                 return;
             }
-            int adjustedDistance = (32 * distance);
+            player.Info.ClickDistance = distance;
+            int adjustedDistance = 32 * player.Info.ClickDistance;
             target.Send(PacketWriter.MakeSetClickDistance(adjustedDistance));
             target.hasCustomClickDistance = true;
             player.Message("Player {0}&s's click distance was set to {1} blocks.", target.ClassyName, distance);
