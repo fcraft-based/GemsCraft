@@ -129,6 +129,11 @@ THE SOFTWARE.*/
 
         private static void GetBlockHandler(Player player, Command cmd)
         {
+            if (!ConfigKey.EnableHeldBlock.Enabled())
+            {
+                player.Message("&4Held block is not enabled on this server.");
+                return;
+            }
             string target = cmd.Next();
             if (string.IsNullOrEmpty(target))
             {
@@ -162,12 +167,17 @@ THE SOFTWARE.*/
         };
 
         private static void FHHandler(Player player, Command cmd)  {
+            if (!ConfigKey.EnableHeldBlock.Enabled())
+            {
+                player.Message("&4Held block is not enabled on this server.");
+                return;
+            }
             if (!player.usesCPE) {
                 player.Message("This is a ClassiCube only command!");
                 return;
             }
             string target = cmd.Next();
-            if (String.IsNullOrEmpty(target)) {
+            if (string.IsNullOrEmpty(target)) {
                 CdForceHold.PrintUsage(player);
                 return;
             }
@@ -180,7 +190,7 @@ THE SOFTWARE.*/
             }
 
             string blockStr = cmd.Next();
-            if (String.IsNullOrEmpty(blockStr)) {
+            if (string.IsNullOrEmpty(blockStr)) {
                 CdForceHold.PrintUsage(player);
                 return;
             }

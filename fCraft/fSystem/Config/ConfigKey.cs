@@ -686,7 +686,15 @@ but will reduce bandwidth use." )]
 
         [IntKey(ConfigSection.CPE, 5,
 @"Max. Click Distance that can be set.")]
-        MaxClickDistance
+        MaxClickDistance,
+
+        #endregion
+
+        #region HeldBlock
+
+        [BoolKey(ConfigSection.CPE, true,
+ @"If enabled, allows the use of the held block CPE Extension")]
+        EnableHeldBlock
 
         #endregion
         #endregion

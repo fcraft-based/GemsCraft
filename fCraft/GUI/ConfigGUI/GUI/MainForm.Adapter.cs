@@ -585,6 +585,8 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
             SectionClasses.CpeConfig.txtBR1.Text = ConfigKey.BR1.GetString();
             #endregion
 
+            #region ClickDistance
+
             bool cdEnabled = ConfigKey.ClickDistanceEnabled.Enabled();
             SectionClasses.CpeConfig.chkEnableClickDistance.Checked = cdEnabled;
             if (cdEnabled)
@@ -599,6 +601,15 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
                 SectionClasses.CpeConfig.numMinDistance.Value = 1;
                 SectionClasses.CpeConfig.numMaxDistance.Value = 5;
             }
+
+            #endregion
+
+            #region HeldBlock
+
+            SectionClasses.CpeConfig.chkEnableHeldBlock.Checked =
+                ConfigKey.EnableHeldBlock.Enabled();
+
+            #endregion
         }
 
         private static void ApplyEnum<TEnum>([NotNull] ListControl box, ConfigKey key, TEnum def) where TEnum : struct
@@ -873,6 +884,13 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
                 cdEnabled ? SectionClasses.CpeConfig.numMaxDistance.Value : 5);
 
             #endregion
+
+            #region HeldBlock
+
+            ConfigKey.EnableHeldBlock.TrySetValue(SectionClasses.CpeConfig.chkEnableHeldBlock.Checked);
+
+            #endregion
+
             SaveWorldList();
         }
 

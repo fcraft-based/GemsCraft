@@ -50,24 +50,28 @@
             this.btnDefineNewBlock = new System.Windows.Forms.Button();
             this.picBackground = new System.Windows.Forms.PictureBox();
             this.gboClickDistance = new System.Windows.Forms.GroupBox();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.chkEnableClickDistance = new MetroFramework.Controls.MetroCheckBox();
-            this.lblMinDistance = new MetroFramework.Controls.MetroLabel();
-            this.numMinDistance = new System.Windows.Forms.NumericUpDown();
             this.numMaxDistance = new System.Windows.Forms.NumericUpDown();
             this.lblMaxDistance = new MetroFramework.Controls.MetroLabel();
+            this.numMinDistance = new System.Windows.Forms.NumericUpDown();
+            this.lblMinDistance = new MetroFramework.Controls.MetroLabel();
+            this.chkEnableClickDistance = new MetroFramework.Controls.MetroCheckBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.gboHeldBlock = new System.Windows.Forms.GroupBox();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.chkEnableHeldBlock = new MetroFramework.Controls.MetroCheckBox();
             this.gboMessageType.SuspendLayout();
             this.gboCustomBlocks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.gboClickDistance.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numMinDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMinDistance)).BeginInit();
+            this.gboHeldBlock.SuspendLayout();
             this.SuspendLayout();
             // 
             // bResetTab
             // 
             this.bResetTab.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.bResetTab.Location = new System.Drawing.Point(553, 301);
+            this.bResetTab.Location = new System.Drawing.Point(559, 363);
             this.bResetTab.Margin = new System.Windows.Forms.Padding(2);
             this.bResetTab.Name = "bResetTab";
             this.bResetTab.Size = new System.Drawing.Size(94, 24);
@@ -95,7 +99,7 @@
             this.gboMessageType.Controls.Add(this.lblMTInformation);
             this.gboMessageType.Location = new System.Drawing.Point(16, 63);
             this.gboMessageType.Name = "gboMessageType";
-            this.gboMessageType.Size = new System.Drawing.Size(354, 262);
+            this.gboMessageType.Size = new System.Drawing.Size(354, 314);
             this.gboMessageType.TabIndex = 28;
             this.gboMessageType.TabStop = false;
             this.gboMessageType.Text = "Message Types";
@@ -117,7 +121,7 @@
             this.txtStatus1.CustomButton.Visible = false;
             this.txtStatus1.Lines = new string[] {
         "metroTextBox6"};
-            this.txtStatus1.Location = new System.Drawing.Point(207, 108);
+            this.txtStatus1.Location = new System.Drawing.Point(207, 158);
             this.txtStatus1.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus1.MaxLength = 32767;
             this.txtStatus1.Name = "txtStatus1";
@@ -151,7 +155,7 @@
             this.txtStatus2.CustomButton.Visible = false;
             this.txtStatus2.Lines = new string[] {
         "metroTextBox5"};
-            this.txtStatus2.Location = new System.Drawing.Point(207, 132);
+            this.txtStatus2.Location = new System.Drawing.Point(207, 182);
             this.txtStatus2.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus2.MaxLength = 32767;
             this.txtStatus2.Name = "txtStatus2";
@@ -185,7 +189,7 @@
             this.txtStatus3.CustomButton.Visible = false;
             this.txtStatus3.Lines = new string[] {
         "metroTextBox4"};
-            this.txtStatus3.Location = new System.Drawing.Point(207, 155);
+            this.txtStatus3.Location = new System.Drawing.Point(207, 205);
             this.txtStatus3.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus3.MaxLength = 32767;
             this.txtStatus3.Name = "txtStatus3";
@@ -219,7 +223,7 @@
             this.txtBR3.CustomButton.Visible = false;
             this.txtBR3.Lines = new string[] {
         "metroTextBox3"};
-            this.txtBR3.Location = new System.Drawing.Point(207, 186);
+            this.txtBR3.Location = new System.Drawing.Point(207, 236);
             this.txtBR3.Margin = new System.Windows.Forms.Padding(2);
             this.txtBR3.MaxLength = 32767;
             this.txtBR3.Name = "txtBR3";
@@ -253,7 +257,7 @@
             this.txtBR2.CustomButton.Visible = false;
             this.txtBR2.Lines = new string[] {
         "metroTextBox2"};
-            this.txtBR2.Location = new System.Drawing.Point(207, 210);
+            this.txtBR2.Location = new System.Drawing.Point(207, 260);
             this.txtBR2.Margin = new System.Windows.Forms.Padding(2);
             this.txtBR2.MaxLength = 32767;
             this.txtBR2.Name = "txtBR2";
@@ -287,7 +291,7 @@
             this.txtBR1.CustomButton.Visible = false;
             this.txtBR1.Lines = new string[] {
         "metroTextBox1"};
-            this.txtBR1.Location = new System.Drawing.Point(207, 233);
+            this.txtBR1.Location = new System.Drawing.Point(207, 283);
             this.txtBR1.Margin = new System.Windows.Forms.Padding(2);
             this.txtBR1.MaxLength = 32767;
             this.txtBR1.Name = "txtBR1";
@@ -307,7 +311,7 @@
             // chkBR1
             // 
             this.chkBR1.AutoSize = true;
-            this.chkBR1.Location = new System.Drawing.Point(6, 238);
+            this.chkBR1.Location = new System.Drawing.Point(6, 288);
             this.chkBR1.Margin = new System.Windows.Forms.Padding(2);
             this.chkBR1.Name = "chkBR1";
             this.chkBR1.Size = new System.Drawing.Size(202, 15);
@@ -318,7 +322,7 @@
             // chkBR2
             // 
             this.chkBR2.AutoSize = true;
-            this.chkBR2.Location = new System.Drawing.Point(6, 215);
+            this.chkBR2.Location = new System.Drawing.Point(6, 265);
             this.chkBR2.Margin = new System.Windows.Forms.Padding(2);
             this.chkBR2.Name = "chkBR2";
             this.chkBR2.Size = new System.Drawing.Size(202, 15);
@@ -329,7 +333,7 @@
             // chkBR3
             // 
             this.chkBR3.AutoSize = true;
-            this.chkBR3.Location = new System.Drawing.Point(6, 191);
+            this.chkBR3.Location = new System.Drawing.Point(6, 241);
             this.chkBR3.Margin = new System.Windows.Forms.Padding(2);
             this.chkBR3.Name = "chkBR3";
             this.chkBR3.Size = new System.Drawing.Size(202, 15);
@@ -340,7 +344,7 @@
             // chkStatus3
             // 
             this.chkStatus3.AutoSize = true;
-            this.chkStatus3.Location = new System.Drawing.Point(6, 159);
+            this.chkStatus3.Location = new System.Drawing.Point(6, 209);
             this.chkStatus3.Margin = new System.Windows.Forms.Padding(2);
             this.chkStatus3.Name = "chkStatus3";
             this.chkStatus3.Size = new System.Drawing.Size(182, 15);
@@ -352,7 +356,7 @@
             // chkStatus2
             // 
             this.chkStatus2.AutoSize = true;
-            this.chkStatus2.Location = new System.Drawing.Point(6, 136);
+            this.chkStatus2.Location = new System.Drawing.Point(6, 186);
             this.chkStatus2.Margin = new System.Windows.Forms.Padding(2);
             this.chkStatus2.Name = "chkStatus2";
             this.chkStatus2.Size = new System.Drawing.Size(182, 15);
@@ -363,7 +367,7 @@
             // chkStatus1
             // 
             this.chkStatus1.AutoSize = true;
-            this.chkStatus1.Location = new System.Drawing.Point(6, 112);
+            this.chkStatus1.Location = new System.Drawing.Point(6, 162);
             this.chkStatus1.Margin = new System.Windows.Forms.Padding(2);
             this.chkStatus1.Name = "chkStatus1";
             this.chkStatus1.Size = new System.Drawing.Size(182, 15);
@@ -432,7 +436,7 @@
             this.picBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picBackground.Location = new System.Drawing.Point(0, 55);
             this.picBackground.Name = "picBackground";
-            this.picBackground.Size = new System.Drawing.Size(669, 275);
+            this.picBackground.Size = new System.Drawing.Size(669, 343);
             this.picBackground.TabIndex = 32;
             this.picBackground.TabStop = false;
             // 
@@ -450,63 +454,6 @@
             this.gboClickDistance.TabIndex = 33;
             this.gboClickDistance.TabStop = false;
             this.gboClickDistance.Text = "Click Distance";
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.Location = new System.Drawing.Point(6, 19);
-            this.metroLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(264, 58);
-            this.metroLabel1.TabIndex = 32;
-            this.metroLabel1.Text = "How far and how short player\'s click distance can be set. Determines how many blo" +
-    "cks away a player can click.";
-            this.metroLabel1.WrapToLine = true;
-            // 
-            // chkEnableClickDistance
-            // 
-            this.chkEnableClickDistance.AutoSize = true;
-            this.chkEnableClickDistance.Location = new System.Drawing.Point(6, 80);
-            this.chkEnableClickDistance.Margin = new System.Windows.Forms.Padding(2);
-            this.chkEnableClickDistance.Name = "chkEnableClickDistance";
-            this.chkEnableClickDistance.Size = new System.Drawing.Size(135, 15);
-            this.chkEnableClickDistance.TabIndex = 33;
-            this.chkEnableClickDistance.Text = "Enable Click Distance";
-            this.chkEnableClickDistance.UseSelectable = true;
-            this.chkEnableClickDistance.CheckedChanged += new System.EventHandler(this.chkEnableClickDistance_CheckedChanged);
-            // 
-            // lblMinDistance
-            // 
-            this.lblMinDistance.AutoSize = true;
-            this.lblMinDistance.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblMinDistance.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblMinDistance.Location = new System.Drawing.Point(6, 102);
-            this.lblMinDistance.Name = "lblMinDistance";
-            this.lblMinDistance.Size = new System.Drawing.Size(79, 15);
-            this.lblMinDistance.TabIndex = 34;
-            this.lblMinDistance.Text = "Min. Distance";
-            // 
-            // numMinDistance
-            // 
-            this.numMinDistance.Location = new System.Drawing.Point(86, 97);
-            this.numMinDistance.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.numMinDistance.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numMinDistance.Name = "numMinDistance";
-            this.numMinDistance.Size = new System.Drawing.Size(55, 20);
-            this.numMinDistance.TabIndex = 35;
-            this.numMinDistance.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numMinDistance.ValueChanged += new System.EventHandler(this.numMinDistance_ValueChanged);
             // 
             // numMaxDistance
             // 
@@ -542,11 +489,101 @@
             this.lblMaxDistance.TabIndex = 36;
             this.lblMaxDistance.Text = "Max. Distance";
             // 
+            // numMinDistance
+            // 
+            this.numMinDistance.Location = new System.Drawing.Point(86, 97);
+            this.numMinDistance.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numMinDistance.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMinDistance.Name = "numMinDistance";
+            this.numMinDistance.Size = new System.Drawing.Size(55, 20);
+            this.numMinDistance.TabIndex = 35;
+            this.numMinDistance.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMinDistance.ValueChanged += new System.EventHandler(this.numMinDistance_ValueChanged);
+            // 
+            // lblMinDistance
+            // 
+            this.lblMinDistance.AutoSize = true;
+            this.lblMinDistance.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblMinDistance.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblMinDistance.Location = new System.Drawing.Point(6, 102);
+            this.lblMinDistance.Name = "lblMinDistance";
+            this.lblMinDistance.Size = new System.Drawing.Size(79, 15);
+            this.lblMinDistance.TabIndex = 34;
+            this.lblMinDistance.Text = "Min. Distance";
+            // 
+            // chkEnableClickDistance
+            // 
+            this.chkEnableClickDistance.AutoSize = true;
+            this.chkEnableClickDistance.Location = new System.Drawing.Point(6, 80);
+            this.chkEnableClickDistance.Margin = new System.Windows.Forms.Padding(2);
+            this.chkEnableClickDistance.Name = "chkEnableClickDistance";
+            this.chkEnableClickDistance.Size = new System.Drawing.Size(135, 15);
+            this.chkEnableClickDistance.TabIndex = 33;
+            this.chkEnableClickDistance.Text = "Enable Click Distance";
+            this.chkEnableClickDistance.UseSelectable = true;
+            this.chkEnableClickDistance.CheckedChanged += new System.EventHandler(this.chkEnableClickDistance_CheckedChanged);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.Location = new System.Drawing.Point(6, 19);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(264, 58);
+            this.metroLabel1.TabIndex = 32;
+            this.metroLabel1.Text = "How far and how short player\'s click distance can be set. Determines how many blo" +
+    "cks away a player can click.";
+            this.metroLabel1.WrapToLine = true;
+            // 
+            // gboHeldBlock
+            // 
+            this.gboHeldBlock.Controls.Add(this.chkEnableHeldBlock);
+            this.gboHeldBlock.Controls.Add(this.metroLabel2);
+            this.gboHeldBlock.Location = new System.Drawing.Point(377, 273);
+            this.gboHeldBlock.Name = "gboHeldBlock";
+            this.gboHeldBlock.Size = new System.Drawing.Size(276, 85);
+            this.gboHeldBlock.TabIndex = 34;
+            this.gboHeldBlock.TabStop = false;
+            this.gboHeldBlock.Text = "Held Block";
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.Location = new System.Drawing.Point(6, 16);
+            this.metroLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(264, 47);
+            this.metroLabel2.TabIndex = 33;
+            this.metroLabel2.Text = "The ability to change/get a player\'s block type in hand";
+            this.metroLabel2.WrapToLine = true;
+            // 
+            // chkEnableHeldBlock
+            // 
+            this.chkEnableHeldBlock.AutoSize = true;
+            this.chkEnableHeldBlock.Location = new System.Drawing.Point(6, 59);
+            this.chkEnableHeldBlock.Margin = new System.Windows.Forms.Padding(2);
+            this.chkEnableHeldBlock.Name = "chkEnableHeldBlock";
+            this.chkEnableHeldBlock.Size = new System.Drawing.Size(118, 15);
+            this.chkEnableHeldBlock.TabIndex = 34;
+            this.chkEnableHeldBlock.Text = "Enable Held Block";
+            this.chkEnableHeldBlock.UseSelectable = true;
+            // 
             // CpeConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 328);
+            this.ClientSize = new System.Drawing.Size(669, 393);
+            this.Controls.Add(this.gboHeldBlock);
             this.Controls.Add(this.gboClickDistance);
             this.Controls.Add(this.gboCustomBlocks);
             this.Controls.Add(this.bResetTab);
@@ -564,8 +601,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).EndInit();
             this.gboClickDistance.ResumeLayout(false);
             this.gboClickDistance.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numMinDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMinDistance)).EndInit();
+            this.gboHeldBlock.ResumeLayout(false);
+            this.gboHeldBlock.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -599,5 +638,8 @@
         private MetroFramework.Controls.MetroLabel lblMinDistance;
         internal System.Windows.Forms.NumericUpDown numMaxDistance;
         internal System.Windows.Forms.NumericUpDown numMinDistance;
+        private System.Windows.Forms.GroupBox gboHeldBlock;
+        internal MetroFramework.Controls.MetroCheckBox chkEnableHeldBlock;
+        internal MetroFramework.Controls.MetroLabel metroLabel2;
     }
 }
