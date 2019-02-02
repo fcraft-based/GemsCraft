@@ -25,8 +25,8 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 	//draws volume, defined by an inequality 
 	public class EqualityDrawOperation : DrawOperation
 	{
-		private Expression _expression;
-		private Scaler _scaler;
+		private readonly Expression _expression;
+		private readonly Scaler _scaler;
 		private int _count;
 		public EqualityDrawOperation(Player player, Command cmd)
 			: base(player)
@@ -45,7 +45,7 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 
 			strFunc = strFunc.ToLower();
 
-			_expression = SimpleParser.ParseAsEquality(strFunc, new string[] { "x", "y", "z" });
+			_expression = SimpleParser.ParseAsEquality(strFunc, new[] { "x", "y", "z" });
 			
 			Player.Message("Expression parsed as " + _expression.Print());
 			string scalingStr = cmd.Next();
@@ -60,18 +60,15 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			InternalDraw(ref Coords.X, ref Coords.Y, ref Coords.Z,
 						Bounds.XMin, Bounds.XMax, Bounds.YMin, Bounds.YMax, Bounds.ZMin, Bounds.ZMax,
 						ref Coords.X, ref Coords.Y, ref Coords.Z,
-						Bounds.XMin, Bounds.XMax, Bounds.YMin, Bounds.YMax, Bounds.ZMin, Bounds.ZMax,
-						maxBlocksToDraw);
+						Bounds.XMin, Bounds.XMax, Bounds.YMin, Bounds.YMax, Bounds.ZMin, Bounds.ZMax);
 			InternalDraw(ref Coords.X, ref Coords.Z, ref Coords.Y,
 						Bounds.XMin, Bounds.XMax, Bounds.ZMin, Bounds.ZMax, Bounds.YMin, Bounds.YMax,
 						ref Coords.X, ref Coords.Y, ref Coords.Z,
-						Bounds.XMin, Bounds.XMax, Bounds.YMin, Bounds.YMax, Bounds.ZMin, Bounds.ZMax,
-						maxBlocksToDraw);
+						Bounds.XMin, Bounds.XMax, Bounds.YMin, Bounds.YMax, Bounds.ZMin, Bounds.ZMax);
 			InternalDraw(ref Coords.Y, ref Coords.Z, ref Coords.X,
 						Bounds.YMin, Bounds.YMax, Bounds.ZMin, Bounds.ZMax, Bounds.XMin, Bounds.XMax,
 						ref Coords.X, ref Coords.Y, ref Coords.Z,
-						Bounds.XMin, Bounds.XMax, Bounds.YMin, Bounds.YMax, Bounds.ZMin, Bounds.ZMax,
-						maxBlocksToDraw);
+						Bounds.XMin, Bounds.XMax, Bounds.YMin, Bounds.YMax, Bounds.ZMin, Bounds.ZMax);
 			
 			IsDone = true;
 			return _count;
@@ -79,13 +76,14 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 
 		//this method exists to box coords nicely as ref params, note that the set of {arg1, arg2, arg3} must be the same with 
 		//{ xArg, yArg, zArg }
-		private int InternalDraw(ref int arg1, ref int arg2, ref int arg3, 
+	    // ReSharper disable once UnusedMethodReturnValue.Local
+	    private int InternalDraw(ref int arg1, ref int arg2, ref int arg3, 
 			int min1, int max1, int min2, int max2, int min3, int max3, 
 			ref int argX, ref int argY, ref int argZ, 
-			int minX, int maxX, int minY, int maxY, int minZ, int maxZ, 
-			int maxBlocksToDraw)
+			int minX, int maxX, int minY, int maxY, int minZ, int maxZ)
 		{
-			_count = 0;
+		    if (arg1 <= 0) throw new ArgumentOutOfRangeException(nameof(arg1));
+		    _count = 0;
 			int exCount = 0;
 
             for (arg1 = min1; arg1 <= max1 && MathCommands.MaxCalculationExceptions >= exCount; ++arg1)
@@ -106,7 +104,8 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 							//decision: we cant only take points with 0 as comparison result as it will happen almost never.
 							//We are reacting on the changes of the comparison result sign 
 							arg3 = int.MaxValue;
-							if (res.Item1 == 0) //exactly equal, wow, such a surprise
+						    // ReSharper disable once CompareOfFloatsByEqualityOperator
+						    if (res.Item1 == 0) //exactly equal, wow, such a surprise
 								arg3 = arg3Iterator;
 							else if (res.Item1 * prevComp < 0) //i.e. different signs, but not the prev==0
 								arg3 = res.Item2 < prevDiff ? arg3Iterator : arg3Iterator - 1; //then choose the closest to 0 difference
@@ -124,12 +123,10 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 							//the exception here is kinda of normal, for functions (especially interesting ones)
 							//may have eg punctured points; we just have to keep an eye on the number, since producing 10000
 							//exceptions in the multiclient application is not the best idea
-                            if (++exCount > MathCommands.MaxCalculationExceptions)
-							{
-                                Player.Message("Surface drawing is interrupted: too many (>" + MathCommands.MaxCalculationExceptions +
-								               ") calculation exceptions.");
-								break;
-							}
+						    if (++exCount <= MathCommands.MaxCalculationExceptions) continue;
+						    Player.Message("Surface drawing is interrupted: too many (>" + MathCommands.MaxCalculationExceptions +
+						                   ") calculation exceptions.");
+						    break;
 						}
 					}
 				}
@@ -146,12 +143,6 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			BlocksTotalEstimate = Bounds.Volume;
 			return true;
 		}
-		public override string Name
-		{
-			get
-			{
-				return "Equality";
-			}
-		}
+		public override string Name => "Equality";
 	}
 }

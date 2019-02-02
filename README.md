@@ -1,6 +1,6 @@
 ﻿Alpha 0.1.2
 #GemsCraft
-![GemsCraft](http://godispower.us/main.png "Shining Gems")<br />
+![GemsCraft](http://gemz.christplay.x10host.com/cool%20logo.png "Shining Gems")<br />
 
 Dowload the latest GemsCraft release here: 
 https://gemscraft.net/
