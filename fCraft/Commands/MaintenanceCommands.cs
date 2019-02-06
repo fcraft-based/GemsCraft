@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Utils;

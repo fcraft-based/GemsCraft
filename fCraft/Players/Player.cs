@@ -12,7 +12,7 @@ using GemsCraft.Commands;
 using GemsCraft.Drawing;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 
 using GemsCraft.Network;
 using GemsCraft.Plugins;
@@ -862,7 +862,7 @@ namespace GemsCraft.Players
             {
                 Message("Selection finished.");
                 if (cmd.ToLower() == "highlight")
-                {
+                { 
                     int ID = LegendCraft.GetNewHighlightId();
                     this.World.Players.Send(PacketWriter.MakeSelectionCuboid((byte)ID, ID.ToString(), selectedMarks[0], selectedMarks[1], color, percentOpacity));
                     Server.Highlights.Add(highlightName, new Tuple<int, Vector3I, Vector3I, System.Drawing.Color, int>(ID, selectedMarks[0], selectedMarks[1], color, percentOpacity));

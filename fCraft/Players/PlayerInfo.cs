@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 using System.IO;
 using System.Linq;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 
 using GemsCraft.Utils;
 using GemsCraft.Worlds;
@@ -518,7 +518,7 @@ namespace GemsCraft.Players
 
 
         // generate blank info for a new player
-        public PlayerInfo([NotNull] string name, [NotNull] IPAddress lastIP, [NotNull] Rank startingRank)
+        public PlayerInfo([NotNull] string name, [NotNull] IPAddress lastIP, Rank startingRank)
             : this()
         {
             FirstLoginDate = DateTime.UtcNow;

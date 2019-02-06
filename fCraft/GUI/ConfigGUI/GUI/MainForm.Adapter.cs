@@ -7,7 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Players;
 using GemsCraft.Utils;
 using JetBrains.Annotations;

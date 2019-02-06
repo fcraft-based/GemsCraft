@@ -10,7 +10,7 @@ using System.Threading;
 using System.Windows.Forms;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Utils;
@@ -296,6 +296,35 @@ namespace GemsCraft.GUI.ServerGUI
                     }
                     logBox.Select(oldLength, msgToAppend.Length);
 
+                    switch (e.MessageType)
+                    {
+                        case LogType.PrivateChat:
+                            logBox.SelectionColor = System.Drawing.Color.Teal;
+                            break;
+                        case LogType.IRC:
+                            logBox.SelectionColor = System.Drawing.Color.FromName(Color.GetName(Color.IRC) ?? "Purple");
+                            break;
+                        case LogType.ChangedWorld:
+                            logBox.SelectionColor = System.Drawing.Color.Orange;
+                            break;
+                        case LogType.Warning:
+                            logBox.SelectionColor = System.Drawing.Color.Yellow;
+                            break;
+                        case LogType.Debug:
+                            logBox.SelectionColor = System.Drawing.Color.DarkGray;
+                            break;
+                        case LogType.Error:
+                        case LogType.SeriousError:
+                            logBox.SelectionColor = System.Drawing.Color.Red;
+                            break;
+                        case LogType.ConsoleInput:
+                        case LogType.ConsoleOutput:
+                            logBox.SelectionColor = System.Drawing.Color.White;
+                            break;
+                        default:
+                            logBox.SelectionColor = System.Drawing.Color.LightGray;
+                            break;
+                    }
                     // cut off the log, if too long
                     if (logBox.Lines.Length > MaxLinesInLog)
                     {
@@ -468,8 +497,7 @@ namespace GemsCraft.GUI.ServerGUI
 
         private void CopyMenuPopupHandler(object sender, EventArgs e)
         {
-            ContextMenu menu = sender as ContextMenu;
-            if (menu != null)
+            if (sender is ContextMenu menu)
             {
                 menu.MenuItems[0].Enabled = (logBox.SelectedText.Length > 0);
             }
@@ -477,7 +505,6 @@ namespace GemsCraft.GUI.ServerGUI
 
         public void SetDefTheme()
         {
-            BackColor = System.Drawing.Color.Firebrick;
             playerList.BackColor = System.Drawing.Color.White;
             logBox.BackColor = System.Drawing.Color.Black;
             logBox.SelectAll();

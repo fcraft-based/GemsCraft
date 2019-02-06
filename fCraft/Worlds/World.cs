@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Games;
 using GemsCraft.MapConversion;
 using GemsCraft.Network;

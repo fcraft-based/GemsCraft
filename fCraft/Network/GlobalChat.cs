@@ -40,7 +40,7 @@ using System.Collections.Concurrent;
 using JetBrains.Annotations;
 using System.Text;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Players;
 using GemsCraft.Utils;
 

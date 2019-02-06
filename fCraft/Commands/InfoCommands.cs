@@ -9,7 +9,7 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Utils;

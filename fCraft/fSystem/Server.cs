@@ -20,7 +20,7 @@ using GemsCraft.Commands;
 using GemsCraft.Commands.Command_Handlers;
 using GemsCraft.Drawing;
 using GemsCraft.Events;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Plugins;
@@ -314,7 +314,7 @@ namespace GemsCraft.fSystem {
             }
 
 #if DEBUG
-            Config.Config.RunSelfTest();
+            Config.RunSelfTest();
 #else
             // delete the old updater, if exists
             File.Delete( Paths.UpdaterFileName );
@@ -322,7 +322,7 @@ namespace GemsCraft.fSystem {
 #endif
 
             // try to load the config
-            if( !Config.Config.Load( false, false ) ) {
+            if( !Config.Load( false, false ) ) {
                 throw new Exception( "GemsCraft Config failed to initialize" );
             }
 
@@ -335,7 +335,7 @@ namespace GemsCraft.fSystem {
             // Load Default Ranks in Config Doesn't exist
             if (!File.Exists("config.json"))
             {
-                Config.Config.LoadRankList(Config.Config._defaultRanks);
+                Config.LoadRankList(Config.DefaultRanks);
             }
 
             // load player DB

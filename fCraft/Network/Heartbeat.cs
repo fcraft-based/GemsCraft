@@ -9,7 +9,7 @@ using System.Net.Sockets;
 using System.Linq;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Network;
 using GemsCraft.Utils;
 using JetBrains.Annotations;

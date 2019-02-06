@@ -261,10 +261,10 @@
     <Compile Include="Drawing\nbt\Tags\NbtString.cs" />
     <Compile Include="Drawing\nbt\Tags\NbtTag.cs" />
     <Compile Include="Drawing\nbt\Tags\NbtTagType.cs" />
-    <Compile Include="fSystem\Config\Config.cs" />
-    <Compile Include="fSystem\Config\ConfigKey.cs" />
-    <Compile Include="fSystem\Config\ConfigKey.Metadata.cs" />
-    <Compile Include="fSystem\Config\ConfigJObject.cs" />
+    <Compile Include="Configuration\Config.cs" />
+    <Compile Include="Configuration\ConfigKey.cs" />
+    <Compile Include="Configuration\ConfigKey.Metadata.cs" />
+    <Compile Include="Configuration\ConfigJObject.cs" />
     <Compile Include="Games\CTF.cs" />
     <Compile Include="Games\FFA.cs" />
     <Compile Include="Games\Football.cs" />
@@ -622,7 +622,7 @@
     <Compile Include="MapConversion\MapOpticraft.cs" />
     <Compile Include="MapConversion\MapFCMv4.cs" />
     <Compile Include="fSystem\ArgKey.cs" />
-    <Compile Include="fSystem\Config\ConfigSection.cs" />
+    <Compile Include="Configuration\ConfigSection.cs" />
     <Compile Include="Utils\Vector3I.cs" />
     <Compile Include="Worlds\BlockChangeContext.cs" />
     <Compile Include="Worlds\BlockDB.cs" />

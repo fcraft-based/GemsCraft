@@ -9,7 +9,7 @@ using System.Management;
 using System.Net;
 using System.Windows.Forms;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Utils;

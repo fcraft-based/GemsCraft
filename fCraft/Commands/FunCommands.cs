@@ -20,7 +20,7 @@ using GemsCraft.Commands.Command_Handlers;
 using GemsCraft.Drawing.DrawOps;
 using GemsCraft.Drawing.DrawOps.RandomMaze;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Games;
 using GemsCraft.Network;
 using GemsCraft.Players;

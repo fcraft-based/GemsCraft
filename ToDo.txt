@@ -1,33 +1,10 @@
 ----------------GEMSCRAFT TODO----------------
-
-For Alpha 0.0
-- New GUI (DONE!)
-- Possible switch to json for config (DONE!)
-- Commands to edit config (DONE!)
-
-For Alpha 0.1
-- Emotes (DONE!)
-- MessageType CPE extension (DONE!)
-- Implement BlockDefinitions (DONE!)
-- Implement EnvMapAspect (DONE!)
-
-For Alpha 0.1.1
-- Update WinForm Icons (DONE!)
-- Add Executable Icon for GemsCraftGUI (renamed to Launcher [GemsCraftLauncher.exe]) (DONE!)
-- Executable to open CLI or GUI (DONE!)
-
-For Alpha 0.1.2
-- Fix Announcement message type for lines over 64 characters (DONE!)
-- Hide Remote Config Section (DONE!)
-- Remove LegendCraft References (DONE!)
-- Fix Updater (DONE!)
-
 For Alpha 0.2
 - *Am I a pretty Girl?* (DONE!)
 - More CPE Configs (ClickDistance, HeldBlocks) (DONE!)
-- Update Cuboid/Draw Operations to use SelectionCuboid Extension
 - Custom Blocks upload .zip to include animations as well instead of .png
-- Server Defined Texture packs (if (textpack != null) // Load saved file else load default.zip
+- Server Defined Texture packs (if (textpack != null) // Load saved file else load default.zip ( IN PROGRESS )
+-- If File NOT exists, use default
 
 For Alpha 0.3
 - More CPE (To Be Determined)

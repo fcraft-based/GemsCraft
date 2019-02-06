@@ -18,7 +18,7 @@ using System.Diagnostics;
 using System.IO;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 
 namespace GemsCraft.Utils
 {

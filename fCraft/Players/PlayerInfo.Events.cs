@@ -2,6 +2,7 @@
 using System;
 using System.Net;
 using GemsCraft.Events;
+using GemsCraft.Configuration;
 using GemsCraft.Players;
 using GemsCraft.Utils;
 using JetBrains.Annotations;
@@ -132,9 +133,12 @@ namespace GemsCraft.Events {
 
     public sealed class PlayerInfoCreatingEventArgs : EventArgs, ICancellableEvent {
         internal PlayerInfoCreatingEventArgs( [NotNull] string name, [CanBeNull] IPAddress ip,
-                                              [NotNull] Rank startingRank, bool isUnrecognized ) {
+                                              Rank startingRank, bool isUnrecognized ) {
             if( name == null ) throw new ArgumentNullException( "name" );
-            if( startingRank == null ) throw new ArgumentNullException( "startingRank" );
+            if (startingRank == null)
+            {
+                Config.LoadRankList("<Ranks></Ranks>");
+            }
             Name = name;
             StartingRank = startingRank;
             IP = ip;

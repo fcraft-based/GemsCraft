@@ -39,6 +39,11 @@ namespace GemsCraft.GUI.ConfigGUI.GUI.Sections
             xMapPath.CheckedChanged += _instance.xMapPath_CheckedChanged;
             cDefaultBuildRank.SelectedIndexChanged += _instance.cDefaultBuildRank_SelectedIndexChanged;
         }
+
+        private void xMapPath_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

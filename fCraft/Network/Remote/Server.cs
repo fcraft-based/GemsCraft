@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Players;
 using GemsCraft.Utils;
 using JetBrains.Annotations;

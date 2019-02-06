@@ -437,6 +437,7 @@ namespace GemsCraft.Players
                 info = Trie.Get(name);
                 if (info == null)
                 {
+                    if (RankManager.DefaultRank == null) RankManager.DefaultRank = RankManager.LowestRank;
                     var e = new PlayerInfoCreatingEventArgs(name, lastIP, RankManager.DefaultRank, false);
                     PlayerInfo.RaiseCreatingEvent(e);
                     if (e.Cancel) throw new OperationCanceledException("Cancelled by a plugin.");

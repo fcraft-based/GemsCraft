@@ -52,6 +52,9 @@
             this.dgvcBlockDB = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.bResetTab = new MetroFramework.Controls.MetroButton();
             this.picBackground = new System.Windows.Forms.PictureBox();
+            this.chkTexturePack = new System.Windows.Forms.CheckBox();
+            this.txtTextureMapPath = new System.Windows.Forms.TextBox();
+            this.btnBrowsePack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWorlds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +64,7 @@
             this.xWoMEnableEnvExtensions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.xWoMEnableEnvExtensions.AutoSize = true;
             this.xWoMEnableEnvExtensions.BackColor = System.Drawing.Color.Transparent;
-            this.xWoMEnableEnvExtensions.Location = new System.Drawing.Point(16, 507);
+            this.xWoMEnableEnvExtensions.Location = new System.Drawing.Point(442, 447);
             this.xWoMEnableEnvExtensions.Name = "xWoMEnableEnvExtensions";
             this.xWoMEnableEnvExtensions.Size = new System.Drawing.Size(168, 17);
             this.xWoMEnableEnvExtensions.TabIndex = 34;
@@ -76,7 +79,7 @@
             this.bMapPath.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.bMapPath.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.bMapPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bMapPath.Location = new System.Drawing.Point(595, 477);
+            this.bMapPath.Location = new System.Drawing.Point(595, 470);
             this.bMapPath.Name = "bMapPath";
             this.bMapPath.Size = new System.Drawing.Size(62, 23);
             this.bMapPath.TabIndex = 33;
@@ -88,12 +91,13 @@
             this.xMapPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.xMapPath.AutoSize = true;
             this.xMapPath.BackColor = System.Drawing.Color.Transparent;
-            this.xMapPath.Location = new System.Drawing.Point(16, 479);
+            this.xMapPath.Location = new System.Drawing.Point(16, 474);
             this.xMapPath.Name = "xMapPath";
             this.xMapPath.Size = new System.Drawing.Size(165, 17);
             this.xMapPath.TabIndex = 31;
             this.xMapPath.Text = "Custom path for storing maps:";
             this.xMapPath.UseVisualStyleBackColor = false;
+            this.xMapPath.CheckedChanged += new System.EventHandler(this.xMapPath_CheckedChanged);
             // 
             // tMapPath
             // 
@@ -101,7 +105,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tMapPath.Enabled = false;
             this.tMapPath.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tMapPath.Location = new System.Drawing.Point(211, 479);
+            this.tMapPath.Location = new System.Drawing.Point(211, 474);
             this.tMapPath.Name = "tMapPath";
             this.tMapPath.Size = new System.Drawing.Size(378, 19);
             this.tMapPath.TabIndex = 32;
@@ -111,7 +115,7 @@
             this.lDefaultBuildRank.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lDefaultBuildRank.AutoSize = true;
             this.lDefaultBuildRank.BackColor = System.Drawing.Color.Transparent;
-            this.lDefaultBuildRank.Location = new System.Drawing.Point(32, 449);
+            this.lDefaultBuildRank.Location = new System.Drawing.Point(16, 447);
             this.lDefaultBuildRank.Name = "lDefaultBuildRank";
             this.lDefaultBuildRank.Size = new System.Drawing.Size(293, 13);
             this.lDefaultBuildRank.TabIndex = 29;
@@ -123,7 +127,7 @@
             this.cDefaultBuildRank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cDefaultBuildRank.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cDefaultBuildRank.FormattingEnabled = true;
-            this.cDefaultBuildRank.Location = new System.Drawing.Point(380, 447);
+            this.cDefaultBuildRank.Location = new System.Drawing.Point(315, 447);
             this.cDefaultBuildRank.Name = "cDefaultBuildRank";
             this.cDefaultBuildRank.Size = new System.Drawing.Size(121, 21);
             this.cDefaultBuildRank.TabIndex = 30;
@@ -297,11 +301,52 @@
             this.picBackground.TabIndex = 36;
             this.picBackground.TabStop = false;
             // 
+            // chkTexturePack
+            // 
+            this.chkTexturePack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkTexturePack.AutoSize = true;
+            this.chkTexturePack.BackColor = System.Drawing.Color.Transparent;
+            this.chkTexturePack.Location = new System.Drawing.Point(16, 499);
+            this.chkTexturePack.Name = "chkTexturePack";
+            this.chkTexturePack.Size = new System.Drawing.Size(128, 17);
+            this.chkTexturePack.TabIndex = 37;
+            this.chkTexturePack.Text = "Custom Texture Pack";
+            this.chkTexturePack.UseVisualStyleBackColor = false;
+            // 
+            // txtTextureMapPath
+            // 
+            this.txtTextureMapPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTextureMapPath.Enabled = false;
+            this.txtTextureMapPath.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTextureMapPath.Location = new System.Drawing.Point(211, 499);
+            this.txtTextureMapPath.Name = "txtTextureMapPath";
+            this.txtTextureMapPath.Size = new System.Drawing.Size(378, 19);
+            this.txtTextureMapPath.TabIndex = 38;
+            // 
+            // btnBrowsePack
+            // 
+            this.btnBrowsePack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowsePack.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnBrowsePack.Enabled = false;
+            this.btnBrowsePack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.btnBrowsePack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.btnBrowsePack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBrowsePack.Location = new System.Drawing.Point(595, 495);
+            this.btnBrowsePack.Name = "btnBrowsePack";
+            this.btnBrowsePack.Size = new System.Drawing.Size(62, 23);
+            this.btnBrowsePack.TabIndex = 39;
+            this.btnBrowsePack.Text = "Browse";
+            this.btnBrowsePack.UseVisualStyleBackColor = false;
+            // 
             // WorldConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 528);
+            this.Controls.Add(this.btnBrowsePack);
+            this.Controls.Add(this.chkTexturePack);
+            this.Controls.Add(this.txtTextureMapPath);
             this.Controls.Add(this.bResetTab);
             this.Controls.Add(this.xWoMEnableEnvExtensions);
             this.Controls.Add(this.bMapPath);
@@ -352,5 +397,8 @@
         internal System.Windows.Forms.DataGridViewCheckBoxColumn dgvcBlockDB;
         internal MetroFramework.Controls.MetroButton bResetTab;
         private System.Windows.Forms.PictureBox picBackground;
+        internal System.Windows.Forms.CheckBox chkTexturePack;
+        internal System.Windows.Forms.TextBox txtTextureMapPath;
+        internal System.Windows.Forms.Button btnBrowsePack;
     }
 }

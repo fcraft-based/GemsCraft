@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Runtime.Remoting.Channels;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Network.Remote;
 using GemsCraft.Players;
 using GemsCraft.Utils;
