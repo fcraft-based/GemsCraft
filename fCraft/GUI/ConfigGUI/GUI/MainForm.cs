@@ -44,6 +44,11 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
         internal void btnRanks_Click(object sender, EventArgs e)
         {
             _selectedTab = 3;
+            if (!RankManager.Ranks.Any())
+            {
+                Config.LoadRankList(Config.DefaultRanks);
+                
+            }
             SectionClasses.RankConfig.ShowDialog();
         }
 
@@ -714,9 +719,15 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
         internal void RebuildRankList()
         {
             SectionClasses.RankConfig.vRanks.Items.Clear();
+            if (!RankManager.Ranks.Any())
+            {
+                Config.LoadRankList(Config.DefaultRanks);
+            }
+
             foreach (Rank rank in RankManager.Ranks)
             {
                 SectionClasses.RankConfig.vRanks.Items.Add(ToComboBoxOption(rank));
+                _rankNameList.Insert(rank.Index, rank.Name);
             }
 
             FillRankList(SectionClasses.GeneralConfig.cDefaultRank, "(lowest rank)");
@@ -794,11 +805,17 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
 
         internal void bAddRank_Click(object sender, EventArgs e)
         {
+            if (RankManager.Ranks.Any() && SectionClasses.RankConfig.vRanks.Items.Count == 0)
+            {
+                foreach (Rank rankObj in RankManager.Ranks)
+                {
+                    SectionClasses.RankConfig.vRanks.Items.Add(rankObj.Name);
+                }
+            }
             int number = 1;
             while (RankManager.RanksByName.ContainsKey("rank" + number)) number++;
 
             Rank rank = new Rank("rank" + number, RankManager.GenerateID());
-
             RankManager.AddRank(rank);
             _selectedRank = null;
 

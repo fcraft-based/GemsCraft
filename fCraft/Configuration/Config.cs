@@ -1372,7 +1372,7 @@ namespace GemsCraft.Configuration {
                 Logger.Log(LogType.Warning,
                     "Config.Load: No ranks were defined, or none were defined correctly." +
                     "Using default ranks (guest, builder, op, and owner).");
-                rankList = new XElement("Ranks");
+                rankList = XElement.Parse(DefaultRanks);
             }
 
             RankManager.ParsePermissionLimits();

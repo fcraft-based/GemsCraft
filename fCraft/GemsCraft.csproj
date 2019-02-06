@@ -264,7 +264,6 @@
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ConfigKey.cs" />
     <Compile Include="Configuration\ConfigKey.Metadata.cs" />
-    <Compile Include="Configuration\ConfigJObject.cs" />
     <Compile Include="Games\CTF.cs" />
     <Compile Include="Games\FFA.cs" />
     <Compile Include="Games\Football.cs" />
