@@ -328,6 +328,25 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
             }
 
             SectionClasses.WorldConfig.xWoMEnableEnvExtensions.Checked = ConfigKey.WoMEnableEnvExtensions.Enabled();
+
+            // Texture Packs
+            string location = ConfigKey.TexturePath.GetString();
+            if (location == "")
+            {
+                SectionClasses.WorldConfig.chkTexturePack.Checked = false;
+            }
+            else
+            {
+                if (!File.Exists(location))
+                {
+                    MessageBox.Show("Texture Pack last saved does not exist. Will be using default");
+                }
+                else
+                {
+                    SectionClasses.WorldConfig.chkTexturePack.Checked = true;
+                    SectionClasses.WorldConfig.txtTextureMapPath.Text = location;
+                }
+            }
         }
 
 
@@ -716,6 +735,7 @@ namespace GemsCraft.GUI.ConfigGUI.GUI
 
             ConfigKey.WoMEnableEnvExtensions.TrySetValue(SectionClasses.WorldConfig.xWoMEnableEnvExtensions.Checked);
 
+            ConfigKey.TexturePath.TrySetValue(SectionClasses.WorldConfig.txtTextureMapPath.Text ?? "");
 
             // Security
             WriteEnum<NameVerificationMode>(SectionClasses.SecurityConfig.cVerifyNames, ConfigKey.VerifyNames);

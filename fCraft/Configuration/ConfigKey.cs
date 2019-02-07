@@ -192,6 +192,9 @@ the build permission for new worlds will default to this rank." )]
 make sure to move the map files before starting the server again." )]
         MapPath,
 
+        [StringKey(ConfigSection.Worlds, "",
+@"Path for custom texture pack.")]
+        TexturePath,
         #endregion
 
 

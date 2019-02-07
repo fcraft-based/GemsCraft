@@ -5,14 +5,9 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Management;
-using System.Net;
-using System.Windows.Forms;
 using GemsCraft.fSystem;
-using GemsCraft.Configuration;
 using GemsCraft.Network;
 using GemsCraft.Players;
-using GemsCraft.Utils;
 using Newtonsoft.Json;
 
 namespace GemsCraft.Worlds.CustomBlocks
@@ -135,9 +130,10 @@ namespace GemsCraft.Worlds.CustomBlocks
                     }
                     
                     TerrainGenerator.Generate(data); // Saves to output_terrain.png
-                    if (!UploadToWeb(out Exception e)) // Sends to GemsCraft server and sends url to classicube
+                    Server.TexturePack.Terrain = Image.FromFile(TerrainGenerator.Output);
+                    if (!Server.TexturePack.Upload(out Exception e)) // Sends to GemsCraft server and sends url to classicube
                     {
-                        throw new CustomBlockException("Unable to upload output_terrain.png", e);
+                        throw new CustomBlockException("Unable to upload texture pack with custom blocks added", e);
                     }
 
                     blocks.Add(block);
@@ -149,26 +145,6 @@ namespace GemsCraft.Worlds.CustomBlocks
                 }
             }
             return blocks;
-        }
-        
-        private static bool UploadToWeb(out Exception e)
-        {
-            try
-            {
-                int name = new Random().Next();
-                Server.TexturePack = "http://gemz.christplay.x10host.com/textures/" + name + ".png";
-                byte[] res = FileUploading.UploadFile(
-                    $"http://gemz.christplay.x10host.com/texture.php?new={name}.png",
-                    TerrainGenerator.Output);
-            
-                e = null;
-                return true;
-            }
-            catch (Exception exception)
-            {
-                e = exception;
-                return false;
-            }
         }
         
         private static bool CompareImg(Image img1, Image img2)

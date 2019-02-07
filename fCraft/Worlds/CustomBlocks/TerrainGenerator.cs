@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GemsCraft.Configuration;
+using GemsCraft.fSystem;
 using GemsCraft.Properties;
 
 namespace GemsCraft.Worlds.CustomBlocks
@@ -32,7 +34,9 @@ namespace GemsCraft.Worlds.CustomBlocks
         /// </summary>
         public static void Generate(IEnumerable<ImageGeneratorData> data)
         {
-            Image baseImage = Resources.terrain;
+            Image baseImage = Config.UsesCustomTexturePack 
+                ? Server.TexturePack.Terrain 
+                : Resources.terrain;
             using (Graphics g = Graphics.FromImage(baseImage))
             {
                 foreach (ImageGeneratorData d in data)

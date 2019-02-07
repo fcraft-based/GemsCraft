@@ -29,7 +29,6 @@ using GemsCraft.Utils;
 using GemsCraft.Worlds;
 using GemsCraft.Worlds.CustomBlocks;
 using JetBrains.Annotations;
-using ServiceStack.Text;
 using Map = GemsCraft.Worlds.Map;
 using ThreadState = System.Threading.ThreadState;
 
@@ -77,6 +76,9 @@ namespace GemsCraft.fSystem {
 
         public static Uri Uri { get; internal set; }
 
+        public static string BaseDirectory { get; private set; }
+
+        public static TexturePack TexturePack { get; internal set; }
 
         #region Command-line args
 
@@ -143,6 +145,7 @@ namespace GemsCraft.fSystem {
         /// <exception cref="System.IO.IOException"> Working path, log path, or map path could not be set. </exception>
         public static void InitLibrary([NotNull] IEnumerable<string> rawArgs, bool isLauncher)
         {
+            BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             if (rawArgs == null) throw new ArgumentNullException("rawArgs");
             if (libraryInitialized && !isLauncher)
             {
@@ -171,8 +174,8 @@ namespace GemsCraft.fSystem {
                         argKeyName = arg.Substring(2);
                         argValue = null;
                     }
-                    ArgKey key;
-                    if (EnumUtil.TryParse(argKeyName, out key, true))
+
+                    if (EnumUtil.TryParse(argKeyName, out ArgKey key, true))
                     {
                         Args.Add(key, argValue);
                     }
@@ -290,6 +293,21 @@ namespace GemsCraft.fSystem {
             }
             GemsCraft.fSystem.Server.RaiseEvent( GemsCraft.fSystem.Server.Initializing );
 
+            // Load Texture Pack
+            string textPath = ConfigKey.TexturePath.GetString();
+            if (textPath != "")
+            {
+                if (!File.Exists(textPath))
+                {
+                    Logger.Log(LogType.Warning,
+                        "Texture Pack does not exist or has been moved. Server will ignore texture pack");
+                    Config.UsesCustomTexturePack = false;
+                }
+                else
+                {
+                    TexturePack = new TexturePack(textPath);
+                }
+            }
             // Instantiate DeflateStream to make sure that libMonoPosix is present.
             // This allows catching misconfigured Mono installs early, and stopping the server.
             using( var testMemStream = new MemoryStream() ) {
@@ -389,7 +407,7 @@ namespace GemsCraft.fSystem {
             if( ConfigKey.BackupDataOnStartup.Enabled() ) {
                 BackupData();
             }
-            Logger.Log(LogType.Discord, "Attempting to connect to Discord");
+            //Logger.Log(LogType.Discord, "Attempting to connect to Discord"); // For a later time
             Player.Console = new Player(ConfigKey.ConsoleName.GetString()) {Info = {Rank = RankManager.HighestRank}};
             Player.AutoRank = new Player( "(AutoRank)" );
             
@@ -428,6 +446,13 @@ namespace GemsCraft.fSystem {
                 Logger.Log( LogType.SystemActivity,
                             "Server.Run: now accepting connections at {0}:{1}",
                             ExternalIP, Port );
+            }
+
+            if (Config.UsesCustomTexturePack)
+            {
+                Logger.Log(LogType.SystemActivity, "Custom Texture pack has been discovered. " +
+                                                   "Please note that not all players may opt in to use this pack.");
+                Logger.Log(LogType.SystemActivity, "Custom Blocks will now add to this texture pack");
             }
 
             Server.PlayerListChanged += Network.Remote.Server.UpdateServer;
@@ -514,21 +539,20 @@ namespace GemsCraft.fSystem {
                 try
                 {
                     if (Players[i].CustomBlocksLoaded) continue;
-                    Players[i].Send(PacketWriter.SetMapEnvUrl(TexturePack)); // Also send texture pack url
+                    Players[i].Send(PacketWriter.SetMapEnvUrl(TexturePack.URL)); // Also send texture pack url
                     foreach (CustomBlock block in CustomBlock.Blocks)
                     {
                         Players[i].Send(PacketWriter.MakeDefineBlock(block));
-                        Players[i].CustomBlocksLoaded = true;
+                        Players[i].CustomBlocksLoaded = true; 
                     }
                 }
-                catch (NullReferenceException ex)
+                catch (NullReferenceException)
                 {
                     Logger.Log(LogType.SystemActivity, "No Custom Blocks Found.");
                 }
             }
         }
-
-        internal static string TexturePack;
+        
         #endregion
 
 

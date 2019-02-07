@@ -85,6 +85,7 @@
             this.bMapPath.TabIndex = 33;
             this.bMapPath.Text = "Browse";
             this.bMapPath.UseVisualStyleBackColor = false;
+            this.bMapPath.Click += new System.EventHandler(this.bMapPath_Click);
             // 
             // xMapPath
             // 
@@ -338,6 +339,7 @@
             this.btnBrowsePack.TabIndex = 39;
             this.btnBrowsePack.Text = "Browse";
             this.btnBrowsePack.UseVisualStyleBackColor = false;
+            this.btnBrowsePack.Click += new System.EventHandler(this.btnBrowsePack_Click);
             // 
             // WorldConfig
             // 

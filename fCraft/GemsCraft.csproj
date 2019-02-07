@@ -105,6 +105,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\AStarPathFinder.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetZip, Version=1.13.2.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.13.2\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
     </Reference>
@@ -546,6 +549,7 @@
     <Compile Include="Worlds\MapGenerator.cs">
     </Compile>
     <Compile Include="Worlds\MapGeneratorArgs.cs" />
+    <Compile Include="Worlds\TexturePack.cs" />
     <Compile Include="Worlds\World.cs" />
     <Compile Include="Worlds\Zone.cs" />
   </ItemGroup>

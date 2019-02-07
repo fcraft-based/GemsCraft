@@ -44,6 +44,24 @@ namespace GemsCraft.GUI.ConfigGUI.GUI.Sections
         {
 
         }
+
+        private void bMapPath_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBrowsePack_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog
+            {
+                SelectedPath = SectionClasses.WorldConfig.txtTextureMapPath.Text ?? "",
+                Description = "Load a ClassiCube texture pack"
+            };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                SectionClasses.WorldConfig.txtTextureMapPath.Text = dialog.SelectedPath;
+            }
+        }
     }
 }
 

@@ -22,154 +22,7 @@ namespace GemsCraft.Configuration {
 
     // ReSharper disable CommentTypo
     /*
-     * Config format-version changelog:
-     * 100 - r1-r133
-     *
-     * 101 - r134 - Per-class draw limits and antigrief detection
-     *              Removed AntigriefBlockCount and AntigriefBlockInterval keys
-     *
-     * 102 - r171 - Added RequireBanReason, RequireClassChangeReason, AnnounceKickAndBanReasons, AnnounceClassChanges keys
-     *              Removed AnnounceUnverifiedNames key
-     *
-     * 103 - r190 - Added UseSpeedHack permission
-     *              Added PrivateMessageColor and IRCColor keys
-     *
-     * 104 - r198 - Added IRCBotAnnounceServerJoins and IRCBotAnnounceIRCJoins keys
-     *              Removed IRCBotMsg key
-     *
-     * 105 - r205 - Added SubmitCrashReports key
-     *              Removed PolicyColorCodesInChat, PolicyIllegalCharacters, and RunOnStartup
-     *
-     * 106 - r212 - Added IRCDelay key
-     * 
-     * 107 - r214 - Added ShowJoinedWorldMessages and ClassColorsInWorldNames keys
-     *              Removed ChangeName permission
-     *
-     * 108 - r224 - Added IP config key
-     *              Capped MaxPlayers at 128
-     *
-     * 109 - r226 - Added PatrolledClass config key
-     *              Added Patrol permission
-     *
-     * 110 - r227 - Added ShutdownServer and Mute permissions.
-     *              NOTE: This build does not support loading config.xml of this or earlier versions.
-     * 
-     * 111 - r231 - Renamed config keys:
-     *                  DefaultClass             -> DefaultRank
-     *                  ClassColorsInChat        -> RankColorsInChat
-     *                  ClassColorsInWorldNames  -> RankColorsInWorldNames
-     *                  ClassPrefixesInChat      -> RankPrefixesInChat
-     *                  ClassPrefixesInList      -> RankPrefixesInList
-     *                  PatrolledClass           -> PatrolledRank
-     *                  RequireClassChangeReason -> RequireRankChangeReason
-     *                  AnnounceClassChanges     -> AnnounceRankChanges
-     *              Renamed XML elements:
-     *                  Classes     -> Ranks
-     *                  PlayerClass -> Rank
-     *              Removed "rank" from PlayerClass/Rank object
-     *              Made the order of Rank elements determine the relative index
-     *              Config.xml files of earlier versions than 111 can NOT be loaded by this copy of GemsCraft.
-     *
-     * 112 - r235 - Removed PingInterval config key
-     *              Removed inactive ControlPhysics and AddLandmarks permissions
-     *
-     * 113 - r243 - Removed IRCBotQuitMsg config key
-     * 
-     * 114 - r244 - Added IRCRegisteredNick, IRCNickServ, and IRCNickServMessage keys
-     * 
-     * 115 - r265 - Added IRCThreads keys
-     * 
-     * 116 - r272 - Added AutoRankEnabled keys
-     * 
-     * 117 - r280 - Added MaxUndo keys
-     * 
-     * 118 - r318 - Added MeColor and WarningColor keys
-     * 
-     * 119 - r331 - Added LogPath and MapPath keys
-     * 
-     * 120 - r332 - Added DataPath key
-     * 
-     * 121 - r335 - Renamed SendRedundantBlockUpdates key to RelayAllBlockUpdates
-     * 
-     * 122 - r341 - Added IRCUseColor key
-     * 
-     * 123 - r346 - Added IRCBotAnnounceServerEvents
-     * 
-     * 124 - r354 - Added HeartbeatEnabled
-     * 
-     * 125 - r356 - Removed LogPath and DataPath keys
-     * 
-     * 126 - r366 - Added PreventSecurityCircumvention key
-     * 
-     * 127 - r368 - Removed PreventSecurityCircumvention key
-     *              Added per-rank AllowSecurityCircumvention setting instead
-     *              
-     * 128 - r379 - Added ConsoleName
-     * 
-     * 129 - r405 - Added ShowConnectedMessages
-     * 
-     * 130 - r413 - Added ShowBannedConnectionMessages
-     * 
-     * 131 - r460 - Changed default for IRCNick from "fBot" to "MinecraftBot"
-     *              Relaxed range limits on many integer keys.
-     *              Renamed ProcessPriority value "Low" to "Idle", to match WinAPI 
-     *              
-     * 132 - r477 - Added BackupBeforeUpdate, RunBeforeUpdate, and RunAfterUpdate config keys
-     *              Renamed UpdateMode to UpdaterMode
-     *              
-     * 133 - r517 - Added UseColorCodes permission
-     * 
-     * 134 - r520 - Removed LimitOneConnectionPerIP key
-     *              Added MaxConnectionsPerIP key
-     *              
-     * 135 - r526 - Added RequireKickReason and AnnounceRankChangeReasons keys
-     *              Added ViewPlayerIPs permission
-     *              
-     * 136 - r528 - Added BringAll permission.
-     * 
-     * 137 - r556 - Added BandwidthUseMode key.
-     * 
-     * 138 - r578 - Removed SaveOnShutdown key.
-     *              Tweaked range checks on some keys.
-     *              Grouped key tags into section tags.
-     *              When saving, keys with default values are now commented out.
-     *              CONFIGS SAVED WITH THIS VERSION ARE NOT LOADABLE. It is obsolete.
-     *              
-     * 139 - r579 - Fixed XML structure messed up by 138. Sections are now saved into <Section> elements.
-     * 
-     * 140 - r616 - Added Spectate permission.
-     * 
-     * 141 - r622 - Added RestartInterval key.
-     * 
-     * 142 - r638 - Added BackupDataOnStartup key.
-     * 
-     * 143 - r676 - Added LoadPlugins key (currently unused).
-     * 
-     * 144 - r787 - Added DrawAdvanced permission.
-     * 
-     * 145 - r794 - Added UndoOthersActions permission.
-     * 
-     * 146 - r910 - Renamed BackupInterval to DefaultBackupInterval
-     * 
-     * 147 - r926 - Renamed EnableBlockDB to BlockDBEnabled
-     * 
-     * 148 - r1014 - Added BlockDBAutoEnable and BlockDBAutoEnableRank keys
-     *               Moved BlockDBEnabled to Security ConfigSection
-     *               
-     * 149 - r1061 - Added HeartbeatToWoMDirect, WoMDirectDescription, and WoMEnableEnvExtensions keys
-     * 
-     * 150 - r1066 - Removed WoMDirectDescription key
-     * 
-     * 151 - r1169 - Added MaxUndoStates key
-     *               Added fillLimit rank attribute.
-     *               Changed defaults for some keys:
-     *                  BlockDBEnabled to "true"
-     *                  WomEnableEnvExtensions to "false"
-     *                  IRCBotAnnounceServerEvents to "true"
-     *                  
-     * 152 - r1243 - Changed the way fCraft stores config keys.
-     *               Before: <fCraftConfig><Section name="blah"><KeyName>Value</KeyName></Section></fCraftConfig>
-     *               After: <fCraftConfig><Settings><ConfigKey key="KeyName" value="Value" default="DefaultValue" /></Settings></fCraftConfig>
+     * j0 - Stopped using xml format for the configuration, instead using json
      */
     // ReSharper restore CommentTypo
 
@@ -199,6 +52,7 @@ namespace GemsCraft.Configuration {
         private static readonly bool[] SettingsEnabledCache; // cached .Enabled() calls
         private static readonly bool[] SettingsUseEnabledCache; // cached .Enabled() calls
 
+        public static bool UsesCustomTexturePack = false;
         // Mapping of keys to their metadata containers.
         private static readonly ConfigKeyAttribute[] KeyMetadata;
 
@@ -441,6 +295,16 @@ namespace GemsCraft.Configuration {
                 counter++;
                 foreach (ConfigJObject item in obj.Keys)
                 {
+                    if (item.Key.ToLower() == "texturepath") // Letting server know that we are using a custom texture pack
+                    {
+                        if (item.Value.ToString() != "")
+                        {
+                            if (File.Exists(item.Value.ToString()))
+                            {
+                                UsesCustomTexturePack = true;
+                            }
+                        }
+                    }
                     ParseKeyElement(item.Key, item.Value.ToString());
                 }
             }
