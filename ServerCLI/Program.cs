@@ -183,7 +183,7 @@ namespace GemsCraft.ServerCLI {
 
         static void CheckForUpdates()
         {
-            VersionResult vr = Updater.CheckUpdates();
+            VersionResult vr = Updater.CheckUpdates(true);
             Console.WriteLine("Checking for GemsCraft updates...");
             try
             {

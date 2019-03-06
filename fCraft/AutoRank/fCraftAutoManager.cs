@@ -70,19 +70,19 @@ namespace GemsCraft.AutoRank
 
         internal static void DoAutoRankAll([NotNull] Player player, [NotNull] PlayerInfo[] list, string message, bool auto)
         {
-            if(player == null) throw new ArgumentNullException(nameof(player));
-            if(list == null) throw new ArgumentNullException(nameof(list));
+            if (player == null) throw new ArgumentNullException(nameof(player));
+            if (list == null) throw new ArgumentNullException(nameof(list));
 
-            if(!HasCriteria)
+            if (!HasCriteria)
             {
-                if(!auto)
+                if (!auto)
                 {
                     player.Message("AutoRankAll: No criteria found.");
                 }
                 return;
             }
 
-            if(!auto)
+            if (!auto)
             {
                 player.Message("AutoRankAll: Evaluating {0} players...", list.Length);
             }
@@ -108,11 +108,12 @@ namespace GemsCraft.AutoRank
                 }
                 catch (PlayerOpException ex)
                 {
-                    if(auto)
+                    if (auto)
                     {
                         Logger.Log(LogType.Error, "AutoRank: Could not change player's rank: {0}", ex.Message);
                     }
-                    else {
+                    else
+                    {
                         player.Message(ex.MessageColored);
                     }
                 }
@@ -120,9 +121,9 @@ namespace GemsCraft.AutoRank
             sw.Stop();
             string resultMsg =
                 $"AutoRankAll: Worked for {sw.ElapsedMilliseconds}ms, {promoted} players promoted, {demoted} demoted.";
-            if(auto)
+            if (auto)
             {
-                if(promoted > 0 || demoted > 0)
+                if (promoted > 0 || demoted > 0)
                 {
                     Logger.Log(LogType.SystemActivity, resultMsg);
                 }
@@ -131,7 +132,7 @@ namespace GemsCraft.AutoRank
             {
                 player.Message(resultMsg);
             }
-        }    
+        }
 
 
         public static bool Init()

@@ -2,9 +2,8 @@
 For Alpha 0.2
 - *Am I a pretty Girl?* (DONE!)
 - More CPE Configs (ClickDistance, HeldBlocks) (DONE!)
-- Custom Blocks upload .zip to include animations as well instead of .png
-- Server Defined Texture packs (if (textpack != null) // Load saved file else load default.zip ( IN PROGRESS )
--- If File NOT exists, use default
+- Custom Blocks upload .zip to include animations as well instead of .png (DONE!)
+- Texture Packs (DONE!)
 
 For Alpha 0.3
 - More CPE (To Be Determined)

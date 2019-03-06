@@ -24,9 +24,9 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 {
 	public class ManifoldDrawOperation : DrawOperation
 	{
-		private Scaler _scaler;
-		private Expression[] _expressions;
-		private double[][] _paramIterations;
+		private readonly Scaler _scaler;
+		private readonly Expression[] _expressions;
+		private readonly double[][] _paramIterations;
 		private const double MaxIterationSteps = 1000000;
 
 		public ManifoldDrawOperation(Player p, Command cmd) : base (p)
@@ -52,21 +52,15 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 				"\ny=" + _expressions[1].Print() + "\nz=" + _expressions[2].Print());
 		}
 
-		public override string Name
-		{
-			get { return "ParametrizedManifold"; }
-		}
+		public override string Name => "ParametrizedManifold";
 
-		public override int DrawBatch(int maxBlocksToDraw)
+	    public override int DrawBatch(int maxBlocksToDraw)
 		{
 			int count = 0;
-			double fromT, toT, stepT;
-			double fromU, toU, stepU;
-			double fromV, toV, stepV;
 
-			GetIterationBounds(0, out fromT, out toT, out stepT);
-			GetIterationBounds(1, out fromU, out toU, out stepU);
-			GetIterationBounds(2, out fromV, out toV, out stepV);
+		    GetIterationBounds(0, out var fromT, out var toT, out var stepT);
+			GetIterationBounds(1, out var fromU, out var toU, out var stepU);
+			GetIterationBounds(2, out var fromV, out var toV, out var stepV);
 
 			for (double t=fromT; t<=toT; t+=stepT)
 			{

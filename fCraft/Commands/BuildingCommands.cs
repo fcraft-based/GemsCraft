@@ -1664,7 +1664,7 @@ THE SOFTWARE.*/
             }
 
             // no need to set player.drawingInProgress here because this is done on the user thread
-            if (Updater.CheckUpdates() == VersionResult.Developer)
+            if (Updater.CheckUpdates(true) == VersionResult.Developer)
             {
                 Logger.Log(LogType.UserActivity,
                             "Player {0} initiated /Undo affecting {1} blocks (on world {2})",

@@ -316,7 +316,7 @@ namespace GemsCraft.fSystem {
             }
 
             // warnings/disclaimers
-            if( Updater.CheckUpdates() == VersionResult.Developer) {
+            if( Updater.CheckUpdates(true) == VersionResult.Developer) {
                 Logger.Log( LogType.Warning,
                             "You are using an unreleased developer version of GemsCraft. " +
                             "Do not use this version unless you are ready to deal with bugs and potential data loss. " +

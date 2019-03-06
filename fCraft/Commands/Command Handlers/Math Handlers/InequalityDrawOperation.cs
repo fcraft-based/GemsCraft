@@ -25,8 +25,8 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 	//draws volume, defined by an inequality 
 	public class InequalityDrawOperation : DrawOperation
 	{
-		private Expression _expression;
-		private Scaler _scaler;
+		private readonly Expression _expression;
+		private readonly Scaler _scaler;
 		private int _count;
 
 		public InequalityDrawOperation(Player player, Command cmd)
@@ -40,7 +40,7 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			
 			strFunc = strFunc.ToLower();
 
-			_expression = SimpleParser.Parse(strFunc, new string[] { "x", "y", "z" });
+			_expression = SimpleParser.Parse(strFunc, new[] { "x", "y", "z" });
 			if (!_expression.IsInEquality())
 				throw new ArgumentException("the expression given is not an inequality (should be like f(x,y,z)>g(x,y,z))");
 
@@ -63,14 +63,12 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 					{
 						try
 						{
-							if (_expression.Evaluate(_scaler.ToFuncParam(Coords.X, Bounds.XMin, Bounds.XMax),
-									                 _scaler.ToFuncParam(Coords.Y, Bounds.YMin, Bounds.YMax),
-													 _scaler.ToFuncParam(Coords.Z, Bounds.ZMin, Bounds.ZMax))>0) //1.0 means true
-							{
-								if (DrawOneBlock())
-									++_count;
-							}
-							//if (TimeToEndBatch)
+						    if (!(_expression.Evaluate(_scaler.ToFuncParam(Coords.X, Bounds.XMin, Bounds.XMax),
+						              _scaler.ToFuncParam(Coords.Y, Bounds.YMin, Bounds.YMax),
+						              _scaler.ToFuncParam(Coords.Z, Bounds.ZMin, Bounds.ZMax)) > 0)) continue;
+						    if (DrawOneBlock())
+						        ++_count;
+						    //if (TimeToEndBatch)
 							//    return _count;
 						}
 						catch (Exception)
@@ -78,12 +76,10 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 							//the exception here is kinda of normal, for functions (especially interesting ones)
 							//may have eg punctured points; we just have to keep an eye on the number, since producing 10000
 							//exceptions in the multiclient application is not the best idea
-                            if (++exCount > MathCommands.MaxCalculationExceptions)
-							{
-                                Player.Message("Drawing is interrupted: too many (>" + MathCommands.MaxCalculationExceptions +
-								               ") calculation exceptions.");
-								break;
-							}
+						    if (++exCount <= MathCommands.MaxCalculationExceptions) continue;
+						    Player.Message("Drawing is interrupted: too many (>" + MathCommands.MaxCalculationExceptions +
+						                   ") calculation exceptions.");
+						    break;
 						}
 					}
 				}
@@ -102,12 +98,6 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			BlocksTotalEstimate = Bounds.Volume;
 			return true;
 		}
-		public override string Name
-		{
-			get
-			{
-				return "Inequality";
-			}
-		}
+		public override string Name => "Inequality";
 	}
 }

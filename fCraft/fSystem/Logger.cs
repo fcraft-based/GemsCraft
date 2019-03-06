@@ -162,6 +162,17 @@ namespace GemsCraft.fSystem
             }
         }
 
+        /// <summary>
+        /// Sends a log like normal, but also shows a message box with the message as well. Should only be used via a WinForm or if checked to see if not console
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="message"></param>
+        [DebuggerStepThrough]
+        public static void DualLog(LogType type, string message)
+        {
+            MessageBox.Show(message);
+            Log(type, message);
+        }
 
         [DebuggerStepThrough]
         public static string GetPrefix(LogType level)

@@ -35,25 +35,16 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 		protected override void DrawFase1(int fval, ref int arg1, ref int arg2, ref int val, int min1, int max1, int min2, int max2,
 										  int minV, int maxV, int maxBlocksToDraw)
 		{
-			if (fval <= maxV && fval >= minV)
-			{
-				val = fval;
-				if (DrawOneBlock())
-					++_count;
-			}
+		    if (fval > maxV || fval < minV) return;
+		    val = fval;
+		    if (DrawOneBlock())
+		        ++Count;
 		}
 		protected override void DrawFase2(ref int arg1, ref int arg2, ref int val, int min1, int max1, int min2, int max2,
 										  int minV, int maxV, int maxBlocksToDraw)
 		{
-
 		}
-		public override string Name
-		{
-			get
-			{
-				return base.Name + "Points";
-			}
-		}
+		public override string Name => base.Name + "Points";
 	}
 
 
@@ -73,11 +64,12 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 		protected override void DrawFase1(int fval, ref int arg1, ref int arg2, ref int val, int min1, int max1, int min2, int max2,
 										  int minV, int maxV, int maxBlocksToDraw)
 		{
-			for (val = minV; val <= fval && val <= maxV; ++val)
+		    if (val <= 0) throw new ArgumentOutOfRangeException(nameof(val));
+		    for (val = minV; val <= fval && val <= maxV; ++val)
 			{
 				if (DrawOneBlock())
 				{
-					++_count;
+					++Count;
 					//if (TimeToEndBatch)
 					//    return;
 				}
@@ -88,13 +80,7 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 		{
 
 		}
-		public override string Name
-		{
-			get
-			{
-				return base.Name + "Fill";
-			}
-		}
+		public override string Name => base.Name + "Fill";
 	}
 
 
@@ -125,7 +111,8 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 		protected override void DrawFase2(ref int arg1, ref int arg2, ref int val, int min1, int max1, int min2, int max2,
 										  int minV, int maxV, int maxBlocksToDraw)
 		{
-			int count = 0;
+		    if (arg1 <= 0) throw new ArgumentOutOfRangeException(nameof(arg1));
+		    int count = 0;
 			for (arg1 = min1; arg1 <= max1; ++arg1)
 			{
 				for (arg2 = min2; arg2 <= max2; ++arg2)
@@ -155,12 +142,6 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 				}
 			}
 		}
-		public override string Name
-		{
-			get
-			{
-				return base.Name + "Surface";
-			}
-		}
+		public override string Name => base.Name + "Surface";
 	}
 }

@@ -1,12 +1,10 @@
 ﻿// Copyright 2009-2012 Matvei Stefarov <me@matvei.org>
 
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Speech.Recognition.SrgsGrammar;
-using System.Text;
+using System.Windows.Forms;
+using GemsCraft.fSystem;
 using GemsCraft.Network;
-using JetBrains.Annotations;
 
 namespace GemsCraft.Utils
 {
@@ -16,6 +14,7 @@ namespace GemsCraft.Utils
     }
     /// <summary> Checks for updates, and keeps track of current version/revision. </summary>
     public class Updater {
+        public static bool UpdaterDisabled { get; internal set; }
         public class Version
         {
             public string Title;
@@ -115,13 +114,11 @@ namespace GemsCraft.Utils
                 }
 
                 finalResult += $"{Major}.{Minor}";
-                if (Revision > -1)
+                if (Revision <= -1) return finalResult;
+                finalResult += $".{Revision}";
+                if (Build > -1)
                 {
-                    finalResult += $".{Revision}";
-                    if (Build > -1)
-                    {
-                        finalResult += $".{Build}";
-                    }
+                    finalResult += $".{Build}";
                 }
 
                 return finalResult;
@@ -134,7 +131,7 @@ namespace GemsCraft.Utils
             Major = 0,
             Minor = 1,
             Revision = 2,
-            Build = -1,
+            Build = 0,
             ShowTitle = true
         };
 
@@ -149,15 +146,45 @@ namespace GemsCraft.Utils
                 File.Delete(File1);
             }
         }
-        public static VersionResult CheckUpdates()
+        public static VersionResult CheckUpdates(bool isConsole)
         {
-            Version currentOnline = Version.ToVersion(
-                NetworkUtils.GetUrlSourceAsList("http://gemz.christplay.x10host.com/current_version.txt"));
-            int versionCompare = Version.Compare(LatestStable, currentOnline);
-            if (versionCompare == -1) return VersionResult.Current;
-            if (versionCompare == 0) return VersionResult.Developer;
-            if (versionCompare == 1) return VersionResult.Outdated;
-            return VersionResult.Current;
+            if (UpdaterDisabled)
+            {
+                const string message = "Updater is disabled. Cannot proceed.";
+                if (!isConsole) Logger.DualLog(LogType.Warning, message);
+                else Logger.Log(LogType.Warning, message);
+                return VersionResult.Current;
+            }
+            else
+            {
+
+                try
+                {
+                    Version currentOnline = Version.ToVersion(
+                        NetworkUtils.GetUrlSourceAsList("http://gemz.christplay.x10host.com/current_version.txt"));
+                    int versionCompare = Version.Compare(LatestStable, currentOnline);
+                    switch (versionCompare)
+                    {
+                        case -1:
+                            return VersionResult.Current;
+                        case 0:
+                            return VersionResult.Developer;
+                        case 1:
+                            return VersionResult.Outdated;
+                        default:
+                            return VersionResult.Current;
+                    }
+                }
+                catch
+                {
+                    const string message = "Unable to check for updates for GemsCraft. For this session (and maybe more) " +
+                                           "you will not be able to update and further update checks will be disabled.";
+                    Logger.Log(LogType.Warning, message);
+                    if (!isConsole) MessageBox.Show(message);
+                    UpdaterDisabled = true;
+                    return VersionResult.Current;
+                }
+            }
         }
     }
     

@@ -113,7 +113,7 @@ namespace GemsCraft.AutoRank
                     switch (item.Key)
                     {
                         case "Since_First_Login":
-                            if(!item.Value.Item1.Operator(player.Info.TimeSinceFirstLogin.Days, item.Value.Item2))
+                            if (!item.Value.Item1.Operator(player.Info.TimeSinceFirstLogin.Days, item.Value.Item2))
                             {
                                 rankUp = false;
                             }

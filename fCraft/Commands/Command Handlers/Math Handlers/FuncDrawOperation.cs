@@ -16,6 +16,7 @@
 //Copyright (C) <2012> Lao Tszy (lao_tszy@yahoo.co.uk)
 
 using System;
+using System.Collections.Generic;
 using GemsCraft.Drawing;
 using GemsCraft.Players;
 using GemsCraft.Utils;
@@ -31,10 +32,10 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			Y,
 			X,
 		}
-		private Expression _expression;
-		private Scaler _scaler;
-		private ValueAxis _vaxis;
-		protected int _count;
+		private readonly Expression _expression;
+		private readonly Scaler _scaler;
+		private readonly ValueAxis _vaxis;
+		protected int Count;
 		
 		protected FuncDrawOperation(Player player, Command cmd)
 			: base(player)
@@ -62,33 +63,36 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			_scaler = new Scaler(scalingStr);
         }
 
-		private static string[] GetVarArray(ValueAxis axis)
+		private static IEnumerable<string> GetVarArray(ValueAxis axis)
 		{
 			switch (axis)
 			{
 				case ValueAxis.Z:
-					return new string[] {"x", "y"};
+					return new[] {"x", "y"};
 				case ValueAxis.Y:
-					return new string[] { "x", "z" };
+					return new[] { "x", "z" };
 				case ValueAxis.X:
-					return new string[] { "y", "z" };
-			}
-			throw new ArgumentException("Unknown value axis direction "+axis+". This software is not released for use in spaces with dimension higher than three.");
+					return new[] { "y", "z" };
+			    default:
+			        throw new ArgumentException("Unknown value axis direction " + axis + ". This software is not released for use in spaces with dimension higher than three.");
+            }
 		}
 
 		private static ValueAxis GetAxis(string varName)
 		{
-			if (varName.Length == 1)
-				switch (varName[0])
-				{
-					case 'x':
-						return ValueAxis.X;
-					case 'y':
-						return ValueAxis.Y;
-					case 'z':
-						return ValueAxis.Z;
-				}
-			throw new ArgumentException("value axis " + varName + " is not valid, must be one of 'x', 'y', or 'z'");
+		    if (varName.Length != 1)
+		        throw new ArgumentException("value axis " + varName + " is not valid, must be one of 'x', 'y', or 'z'");
+		    switch (varName[0])
+		    {
+		        case 'x':
+		            return ValueAxis.X;
+		        case 'y':
+		            return ValueAxis.Y;
+		        case 'z':
+		            return ValueAxis.Z;
+		        default:
+		            throw new ArgumentException("value axis " + varName + " is not valid, must be one of 'x', 'y', or 'z'");
+		    }
 		}
 
         public override int DrawBatch(int maxBlocksToDraw)
@@ -117,13 +121,14 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			}
 			
             IsDone = true;
-            return _count;
+            return Count;
         }
 
 		//this method exists to box coords nicely as ref params
 		private int InternalDraw(ref int arg1, ref int arg2, ref int val, int min1, int max1, int min2, int max2, int minV, int maxV, int maxBlocksToDraw)
 		{
-			_count = 0;
+		    if (arg1 <= 0) throw new ArgumentOutOfRangeException(nameof(arg1));
+		    Count = 0;
 			int exCount = 0;
 			DrawFasePrepare(min1, max1, min2, max2);
 
@@ -157,7 +162,7 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			}
 			//the real drawing for the surface variant
 			DrawFase2(ref arg1, ref arg2, ref val, min1, max1, min2, max2, minV, maxV, maxBlocksToDraw);
-			return _count;
+			return Count;
 		}
 
 		protected abstract void DrawFasePrepare(int min1, int max1, int min2, int max2);
@@ -175,12 +180,6 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
             BlocksTotalEstimate = Bounds.Volume;
             return true;
         }
-		public override string Name
-        {
-            get
-            {
-            	return "Func";
-            }
-        }
+		public override string Name => "Func";
     }
 }

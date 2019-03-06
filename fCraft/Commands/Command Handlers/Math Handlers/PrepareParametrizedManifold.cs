@@ -17,6 +17,7 @@
 
 using System;
 using GemsCraft.Players;
+using JetBrains.Annotations;
 
 namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 {
@@ -43,7 +44,7 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 				string coordVar = SimpleParser.PreparseAssignment(ref strFunc);
 				CheckCoordVar(coordVar);
 
-				Expression expression = SimpleParser.Parse(strFunc, new string[] { "t", "u", "v" });
+				Expression expression = SimpleParser.Parse(strFunc, new[] { "t", "u", "v" });
 
 				p.Message("Expression parsed as " + coordVar + "=" + expression.Print());
 
@@ -81,7 +82,7 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 				p.Message("Iteration for " + strParam + " from " + from + " to " + to + " with step " + step + ". " +
 				          ((to - from)/step + 1) + " steps.");
 
-				GetPlayerParametrizationParamsStorage(p)[VarNameToIdx(strParam[0])] = new double[] {from, to, step};
+				GetPlayerParametrizationParamsStorage(p)[VarNameToIdx(strParam[0])] = new[] {from, to, step};
 			}
 			catch (Exception e)
 			{
@@ -101,45 +102,40 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			string s = cmd.Next();
 			if (string.IsNullOrWhiteSpace(s))
 				throw new ArgumentException("missing param variable " + msgParamParamName);
-			double d;
-			if (!double.TryParse(s, out d))
-				throw new ArgumentException("cannot parse param variable " + msgParamParamName);
-			return d;
+            if (!double.TryParse(s, out double d))
+                throw new ArgumentException("cannot parse param variable " + msgParamParamName);
+            return d;
 		}
 
 		public static Expression[] GetPlayerParametrizationCoordsStorage(Player p)
 		{
-			Object o;
-			if (!p.PublicAuxStateObjects.TryGetValue(CoordsStorageName, out o))
-			{
-				o = new Expression[3];
-				p.PublicAuxStateObjects.Add(CoordsStorageName, o);
-			}
-			return (Expression[]) o;
+		    if (p.PublicAuxStateObjects.TryGetValue(CoordsStorageName, out var o)) return (Expression[]) o;
+		    o = new Expression[3];
+		    p.PublicAuxStateObjects.Add(CoordsStorageName, o);
+		    return (Expression[]) o;
 		}
 
 		public static double[][] GetPlayerParametrizationParamsStorage(Player p)
 		{
-			Object o;
-			if (!p.PublicAuxStateObjects.TryGetValue(ParamsStorageName, out o))
-			{
-				o = new double[3][];
-				p.PublicAuxStateObjects.Add(ParamsStorageName, o);
-			}
-			return (double[][])o;
+		    if (p.PublicAuxStateObjects.TryGetValue(ParamsStorageName, out var o)) return (double[][]) o;
+		    o = new double[3][];
+		    p.PublicAuxStateObjects.Add(ParamsStorageName, o);
+		    return (double[][])o;
 		}
 
-		private static string CoordsStorageName { get { return typeof (PrepareParametrizedManifold).Name + "Coords"; } }
-		private static string ParamsStorageName { get { return typeof(PrepareParametrizedManifold).Name + "Params"; } }
+		private static string CoordsStorageName => typeof (PrepareParametrizedManifold).Name + "Coords";
+	    private static string ParamsStorageName => typeof(PrepareParametrizedManifold).Name + "Params";
 
-		private static void CheckCoordVar(string s)
-		{
-			if (string.IsNullOrWhiteSpace(s) || (s != "x" && s != "y" && s != "z"))
+	    private static void CheckCoordVar([NotNull] string s)
+	    {
+	        if (s == null) throw new ArgumentNullException(nameof(s));
+	        if (string.IsNullOrWhiteSpace(s) || s != "x" && s != "y" && s != "z")
 				throw new ArgumentException("expected assignment of x, y, or z (e.g. x=2*t)");
-		}
-		private static void CheckParamVar(string s)
+	    }
+		private static void CheckParamVar([NotNull] string s)
 		{
-			if (string.IsNullOrWhiteSpace(s) || (s != "t" && s != "u" && s != "v"))
+		    if (s == null) throw new ArgumentNullException(nameof(s));
+		    if (string.IsNullOrWhiteSpace(s) || s != "t" && s != "u" && s != "v")
 				throw new ArgumentException("expected parametrization variable name is t, u, or v");
 		}
 		public static int VarNameToIdx(char varName)

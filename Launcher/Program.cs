@@ -18,13 +18,13 @@ namespace Launcher
             try
             {
                 DialogResult result = DialogResult.None;
-                if (Updater.CheckUpdates() == VersionResult.Developer)
+                if (Updater.CheckUpdates(false) == VersionResult.Developer)
                 {
                     result = MessageBox.Show("You are using an unreleased developer version of GemsCraft. " +
                                     "Would you like to download the current version?", "Unreleased Version", MessageBoxButtons.YesNo);
                     
                 }
-                else if (Updater.CheckUpdates() == VersionResult.Outdated)
+                else if (Updater.CheckUpdates(false) == VersionResult.Outdated)
                 {
                     result = MessageBox.Show("You are using an outdated version of GemsCraft. " +
                                              "Would you like to download the current version?", "Outdated Version", MessageBoxButtons.YesNo);

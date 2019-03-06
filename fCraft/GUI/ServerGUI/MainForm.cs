@@ -153,12 +153,12 @@ namespace GemsCraft.GUI.ServerGUI
             Logger.Log(LogType.SystemActivity, "Checking for GemsCraft updates...");
             string title = null;
             string message = null;
-            if (Updater.CheckUpdates() == VersionResult.Outdated)
+            if (Updater.CheckUpdates(false) == VersionResult.Outdated)
             {
                 title = "Outdated";
                 message = "A GemsCraft Update is available! Would you like to update now?";
             }
-            else if (Updater.CheckUpdates() == VersionResult.Developer)
+            else if (Updater.CheckUpdates(false) == VersionResult.Developer)
             {
                 title = "Unreleased Version";
                 message = "This GemsCraft version is not supported and it is not recommended to keep using it.\n" +

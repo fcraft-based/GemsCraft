@@ -38,15 +38,15 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			public int Precedence;
 			public SpecialOperandKind SpecialKind;
 		}
-		static private Dictionary<string, FuncData> _functions;
-		static private Dictionary<char, FuncData> _operators; //binary ops
-		static private Dictionary<char, FuncData> _soperators; //special ops
-		static private Dictionary<char, FuncData> _uoperators; //unary ops
-		static private Dictionary<string, IExpressionElement> _consts;
+		private static readonly Dictionary<string, FuncData> Functions;
+		private static readonly Dictionary<char, FuncData> Operators; //binary ops
+		private static readonly Dictionary<char, FuncData> Soperators; //special ops
+		private static readonly Dictionary<char, FuncData> Uoperators; //unary ops
+		private static readonly Dictionary<string, IExpressionElement> Consts;
 
 		static SimpleParser()
 		{
-			_functions=new Dictionary<string, FuncData>
+			Functions=new Dictionary<string, FuncData>
 			    {
 			        {"sqrt", new FuncData() {Func = new Sqrt(), IsFunctionOrUnary = true}},
 			        {"abs", new FuncData() {Func = new Abs(), IsFunctionOrUnary = true}},
@@ -65,7 +65,7 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			    };
 
 			//special operators
-			_soperators=new Dictionary<char, FuncData>
+			Soperators=new Dictionary<char, FuncData>
 			    {
 			        {'(', new FuncData() {SpecialKind = SpecialOperandKind.LeftParenthesis}},
 			        {')', new FuncData() {SpecialKind = SpecialOperandKind.RightParenthesis}},
@@ -73,7 +73,7 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			    };
 
 			//'normal' ops
-			_operators = new Dictionary<char, FuncData>
+			Operators = new Dictionary<char, FuncData>
 			    {
 			        {'+', new FuncData() {Func = new Sum(), Precedence = 2}},
 			        {'*', new FuncData() {Func = new Mul(), Precedence = 3}},
@@ -92,14 +92,22 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 
 			//unary ops
 			//negate, since it must be distinct from binary minus
-			_uoperators = new Dictionary<char, FuncData>
+			Uoperators = new Dictionary<char, FuncData>
 			    {
 			        {'-', new FuncData() {Func = new Negate(), IsFunctionOrUnary = true}},
 			        {'!', new FuncData() {Func = new Not(), IsFunctionOrUnary = true}}
 			    };
 
 			//constants: e, pi
-			_consts=new Dictionary<string, IExpressionElement> {{"e", new E()}, {"pi", new Pi()}};
+			Consts = new Dictionary<string, IExpressionElement>
+			{
+			    {
+			        "e", new E()
+			    },
+			    {
+			        "pi", new Pi()
+			    }
+			};
 		}
 
 		public static Expression Parse(string expression, IEnumerable<string> vars)
@@ -120,22 +128,21 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 				lParenthExpected = false; //checked, can be turn off
 
 				//if a number or const or variable, append to the expression
-				double num;
-				if (double.TryParse(term, out num)) //number
+			    if (double.TryParse(term, out var num)) //number
 				{
 					e.Append(new Variable() {Value = num, Name=num.ToString()});
 					noBOperatorExpected = false;
 					continue;
 				}
-				IExpressionElement el;
-				if (_consts.TryGetValue(term, out el)) //const
+
+			    if (Consts.TryGetValue(term, out var el)) //const
 				{
 					e.Append(el);
 					noBOperatorExpected = false;
 					continue;
 				}
-				Variable v;
-				if (e.Vars.TryGetValue(term, out v)) //variable
+
+			    if (e.Vars.TryGetValue(term, out var v)) //variable
 				{
 					e.Append(v);
 					noBOperatorExpected = false;
@@ -143,65 +150,55 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 				}
 
 				//if function -> push to stack
-				FuncData fd;
-				if (_functions.TryGetValue(term, out fd))
+			    if (Functions.TryGetValue(term, out var fd))
 				{
 					tmpStack.Push(fd);
 					lParenthExpected = true; //dont need to set/reset noBOperatorExpected
 					continue;
 				}
-				if (term.Length == 1) //operators
-				{
-					char termch = term[0];
-					if (_soperators.TryGetValue(termch, out fd))
-					{
-						switch (fd.SpecialKind)
-						{
-							case SpecialOperandKind.LeftParenthesis:
-								tmpStack.Push(fd);
-								noBOperatorExpected = true;
-								break;
-							case SpecialOperandKind.RightParenthesis:
-								noBOperatorExpected = false;
-								ProcessRightParenth(e, tmpStack, pos);
-								break;
-							case SpecialOperandKind.Comma:
-								noBOperatorExpected = true;
-								ProcessComma(e, tmpStack, pos);
-								break;
-						}
-						continue;
-					}
-					if (noBOperatorExpected)
-					{
-						if (_uoperators.TryGetValue(termch, out fd))
-						{
-							tmpStack.Push(fd);
-							//noBOperatorExpected = true; - is already
-							continue;
-						}
-					}
-					else
-					{
-						if(_operators.TryGetValue(termch, out fd))
-						{
-							ProcessOperator(fd, e, tmpStack);
-							noBOperatorExpected = true;
-							continue;
-						}
-					}
-				}
 
-				//unrecongnizable
-				throw new ArgumentException("unrecognizable term " + term + " at before " + pos);
+			    if (term.Length != 1) throw new ArgumentException("unrecognizable term " + term + " at before " + pos);
+			    char termch = term[0];
+			    if (Soperators.TryGetValue(termch, out fd))
+			    {
+			        switch (fd.SpecialKind)
+			        {
+			            case SpecialOperandKind.LeftParenthesis:
+			                tmpStack.Push(fd);
+			                noBOperatorExpected = true;
+			                break;
+			            case SpecialOperandKind.RightParenthesis:
+			                noBOperatorExpected = false;
+			                ProcessRightParenth(e, tmpStack, pos);
+			                break;
+			            case SpecialOperandKind.Comma:
+			                noBOperatorExpected = true;
+			                ProcessComma(e, tmpStack, pos);
+			                break;
+			        }
+			        continue;
+			    }
+			    if (noBOperatorExpected)
+			    {
+			        if (!Uoperators.TryGetValue(termch, out fd))
+			            throw new ArgumentException("unrecognizable term " + term + " at before " + pos);
+			        tmpStack.Push(fd);
+			    }
+			    else
+			    {
+			        if (!Operators.TryGetValue(termch, out fd))
+			            throw new ArgumentException("unrecognizable term " + term + " at before " + pos);
+			        ProcessOperator(fd, e, tmpStack);
+			        noBOperatorExpected = true;
+			    }
 			}
 
 			//we will be tolerant to closing parenthesis, i.e. the left parenthesis left will be ignored
 			foreach (var f in tmpStack)
-				if (f.SpecialKind!=SpecialOperandKind.LeftParenthesis)
+				if (f.SpecialKind != SpecialOperandKind.LeftParenthesis)
 					e.Append(f.Func);
 				else
-					throw new ArgumentException("unmatching parenthesis");
+					throw new ArgumentException("Parenthesis are not matching");
 
 			return e;
 		}
@@ -270,7 +267,7 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			ReadSpaces(s, ref pos);
 
 			char ch = s[pos];
-			if (_operators.ContainsKey(ch) || _soperators.ContainsKey(ch) || _uoperators.ContainsKey(ch) || /*tmp*/ch=='=')
+			if (Operators.ContainsKey(ch) || Soperators.ContainsKey(ch) || Uoperators.ContainsKey(ch) || /*tmp*/ch=='=')
 			{
 				string ret=new string(s[pos], 1);
 				++pos; 

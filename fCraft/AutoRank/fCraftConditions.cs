@@ -67,7 +67,7 @@ namespace GemsCraft.AutoRank
             }
             // ReSharper restore PossibleNullReferenceException
         }
-        
+
         public override bool Eval([NotNull] PlayerInfo info)
         {
             if (info == null) throw new ArgumentNullException(nameof(info));

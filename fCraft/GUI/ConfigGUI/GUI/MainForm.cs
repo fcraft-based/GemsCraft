@@ -1950,7 +1950,7 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
                     string version = streamReader.ReadLine();
 
                     //update is available, prompt for a download
-                    if (Updater.CheckUpdates() == VersionResult.Outdated)
+                    if (Updater.CheckUpdates(false) == VersionResult.Outdated)
                     {
 
                         DialogResult answer = MessageBox.Show("A GemsCraft Update is available. Would you like to download the latest GemsCraft Version? (" + version + ")", "GemsCraft Updater", MessageBoxButtons.YesNo);

@@ -27,9 +27,9 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 {
     public class StartSpringDraw : DrawOperation
     {
-        private Scaler _scaler2;
-        private Expression[] _expressions2;
-        private double[][] _paramIterations2;
+        private readonly Scaler _scaler2;
+        private readonly Expression[] _expressions2;
+        private readonly double[][] _paramIterations2;
         private const double MaxIterationSteps2 = 1000000;
 
         public StartSpringDraw(Player p, Command cmd)
@@ -53,21 +53,15 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
             _scaler2 = new Scaler(cmd.Next());
 
         }
-        public override string Name
-        {
-            get { return "MathFigure"; }        //What it will say when doing one of these math figure cmds
-        }
+        public override string Name => "MathFigure";
 
         public override int DrawBatch(int maxBlocksToDraw)
         {
             int count = 0;
-            double fromT, toT, stepT;
-            double fromU, toU, stepU;
-            double fromV, toV, stepV;
 
-            GetIterationBounds2(0, out fromT, out toT, out stepT);
-            GetIterationBounds2(1, out fromU, out toU, out stepU);
-            GetIterationBounds2(2, out fromV, out toV, out stepV);
+            GetIterationBounds2(0, out var fromT, out var toT, out var stepT);
+            GetIterationBounds2(1, out var fromU, out var toU, out var stepU);
+            GetIterationBounds2(2, out var fromV, out var toV, out var stepV);
 
             for (double t = fromT; t <= toT; t += stepT)
             {

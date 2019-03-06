@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+// ReSharper disable CompareOfFloatsByEqualityOperator
 
 namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 {
@@ -25,25 +26,24 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 
     public class Expression : IExpressionElement
     {
-        private List<IExpressionElement> _expression = new List<IExpressionElement>();
-        private Dictionary<string, Variable> _vars = new Dictionary<string, Variable>(); //vars by name
-        private Variable[] _varsArray;  //vars by ordes of appearence in constructor
-        public IDictionary<string, Variable> Vars { get { return _vars; } }
+        private readonly List<IExpressionElement> _expression = new List<IExpressionElement>();
+        private readonly Dictionary<string, Variable> _vars = new Dictionary<string, Variable>(); //vars by name
+        private readonly Variable[] _varsArray;  //vars by ordes of appearence in constructor
+        public IDictionary<string, Variable> Vars => _vars;
 
-        public String AssignedFunctionName { get; internal set; }
+        public string AssignedFunctionName { get; internal set; }
 
         public Expression(IEnumerable<string> vars)
         {
-            if (null != vars)
+            if (null == vars) return;
+            var enumerable = vars as string[] ?? vars.ToArray();
+            _varsArray = new Variable[enumerable.Length];
+            int i = 0;
+            foreach (var v in enumerable)
             {
-                _varsArray = new Variable[vars.Count()];
-                int i = 0;
-                foreach (var v in vars)
-                {
-                    _varsArray[i] = new Variable() { Name = v };
-                    _vars.Add(v, _varsArray[i]);
-                    ++i;
-                }
+                _varsArray[i] = new Variable { Name = v };
+                _vars.Add(v, _varsArray[i]);
+                ++i;
             }
         }
 
@@ -66,13 +66,13 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
             return stack.Pop();
         }
 
-        private void EvaluateInternal(double[] param, Stack<double> stack)
+        private void EvaluateInternal(IReadOnlyList<double> param, Stack<double> stack)
         {
             if (null != param)
             {
-                if (param.Length != _varsArray.Length)
+                if (param.Count != _varsArray.Length)
                     throw new ArgumentException("wrong number of params");
-                for (int i = 0; i < param.Length; ++i)
+                for (int i = 0; i < param.Count; ++i)
                     _varsArray[i].Value = param[i];
             }
 
@@ -93,15 +93,13 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
                 throw new ArgumentException("expression is not an equality");
             _expression[_expression.Count - 1] = new EqualityEqual();
         }
-        public bool IsEquality()
-        {
-            return _expression.Last() is EqualityEqual;
-        }
+
         public bool IsInEquality()
         {
             IExpressionElement e = _expression.Last();
-            return (e is Less) || (e is Greater);
+            return e is Less || e is Greater;
         }
+
         public Tuple<double, double> EvaluateAsEquality(params double[] param)
         {
             Stack<double> stack = new Stack<double>();

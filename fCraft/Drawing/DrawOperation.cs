@@ -144,13 +144,12 @@ namespace GemsCraft.Drawing {
 
 
         protected DrawOperation( [NotNull] Player player ) {
-            if( player == null ) throw new ArgumentNullException( "player" );
-            Player = player;
+            Player = player ?? throw new ArgumentNullException( "player" );
             Map = player.WorldMap;
 
             Context |= BlockChangeContext.Drawn;
             AnnounceCompletion = true;
-            LogCompletion = Updater.CheckUpdates() == VersionResult.Developer;
+            LogCompletion = Updater.CheckUpdates(true) == VersionResult.Developer;
         }
 
 
@@ -357,7 +356,7 @@ namespace GemsCraft.Drawing {
                     }
                 }
             }
-            if( AnnounceCompletion && Map.World != null && Updater.CheckUpdates() == VersionResult.Developer) {
+            if( AnnounceCompletion && Map.World != null && Updater.CheckUpdates(true) == VersionResult.Developer) {
                 Logger.Log( LogType.UserActivity,
                             "Player {0} executed {1} on world {2} (between {3} and {4}). Processed {5}, Updated {6}, Skipped {7}, Denied {8} blocks.",
                             Player.Name, Description, Map.World.Name,
@@ -381,7 +380,7 @@ namespace GemsCraft.Drawing {
                                     BlocksProcessed, BlocksUpdated );
                 }
             }
-            if (LogCompletion && Map.World != null && Updater.CheckUpdates() == VersionResult.Developer)
+            if (LogCompletion && Map.World != null && Updater.CheckUpdates(true) == VersionResult.Developer)
             {
                 Logger.Log( LogType.UserActivity,
                             "Player {0} cancelled {1} on world {2}. Processed {3}, Updated {4}, Skipped {5}, Denied {6} blocks.",
