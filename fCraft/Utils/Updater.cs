@@ -146,18 +146,18 @@ namespace GemsCraft.Utils
                 File.Delete(File1);
             }
         }
+
+        private static bool _shown;
         public static VersionResult CheckUpdates(bool isConsole)
         {
             if (UpdaterDisabled)
             {
-                const string message = "Updater is disabled. Cannot proceed.";
-                if (!isConsole) Logger.DualLog(LogType.Warning, message);
-                else Logger.Log(LogType.Warning, message);
+                if (!_shown) Logger.Log(LogType.Warning, "Updater is disabled. Will not check for updates. Continuing with current version");
+                _shown = true;
                 return VersionResult.Current;
             }
             else
             {
-
                 try
                 {
                     Version currentOnline = Version.ToVersion(
