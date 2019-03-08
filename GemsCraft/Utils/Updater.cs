@@ -126,13 +126,16 @@ namespace GemsCraft.Utils
             }
         }
 
+        /// <summary>
+        /// This installation's version of the software.
+        /// </summary>
         public static Version LatestStable = new Version
         {
             Title = "Alpha",
             Major = 0,
-            Minor = 1,
-            Revision = 2,
-            Build = 0,
+            Minor = 2,
+            Revision = -1,
+            Build = -1,
             ShowTitle = true
         };
 

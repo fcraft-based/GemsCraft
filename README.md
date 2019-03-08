@@ -1,4 +1,4 @@
-﻿Alpha 0.1.2
+﻿Alpha 0.2
 #GemsCraft
 ![GemsCraft](http://gemz.christplay.x10host.com/cool%20logo.png "Shining Gems")<br />
 
