@@ -277,7 +277,7 @@ namespace GemsCraft.Commands.Command_Handlers.Math_Handlers
 			StringBuilder term = new StringBuilder();
 			while (pos<s.Length)
 			{
-				if (Char.IsLetterOrDigit(s[pos]) || s[pos]=='.') //no support for exp number form!
+				if (char.IsLetterOrDigit(s[pos]) || s[pos]=='.') //no support for exp number form!
 					term.Append(s[pos]);
 				else 
 					break;

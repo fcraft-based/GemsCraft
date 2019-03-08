@@ -29,7 +29,7 @@ namespace GemsCraft.Commands.Command_Handlers
         public static int VotedNo;
         public static List<Player> Voted;
         public static string VoteStarter;
-        public static bool VoteIsOn = false;
+        public static bool VoteIsOn;
         public static Thread VoteThread;
         public static string VoteKickReason;
         public static string TargetName;
@@ -62,7 +62,6 @@ namespace GemsCraft.Commands.Command_Handlers
                         else
                             player.Message("Last VoteKick: &CA VoteKick has started for {0}&C, reason: {1}", TargetName, VoteKickReason);
                         player.Message(Usage);
-                        return;
                     }
                     else
                         player.Message(option);
@@ -82,11 +81,11 @@ namespace GemsCraft.Commands.Command_Handlers
                         return;
                     }
                     VoteIsOn = false;
-                    foreach (Player V in Voted)
+                    foreach (Player v in Voted)
                     {
-                        if (V.Info.HasVoted)
-                            V.Info.HasVoted = false;
-                        V.Message("Your vote was cancelled");
+                        if (v.Info.HasVoted)
+                            v.Info.HasVoted = false;
+                        v.Message("Your vote was cancelled");
                     }
                     Voted.Clear();
                     TargetName = null;
@@ -148,15 +147,15 @@ namespace GemsCraft.Commands.Command_Handlers
                     }
 
                     VoteThread = new Thread(new ThreadStart(delegate
-                      {
-                          NewVote();
-                          VoteStarter = player.ClassyName;
-                          Server.Players.Message("{0}&S Asked: {1}", MessageType.Announcement, player.ClassyName, Question);
-                          Server.Players.Message("&9Vote now! &S/Vote &AYes &Sor /Vote &CNo", 0);
-                          VoteIsOn = true;
-                          Thread.Sleep(60000);
-                          VoteCheck();
-                      })); VoteThread.Start();
+                    {
+                        NewVote();
+                        VoteStarter = player.ClassyName;
+                        Server.Players.Message("{0}&S Asked: {1}", MessageType.Announcement, player.ClassyName, Question);
+                        Server.Players.Message("&9Vote now! &S/Vote &AYes &Sor /Vote &CNo", 0);
+                        VoteIsOn = true;
+                        Thread.Sleep(60000);
+                        VoteCheck();
+                    })); VoteThread.Start();
                     break;
             }
         }
@@ -172,8 +171,6 @@ namespace GemsCraft.Commands.Command_Handlers
                 v.Info.HasVoted = false;
             }
         }
-
-
     }
 }
 

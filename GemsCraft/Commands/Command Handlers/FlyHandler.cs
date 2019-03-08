@@ -25,9 +25,9 @@ using GemsCraft.Worlds;
 
 namespace GemsCraft.Commands.Command_Handlers
 {
-    class FlyHandler
+    internal class FlyHandler
     {
-        private static FlyHandler instance;
+        private static FlyHandler _instance;
 
         private FlyHandler()
         {
@@ -36,25 +36,19 @@ namespace GemsCraft.Commands.Command_Handlers
 
         public static FlyHandler GetInstance()
         {
-            if (instance == null)
-            {
-                instance = new FlyHandler();
-                Player.PlacingBlock += new EventHandler<Events.PlayerPlacingBlockEventArgs>(Player_Clicked);
-            }
+            if (_instance != null) return _instance;
+            _instance = new FlyHandler();
+            Player.PlacingBlock += Player_Clicked;
 
-            return instance;
+            return _instance;
         }
         private static void Player_Clicked(object sender, Events.PlayerPlacingBlockEventArgs e) //placing air
         {
-            if (e.Player.IsFlying)
+            if (!e.Player.IsFlying) return;
+            if (e.Context != BlockChangeContext.Manual) return;
+            if (e.Player.FlyCache.Values.Contains(e.Coords))
             {
-                if (e.Context == BlockChangeContext.Manual)//ignore all other things
-                {
-                    if (e.Player.FlyCache.Values.Contains(e.Coords))
-                    {
-                        e.Result = CanPlaceResult.Revert; //nothing saves to blockcount or blockdb
-                    }
-                }
+                e.Result = CanPlaceResult.Revert; //nothing saves to blockcount or blockdb
             }
         }
 
@@ -79,7 +73,7 @@ namespace GemsCraft.Commands.Command_Handlers
             }
             catch (Exception ex)
             {
-                Logger.Log( LogType.Error, "FlyHandler.StopFlying: " + ex);
+                Logger.Log(LogType.Error, "FlyHandler.StopFlying: " + ex);
             }
         }
 
@@ -93,11 +87,7 @@ namespace GemsCraft.Commands.Command_Handlers
             {
                 return true;
             }
-            if (!(x >= -1 && x <= 1) || !(y >= -1 && y <= 1) || !(z >= -3 && z <= 4))
-            {
-                return true;
-            }
-            return false;
+            return !(x >= -1 && x <= 1) || !(y >= -1 && y <= 1) || !(z >= -3 && z <= 4);
         }
     }
 }

@@ -30,7 +30,7 @@ using Map = GemsCraft.Worlds.Map;
 
 namespace GemsCraft.Commands.Command_Handlers
 {
-    class RealmHandler
+    internal class RealmHandler
     {
         public static void RealmLoad(Player player, Command cmd, string fileName, string worldName)
         {
@@ -44,7 +44,7 @@ namespace GemsCraft.Commands.Command_Handlers
             if (fileName == null)
             {
                 // No params given at all
-                
+
                 return;
             }
 
@@ -184,7 +184,7 @@ namespace GemsCraft.Commands.Command_Handlers
                         Logger.Log(LogType.UserActivity,
                                     "{0} loaded new map for realm \"{1}\" from {2}",
                                     player.Name, realm.Name, fullFileName);
-                        
+
 
                     }
                     else
@@ -221,7 +221,7 @@ namespace GemsCraft.Commands.Command_Handlers
                         try
                         {
                             newWorld = WorldManager.AddWorld(player, worldName, map, false);
-                            
+
                         }
                         catch (WorldOpException ex)
                         {
@@ -257,7 +257,7 @@ namespace GemsCraft.Commands.Command_Handlers
                         player.MessageNow("Access permission is {0}+&S, and build permission is {1}+",
                                            newWorld.AccessSecurity.MinRank.ClassyName,
                                            newWorld.BuildSecurity.MinRank.ClassyName);
-                        
+
                     }
                 }
             }
@@ -271,8 +271,7 @@ namespace GemsCraft.Commands.Command_Handlers
             MapGenTemplate template;
             MapGenTheme theme;
 
-            int wx, wy, height = 128;
-            if (!(cmd.NextInt(out wx) && cmd.NextInt(out wy) && cmd.NextInt(out height)))
+            if (!(cmd.NextInt(out var wx) && cmd.NextInt(out var wy) && cmd.NextInt(out var height)))
             {
                 if (player.World != null)
                 {
@@ -312,24 +311,9 @@ namespace GemsCraft.Commands.Command_Handlers
             {
                 fileName = player.Name.Replace(".", "-"); //support for email names
             }
-            
-            string fullFileName = null;
 
-            if (fileName == null)
-            {
-                if (player.World == null)
-                {
-                    player.Message("When used from console, /gen requires FileName.");
+            string fullFileName;
 
-                    return;
-                }
-                if (!cmd.IsConfirmed)
-                {
-                    player.Confirm(cmd, "Replace this realm's map with a generated one?");
-                    return;
-                }
-            }
-            else
             {
                 fileName = fileName.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
                 if (!fileName.EndsWith(".fcm", StringComparison.OrdinalIgnoreCase))
@@ -354,7 +338,7 @@ namespace GemsCraft.Commands.Command_Handlers
                 }
                 if (!cmd.IsConfirmed && File.Exists(fullFileName))
                 {
-                    player.Confirm(cmd, "The mapfile \"{0}\" already exists. Overwrite?", fileName);
+                    player.Confirm(cmd, "The map file \"{0}\" already exists. Overwrite?", fileName);
                     return;
                 }
             }
@@ -369,14 +353,14 @@ namespace GemsCraft.Commands.Command_Handlers
             {
                 try
                 {
-                    theme = (MapGenTheme)Enum.Parse(typeof(MapGenTheme), themeName, true);
-                    noTrees = (theme != MapGenTheme.Forest);
+                    theme = (MapGenTheme) Enum.Parse(typeof(MapGenTheme), themeName, true);
+                    noTrees = theme != MapGenTheme.Forest;
                 }
                 catch (Exception)
                 {
                     player.MessageNow("Unrecognized theme \"{0}\". Available themes are: Grass, {1}",
                                        themeName,
-                                       String.Join(", ", Enum.GetNames(typeof(MapGenTheme))));
+                                       string.Join(", ", Enum.GetNames(typeof(MapGenTheme))));
                     return;
                 }
             }
@@ -389,13 +373,12 @@ namespace GemsCraft.Commands.Command_Handlers
             {
                 player.Message("Unrecognized template \"{0}\". Available templates are: {1}",
                                 templateName,
-                                String.Join(", ", Enum.GetNames(typeof(MapGenTemplate))));
+                                string.Join(", ", Enum.GetNames(typeof(MapGenTemplate))));
                 return;
             }
 
             if (!Enum.IsDefined(typeof(MapGenTheme), theme) || !Enum.IsDefined(typeof(MapGenTemplate), template))
             {
-
                 return;
             }
 
@@ -438,50 +421,31 @@ namespace GemsCraft.Commands.Command_Handlers
                 return;
             }
 
-            if (fileName != null)
+            if (map.Save(fullFileName))
             {
-                if (map.Save(fullFileName))
-                {
-                    player.MessageNow("Generation done. Saved to {0}", fileName);
-                }
-                else
-                {
-                    player.Message("&WAn error occured while saving generated map to {0}", fileName);
-                }
+                player.MessageNow("Generation done. Saved to {0}", fileName);
             }
             else
             {
-                player.MessageNow("Generation done. Changing map...");
-                player.World.ChangeMap(map);
+                player.Message("&WAn error occured while saving generated map to {0}", fileName);
             }
         }
 
-
-
-
         internal static void RealmAccess(Player player, Command cmd, string worldName, string name)
         {
-
             // Print information about the current realm
             if (worldName == null)
             {
-                if (player.World == null)
-                {
-                    player.Message("Error.");
-                }
-                else
-                {
-                    player.Message(player.World.AccessSecurity.GetDescription(player.World, "realm", "accessed"));
-                }
+                player.Message(player.World == null
+                    ? "Error."
+                    : player.World.AccessSecurity.GetDescription(player.World, "realm", "accessed"));
                 return;
             }
 
             // Find a realm by name
             World realm = WorldManager.FindWorldOrPrintMatches(player, worldName);
             if (realm == null) return;
-
-
-
+            
             if (name == null)
             {
                 player.Message(realm.AccessSecurity.GetDescription(realm, "realm", "accessed"));
@@ -500,14 +464,14 @@ namespace GemsCraft.Commands.Command_Handlers
                 // Whitelisting individuals
                 if (name.StartsWith("+"))
                 {
-                    PlayerInfo info;
-                    if (!PlayerDB.FindPlayerInfo(name.Substring(1), out info))
+                    if (!PlayerDB.FindPlayerInfo(name.Substring(1), out var info))
                     {
                         player.Message("More than one player found matching \"{0}\"", name.Substring(1));
                         continue;
 
                     }
-                    else if (info == null)
+
+                    if (info == null)
                     {
                         player.MessageNoPlayer(name.Substring(1));
                         continue;
@@ -533,23 +497,17 @@ namespace GemsCraft.Commands.Command_Handlers
                             {
                                 player.Message("{0}&S is unbanned from Realm {1}",
                                                 info.ClassyName, realm.ClassyName);
-                                if (target != null)
-                                {
-                                    target.Message("You are now unbanned from Realm {0}&S (removed from blacklist by {1}&S).",
-                                                    realm.ClassyName, player.ClassyName);
-                                }
+                                target?.Message("You are now unbanned from Realm {0}&S (removed from blacklist by {1}&S).",
+                                    realm.ClassyName, player.ClassyName);
                             }
                             else
                             {
                                 player.Message("{0}&S was unbanned from Realm {1}&S. " +
                                                 "Player is still NOT allowed to join (by rank).",
                                                 info.ClassyName, realm.ClassyName);
-                                if (target != null)
-                                {
-                                    target.Message("You were Unbanned from Realm {0}&S by {1}&S. " +
-                                                    "You are still NOT allowed to join (by rank).",
-                                                    player.ClassyName, realm.ClassyName);
-                                }
+                                target?.Message("You were Unbanned from Realm {0}&S by {1}&S. " +
+                                                "You are still NOT allowed to join (by rank).",
+                                    player.ClassyName, realm.ClassyName);
                             }
                             Logger.Log(LogType.UserActivity, "{0} removed {1} from the access blacklist of {2}",
                                         player.Name, info.Name, realm.Name);
@@ -559,11 +517,8 @@ namespace GemsCraft.Commands.Command_Handlers
                         case PermissionOverride.None:
                             player.Message("{0}&S is now allowed to access {1}",
                                             info.ClassyName, realm.ClassyName);
-                            if (target != null)
-                            {
-                                target.Message("You can now access realm {0}&S (whitelisted by {1}&S).",
-                                                realm.ClassyName, player.ClassyName);
-                            }
+                            target?.Message("You can now access realm {0}&S (whitelisted by {1}&S).",
+                                realm.ClassyName, player.ClassyName);
                             Logger.Log(LogType.UserActivity, "{0} added {1} to the access whitelist on realm {2}",
                                         player.Name, info.Name, realm.Name);
                             changesWereMade = true;
@@ -579,13 +534,13 @@ namespace GemsCraft.Commands.Command_Handlers
                 }
                 else if (name.StartsWith("-"))
                 {
-                    PlayerInfo info;
-                    if (!PlayerDB.FindPlayerInfo(name.Substring(1), out info))
+                    if (!PlayerDB.FindPlayerInfo(name.Substring(1), out var info))
                     {
                         player.Message("More than one player found matching \"{0}\"", name.Substring(1));
                         continue;
                     }
-                    else if (info == null)
+
+                    if (info == null)
                     {
                         player.MessageNoPlayer(name.Substring(1));
                         continue;
@@ -612,11 +567,8 @@ namespace GemsCraft.Commands.Command_Handlers
                         case PermissionOverride.None:
                             player.Message("{0}&S is now banned from accessing {1}",
                                             info.ClassyName, realm.ClassyName);
-                            if (target != null)
-                            {
-                                target.Message("&WYou were banned by {0}&W from accessing realm {1}",
-                                                player.ClassyName, realm.ClassyName);
-                            }
+                            target?.Message("&WYou were banned by {0}&W from accessing realm {1}",
+                                player.ClassyName, realm.ClassyName);
                             Logger.Log(LogType.UserActivity, "{0} added {1} to the access blacklist on realm {2}",
                                         player.Name, info.Name, realm.Name);
                             changesWereMade = true;
@@ -628,22 +580,16 @@ namespace GemsCraft.Commands.Command_Handlers
                                 player.Message("{0}&S is no longer on the access whitelist of {1}&S. " +
                                                 "Player is still allowed to join (by rank).",
                                                 info.ClassyName, realm.ClassyName);
-                                if (target != null)
-                                {
-                                    target.Message("You were banned from Realm {0}&S by {1}&S. " +
-                                                    "You are still allowed to join (by rank).",
-                                                    player.ClassyName, realm.ClassyName);
-                                }
+                                target?.Message("You were banned from Realm {0}&S by {1}&S. " +
+                                                "You are still allowed to join (by rank).",
+                                    player.ClassyName, realm.ClassyName);
                             }
                             else
                             {
                                 player.Message("{0}&S is no longer allowed to access {1}",
                                                 info.ClassyName, realm.ClassyName);
-                                if (target != null)
-                                {
-                                    target.Message("&WYou were banned from Realm {0}&W (Banned by {1}&W).",
-                                                    realm.ClassyName, player.ClassyName);
-                                }
+                                target?.Message("&WYou were banned from Realm {0}&W (Banned by {1}&W).",
+                                    realm.ClassyName, player.ClassyName);
                             }
                             Logger.Log(LogType.UserActivity, "{0} removed {1} from the access whitelist on realm {2}",
                                         player.Name, info.Name, realm.Name);
@@ -703,35 +649,28 @@ namespace GemsCraft.Commands.Command_Handlers
                 }
             } while ((name = cmd.Next()) != null);
 
-            if (changesWereMade)
+            if (!changesWereMade) return;
+            var playersWhoCantStay = realm.Players.Where(p => !p.CanJoin(realm));
+            foreach (Player p in playersWhoCantStay)
             {
-                var playersWhoCantStay = realm.Players.Where(p => !p.CanJoin(realm));
-                foreach (Player p in playersWhoCantStay)
-                {
-                    p.Message("&WYou are no longer allowed to join realm {0}", realm.ClassyName);
-                    p.JoinWorld(WorldManager.MainWorld, WorldChangeReason.PermissionChanged);
-                }
-
-                WorldManager.SaveWorldList();
+                p.Message("&WYou are no longer allowed to join realm {0}", realm.ClassyName);
+                p.JoinWorld(WorldManager.MainWorld, WorldChangeReason.PermissionChanged);
             }
+
+            WorldManager.SaveWorldList();
         }
 
 
-        internal static void RealmBuild(Player player, Command cmd, string worldName, string name, string NameIfRankIsName)
+        internal static void RealmBuild(Player player, Command cmd, string worldName, string name, string nameIfRankIsName)
         {
 
 
             // Print information about the current realm
             if (worldName == null)
             {
-                if (player.World == null)
-                {
-                    player.Message("When calling /wbuild from console, you must specify a realm name.");
-                }
-                else
-                {
-                    player.Message(player.World.BuildSecurity.GetDescription(player.World, "realm", "modified"));
-                }
+                player.Message(player.World == null
+                    ? "When calling /wbuild from console, you must specify a realm name."
+                    : player.World.BuildSecurity.GetDescription(player.World, "realm", "modified"));
                 return;
             }
 
@@ -753,8 +692,7 @@ namespace GemsCraft.Commands.Command_Handlers
                 // Whitelisting individuals
                 if (name.StartsWith("+"))
                 {
-                    PlayerInfo info;
-                    if (!PlayerDB.FindPlayerInfo(name.Substring(1), out info))
+                    if (!PlayerDB.FindPlayerInfo(name.Substring(1), out var info))
                     {
                         player.Message("More than one player found matching \"{0}\"", name.Substring(1));
                         continue;
@@ -764,9 +702,7 @@ namespace GemsCraft.Commands.Command_Handlers
                         player.MessageNoPlayer(name.Substring(1));
                         continue;
                     }
-
-
-
+                    
                     if (realm.BuildSecurity.CheckDetailed(info) == SecurityCheckResult.Allowed)
                     {
                         player.Message("{0}&S is already allowed to build in {1}&S (by rank)",
@@ -784,23 +720,17 @@ namespace GemsCraft.Commands.Command_Handlers
                             {
                                 player.Message("{0}&S is no longer barred from building in {1}",
                                                 info.ClassyName, realm.ClassyName);
-                                if (target != null)
-                                {
-                                    target.Message("You can now build in realm {0}&S (removed from blacklist by {1}&S).",
-                                                    realm.ClassyName, player.ClassyName);
-                                }
+                                target?.Message("You can now build in realm {0}&S (removed from blacklist by {1}&S).",
+                                    realm.ClassyName, player.ClassyName);
                             }
                             else
                             {
                                 player.Message("{0}&S was removed from the build blacklist of {1}&S. " +
                                                 "Player is still NOT allowed to build (by rank).",
                                                 info.ClassyName, realm.ClassyName);
-                                if (target != null)
-                                {
-                                    target.Message("You were removed from the build blacklist of realm {0}&S by {1}&S. " +
-                                                    "You are still NOT allowed to build (by rank).",
-                                                    player.ClassyName, realm.ClassyName);
-                                }
+                                target?.Message("You were removed from the build blacklist of realm {0}&S by {1}&S. " +
+                                                "You are still NOT allowed to build (by rank).",
+                                    player.ClassyName, realm.ClassyName);
                             }
                             Logger.Log(LogType.UserActivity, "{0} removed {1} from the build blacklist of {2}",
                                         player.Name, info.Name, realm.Name);
@@ -810,11 +740,8 @@ namespace GemsCraft.Commands.Command_Handlers
                         case PermissionOverride.None:
                             player.Message("{0}&S is now allowed to build in {1}",
                                             info.ClassyName, realm.ClassyName);
-                            if (target != null)
-                            {
-                                target.Message("You can now build in realm {0}&S (whitelisted by {1}&S).",
-                                                realm.ClassyName, player.ClassyName);
-                            }
+                            target?.Message("You can now build in realm {0}&S (whitelisted by {1}&S).",
+                                realm.ClassyName, player.ClassyName);
                             Logger.Log(LogType.UserActivity, "{0} added {1} to the build whitelist on realm {2}",
                                         player.Name, info.Name, realm.Name);
                             break;
@@ -829,13 +756,13 @@ namespace GemsCraft.Commands.Command_Handlers
                 }
                 else if (name.StartsWith("-"))
                 {
-                    PlayerInfo info;
-                    if (!PlayerDB.FindPlayerInfo(name.Substring(1), out info))
+                    if (!PlayerDB.FindPlayerInfo(name.Substring(1), out var info))
                     {
                         player.Message("More than one player found matching \"{0}\"", name.Substring(1));
                         continue;
                     }
-                    else if (info == null)
+
+                    if (info == null)
                     {
                         player.MessageNoPlayer(name.Substring(1));
                         continue;
@@ -862,11 +789,8 @@ namespace GemsCraft.Commands.Command_Handlers
                         case PermissionOverride.None:
                             player.Message("{0}&S is now barred from building in {1}",
                                             info.ClassyName, realm.ClassyName);
-                            if (target != null)
-                            {
-                                target.Message("&WYou were barred by {0}&W from building in realm {1}",
-                                                player.ClassyName, realm.ClassyName);
-                            }
+                            target?.Message("&WYou were barred by {0}&W from building in realm {1}",
+                                player.ClassyName, realm.ClassyName);
                             Logger.Log(LogType.UserActivity, "{0} added {1} to the build blacklist on realm {2}",
                                         player.Name, info.Name, realm.Name);
                             changesWereMade = true;
@@ -878,22 +802,16 @@ namespace GemsCraft.Commands.Command_Handlers
                                 player.Message("{0}&S is no longer on the build whitelist of {1}&S. " +
                                                 "Player is still allowed to build (by rank).",
                                                 info.ClassyName, realm.ClassyName);
-                                if (target != null)
-                                {
-                                    target.Message("You were removed from the build whitelist of realm {0}&S by {1}&S. " +
-                                                    "You are still allowed to build (by rank).",
-                                                    player.ClassyName, realm.ClassyName);
-                                }
+                                target?.Message("You were removed from the build whitelist of realm {0}&S by {1}&S. " +
+                                                "You are still allowed to build (by rank).",
+                                    player.ClassyName, realm.ClassyName);
                             }
                             else
                             {
                                 player.Message("{0}&S is no longer allowed to build in {1}",
                                                 info.ClassyName, realm.ClassyName);
-                                if (target != null)
-                                {
-                                    target.Message("&WYou can no longer build in realm {0}&W (removed from whitelist by {1}&W).",
-                                                    realm.ClassyName, player.ClassyName);
-                                }
+                                target?.Message("&WYou can no longer build in realm {0}&W (removed from whitelist by {1}&W).",
+                                    realm.ClassyName, player.ClassyName);
                             }
                             Logger.Log(LogType.UserActivity, "{0} removed {1} from the build whitelist on realm {2}",
                                         player.Name, info.Name, realm.Name);
