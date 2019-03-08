@@ -1,5 +1,5 @@
 ﻿using System;
-using GemsCraft.GUI.BlockDesigner;
+using GemsCraft.Display.BlockDesigner;
 
 namespace RemoteTest
 {

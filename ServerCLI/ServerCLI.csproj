@@ -89,8 +89,8 @@
     <Content Include="ServerCLI.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fCraft\GemsCraft.csproj">
-      <Project>{7FBE7809-6F77-415C-ABEB-A3F627E817B0}</Project>
+    <ProjectReference Include="..\GemsCraft\GemsCraft.csproj">
+      <Project>{7fbe7809-6f77-415c-abeb-a3f627e817b0}</Project>
       <Name>GemsCraft</Name>
     </ProjectReference>
   </ItemGroup>

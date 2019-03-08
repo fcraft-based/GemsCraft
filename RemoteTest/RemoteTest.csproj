@@ -55,7 +55,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\fCraft\GemsCraft.csproj">
+    <ProjectReference Include="..\GemsCraft\GemsCraft.csproj">
       <Project>{7fbe7809-6f77-415c-abeb-a3f627e817b0}</Project>
       <Name>GemsCraft</Name>
     </ProjectReference>
