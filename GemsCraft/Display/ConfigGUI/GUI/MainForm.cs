@@ -107,7 +107,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI
             InitializeComponent();
             toolTip = new ToolTip();
             _instance = this;
-            // Setting up the UI's for the Config Sections
+            // Setting up the UI's for the Config Section
             SectionClasses.GeneralConfig = new GeneralConfig();
             SectionClasses.ChatConfig = new ChatConfig();
             SectionClasses.WorldConfig = new WorldConfig();
@@ -1851,8 +1851,8 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
                 File.WriteAllText(Path.Combine(Paths.ReqPath, "requirements.txt"), "//" +
                     "This is the requirements file, here is where you list the requirements " +
                     "for your server's ranks. You can either list all of the requirements " +
-                    "here or you can split it into sections by creating text documents in " +
-                    "this same directory(requirements folder) (sections are the most preferable). Make sure " +
+                    "here or you can split it into sectionses by creating text documents in " +
+                    "this same directory(requirements folder) (sectionses are the most preferable). Make sure " +
                     "the text documents are the same name of the rank you are listing " +
                     "the requirements for. If you wish to use color codes use & instead of %");
                 Process.Start(Paths.ReqTextPath);

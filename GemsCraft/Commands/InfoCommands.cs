@@ -543,7 +543,7 @@ THE SOFTWARE.*/
             IsConsoleSafe = true,
             UsableByFrozenPlayers = true,
             Help = "&SCan show an advanced list for a chosen section. " +
-             "Type /List to display the sections",
+             "Type /List to display the sectionses",
             Usage = "/List SectionName",
             Handler = ListHandler
         };
@@ -555,14 +555,14 @@ THE SOFTWARE.*/
             if (Option == null)
             {
                 CdList.PrintUsage(player);
-                player.Message("  Sections include: Staff, DisplayedNames, Idles, Portals, Rank, Top10, HaxOff, TopBuilders, MostTime, MostKicks, MostBans, MostPromos, MostLogins, and Donators");
+                player.Message("  Section include: Staff, DisplayedNames, Idles, Portals, Rank, Top10, HaxOff, TopBuilders, MostTime, MostKicks, MostBans, MostPromos, MostLogins, and Donators");
                 return;
             }
             switch (Option.ToLower())
             {
                 default:
                     CdList.PrintUsage(player);
-                    player.Message("  Sections include: Staff, DisplayedNames, Idles, Portals, Rank, Top10, TopBuilders, MostTime, MostKicks, MostBans, MostPromos, MostLogins, and Donators");
+                    player.Message("  Section include: Staff, DisplayedNames, Idles, Portals, Rank, Top10, TopBuilders, MostTime, MostKicks, MostBans, MostPromos, MostLogins, and Donators");
                     break;
                 case "top10":
                     List<World> WorldNames = new List<World>(WorldManager.Worlds.Where(w => w.VisitCount > 0)
@@ -799,14 +799,14 @@ THE SOFTWARE.*/
                 string[] sections = GetReqSectionList();
                 if (sections != null)
                 {
-                    player.Message("Requirement sections: {0}. Type &H/reqs SectionName&S to read information on how to gain that rank.", sections.JoinToString());
+                    player.Message("Requirement sectionses: {0}. Type &H/reqs SectionName&S to read information on how to gain that rank.", sections.JoinToString());
                 }
                 return;
             }
 
             if (!Directory.Exists(Paths.ReqPath))
             {
-                player.Message("There are no requirement sections defined.");
+                player.Message("There are no requirement sectionses defined.");
                 return;
             }
 
@@ -835,7 +835,7 @@ THE SOFTWARE.*/
                         var matches = sectionFiles.Select(f => Path.GetFileNameWithoutExtension(f))
                                                   .Where(sn => sn != null && sn.StartsWith(sectionName));
                         // if there are multiple matches, print a list
-                        player.Message("Multiple requirement sections matched \"{0}\": {1}",
+                        player.Message("Multiple requirement sectionses matched \"{0}\": {1}",
                                         sectionName, matches.JoinToString());
                     }
                 }
@@ -846,11 +846,11 @@ THE SOFTWARE.*/
                 var sectionList = GetReqSectionList();
                 if (sectionList == null)
                 {
-                    player.Message("There are no requirement sections defined.");
+                    player.Message("There are no requirement sectionses defined.");
                 }
                 else
                 {
-                    player.Message("No requirement section defined for \"{0}\". Available sections: {1}",
+                    player.Message("No requirement section defined for \"{0}\". Available sectionses: {1}",
                                     sectionName, sectionList.JoinToString());
                 }
             }
@@ -1912,11 +1912,11 @@ THE SOFTWARE.*/
                     player.Message(DefaultRules);
                 }
 
-                // print a list of available sections
+                // print a list of available sectionses
                 string[] sections = GetRuleSectionList();
                 if (sections != null)
                 {
-                    player.Message("Rule sections: {0}. Type &H/Rules SectionName&S to read.", sections.JoinToString());
+                    player.Message("Rule sectionses: {0}. Type &H/Rules SectionName&S to read.", sections.JoinToString());
                 }
                 return;
             }
@@ -1924,7 +1924,7 @@ THE SOFTWARE.*/
             // if a section name is given, but no section files exist
             if (!Directory.Exists(Paths.RulesPath))
             {
-                player.Message("There are no rule sections defined.");
+                player.Message("There are no rule sectionses defined.");
                 return;
             }
 
@@ -1957,7 +1957,7 @@ THE SOFTWARE.*/
                         var matches = sectionFiles.Select(f => Path.GetFileNameWithoutExtension(f))
                                                   .Where(sn => sn != null && sn.StartsWith(sectionName, StringComparison.OrdinalIgnoreCase));
                         // if there are multiple matches, print a list
-                        player.Message("Multiple rule sections matched \"{0}\": {1}",
+                        player.Message("Multiple rule sectionses matched \"{0}\": {1}",
                                         sectionName, matches.JoinToString());
                         return;
                     }
@@ -1978,11 +1978,11 @@ THE SOFTWARE.*/
                 var sectionList = GetRuleSectionList();
                 if (sectionList == null)
                 {
-                    player.Message("There are no rule sections defined.");
+                    player.Message("There are no rule sectionses defined.");
                 }
                 else
                 {
-                    player.Message("No rule section defined for \"{0}\". Available sections: {1}",
+                    player.Message("No rule section defined for \"{0}\". Available sectionses: {1}",
                                     sectionName, sectionList.JoinToString());
                 }
             }

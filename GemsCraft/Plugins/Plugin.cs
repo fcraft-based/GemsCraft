@@ -21,9 +21,16 @@ namespace GemsCraft.Plugins
 {
     public interface IPlugin
     {
-        String Name { get; set; }
-        String Version { get; set; }
-
+        string Name { get; set; }
+        string Version { get; set; }
+        PluginProperty[] Properties { get; set; }
         void Initialize();
     }
+
+    public class PluginProperty
+    { 
+        public string Name;
+        public object Value;
+    }
+
 }

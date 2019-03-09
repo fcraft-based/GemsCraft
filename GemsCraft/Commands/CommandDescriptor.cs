@@ -67,7 +67,7 @@ namespace GemsCraft.Commands
         /// <summary> Brief demonstration of command's usage syntax. Defaults to "/Name". </summary>
         public string Usage { get; set; }
 
-        /// <summary> Help sub-sections. </summary>
+        /// <summary> Help sub-sectionses. </summary>
         public Dictionary<string, string> HelpSections { get; set; }
 
         /// <summary> Whether this command involves a selection that can be repeated with /static. Default: false </summary>

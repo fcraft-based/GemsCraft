@@ -56,7 +56,7 @@ namespace GemsCraft.Configuration {
         // Mapping of keys to their metadata containers.
         private static readonly ConfigKeyAttribute[] KeyMetadata;
 
-        // Keys organized by sections
+        // Keys organized by sectionses
         private static readonly Dictionary<ConfigSection, ConfigKey[]> KeySections = new Dictionary<ConfigSection, ConfigKey[]>();
 
         // List of renamed/remapped keys.
@@ -69,13 +69,13 @@ namespace GemsCraft.Configuration {
 
         public static ConfigKey[] AllKeys()
         {
-            ConfigSection[] sections =
+            ConfigSection[] sectionses =
             {
                 ConfigSection.Advanced, ConfigSection.Chat, ConfigSection.General,
                 ConfigSection.IRC, ConfigSection.Logging, ConfigSection.SavingAndBackup,
                 ConfigSection.Worlds, ConfigSection.Security, ConfigSection.Worlds, ConfigSection.CPE
             };
-            return sections.SelectMany(GetKeys).ToArray();
+            return sectionses.SelectMany(GetKeys).ToArray();
         }
 
         static Config() {
@@ -313,7 +313,7 @@ namespace GemsCraft.Configuration {
             if (counter == -1)
             {
                 Logger.Log(LogType.Warning,
-                    "Config.Load: No config sections found saved. " +
+                    "Config.Load: No config sectionses found saved. " +
                     "Using default for everything.");
             }
 

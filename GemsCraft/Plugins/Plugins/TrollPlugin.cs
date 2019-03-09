@@ -13,6 +13,8 @@ namespace TrollPlugin
 {
     public class Init : IPlugin
     {
+        public PluginProperty[] Properties { get; set; }
+
         public void Initialize()
         {
             Logger.Log(LogType.ConsoleOutput, Name + "(v " + Version + "): Registering TrollPlugin");

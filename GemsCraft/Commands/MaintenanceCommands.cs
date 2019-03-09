@@ -134,7 +134,7 @@ namespace GemsCraft.Commands {
             Handler = ConfigListHandler
         };
 
-        private static ConfigSection[] cSections = {
+        private static ConfigSection[] _cSectionses = {
             ConfigSection.General, ConfigSection.Chat, ConfigSection.Security,
             ConfigSection.SavingAndBackup, ConfigSection.IRC, ConfigSection.Advanced,
             ConfigSection.Misc, ConfigSection.CPE
@@ -146,7 +146,7 @@ namespace GemsCraft.Commands {
                 string section = cmd.Next().ToLower();
                 string message = "&aConfigurations in this section are: ";
                 bool foundOne = false;
-                foreach (ConfigSection cs in cSections)
+                foreach (ConfigSection cs in _cSectionses)
                 {
                     if (cs.ToString().ToLower() != section) continue;
                     foundOne = true;
@@ -177,7 +177,7 @@ namespace GemsCraft.Commands {
             catch (NullReferenceException)
             {
                 string message = "&aAvailable configurations are: &f";
-                foreach (ConfigSection cs in cSections)
+                foreach (ConfigSection cs in _cSectionses)
                 {
                     ConfigKey[] keys = cs.GetKeys();
                     for (int x = 0; x <= keys.Length - 1; x++)

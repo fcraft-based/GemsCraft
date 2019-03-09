@@ -30,7 +30,7 @@ namespace GemsCraft.Plugins
 
         private PluginManager()
         {
-            // Empty bitch
+            // Removed profanity
         }
 
         public static PluginManager GetInstance()
