@@ -44,7 +44,6 @@ namespace GemsCraft.Commands
             CommandManager.RegisterCommand(CdPoke);
             CommandManager.RegisterCommand(CdBroMode);
             CommandManager.RegisterCommand(CdRageQuit);
-            CommandManager.RegisterCommand(CdQuit);
             CommandManager.RegisterCommand(CdModerate);
 
             CommandManager.RegisterCommand(CdBroFist);
@@ -63,14 +62,85 @@ namespace GemsCraft.Commands
             CommandManager.RegisterCommand(CdBarf);
             CommandManager.RegisterCommand(CdSecret);
             CommandManager.RegisterCommand(CdDiscordSend);
+            CommandManager.RegisterCommand(CdExitMessage);
 
             Player.Moved += Player_IsBack;
         }
+
+        private static CommandDescriptor CdExitMessage = new CommandDescriptor
+        {
+            Name = "ExitMessage",
+            Aliases = new []{ "setexit", "setexitmessage", "exitstring", "setexitstring" },
+            Permissions = new [] { Permission.Chat, Permission.ExitMessage },
+            Category = CommandCategory.Chat,
+            Help = "Changes yours or another person's exit message.",
+            Usage = "/ExitMessage Set/Playername/Clear",
+            IsConsoleSafe = true,
+            Handler = ExitMessageHandler
+        };
+
+        private static void ExitMessageHandler(Player player, Command cmd)
+        {
+            try
+            {
+                string arg = cmd.Next().ToLower();
+                string message = cmd.NextAll();
+                bool messageEmpty = message == null;
+                switch (arg)
+                {
+                    case "set":
+                        if (player.IsConsole)
+                        {
+                            player.Message("&4You cannot do this from Console.");
+                        }
+                        player.Info.ExitMessage = messageEmpty ? "" : message;
+                        player.Message(messageEmpty ? "Exit message cleared." : $"Exit message set to: {message}");
+                        break;
+                    case "clear":
+                        if (player.IsConsole)
+                        {
+                            player.Message("&4You cannot do this from Console.");
+                            return;
+                        }
+                        player.Info.ExitMessage = "";
+                        player.Message("Exit message cleared");
+                        break;
+                    default:
+                        if (!player.Can(Permission.SetOtherExitMessage))
+                        {
+                            player.Message("&4You don't have permission to do this.");
+                            return;
+                        }
+                        bool foundOne = false;
+                        foreach (Player p in Server.Players)
+                        {
+                            if (p.Info.Name.ToLower() != arg) continue;
+                            p.Info.ExitMessage = messageEmpty ? "" : message;
+                            player.Message(messageEmpty
+                                ? $"Exit message of {p.Info.DisplayedName}&r was cleared."
+                                : $"Exit message of {p.Info.DisplayedName}&r was set to {message}");
+                            foundOne = true;
+                        }
+
+                        if (!foundOne)
+                        {
+                            CdExitMessage.PrintUsage(player);
+                        }
+                        break;
+                }
+
+            }
+            catch (NullReferenceException)
+            {
+                CdExitMessage.PrintUsage(player);
+            }
+        }
+
         static readonly CommandDescriptor CdDiscordSend = new CommandDescriptor
         {
             Name = "DiscordSend",
             Category = CommandCategory.Chat,
-            Permissions = new[] { Permission.Chat },
+            Permissions = new[] { Permission.Chat},
             Usage = "/DiscordSend",
             Help = "&SDon't tell anyone!!!",
             Handler = DiscordSendHandler
@@ -1127,36 +1197,7 @@ THE SOFTWARE.*/
                 }
             }
         }
-
-        static readonly CommandDescriptor CdQuit = new CommandDescriptor
-        {
-            Name = "Quitmsg",
-            Aliases = new[] { "quit", "quitmessage" },
-            Category = CommandCategory.Chat,
-            IsConsoleSafe = false,
-            Permissions = new[] { Permission.Chat },
-            Usage = "/Quitmsg [message]",
-            Help = "Adds a farewell message which is displayed when you leave the server.",
-            Handler = QuitHandler
-        };
-
-        static void QuitHandler(Player player, Command cmd)
-        {
-            string Msg = cmd.NextAll();
-
-            if (Msg.Length < 1)
-            {
-                CdQuit.PrintUsage(player);
-                return;
-            }
-
-            else
-            {
-                player.Info.LeaveMsg = "left the server: &C" + Msg;
-                player.Message("Your quit message is now set to: {0}", Msg);
-            }
-        }
-
+        
 
         static readonly CommandDescriptor CdRageQuit = new CommandDescriptor
         {

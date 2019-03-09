@@ -49,6 +49,11 @@ namespace GemsCraft.Players
         [CanBeNull]
         public string TitleName;
 
+        /// <summary>
+        /// Player's exit message. Example: {name} has left the server. ({message})
+        /// </summary>
+        public string ExitMessage;
+
         /// <summary> Player's unique numeric ID. Issued on first join. </summary>
         public int ID;
 
@@ -100,7 +105,6 @@ namespace GemsCraft.Players
         public string followingID;
         public int followingCount = 0;
         public bool Static = true;
-        public string LeaveMsg = "left the server";
         public string oldDisplayedName = null;
 
         //Games
@@ -657,14 +661,7 @@ namespace GemsCraft.Players
 
             if (fields.Length > 45)
             {
-                if (fields[45].Length == 0)
-                {
-                    info.IsHidden = false;
-                }
-                else
-                {
-                    info.IsHidden = info.Rank.Can(Permission.Hide);
-                }
+                info.IsHidden = fields[45].Length != 0 && info.Rank.Can(Permission.Hide);
             }
             if (fields.Length > 46)
             {
@@ -695,6 +692,7 @@ namespace GemsCraft.Players
                 if (fields[51].Length > 0) Int32.TryParse(fields[51], out info.totalDeathsFFA);
             }
 
+            if (fields.Length > 52 && fields[52].Length > 0) info.ExitMessage = fields[52];
             return info;
         }
 
@@ -850,6 +848,10 @@ namespace GemsCraft.Players
                 if (fields[51].Length > 0) Int32.TryParse(fields[51], out info.totalDeathsFFA);
             }
 
+            if (fields.Length > 52 && fields[52].Length > 0)
+            {
+                info.ExitMessage = fields[52];
+            }
             return info;
         }
 
@@ -1369,6 +1371,9 @@ namespace GemsCraft.Players
             sb.Append(',');
 
             if (totalDeathsFFA > 0) sb.Digits(totalDeathsFFA); // 51
+            sb.Append(',');
+
+            sb.Append(ExitMessage);
         }
 
 
@@ -1485,6 +1490,9 @@ namespace GemsCraft.Players
             //FFA Stats            
             Write7BitEncodedInt(writer, totalKillsFFA); // 50
             Write7BitEncodedInt(writer, totalDeathsFFA); // 51
+            
+            //GC Items
+            writer.Write(ExitMessage); // 52
         }
 
 

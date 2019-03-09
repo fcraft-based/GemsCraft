@@ -39,7 +39,8 @@ namespace GemsCraft.Players
     /// For persistent state of a known player account, see PlayerInfo. </summary>
     public sealed partial class Player : IClassy
     {
-
+        public bool IsConsole => this == Console;
+        public bool IsAutoRank => this == AutoRank;
         /// <summary> The godly pseudo-player for commands called from the server console.
         /// Console has all the permissions granted.
         /// Note that Player.Console.World is always null,

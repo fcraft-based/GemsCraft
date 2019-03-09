@@ -1,13 +1,5 @@
-----------------GEMSCRAFT TODO----------------
-For Alpha 0.2
-- *Am I a pretty Girl?* (DONE!)
-- More CPE Configs (ClickDistance, HeldBlocks) (DONE!)
-- Custom Blocks upload .zip to include animations as well instead of .png (DONE!)
-- Texture Packs (DONE!)
-
+----------------GEMSCRAFT TODO---------------
 For Alpha 0.3
-- More CPE (To Be Determined)
-- Tutorial
-
-For Alpha 0.4
-- Remote Control Revisited
+- Exit Messages (DONE!)
+- Custom Config Sections
+- Remote Control

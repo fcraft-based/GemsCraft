@@ -37,6 +37,16 @@ namespace GemsCraft.Players {
         /// <summary> Ability to delete or replace admincrete. </summary>
         DeleteAdmincrete,
 
+        /// <summary>
+        /// Ability to set own exit message.
+        /// </summary>
+        ExitMessage,
+
+        /// <summary>
+        /// Ability to set another player's exit message.
+        /// </summary>
+        SetOtherExitMessage,
+
         /// <summary> Ability to view extended information about other players. </summary>
         ViewOthersInfo,
 
