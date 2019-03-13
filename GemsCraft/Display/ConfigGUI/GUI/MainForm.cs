@@ -94,6 +94,12 @@ namespace GemsCraft.Display.ConfigGUI.GUI
             SectionClasses.CpeConfig.ShowDialog();
         }
 
+        internal void btnPlugins_Click(object sender, EventArgs e)
+        {
+            _selectedTab = 11;
+            
+        }
+
         internal static Display.ConfigGUI.GUI.MainForm _instance;
         internal readonly Font _bold;
         internal Rank _selectedRank;
@@ -1401,6 +1407,7 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
             ApplyTabAdvanced();
             ApplyTabMisc();
             ApplyTabCpe();
+            ApplyTabPlugins();
         }
 
         internal void bResetTab_Click(object sender, EventArgs e)
@@ -1455,6 +1462,10 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
                 case 10:
                     Config.LoadDefaults(ConfigSection.CPE);
                     ApplyTabCpe();
+                    break;
+                case 11:
+                    Config.LoadDefaults(ConfigSection.Plugins);
+                    ApplyTabPlugins();
                     break;
             }
         }
@@ -1880,7 +1891,7 @@ Your rank is {RANK}&S. Type &H/Help&S for help.");
         {
 
         }
-
+        
         internal void websiteURL_TextChanged(object sender, EventArgs e)
         {
             SectionClasses.MiscConfig.websiteURL.Text = SectionClasses.MiscConfig.websiteURL.Text.Trim();

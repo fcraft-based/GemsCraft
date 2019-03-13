@@ -18,30 +18,39 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using GemsCraft.Configuration;
 using GemsCraft.fSystem;
+using GemsCraft.Utils;
+using Newtonsoft.Json;
+using Version = GemsCraft.Utils.Version;
 
 namespace GemsCraft.Plugins
 {
     class PluginManager
     {
-        private static PluginManager instance;
+        private static PluginManager _instance;
         public static List<IPlugin> Plugins = new List<IPlugin>();
 
         private PluginManager()
         {
-            // Removed profanity
+            // Empty
         }
 
         public static PluginManager GetInstance()
         {
-            if (instance == null)
+            if (!ConfigKey.EnablePlugins.Enabled())
             {
-                instance = new PluginManager();
-                instance.Initialize();
+                Logger.Log(LogType.SystemActivity,
+                    "Plugin loading is disabled by the config. Plugins will not be loaded.");
+                return new PluginManager();
             }
+            if (_instance != null) return _instance;
+            _instance = new PluginManager();
+            _instance.Initialize();
 
-            return instance;
+            return _instance;
         }
 
         private void Initialize()
@@ -60,32 +69,65 @@ namespace GemsCraft.Plugins
             }
 
             // Load plugins
-            String[] plugins = Directory.GetFiles("plugins", "*.dll");
-
+            string[] plugins = Directory.GetFiles("plugins", "*.dll");
+            
+            
             if (plugins.Length == 0)
             {
                 Logger.Log(LogType.ConsoleOutput, "PluginManager: No plugins found");
-                return;
             }
             else
             {
                 Logger.Log(LogType.ConsoleOutput, "PluginManager: Loading " + plugins.Length + " plugins");
 
-                foreach (String plugin in plugins)
+                foreach (string plugin in plugins)
                 {
                     try
                     {
                         Type pluginType = null;
-                        String args = plugin.Substring(plugin.LastIndexOf("\\") + 1, plugin.IndexOf(".dll") - plugin.LastIndexOf("\\") - 1);
-                        Assembly assembly = Assembly.LoadFile(Path.GetFullPath(plugin));
-                        if (assembly != null)
+                        string args = plugin.Substring(plugin.LastIndexOf("\\") + 1, plugin.IndexOf(".dll") - plugin.LastIndexOf("\\") - 1);
+                        string file = Path.GetFullPath(plugin);
+                        if (Path.GetExtension(file) != ".dll") continue; // Continue to next file
+                        Assembly assembly = Assembly.LoadFile(file);
+                        pluginType = assembly.GetType(args + ".Init");
+                        if (pluginType == null) continue; // Ignore dll's that are not comptatible, including plugins made for other fCraft forks
+                        // Uses a temp variable so we can load the defaults of the plugin later
+                        // This prevents the user from modifiying key elements important to the plugin in the config file
+                        IPlugin pluginObj = null;
+                        IPlugin temp = (IPlugin) Activator.CreateInstance(pluginType);
+                        // Checks to make sure the plugin is updated - this is crucial!
+                        if (Version.Compare(temp.SoftwareVersion, Updater.LatestStable) != -1)
                         {
-                            pluginType = assembly.GetType(args + ".Init");
-                            if (pluginType != null)
-                            {
-                                Plugins.Add((IPlugin)Activator.CreateInstance(pluginType));
-                            }
+                            throw new Exception(
+                                $"Plugin {temp.Name} uses an outdated version of GemsCraft. Check with the plugin developer to have it updated.");
                         }
+                        // Checks to see if a property file exists for the plugin.
+                        string propertyName = $"plugins/{temp.Name}.json";
+                        if (!File.Exists(propertyName))
+                        {
+                            Logger.Log(LogType.Warning,
+                                $"Property file does not exist for plugin {temp.Name}. Assuming defaults.");
+                        }
+                        else
+                        {
+                            pluginObj = JsonConvert.DeserializeObject<IPlugin>(propertyName);
+                        }
+
+                        if (pluginObj == null)
+                        {
+                            pluginObj = temp;
+                        }
+                        else
+                        {
+                            // Reinstates the key items as they should be, in case the user modified them in the config
+                            pluginObj.Name = temp.Name;
+                            pluginObj.Version = temp.Version;
+                            pluginObj.FileName = temp.FileName;
+                            pluginObj.Author = temp.Author;
+                            pluginObj.ReleaseDate = temp.ReleaseDate;
+                        }
+                        // Adds the plugin to the list.
+                        Plugins.Add(pluginObj);
                     }
                     catch (Exception ex)
                     {
@@ -97,10 +139,12 @@ namespace GemsCraft.Plugins
             }
         }
 
+        private bool secondFail = false;
         private void LoadPlugins()
         {
             if (Plugins.Count > 0)
             {
+                int loopCount = 0;
                 foreach (IPlugin plugin in Plugins)
                 {
                     Logger.Log(LogType.ConsoleOutput, "PluginManager: Loading plugin " + plugin.Name);
@@ -113,6 +157,8 @@ namespace GemsCraft.Plugins
                     {
                         Logger.Log(LogType.Error, "PluginManager: Failed loading plugin " + plugin.Name + ": " + ex);
                     }
+
+                    loopCount++;
                 }
             }
         }

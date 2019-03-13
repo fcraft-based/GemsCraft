@@ -9,8 +9,10 @@ using System.Xml.Linq;
 using GemsCraft.Configuration;
 using GemsCraft.fSystem;
 using GemsCraft.Players;
+using GemsCraft.Plugins;
 using GemsCraft.Utils;
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 
 namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
 {
@@ -66,6 +68,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             ApplyTabIRC();
             ApplyTabAdvanced();
             ApplyTabCpe();
+            ApplyTabPlugins();
 
             AddChangeHandler(tabs, SomethingChanged);
             AddChangeHandler(bResetTab, SomethingChanged);
@@ -157,14 +160,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             CheckMaxPlayersPerWorldValue();
             nMaxPlayersPerWorld.Value = ConfigKey.MaxPlayersPerWorld.GetInt();
 
-            if (ConfigKey.CheckForUpdates.GetString() == "True")
-            {
-                checkUpdate.Checked = true;
-            }
-            else
-            {
-                checkUpdate.Checked = false;
-            }
+            checkUpdate.Checked = ConfigKey.CheckForUpdates.GetString() == "True";
 
 
 
@@ -572,6 +568,11 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             #endregion
         }
 
+        private void ApplyTabPlugins()
+        {
+            chkPlugins.Checked = ConfigKey.EnablePlugins.Enabled();
+        }
+
         static void ApplyEnum<TEnum>([NotNull] ComboBox box, ConfigKey key, TEnum def) where TEnum : struct
         {
             if (box == null) throw new ArgumentNullException("box");
@@ -815,6 +816,20 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             ConfigKey.EnableHeldBlock.TrySetValue(chkEnableHeldBlock.Checked);
 
             #endregion
+
+            // Plugins
+            ConfigKey.EnablePlugins.SetValue(chkPlugins.Checked);
+
+            for (int x = 0; x <= listPlugins.Items.Count - 1; x++)
+            {
+                IPlugin plugin = PluginManager.Plugins[x];
+                string file = $"plugins/{plugin.Name}.json";
+                var writer = File.CreateText(file);
+                string json = JsonConvert.SerializeObject(writer, Formatting.Indented);
+                writer.Write(json);
+                writer.Flush();
+                writer.Close();
+            }
 
             // Save those worlds
             SaveWorldList();

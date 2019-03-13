@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
-
+using Version = System.Version;
 namespace GemsCraft.Utils
 {
 
@@ -26,7 +26,7 @@ namespace GemsCraft.Utils
         public static string MonoVersionString { get; private set; }
 
         /// <summary> Mono version number. May be null if we are running a REALLY old version. </summary>
-        public static Version MonoVersion { get; private set; }
+        public static System.Version MonoVersion { get; private set; }
 
         /// <summary> Whether we are under a Windows OS (under either .NET or Mono). </summary>
         public static bool IsWindows { get; private set; }
@@ -55,7 +55,7 @@ namespace GemsCraft.Utils
                         int major = Int32.Parse(versionMatch.Groups[1].Value);
                         int minor = Int32.Parse(versionMatch.Groups[2].Value);
                         int revision = Int32.Parse(versionMatch.Groups[3].Value);
-                        MonoVersion = new Version(major, minor, revision);
+                        MonoVersion = new System.Version(major, minor, revision);
                         IsSGenCapable = (major == 2 && minor >= 8);
                     }
                     catch (Exception ex)

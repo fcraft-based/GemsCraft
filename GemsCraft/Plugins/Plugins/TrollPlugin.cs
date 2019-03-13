@@ -8,12 +8,15 @@ using GemsCraft.fSystem;
 using GemsCraft.Players;
 using GemsCraft.Plugins;
 using GemsCraft.Utils;
+using Version = GemsCraft.Utils.Version;
 
 namespace TrollPlugin
 {
     public class Init : IPlugin
     {
-        public PluginProperty[] Properties { get; set; }
+        public string FileName { get; set; }
+        public Version SoftwareVersion { get; set; }
+        public bool Enabled { get; set; }
 
         public void Initialize()
         {
@@ -38,15 +41,23 @@ namespace TrollPlugin
         public string Name
         {
             get => "TrollPlugin";
-            set => Name = value;
+            set => throw new NotImplementedException();
         }
 
         //your plugin version
         public string Version
         {
             get => "1.0";
-            set => Version = value;
+            set => throw new NotImplementedException();
         }
+
+        public string Author
+        {
+            get => "Unknown";
+            set => throw new NotImplementedException();
+        }
+
+        public DateTime ReleaseDate { get; set; }
 
         static void TrollHandler(Player player, Command cmd)
         {

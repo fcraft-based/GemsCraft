@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using GemsCraft.Configuration;
 using GemsCraft.fSystem;
 using GemsCraft.Players;
+using GemsCraft.Plugins;
 using GemsCraft.Utils;
 using JetBrains.Annotations;
 using Color = GemsCraft.Utils.Color;
@@ -35,10 +36,23 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig {
             bold = new Font( Font, FontStyle.Bold );
             Shown += Init;
             Text = "GemsCraft Configuration " + Updater.LatestStable;
+
+            PluginManager.GetInstance();
+            foreach (IPlugin plugin in PluginManager.Plugins)
+            {
+                listPlugins.Items.Add($"{plugin.Name} ({plugin.FileName}) [{plugin.Version}]");
+            }
+
+            propertyGrid1.PropertyValueChanged += PluginPropertyChanged;
         }
 
+        private void PluginPropertyChanged(object o, PropertyValueChangedEventArgs propertyValueChangedEventArgs)
+        {
+            int index = listPlugins.SelectedIndex;
+            PluginManager.Plugins[index] = (IPlugin) propertyGrid1.SelectedObject;
+        }
 
-        void Init( object sender, EventArgs e ) {
+        private void Init( object sender, EventArgs e ) {
             // fills Permission and LogType lists
             FillEnumLists();
 
@@ -1324,12 +1338,11 @@ Your rank is {RANK}&S. Type &H/Help&S for help." );
 
         void UpdateChatPreview() {
             List<string> lines = new List<string>();
-            if( xShowConnectionMessages.Checked ) {
-                lines.Add( String.Format( "&SPlayer {0}{1}LeChosenOne&S connected, joined {2}{3}main",
-                                          xRankColorsInChat.Checked ? RankManager.HighestRank.Color : "",
-                                          xRankPrefixesInChat.Checked ? RankManager.HighestRank.Prefix : "",
-                                          xRankColorsInWorldNames.Checked ? RankManager.LowestRank.Color : "",
-                                          xRankPrefixesInChat.Checked ? RankManager.LowestRank.Prefix : "" ) );
+            if( xShowConnectionMessages.Checked )
+            {
+                if (RankManager.HighestRank == null) Config.LoadRankList(Config.DefaultRanks);
+                lines.Add(
+                    $"&SPlayer {(xRankColorsInChat.Checked ? RankManager.HighestRank.Color : "")}{(xRankPrefixesInChat.Checked ? RankManager.HighestRank.Prefix : "")}LeChosenOne&S connected, joined {(xRankColorsInWorldNames.Checked ? RankManager.LowestRank.Color : "")}{(xRankPrefixesInChat.Checked ? RankManager.LowestRank.Prefix : "")}main");
             }
             lines.Add( "&R<*- This is an announcement -*>" );
             lines.Add( "&YThis is a /say announcement" );
@@ -1604,6 +1617,29 @@ Your rank is {RANK}&S. Type &H/Help&S for help." );
             numMaxDistance.Enabled = chkEnableClickDistance.Checked;
         }
 
+        private void chkPlugins_CheckedChanged(object sender, EventArgs e)
+        {
+            propertyGrid1.Enabled = chkPlugins.Checked;
+            listPlugins.Enabled = chkPlugins.Checked;
+        }
+
+        private void propertyGrid1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            IPlugin pl = (IPlugin) propertyGrid1.SelectedObject;
+            MessageBox.Show(pl.Name);
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listPlugins.SelectedIndex == -1) return;
+            propertyGrid1.SelectedObject = PluginManager.Plugins[listPlugins.SelectedIndex];
+        }
+
         private void bWeb_Click(object sender, EventArgs e)
         {
             try
@@ -1688,14 +1724,7 @@ Your rank is {RANK}&S. Type &H/Help&S for help." );
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            
         }
-
-        private void HeartBeatUrlComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 }

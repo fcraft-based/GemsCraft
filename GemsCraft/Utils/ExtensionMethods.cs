@@ -6,12 +6,14 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using GemsCraft.fSystem;
 using GemsCraft.Network;
 using GemsCraft.Players;
+using GemsCraft.Plugins;
 using JetBrains.Annotations;
 
 namespace GemsCraft.Utils
@@ -908,9 +910,18 @@ namespace GemsCraft.Utils
     
     public static class EnumUtil
     {
-        
 
-     
+        public static string ToString(this Enum en)
+        {
+            Type type = en.GetType();
+            MemberInfo[] memInfo = type.GetMember(en.ToString());
+            if (memInfo.Length <= 0) return en.ToString();
+            object[] attrs = memInfo[0].GetCustomAttributes(
+                typeof(EnumText),
+                false);
+            return attrs.Length > 0 ? ((EnumText) attrs[0]).Text : en.ToString();
+        }
+
         public static bool TryParse<TEnum>([NotNull] string value, out TEnum output, bool ignoreCase)
         {
             if (value == null) throw new ArgumentNullException("value");

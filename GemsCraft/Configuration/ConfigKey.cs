@@ -698,9 +698,16 @@ but will reduce bandwidth use." )]
 
         [BoolKey(ConfigSection.CPE, true,
  @"If enabled, allows the use of the held block CPE Extension")]
-        EnableHeldBlock
+        EnableHeldBlock,
 
         #endregion
+        #endregion
+
+        #region Plugins
+
+        [BoolKey(ConfigSection.Plugins, false, "Whether to enable/disable plugins.")]
+        EnablePlugins
+
         #endregion
     }
 }

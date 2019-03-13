@@ -136,6 +136,9 @@ namespace GemsCraft.fSystem
             }
             if (!Enabled) return;
             string line = DateTime.Now.ToLongTimeString() + " > " + GetPrefix(type) + message; // localized
+#if DEBUG
+            Console.WriteLine(line);
+#endif
             Network.Remote.Server.Logs.Add(line);
             lock (LogLock)
             {

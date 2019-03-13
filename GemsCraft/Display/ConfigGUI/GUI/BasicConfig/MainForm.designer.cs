@@ -155,6 +155,35 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.bAddRank = new System.Windows.Forms.Button();
             this.lPermissions = new System.Windows.Forms.Label();
             this.vRanks = new System.Windows.Forms.ListBox();
+            this.tabCPE = new System.Windows.Forms.TabPage();
+            this.gboHeldBlock = new System.Windows.Forms.GroupBox();
+            this.chkEnableHeldBlock = new System.Windows.Forms.CheckBox();
+            this.metroLabel2 = new System.Windows.Forms.Label();
+            this.gboClickDistance = new System.Windows.Forms.GroupBox();
+            this.numMaxDistance = new System.Windows.Forms.NumericUpDown();
+            this.lblMaxDistance = new System.Windows.Forms.Label();
+            this.numMinDistance = new System.Windows.Forms.NumericUpDown();
+            this.lblMinDistance = new System.Windows.Forms.Label();
+            this.chkEnableClickDistance = new System.Windows.Forms.CheckBox();
+            this.metroLabel1 = new System.Windows.Forms.Label();
+            this.gboCustomBlocks = new System.Windows.Forms.GroupBox();
+            this.btnDefineNewBlock = new System.Windows.Forms.Button();
+            this.gboMessageType = new System.Windows.Forms.GroupBox();
+            this.txtStatus1 = new System.Windows.Forms.TextBox();
+            this.txtStatus2 = new System.Windows.Forms.TextBox();
+            this.txtStatus3 = new System.Windows.Forms.TextBox();
+            this.txtBR3 = new System.Windows.Forms.TextBox();
+            this.txtBR2 = new System.Windows.Forms.TextBox();
+            this.txtBR1 = new System.Windows.Forms.TextBox();
+            this.chkBR1 = new System.Windows.Forms.CheckBox();
+            this.chkBR2 = new System.Windows.Forms.CheckBox();
+            this.chkBR3 = new System.Windows.Forms.CheckBox();
+            this.chkStatus3 = new System.Windows.Forms.CheckBox();
+            this.chkStatus2 = new System.Windows.Forms.CheckBox();
+            this.chkStatus1 = new System.Windows.Forms.CheckBox();
+            this.chkShowAnnouncements = new System.Windows.Forms.CheckBox();
+            this.chkEnableMessageTypes = new System.Windows.Forms.CheckBox();
+            this.lblMTInformation = new System.Windows.Forms.Label();
             this.tabSecurity = new System.Windows.Forms.TabPage();
             this.gBlockDB = new System.Windows.Forms.GroupBox();
             this.cBlockDBAutoEnableRank = new System.Windows.Forms.ComboBox();
@@ -188,7 +217,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.xMaxConnectionsPerIP = new System.Windows.Forms.CheckBox();
             this.lVerifyNames = new System.Windows.Forms.Label();
             this.cVerifyNames = new System.Windows.Forms.ComboBox();
-            this.gUpdate = new System.Windows.Forms.TabPage();
+            this.tabSavingAndBackup = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.bUpdate = new System.Windows.Forms.Button();
             this.checkUpdate = new System.Windows.Forms.CheckBox();
@@ -264,6 +293,13 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.lIRCList = new System.Windows.Forms.Label();
             this.xIRCBotEnabled = new System.Windows.Forms.CheckBox();
             this.cIRCList = new System.Windows.Forms.ComboBox();
+            this.tabPlugins = new System.Windows.Forms.TabPage();
+            this.gboPlugins = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.gboPluginInfo = new System.Windows.Forms.GroupBox();
+            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
+            this.listPlugins = new System.Windows.Forms.ListBox();
+            this.chkPlugins = new System.Windows.Forms.CheckBox();
             this.tabAdvanced = new System.Windows.Forms.TabPage();
             this.gPerformance = new System.Windows.Forms.GroupBox();
             this.lAdvancedWarning = new System.Windows.Forms.Label();
@@ -293,7 +329,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.gCrashReport = new System.Windows.Forms.GroupBox();
             this.xCrash = new System.Windows.Forms.CheckBox();
             this.lCrashReportDisclaimer = new System.Windows.Forms.Label();
-            this.Misc = new System.Windows.Forms.TabPage();
+            this.tabMisc = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.websiteURL = new System.Windows.Forms.TextBox();
@@ -311,35 +347,6 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.CustomName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.CustomAliases = new System.Windows.Forms.TextBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.gboHeldBlock = new System.Windows.Forms.GroupBox();
-            this.chkEnableHeldBlock = new System.Windows.Forms.CheckBox();
-            this.metroLabel2 = new System.Windows.Forms.Label();
-            this.gboClickDistance = new System.Windows.Forms.GroupBox();
-            this.numMaxDistance = new System.Windows.Forms.NumericUpDown();
-            this.lblMaxDistance = new System.Windows.Forms.Label();
-            this.numMinDistance = new System.Windows.Forms.NumericUpDown();
-            this.lblMinDistance = new System.Windows.Forms.Label();
-            this.chkEnableClickDistance = new System.Windows.Forms.CheckBox();
-            this.metroLabel1 = new System.Windows.Forms.Label();
-            this.gboCustomBlocks = new System.Windows.Forms.GroupBox();
-            this.btnDefineNewBlock = new System.Windows.Forms.Button();
-            this.gboMessageType = new System.Windows.Forms.GroupBox();
-            this.txtStatus1 = new System.Windows.Forms.TextBox();
-            this.txtStatus2 = new System.Windows.Forms.TextBox();
-            this.txtStatus3 = new System.Windows.Forms.TextBox();
-            this.txtBR3 = new System.Windows.Forms.TextBox();
-            this.txtBR2 = new System.Windows.Forms.TextBox();
-            this.txtBR1 = new System.Windows.Forms.TextBox();
-            this.chkBR1 = new System.Windows.Forms.CheckBox();
-            this.chkBR2 = new System.Windows.Forms.CheckBox();
-            this.chkBR3 = new System.Windows.Forms.CheckBox();
-            this.chkStatus3 = new System.Windows.Forms.CheckBox();
-            this.chkStatus2 = new System.Windows.Forms.CheckBox();
-            this.chkStatus1 = new System.Windows.Forms.CheckBox();
-            this.chkShowAnnouncements = new System.Windows.Forms.CheckBox();
-            this.chkEnableMessageTypes = new System.Windows.Forms.CheckBox();
-            this.lblMTInformation = new System.Windows.Forms.Label();
             this.bOK = new System.Windows.Forms.Button();
             this.bCancel = new System.Windows.Forms.Button();
             this.bResetTab = new System.Windows.Forms.Button();
@@ -347,6 +354,18 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.bApply = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.propertyGrid2 = new System.Windows.Forms.PropertyGrid();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.propertyGrid3 = new System.Windows.Forms.PropertyGrid();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.tabs.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.gBasic.SuspendLayout();
@@ -373,6 +392,13 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             ((System.ComponentModel.ISupportInitialize)(this.nDrawLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nKickIdle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nAntiGriefBlocks)).BeginInit();
+            this.tabCPE.SuspendLayout();
+            this.gboHeldBlock.SuspendLayout();
+            this.gboClickDistance.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMinDistance)).BeginInit();
+            this.gboCustomBlocks.SuspendLayout();
+            this.gboMessageType.SuspendLayout();
             this.tabSecurity.SuspendLayout();
             this.gBlockDB.SuspendLayout();
             this.gSecurityMisc.SuspendLayout();
@@ -383,7 +409,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             ((System.ComponentModel.ISupportInitialize)(this.nAntispamMessageCount)).BeginInit();
             this.gVerify.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nMaxConnectionsPerIP)).BeginInit();
-            this.gUpdate.SuspendLayout();
+            this.tabSavingAndBackup.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.gDataBackup.SuspendLayout();
             this.gSaving.SuspendLayout();
@@ -402,6 +428,9 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.gIRCNetwork.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nIRCDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nIRCBotPort)).BeginInit();
+            this.tabPlugins.SuspendLayout();
+            this.gboPlugins.SuspendLayout();
+            this.gboPluginInfo.SuspendLayout();
             this.tabAdvanced.SuspendLayout();
             this.gPerformance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nTickInterval)).BeginInit();
@@ -410,17 +439,14 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             ((System.ComponentModel.ISupportInitialize)(this.nMaxUndoStates)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nMaxUndo)).BeginInit();
             this.gCrashReport.SuspendLayout();
-            this.Misc.SuspendLayout();
+            this.tabMisc.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxCapsValue)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.gboHeldBlock.SuspendLayout();
-            this.gboClickDistance.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numMaxDistance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMinDistance)).BeginInit();
-            this.gboCustomBlocks.SuspendLayout();
-            this.gboMessageType.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabs
@@ -432,13 +458,14 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.tabs.Controls.Add(this.tabChat);
             this.tabs.Controls.Add(this.tabWorlds);
             this.tabs.Controls.Add(this.tabRanks);
+            this.tabs.Controls.Add(this.tabCPE);
             this.tabs.Controls.Add(this.tabSecurity);
-            this.tabs.Controls.Add(this.gUpdate);
+            this.tabs.Controls.Add(this.tabSavingAndBackup);
             this.tabs.Controls.Add(this.tabLogging);
             this.tabs.Controls.Add(this.tabIRC);
+            this.tabs.Controls.Add(this.tabPlugins);
             this.tabs.Controls.Add(this.tabAdvanced);
-            this.tabs.Controls.Add(this.Misc);
-            this.tabs.Controls.Add(this.tabPage1);
+            this.tabs.Controls.Add(this.tabMisc);
             this.tabs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabs.Location = new System.Drawing.Point(12, 12);
             this.tabs.Name = "tabs";
@@ -1928,6 +1955,345 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.vRanks.TabIndex = 1;
             this.vRanks.SelectedIndexChanged += new System.EventHandler(this.vRanks_SelectedIndexChanged);
             // 
+            // tabCPE
+            // 
+            this.tabCPE.Controls.Add(this.gboHeldBlock);
+            this.tabCPE.Controls.Add(this.gboClickDistance);
+            this.tabCPE.Controls.Add(this.gboCustomBlocks);
+            this.tabCPE.Controls.Add(this.gboMessageType);
+            this.tabCPE.Location = new System.Drawing.Point(4, 24);
+            this.tabCPE.Name = "tabCPE";
+            this.tabCPE.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCPE.Size = new System.Drawing.Size(652, 482);
+            this.tabCPE.TabIndex = 12;
+            this.tabCPE.Text = "CPE";
+            this.tabCPE.UseVisualStyleBackColor = true;
+            // 
+            // gboHeldBlock
+            // 
+            this.gboHeldBlock.Controls.Add(this.chkEnableHeldBlock);
+            this.gboHeldBlock.Controls.Add(this.metroLabel2);
+            this.gboHeldBlock.Location = new System.Drawing.Point(366, 215);
+            this.gboHeldBlock.Name = "gboHeldBlock";
+            this.gboHeldBlock.Size = new System.Drawing.Size(276, 85);
+            this.gboHeldBlock.TabIndex = 35;
+            this.gboHeldBlock.TabStop = false;
+            this.gboHeldBlock.Text = "Held Block";
+            // 
+            // chkEnableHeldBlock
+            // 
+            this.chkEnableHeldBlock.AutoSize = true;
+            this.chkEnableHeldBlock.Location = new System.Drawing.Point(6, 59);
+            this.chkEnableHeldBlock.Margin = new System.Windows.Forms.Padding(2);
+            this.chkEnableHeldBlock.Name = "chkEnableHeldBlock";
+            this.chkEnableHeldBlock.Size = new System.Drawing.Size(127, 19);
+            this.chkEnableHeldBlock.TabIndex = 34;
+            this.chkEnableHeldBlock.Text = "Enable Held Block";
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.Location = new System.Drawing.Point(6, 16);
+            this.metroLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(264, 47);
+            this.metroLabel2.TabIndex = 33;
+            this.metroLabel2.Text = "The ability to change/get a player\'s block type in hand";
+            // 
+            // gboClickDistance
+            // 
+            this.gboClickDistance.Controls.Add(this.numMaxDistance);
+            this.gboClickDistance.Controls.Add(this.lblMaxDistance);
+            this.gboClickDistance.Controls.Add(this.numMinDistance);
+            this.gboClickDistance.Controls.Add(this.lblMinDistance);
+            this.gboClickDistance.Controls.Add(this.chkEnableClickDistance);
+            this.gboClickDistance.Controls.Add(this.metroLabel1);
+            this.gboClickDistance.Location = new System.Drawing.Point(366, 59);
+            this.gboClickDistance.Name = "gboClickDistance";
+            this.gboClickDistance.Size = new System.Drawing.Size(276, 150);
+            this.gboClickDistance.TabIndex = 34;
+            this.gboClickDistance.TabStop = false;
+            this.gboClickDistance.Text = "Click Distance";
+            // 
+            // numMaxDistance
+            // 
+            this.numMaxDistance.Location = new System.Drawing.Point(94, 123);
+            this.numMaxDistance.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numMaxDistance.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMaxDistance.Name = "numMaxDistance";
+            this.numMaxDistance.Size = new System.Drawing.Size(55, 21);
+            this.numMaxDistance.TabIndex = 37;
+            this.numMaxDistance.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numMaxDistance.ValueChanged += new System.EventHandler(this.numMaxDistance_ValueChanged);
+            // 
+            // lblMaxDistance
+            // 
+            this.lblMaxDistance.AutoSize = true;
+            this.lblMaxDistance.Location = new System.Drawing.Point(6, 128);
+            this.lblMaxDistance.Name = "lblMaxDistance";
+            this.lblMaxDistance.Size = new System.Drawing.Size(85, 15);
+            this.lblMaxDistance.TabIndex = 36;
+            this.lblMaxDistance.Text = "Max. Distance";
+            // 
+            // numMinDistance
+            // 
+            this.numMinDistance.Location = new System.Drawing.Point(94, 96);
+            this.numMinDistance.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numMinDistance.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMinDistance.Name = "numMinDistance";
+            this.numMinDistance.Size = new System.Drawing.Size(55, 21);
+            this.numMinDistance.TabIndex = 35;
+            this.numMinDistance.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMinDistance.ValueChanged += new System.EventHandler(this.numMinDistance_ValueChanged);
+            // 
+            // lblMinDistance
+            // 
+            this.lblMinDistance.AutoSize = true;
+            this.lblMinDistance.Location = new System.Drawing.Point(6, 102);
+            this.lblMinDistance.Name = "lblMinDistance";
+            this.lblMinDistance.Size = new System.Drawing.Size(82, 15);
+            this.lblMinDistance.TabIndex = 34;
+            this.lblMinDistance.Text = "Min. Distance";
+            // 
+            // chkEnableClickDistance
+            // 
+            this.chkEnableClickDistance.AutoSize = true;
+            this.chkEnableClickDistance.Location = new System.Drawing.Point(6, 80);
+            this.chkEnableClickDistance.Margin = new System.Windows.Forms.Padding(2);
+            this.chkEnableClickDistance.Name = "chkEnableClickDistance";
+            this.chkEnableClickDistance.Size = new System.Drawing.Size(145, 19);
+            this.chkEnableClickDistance.TabIndex = 33;
+            this.chkEnableClickDistance.Text = "Enable Click Distance";
+            this.chkEnableClickDistance.CheckedChanged += new System.EventHandler(this.chkEnableClickDistance_CheckedChanged);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.Location = new System.Drawing.Point(6, 19);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(264, 58);
+            this.metroLabel1.TabIndex = 32;
+            this.metroLabel1.Text = "How far and how short player\'s click distance can be set. Determines how many blo" +
+    "cks away a player can click.";
+            // 
+            // gboCustomBlocks
+            // 
+            this.gboCustomBlocks.Controls.Add(this.btnDefineNewBlock);
+            this.gboCustomBlocks.Location = new System.Drawing.Point(366, 6);
+            this.gboCustomBlocks.Name = "gboCustomBlocks";
+            this.gboCustomBlocks.Size = new System.Drawing.Size(276, 50);
+            this.gboCustomBlocks.TabIndex = 32;
+            this.gboCustomBlocks.TabStop = false;
+            this.gboCustomBlocks.Text = "Custom Blocks";
+            // 
+            // btnDefineNewBlock
+            // 
+            this.btnDefineNewBlock.Location = new System.Drawing.Point(6, 19);
+            this.btnDefineNewBlock.Name = "btnDefineNewBlock";
+            this.btnDefineNewBlock.Size = new System.Drawing.Size(264, 23);
+            this.btnDefineNewBlock.TabIndex = 0;
+            this.btnDefineNewBlock.Text = "Define New Block";
+            this.btnDefineNewBlock.UseVisualStyleBackColor = true;
+            this.btnDefineNewBlock.Click += new System.EventHandler(this.btnDefineNewBlock_Click);
+            // 
+            // gboMessageType
+            // 
+            this.gboMessageType.Controls.Add(this.txtStatus1);
+            this.gboMessageType.Controls.Add(this.txtStatus2);
+            this.gboMessageType.Controls.Add(this.txtStatus3);
+            this.gboMessageType.Controls.Add(this.txtBR3);
+            this.gboMessageType.Controls.Add(this.txtBR2);
+            this.gboMessageType.Controls.Add(this.txtBR1);
+            this.gboMessageType.Controls.Add(this.chkBR1);
+            this.gboMessageType.Controls.Add(this.chkBR2);
+            this.gboMessageType.Controls.Add(this.chkBR3);
+            this.gboMessageType.Controls.Add(this.chkStatus3);
+            this.gboMessageType.Controls.Add(this.chkStatus2);
+            this.gboMessageType.Controls.Add(this.chkStatus1);
+            this.gboMessageType.Controls.Add(this.chkShowAnnouncements);
+            this.gboMessageType.Controls.Add(this.chkEnableMessageTypes);
+            this.gboMessageType.Controls.Add(this.lblMTInformation);
+            this.gboMessageType.Location = new System.Drawing.Point(6, 6);
+            this.gboMessageType.Name = "gboMessageType";
+            this.gboMessageType.Size = new System.Drawing.Size(354, 314);
+            this.gboMessageType.TabIndex = 29;
+            this.gboMessageType.TabStop = false;
+            this.gboMessageType.Text = "Message Types";
+            // 
+            // txtStatus1
+            // 
+            this.txtStatus1.Location = new System.Drawing.Point(207, 158);
+            this.txtStatus1.Margin = new System.Windows.Forms.Padding(2);
+            this.txtStatus1.Name = "txtStatus1";
+            this.txtStatus1.Size = new System.Drawing.Size(135, 21);
+            this.txtStatus1.TabIndex = 45;
+            this.txtStatus1.Text = "metroTextBox6";
+            this.txtStatus1.Visible = false;
+            // 
+            // txtStatus2
+            // 
+            this.txtStatus2.Location = new System.Drawing.Point(207, 182);
+            this.txtStatus2.Margin = new System.Windows.Forms.Padding(2);
+            this.txtStatus2.Name = "txtStatus2";
+            this.txtStatus2.Size = new System.Drawing.Size(135, 21);
+            this.txtStatus2.TabIndex = 44;
+            this.txtStatus2.Text = "metroTextBox5";
+            this.txtStatus2.Visible = false;
+            // 
+            // txtStatus3
+            // 
+            this.txtStatus3.Location = new System.Drawing.Point(207, 205);
+            this.txtStatus3.Margin = new System.Windows.Forms.Padding(2);
+            this.txtStatus3.Name = "txtStatus3";
+            this.txtStatus3.Size = new System.Drawing.Size(135, 21);
+            this.txtStatus3.TabIndex = 43;
+            this.txtStatus3.Text = "metroTextBox4";
+            this.txtStatus3.Visible = false;
+            // 
+            // txtBR3
+            // 
+            this.txtBR3.Location = new System.Drawing.Point(207, 236);
+            this.txtBR3.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBR3.Name = "txtBR3";
+            this.txtBR3.Size = new System.Drawing.Size(135, 21);
+            this.txtBR3.TabIndex = 42;
+            this.txtBR3.Text = "metroTextBox3";
+            this.txtBR3.Visible = false;
+            // 
+            // txtBR2
+            // 
+            this.txtBR2.Location = new System.Drawing.Point(207, 260);
+            this.txtBR2.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBR2.Name = "txtBR2";
+            this.txtBR2.Size = new System.Drawing.Size(135, 21);
+            this.txtBR2.TabIndex = 41;
+            this.txtBR2.Text = "metroTextBox2";
+            this.txtBR2.Visible = false;
+            // 
+            // txtBR1
+            // 
+            this.txtBR1.Location = new System.Drawing.Point(207, 283);
+            this.txtBR1.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBR1.Name = "txtBR1";
+            this.txtBR1.Size = new System.Drawing.Size(135, 21);
+            this.txtBR1.TabIndex = 40;
+            this.txtBR1.Text = "metroTextBox1";
+            this.txtBR1.Visible = false;
+            // 
+            // chkBR1
+            // 
+            this.chkBR1.AutoSize = true;
+            this.chkBR1.Location = new System.Drawing.Point(6, 288);
+            this.chkBR1.Margin = new System.Windows.Forms.Padding(2);
+            this.chkBR1.Name = "chkBR1";
+            this.chkBR1.Size = new System.Drawing.Size(216, 19);
+            this.chkBR1.TabIndex = 39;
+            this.chkBR1.Text = "Enable Bottom Right #1 Messages";
+            // 
+            // chkBR2
+            // 
+            this.chkBR2.AutoSize = true;
+            this.chkBR2.Location = new System.Drawing.Point(6, 265);
+            this.chkBR2.Margin = new System.Windows.Forms.Padding(2);
+            this.chkBR2.Name = "chkBR2";
+            this.chkBR2.Size = new System.Drawing.Size(216, 19);
+            this.chkBR2.TabIndex = 38;
+            this.chkBR2.Text = "Enable Bottom Right #2 Messages";
+            // 
+            // chkBR3
+            // 
+            this.chkBR3.AutoSize = true;
+            this.chkBR3.Location = new System.Drawing.Point(6, 241);
+            this.chkBR3.Margin = new System.Windows.Forms.Padding(2);
+            this.chkBR3.Name = "chkBR3";
+            this.chkBR3.Size = new System.Drawing.Size(216, 19);
+            this.chkBR3.TabIndex = 37;
+            this.chkBR3.Text = "Enable Bottom Right #3 Messages";
+            // 
+            // chkStatus3
+            // 
+            this.chkStatus3.AutoSize = true;
+            this.chkStatus3.Location = new System.Drawing.Point(6, 209);
+            this.chkStatus3.Margin = new System.Windows.Forms.Padding(2);
+            this.chkStatus3.Name = "chkStatus3";
+            this.chkStatus3.Size = new System.Drawing.Size(198, 19);
+            this.chkStatus3.TabIndex = 36;
+            this.chkStatus3.Text = "Enable Top Right #3 Messages";
+            // 
+            // chkStatus2
+            // 
+            this.chkStatus2.AutoSize = true;
+            this.chkStatus2.Location = new System.Drawing.Point(6, 186);
+            this.chkStatus2.Margin = new System.Windows.Forms.Padding(2);
+            this.chkStatus2.Name = "chkStatus2";
+            this.chkStatus2.Size = new System.Drawing.Size(198, 19);
+            this.chkStatus2.TabIndex = 35;
+            this.chkStatus2.Text = "Enable Top Right #2 Messages";
+            // 
+            // chkStatus1
+            // 
+            this.chkStatus1.AutoSize = true;
+            this.chkStatus1.Location = new System.Drawing.Point(6, 162);
+            this.chkStatus1.Margin = new System.Windows.Forms.Padding(2);
+            this.chkStatus1.Name = "chkStatus1";
+            this.chkStatus1.Size = new System.Drawing.Size(198, 19);
+            this.chkStatus1.TabIndex = 34;
+            this.chkStatus1.Text = "Enable Top Right #1 Messages";
+            // 
+            // chkShowAnnouncements
+            // 
+            this.chkShowAnnouncements.AutoSize = true;
+            this.chkShowAnnouncements.Location = new System.Drawing.Point(6, 93);
+            this.chkShowAnnouncements.Margin = new System.Windows.Forms.Padding(2);
+            this.chkShowAnnouncements.Name = "chkShowAnnouncements";
+            this.chkShowAnnouncements.Size = new System.Drawing.Size(298, 19);
+            this.chkShowAnnouncements.TabIndex = 33;
+            this.chkShowAnnouncements.Text = "Show Server Announcements with MessageTypes";
+            // 
+            // chkEnableMessageTypes
+            // 
+            this.chkEnableMessageTypes.AutoSize = true;
+            this.chkEnableMessageTypes.Location = new System.Drawing.Point(6, 75);
+            this.chkEnableMessageTypes.Margin = new System.Windows.Forms.Padding(2);
+            this.chkEnableMessageTypes.Name = "chkEnableMessageTypes";
+            this.chkEnableMessageTypes.Size = new System.Drawing.Size(154, 19);
+            this.chkEnableMessageTypes.TabIndex = 32;
+            this.chkEnableMessageTypes.Text = "Enable Message Types";
+            this.chkEnableMessageTypes.CheckedChanged += new System.EventHandler(this.chkEnableMessageTypes_CheckedChanged);
+            // 
+            // lblMTInformation
+            // 
+            this.lblMTInformation.Location = new System.Drawing.Point(5, 15);
+            this.lblMTInformation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMTInformation.Name = "lblMTInformation";
+            this.lblMTInformation.Size = new System.Drawing.Size(337, 58);
+            this.lblMTInformation.TabIndex = 31;
+            this.lblMTInformation.Text = "Message Types displays messages in different areas of the client\'s screen. Here y" +
+    "ou can configure all but announcements and chat.";
+            // 
             // tabSecurity
             // 
             this.tabSecurity.BackColor = System.Drawing.Color.Brown;
@@ -2319,19 +2685,19 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.cVerifyNames.TabIndex = 1;
             this.cVerifyNames.SelectedIndexChanged += new System.EventHandler(this.cVerifyNames_SelectedIndexChanged);
             // 
-            // gUpdate
+            // tabSavingAndBackup
             // 
-            this.gUpdate.BackColor = System.Drawing.Color.Teal;
-            this.gUpdate.Controls.Add(this.groupBox5);
-            this.gUpdate.Controls.Add(this.gDataBackup);
-            this.gUpdate.Controls.Add(this.gSaving);
-            this.gUpdate.Controls.Add(this.gBackups);
-            this.gUpdate.Location = new System.Drawing.Point(4, 24);
-            this.gUpdate.Name = "gUpdate";
-            this.gUpdate.Padding = new System.Windows.Forms.Padding(5, 10, 5, 10);
-            this.gUpdate.Size = new System.Drawing.Size(652, 482);
-            this.gUpdate.TabIndex = 4;
-            this.gUpdate.Text = "Saving and Backup";
+            this.tabSavingAndBackup.BackColor = System.Drawing.Color.Teal;
+            this.tabSavingAndBackup.Controls.Add(this.groupBox5);
+            this.tabSavingAndBackup.Controls.Add(this.gDataBackup);
+            this.tabSavingAndBackup.Controls.Add(this.gSaving);
+            this.tabSavingAndBackup.Controls.Add(this.gBackups);
+            this.tabSavingAndBackup.Location = new System.Drawing.Point(4, 24);
+            this.tabSavingAndBackup.Name = "tabSavingAndBackup";
+            this.tabSavingAndBackup.Padding = new System.Windows.Forms.Padding(5, 10, 5, 10);
+            this.tabSavingAndBackup.Size = new System.Drawing.Size(652, 482);
+            this.tabSavingAndBackup.TabIndex = 4;
+            this.tabSavingAndBackup.Text = "Saving and Backup";
             // 
             // groupBox5
             // 
@@ -3166,6 +3532,85 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.cIRCList.TabIndex = 2;
             this.cIRCList.SelectedIndexChanged += new System.EventHandler(this.cIRCList_SelectedIndexChanged);
             // 
+            // tabPlugins
+            // 
+            this.tabPlugins.BackColor = System.Drawing.Color.Red;
+            this.tabPlugins.Controls.Add(this.groupBox6);
+            this.tabPlugins.Controls.Add(this.gboPlugins);
+            this.tabPlugins.Location = new System.Drawing.Point(4, 24);
+            this.tabPlugins.Name = "tabPlugins";
+            this.tabPlugins.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPlugins.Size = new System.Drawing.Size(652, 482);
+            this.tabPlugins.TabIndex = 13;
+            this.tabPlugins.Text = "Plugins";
+            // 
+            // gboPlugins
+            // 
+            this.gboPlugins.Controls.Add(this.groupBox8);
+            this.gboPlugins.Controls.Add(this.button1);
+            this.gboPlugins.Controls.Add(this.gboPluginInfo);
+            this.gboPlugins.Controls.Add(this.listPlugins);
+            this.gboPlugins.Controls.Add(this.chkPlugins);
+            this.gboPlugins.Location = new System.Drawing.Point(11, 6);
+            this.gboPlugins.Name = "gboPlugins";
+            this.gboPlugins.Size = new System.Drawing.Size(630, 470);
+            this.gboPlugins.TabIndex = 0;
+            this.gboPlugins.TabStop = false;
+            this.gboPlugins.Text = "Plugins";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(464, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // gboPluginInfo
+            // 
+            this.gboPluginInfo.Controls.Add(this.propertyGrid1);
+            this.gboPluginInfo.Location = new System.Drawing.Point(284, 46);
+            this.gboPluginInfo.Name = "gboPluginInfo";
+            this.gboPluginInfo.Size = new System.Drawing.Size(340, 418);
+            this.gboPluginInfo.TabIndex = 6;
+            this.gboPluginInfo.TabStop = false;
+            this.gboPluginInfo.Text = "Properties";
+            // 
+            // propertyGrid1
+            // 
+            this.propertyGrid1.Location = new System.Drawing.Point(6, 20);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.Size = new System.Drawing.Size(453, 392);
+            this.propertyGrid1.TabIndex = 0;
+            this.propertyGrid1.Click += new System.EventHandler(this.propertyGrid1_Click);
+            // 
+            // listPlugins
+            // 
+            this.listPlugins.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listPlugins.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listPlugins.FormattingEnabled = true;
+            this.listPlugins.IntegralHeight = false;
+            this.listPlugins.ItemHeight = 11;
+            this.listPlugins.Location = new System.Drawing.Point(7, 46);
+            this.listPlugins.Name = "listPlugins";
+            this.listPlugins.Size = new System.Drawing.Size(271, 418);
+            this.listPlugins.TabIndex = 2;
+            this.listPlugins.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // chkPlugins
+            // 
+            this.chkPlugins.AutoSize = true;
+            this.chkPlugins.Location = new System.Drawing.Point(7, 21);
+            this.chkPlugins.Name = "chkPlugins";
+            this.chkPlugins.Size = new System.Drawing.Size(109, 19);
+            this.chkPlugins.TabIndex = 0;
+            this.chkPlugins.Text = "Enable Plugins";
+            this.chkPlugins.UseVisualStyleBackColor = true;
+            this.chkPlugins.CheckedChanged += new System.EventHandler(this.chkPlugins_CheckedChanged);
+            // 
             // tabAdvanced
             // 
             this.tabAdvanced.BackColor = System.Drawing.Color.Gray;
@@ -3543,21 +3988,21 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.lCrashReportDisclaimer.Name = "lCrashReportDisclaimer";
             this.lCrashReportDisclaimer.Size = new System.Drawing.Size(468, 39);
             this.lCrashReportDisclaimer.TabIndex = 1;
-            this.lCrashReportDisclaimer.Text = "Send all Crash Reports To The LegendCraft Dev Team\r\nCrash reports are when seriou" +
-    "s unexpected errors occur. Being able to receive crash reports helps\r\nidentify b" +
-    "ugs and improve LegendCraft! ";
+            this.lCrashReportDisclaimer.Text = "Send all Crash Reports To The GemsCraft Dev Team\r\nCrash reports are when serious " +
+    "unexpected errors occur. Being able to receive crash reports helps\r\nidentify bug" +
+    "s and improve GemsCraft! ";
             // 
-            // Misc
+            // tabMisc
             // 
-            this.Misc.BackColor = System.Drawing.Color.Indigo;
-            this.Misc.Controls.Add(this.groupBox3);
-            this.Misc.Controls.Add(this.groupBox1);
-            this.Misc.Location = new System.Drawing.Point(4, 24);
-            this.Misc.Name = "Misc";
-            this.Misc.Padding = new System.Windows.Forms.Padding(3);
-            this.Misc.Size = new System.Drawing.Size(652, 482);
-            this.Misc.TabIndex = 11;
-            this.Misc.Text = "Misc";
+            this.tabMisc.BackColor = System.Drawing.Color.Indigo;
+            this.tabMisc.Controls.Add(this.groupBox3);
+            this.tabMisc.Controls.Add(this.groupBox1);
+            this.tabMisc.Location = new System.Drawing.Point(4, 24);
+            this.tabMisc.Name = "tabMisc";
+            this.tabMisc.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMisc.Size = new System.Drawing.Size(652, 482);
+            this.tabMisc.TabIndex = 11;
+            this.tabMisc.Text = "Misc";
             // 
             // groupBox3
             // 
@@ -3761,345 +4206,6 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.CustomAliases.Size = new System.Drawing.Size(169, 21);
             this.CustomAliases.TabIndex = 19;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.gboHeldBlock);
-            this.tabPage1.Controls.Add(this.gboClickDistance);
-            this.tabPage1.Controls.Add(this.gboCustomBlocks);
-            this.tabPage1.Controls.Add(this.gboMessageType);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(652, 482);
-            this.tabPage1.TabIndex = 12;
-            this.tabPage1.Text = "CPE";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // gboHeldBlock
-            // 
-            this.gboHeldBlock.Controls.Add(this.chkEnableHeldBlock);
-            this.gboHeldBlock.Controls.Add(this.metroLabel2);
-            this.gboHeldBlock.Location = new System.Drawing.Point(366, 215);
-            this.gboHeldBlock.Name = "gboHeldBlock";
-            this.gboHeldBlock.Size = new System.Drawing.Size(276, 85);
-            this.gboHeldBlock.TabIndex = 35;
-            this.gboHeldBlock.TabStop = false;
-            this.gboHeldBlock.Text = "Held Block";
-            // 
-            // chkEnableHeldBlock
-            // 
-            this.chkEnableHeldBlock.AutoSize = true;
-            this.chkEnableHeldBlock.Location = new System.Drawing.Point(6, 59);
-            this.chkEnableHeldBlock.Margin = new System.Windows.Forms.Padding(2);
-            this.chkEnableHeldBlock.Name = "chkEnableHeldBlock";
-            this.chkEnableHeldBlock.Size = new System.Drawing.Size(127, 19);
-            this.chkEnableHeldBlock.TabIndex = 34;
-            this.chkEnableHeldBlock.Text = "Enable Held Block";
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.Location = new System.Drawing.Point(6, 16);
-            this.metroLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(264, 47);
-            this.metroLabel2.TabIndex = 33;
-            this.metroLabel2.Text = "The ability to change/get a player\'s block type in hand";
-            // 
-            // gboClickDistance
-            // 
-            this.gboClickDistance.Controls.Add(this.numMaxDistance);
-            this.gboClickDistance.Controls.Add(this.lblMaxDistance);
-            this.gboClickDistance.Controls.Add(this.numMinDistance);
-            this.gboClickDistance.Controls.Add(this.lblMinDistance);
-            this.gboClickDistance.Controls.Add(this.chkEnableClickDistance);
-            this.gboClickDistance.Controls.Add(this.metroLabel1);
-            this.gboClickDistance.Location = new System.Drawing.Point(366, 59);
-            this.gboClickDistance.Name = "gboClickDistance";
-            this.gboClickDistance.Size = new System.Drawing.Size(276, 150);
-            this.gboClickDistance.TabIndex = 34;
-            this.gboClickDistance.TabStop = false;
-            this.gboClickDistance.Text = "Click Distance";
-            // 
-            // numMaxDistance
-            // 
-            this.numMaxDistance.Location = new System.Drawing.Point(94, 123);
-            this.numMaxDistance.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.numMaxDistance.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numMaxDistance.Name = "numMaxDistance";
-            this.numMaxDistance.Size = new System.Drawing.Size(55, 21);
-            this.numMaxDistance.TabIndex = 37;
-            this.numMaxDistance.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numMaxDistance.ValueChanged += new System.EventHandler(this.numMaxDistance_ValueChanged);
-            // 
-            // lblMaxDistance
-            // 
-            this.lblMaxDistance.AutoSize = true;
-            this.lblMaxDistance.Location = new System.Drawing.Point(6, 128);
-            this.lblMaxDistance.Name = "lblMaxDistance";
-            this.lblMaxDistance.Size = new System.Drawing.Size(85, 15);
-            this.lblMaxDistance.TabIndex = 36;
-            this.lblMaxDistance.Text = "Max. Distance";
-            // 
-            // numMinDistance
-            // 
-            this.numMinDistance.Location = new System.Drawing.Point(94, 96);
-            this.numMinDistance.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.numMinDistance.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numMinDistance.Name = "numMinDistance";
-            this.numMinDistance.Size = new System.Drawing.Size(55, 21);
-            this.numMinDistance.TabIndex = 35;
-            this.numMinDistance.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numMinDistance.ValueChanged += new System.EventHandler(this.numMinDistance_ValueChanged);
-            // 
-            // lblMinDistance
-            // 
-            this.lblMinDistance.AutoSize = true;
-            this.lblMinDistance.Location = new System.Drawing.Point(6, 102);
-            this.lblMinDistance.Name = "lblMinDistance";
-            this.lblMinDistance.Size = new System.Drawing.Size(82, 15);
-            this.lblMinDistance.TabIndex = 34;
-            this.lblMinDistance.Text = "Min. Distance";
-            // 
-            // chkEnableClickDistance
-            // 
-            this.chkEnableClickDistance.AutoSize = true;
-            this.chkEnableClickDistance.Location = new System.Drawing.Point(6, 80);
-            this.chkEnableClickDistance.Margin = new System.Windows.Forms.Padding(2);
-            this.chkEnableClickDistance.Name = "chkEnableClickDistance";
-            this.chkEnableClickDistance.Size = new System.Drawing.Size(145, 19);
-            this.chkEnableClickDistance.TabIndex = 33;
-            this.chkEnableClickDistance.Text = "Enable Click Distance";
-            this.chkEnableClickDistance.CheckedChanged += new System.EventHandler(this.chkEnableClickDistance_CheckedChanged);
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.Location = new System.Drawing.Point(6, 19);
-            this.metroLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(264, 58);
-            this.metroLabel1.TabIndex = 32;
-            this.metroLabel1.Text = "How far and how short player\'s click distance can be set. Determines how many blo" +
-    "cks away a player can click.";
-            // 
-            // gboCustomBlocks
-            // 
-            this.gboCustomBlocks.Controls.Add(this.btnDefineNewBlock);
-            this.gboCustomBlocks.Location = new System.Drawing.Point(366, 6);
-            this.gboCustomBlocks.Name = "gboCustomBlocks";
-            this.gboCustomBlocks.Size = new System.Drawing.Size(276, 50);
-            this.gboCustomBlocks.TabIndex = 32;
-            this.gboCustomBlocks.TabStop = false;
-            this.gboCustomBlocks.Text = "Custom Blocks";
-            // 
-            // btnDefineNewBlock
-            // 
-            this.btnDefineNewBlock.Location = new System.Drawing.Point(6, 19);
-            this.btnDefineNewBlock.Name = "btnDefineNewBlock";
-            this.btnDefineNewBlock.Size = new System.Drawing.Size(264, 23);
-            this.btnDefineNewBlock.TabIndex = 0;
-            this.btnDefineNewBlock.Text = "Define New Block";
-            this.btnDefineNewBlock.UseVisualStyleBackColor = true;
-            this.btnDefineNewBlock.Click += new System.EventHandler(this.btnDefineNewBlock_Click);
-            // 
-            // gboMessageType
-            // 
-            this.gboMessageType.Controls.Add(this.txtStatus1);
-            this.gboMessageType.Controls.Add(this.txtStatus2);
-            this.gboMessageType.Controls.Add(this.txtStatus3);
-            this.gboMessageType.Controls.Add(this.txtBR3);
-            this.gboMessageType.Controls.Add(this.txtBR2);
-            this.gboMessageType.Controls.Add(this.txtBR1);
-            this.gboMessageType.Controls.Add(this.chkBR1);
-            this.gboMessageType.Controls.Add(this.chkBR2);
-            this.gboMessageType.Controls.Add(this.chkBR3);
-            this.gboMessageType.Controls.Add(this.chkStatus3);
-            this.gboMessageType.Controls.Add(this.chkStatus2);
-            this.gboMessageType.Controls.Add(this.chkStatus1);
-            this.gboMessageType.Controls.Add(this.chkShowAnnouncements);
-            this.gboMessageType.Controls.Add(this.chkEnableMessageTypes);
-            this.gboMessageType.Controls.Add(this.lblMTInformation);
-            this.gboMessageType.Location = new System.Drawing.Point(6, 6);
-            this.gboMessageType.Name = "gboMessageType";
-            this.gboMessageType.Size = new System.Drawing.Size(354, 314);
-            this.gboMessageType.TabIndex = 29;
-            this.gboMessageType.TabStop = false;
-            this.gboMessageType.Text = "Message Types";
-            // 
-            // txtStatus1
-            // 
-            this.txtStatus1.Location = new System.Drawing.Point(207, 158);
-            this.txtStatus1.Margin = new System.Windows.Forms.Padding(2);
-            this.txtStatus1.Name = "txtStatus1";
-            this.txtStatus1.Size = new System.Drawing.Size(135, 21);
-            this.txtStatus1.TabIndex = 45;
-            this.txtStatus1.Text = "metroTextBox6";
-            this.txtStatus1.Visible = false;
-            // 
-            // txtStatus2
-            // 
-            this.txtStatus2.Location = new System.Drawing.Point(207, 182);
-            this.txtStatus2.Margin = new System.Windows.Forms.Padding(2);
-            this.txtStatus2.Name = "txtStatus2";
-            this.txtStatus2.Size = new System.Drawing.Size(135, 21);
-            this.txtStatus2.TabIndex = 44;
-            this.txtStatus2.Text = "metroTextBox5";
-            this.txtStatus2.Visible = false;
-            // 
-            // txtStatus3
-            // 
-            this.txtStatus3.Location = new System.Drawing.Point(207, 205);
-            this.txtStatus3.Margin = new System.Windows.Forms.Padding(2);
-            this.txtStatus3.Name = "txtStatus3";
-            this.txtStatus3.Size = new System.Drawing.Size(135, 21);
-            this.txtStatus3.TabIndex = 43;
-            this.txtStatus3.Text = "metroTextBox4";
-            this.txtStatus3.Visible = false;
-            // 
-            // txtBR3
-            // 
-            this.txtBR3.Location = new System.Drawing.Point(207, 236);
-            this.txtBR3.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBR3.Name = "txtBR3";
-            this.txtBR3.Size = new System.Drawing.Size(135, 21);
-            this.txtBR3.TabIndex = 42;
-            this.txtBR3.Text = "metroTextBox3";
-            this.txtBR3.Visible = false;
-            // 
-            // txtBR2
-            // 
-            this.txtBR2.Location = new System.Drawing.Point(207, 260);
-            this.txtBR2.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBR2.Name = "txtBR2";
-            this.txtBR2.Size = new System.Drawing.Size(135, 21);
-            this.txtBR2.TabIndex = 41;
-            this.txtBR2.Text = "metroTextBox2";
-            this.txtBR2.Visible = false;
-            // 
-            // txtBR1
-            // 
-            this.txtBR1.Location = new System.Drawing.Point(207, 283);
-            this.txtBR1.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBR1.Name = "txtBR1";
-            this.txtBR1.Size = new System.Drawing.Size(135, 21);
-            this.txtBR1.TabIndex = 40;
-            this.txtBR1.Text = "metroTextBox1";
-            this.txtBR1.Visible = false;
-            // 
-            // chkBR1
-            // 
-            this.chkBR1.AutoSize = true;
-            this.chkBR1.Location = new System.Drawing.Point(6, 288);
-            this.chkBR1.Margin = new System.Windows.Forms.Padding(2);
-            this.chkBR1.Name = "chkBR1";
-            this.chkBR1.Size = new System.Drawing.Size(216, 19);
-            this.chkBR1.TabIndex = 39;
-            this.chkBR1.Text = "Enable Bottom Right #1 Messages";
-            // 
-            // chkBR2
-            // 
-            this.chkBR2.AutoSize = true;
-            this.chkBR2.Location = new System.Drawing.Point(6, 265);
-            this.chkBR2.Margin = new System.Windows.Forms.Padding(2);
-            this.chkBR2.Name = "chkBR2";
-            this.chkBR2.Size = new System.Drawing.Size(216, 19);
-            this.chkBR2.TabIndex = 38;
-            this.chkBR2.Text = "Enable Bottom Right #2 Messages";
-            // 
-            // chkBR3
-            // 
-            this.chkBR3.AutoSize = true;
-            this.chkBR3.Location = new System.Drawing.Point(6, 241);
-            this.chkBR3.Margin = new System.Windows.Forms.Padding(2);
-            this.chkBR3.Name = "chkBR3";
-            this.chkBR3.Size = new System.Drawing.Size(216, 19);
-            this.chkBR3.TabIndex = 37;
-            this.chkBR3.Text = "Enable Bottom Right #3 Messages";
-            // 
-            // chkStatus3
-            // 
-            this.chkStatus3.AutoSize = true;
-            this.chkStatus3.Location = new System.Drawing.Point(6, 209);
-            this.chkStatus3.Margin = new System.Windows.Forms.Padding(2);
-            this.chkStatus3.Name = "chkStatus3";
-            this.chkStatus3.Size = new System.Drawing.Size(198, 19);
-            this.chkStatus3.TabIndex = 36;
-            this.chkStatus3.Text = "Enable Top Right #3 Messages";
-            // 
-            // chkStatus2
-            // 
-            this.chkStatus2.AutoSize = true;
-            this.chkStatus2.Location = new System.Drawing.Point(6, 186);
-            this.chkStatus2.Margin = new System.Windows.Forms.Padding(2);
-            this.chkStatus2.Name = "chkStatus2";
-            this.chkStatus2.Size = new System.Drawing.Size(198, 19);
-            this.chkStatus2.TabIndex = 35;
-            this.chkStatus2.Text = "Enable Top Right #2 Messages";
-            // 
-            // chkStatus1
-            // 
-            this.chkStatus1.AutoSize = true;
-            this.chkStatus1.Location = new System.Drawing.Point(6, 162);
-            this.chkStatus1.Margin = new System.Windows.Forms.Padding(2);
-            this.chkStatus1.Name = "chkStatus1";
-            this.chkStatus1.Size = new System.Drawing.Size(198, 19);
-            this.chkStatus1.TabIndex = 34;
-            this.chkStatus1.Text = "Enable Top Right #1 Messages";
-            // 
-            // chkShowAnnouncements
-            // 
-            this.chkShowAnnouncements.AutoSize = true;
-            this.chkShowAnnouncements.Location = new System.Drawing.Point(6, 93);
-            this.chkShowAnnouncements.Margin = new System.Windows.Forms.Padding(2);
-            this.chkShowAnnouncements.Name = "chkShowAnnouncements";
-            this.chkShowAnnouncements.Size = new System.Drawing.Size(298, 19);
-            this.chkShowAnnouncements.TabIndex = 33;
-            this.chkShowAnnouncements.Text = "Show Server Announcements with MessageTypes";
-            // 
-            // chkEnableMessageTypes
-            // 
-            this.chkEnableMessageTypes.AutoSize = true;
-            this.chkEnableMessageTypes.Location = new System.Drawing.Point(6, 75);
-            this.chkEnableMessageTypes.Margin = new System.Windows.Forms.Padding(2);
-            this.chkEnableMessageTypes.Name = "chkEnableMessageTypes";
-            this.chkEnableMessageTypes.Size = new System.Drawing.Size(154, 19);
-            this.chkEnableMessageTypes.TabIndex = 32;
-            this.chkEnableMessageTypes.Text = "Enable Message Types";
-            this.chkEnableMessageTypes.CheckedChanged += new System.EventHandler(this.chkEnableMessageTypes_CheckedChanged);
-            // 
-            // lblMTInformation
-            // 
-            this.lblMTInformation.Location = new System.Drawing.Point(5, 15);
-            this.lblMTInformation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMTInformation.Name = "lblMTInformation";
-            this.lblMTInformation.Size = new System.Drawing.Size(337, 58);
-            this.lblMTInformation.TabIndex = 31;
-            this.lblMTInformation.Text = "Message Types displays messages in different areas of the client\'s screen. Here y" +
-    "ou can configure all but announcements and chat.";
-            // 
             // bOK
             // 
             this.bOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -4179,6 +4285,138 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.toolTip.IsBalloon = true;
             this.toolTip.ReshowDelay = 100;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.button2);
+            this.groupBox6.Controls.Add(this.groupBox7);
+            this.groupBox6.Controls.Add(this.listBox1);
+            this.groupBox6.Controls.Add(this.checkBox1);
+            this.groupBox6.Location = new System.Drawing.Point(11, 6);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(630, 470);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Plugins";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(464, 21);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "button1";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.propertyGrid2);
+            this.groupBox7.Location = new System.Drawing.Point(284, 46);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(340, 418);
+            this.groupBox7.TabIndex = 6;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Properties";
+            // 
+            // propertyGrid2
+            // 
+            this.propertyGrid2.Location = new System.Drawing.Point(6, 20);
+            this.propertyGrid2.Name = "propertyGrid2";
+            this.propertyGrid2.Size = new System.Drawing.Size(328, 392);
+            this.propertyGrid2.TabIndex = 0;
+            this.propertyGrid2.Click += new System.EventHandler(this.propertyGrid1_Click);
+            // 
+            // listBox1
+            // 
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBox1.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.IntegralHeight = false;
+            this.listBox1.ItemHeight = 11;
+            this.listBox1.Location = new System.Drawing.Point(7, 46);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(271, 418);
+            this.listBox1.TabIndex = 2;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(7, 21);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(109, 19);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Enable Plugins";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.chkPlugins_CheckedChanged);
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.button3);
+            this.groupBox8.Controls.Add(this.groupBox9);
+            this.groupBox8.Controls.Add(this.listBox2);
+            this.groupBox8.Controls.Add(this.checkBox2);
+            this.groupBox8.Location = new System.Drawing.Point(0, 0);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(630, 470);
+            this.groupBox8.TabIndex = 0;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Plugins";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(464, 21);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "button1";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.propertyGrid3);
+            this.groupBox9.Location = new System.Drawing.Point(284, 46);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(340, 418);
+            this.groupBox9.TabIndex = 6;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Properties";
+            // 
+            // propertyGrid3
+            // 
+            this.propertyGrid3.Location = new System.Drawing.Point(6, 20);
+            this.propertyGrid3.Name = "propertyGrid3";
+            this.propertyGrid3.Size = new System.Drawing.Size(328, 392);
+            this.propertyGrid3.TabIndex = 0;
+            this.propertyGrid3.Click += new System.EventHandler(this.propertyGrid1_Click);
+            // 
+            // listBox2
+            // 
+            this.listBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBox2.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.IntegralHeight = false;
+            this.listBox2.ItemHeight = 11;
+            this.listBox2.Location = new System.Drawing.Point(7, 46);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(271, 418);
+            this.listBox2.TabIndex = 2;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(7, 21);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(109, 19);
+            this.checkBox2.TabIndex = 0;
+            this.checkBox2.Text = "Enable Plugins";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.chkPlugins_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4230,6 +4468,16 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             ((System.ComponentModel.ISupportInitialize)(this.nDrawLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nKickIdle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nAntiGriefBlocks)).EndInit();
+            this.tabCPE.ResumeLayout(false);
+            this.gboHeldBlock.ResumeLayout(false);
+            this.gboHeldBlock.PerformLayout();
+            this.gboClickDistance.ResumeLayout(false);
+            this.gboClickDistance.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMinDistance)).EndInit();
+            this.gboCustomBlocks.ResumeLayout(false);
+            this.gboMessageType.ResumeLayout(false);
+            this.gboMessageType.PerformLayout();
             this.tabSecurity.ResumeLayout(false);
             this.gBlockDB.ResumeLayout(false);
             this.gBlockDB.PerformLayout();
@@ -4244,7 +4492,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.gVerify.ResumeLayout(false);
             this.gVerify.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nMaxConnectionsPerIP)).EndInit();
-            this.gUpdate.ResumeLayout(false);
+            this.tabSavingAndBackup.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.gDataBackup.ResumeLayout(false);
@@ -4273,6 +4521,10 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             this.gIRCNetwork.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nIRCDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nIRCBotPort)).EndInit();
+            this.tabPlugins.ResumeLayout(false);
+            this.gboPlugins.ResumeLayout(false);
+            this.gboPlugins.PerformLayout();
+            this.gboPluginInfo.ResumeLayout(false);
             this.tabAdvanced.ResumeLayout(false);
             this.gPerformance.ResumeLayout(false);
             this.gPerformance.PerformLayout();
@@ -4284,22 +4536,18 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
             ((System.ComponentModel.ISupportInitialize)(this.nMaxUndo)).EndInit();
             this.gCrashReport.ResumeLayout(false);
             this.gCrashReport.PerformLayout();
-            this.Misc.ResumeLayout(false);
+            this.tabMisc.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxCapsValue)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.gboHeldBlock.ResumeLayout(false);
-            this.gboHeldBlock.PerformLayout();
-            this.gboClickDistance.ResumeLayout(false);
-            this.gboClickDistance.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numMaxDistance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMinDistance)).EndInit();
-            this.gboCustomBlocks.ResumeLayout(false);
-            this.gboMessageType.ResumeLayout(false);
-            this.gboMessageType.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -4318,7 +4566,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
         private System.Windows.Forms.TextBox tMOTD;
         private System.Windows.Forms.Label lMaxPlayers;
         private System.Windows.Forms.NumericUpDown nMaxPlayers;
-        private System.Windows.Forms.TabPage gUpdate;
+        private System.Windows.Forms.TabPage tabSavingAndBackup;
         private System.Windows.Forms.ComboBox cPublic;
         private System.Windows.Forms.Label lPublic;
         private System.Windows.Forms.Button bMeasure;
@@ -4554,7 +4802,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
         private System.Windows.Forms.Label lMaxUndoStates;
         private System.Windows.Forms.GroupBox gPerformance;
         private System.Windows.Forms.Button bChangelog;
-        private System.Windows.Forms.TabPage Misc;
+        private System.Windows.Forms.TabPage tabMisc;
         private System.Windows.Forms.Label CustomText;
         private System.Windows.Forms.Button CustomColor;
         private System.Windows.Forms.Label label1;
@@ -4589,7 +4837,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
         private System.Windows.Forms.CheckBox xAutoRank;
         private System.Windows.Forms.Button bColorGlobal;
         private System.Windows.Forms.Label IColorGlobal;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabCPE;
         internal System.Windows.Forms.GroupBox gboMessageType;
         internal TextBox txtStatus1;
         internal TextBox txtStatus2;
@@ -4618,5 +4866,24 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
         private GroupBox gboHeldBlock;
         internal CheckBox chkEnableHeldBlock;
         internal Label metroLabel2;
+        private TabPage tabPlugins;
+        private GroupBox gboPlugins;
+        private CheckBox chkPlugins;
+        private ListBox listPlugins;
+        private GroupBox gboPluginInfo;
+        private PropertyGrid propertyGrid1;
+        private Button button1;
+        private GroupBox groupBox6;
+        private Button button2;
+        private GroupBox groupBox7;
+        private PropertyGrid propertyGrid2;
+        private ListBox listBox1;
+        private CheckBox checkBox1;
+        private GroupBox groupBox8;
+        private Button button3;
+        private GroupBox groupBox9;
+        private PropertyGrid propertyGrid3;
+        private ListBox listBox2;
+        private CheckBox checkBox2;
     }
 }

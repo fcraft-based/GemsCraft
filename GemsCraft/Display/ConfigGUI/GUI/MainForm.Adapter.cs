@@ -9,8 +9,10 @@ using System.Xml.Linq;
 using GemsCraft.Configuration;
 using GemsCraft.fSystem;
 using GemsCraft.Players;
+using GemsCraft.Plugins;
 using GemsCraft.Utils;
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 
 namespace GemsCraft.Display.ConfigGUI.GUI
 {
@@ -68,6 +70,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI
             ApplyTabAdvanced();
             ApplyTabMisc();
             ApplyTabCpe();
+            ApplyTabPlugins();
 
             AddChangeHandler(SectionClasses.GeneralConfig, SomethingChanged);
             AddChangeHandler(SectionClasses.ChatConfig, SomethingChanged);
@@ -634,6 +637,11 @@ namespace GemsCraft.Display.ConfigGUI.GUI
             #endregion
         }
 
+        private void ApplyTabPlugins()
+        {
+            SectionClasses.PluginConfig.checkBox2.Checked = ConfigKey.EnablePlugins.Enabled();
+        }
+
         private static void ApplyEnum<TEnum>([NotNull] ListControl box, ConfigKey key, TEnum def) where TEnum : struct
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
@@ -913,6 +921,21 @@ namespace GemsCraft.Display.ConfigGUI.GUI
             ConfigKey.EnableHeldBlock.TrySetValue(SectionClasses.CpeConfig.chkEnableHeldBlock.Checked);
 
             #endregion
+
+            // Plugins
+
+            ConfigKey.EnablePlugins.SetValue(SectionClasses.PluginConfig.checkBox2.Checked);
+
+            for (int x = 0; x <= SectionClasses.PluginConfig.listPlugins.Items.Count - 1; x++)
+            {
+                IPlugin plugin = PluginManager.Plugins[x];
+                string file = $"plugins/{plugin.Name}.json";
+                var writer = File.CreateText(file);
+                string json = JsonConvert.SerializeObject(writer, Formatting.Indented);
+                writer.Write(json);
+                writer.Flush();
+                writer.Close();
+            }
 
             SaveWorldList();
         }

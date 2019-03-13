@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Display.ConfigGUI.GUI.MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnGeneral = new MetroFramework.Controls.MetroTile();
             this.btnChat = new MetroFramework.Controls.MetroTile();
             this.btnWorlds = new MetroFramework.Controls.MetroTile();
@@ -44,6 +44,7 @@
             this.bResetAll = new MetroFramework.Controls.MetroButton();
             this.bApply = new MetroFramework.Controls.MetroButton();
             this.picBackground = new System.Windows.Forms.PictureBox();
+            this.btnPlugins = new MetroFramework.Controls.MetroTile();
             ((System.ComponentModel.ISupportInitialize)(this.picBackground)).BeginInit();
             this.SuspendLayout();
             // 
@@ -193,7 +194,7 @@
             // btnSave
             // 
             this.btnSave.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.btnSave.Location = new System.Drawing.Point(456, 246);
+            this.btnSave.Location = new System.Drawing.Point(239, 338);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(142, 24);
@@ -205,7 +206,7 @@
             // bResetAll
             // 
             this.bResetAll.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.bResetAll.Location = new System.Drawing.Point(456, 278);
+            this.bResetAll.Location = new System.Drawing.Point(16, 338);
             this.bResetAll.Margin = new System.Windows.Forms.Padding(2);
             this.bResetAll.Name = "bResetAll";
             this.bResetAll.Size = new System.Drawing.Size(142, 24);
@@ -216,7 +217,7 @@
             // bApply
             // 
             this.bApply.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.bApply.Location = new System.Drawing.Point(456, 309);
+            this.bApply.Location = new System.Drawing.Point(455, 338);
             this.bApply.Margin = new System.Windows.Forms.Padding(2);
             this.bApply.Name = "bApply";
             this.bApply.Size = new System.Drawing.Size(142, 24);
@@ -229,16 +230,30 @@
             this.picBackground.Image = global::GemsCraft.Properties.Resources.Green;
             this.picBackground.Location = new System.Drawing.Point(0, 55);
             this.picBackground.Name = "picBackground";
-            this.picBackground.Size = new System.Drawing.Size(621, 289);
+            this.picBackground.Size = new System.Drawing.Size(621, 321);
             this.picBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBackground.TabIndex = 14;
             this.picBackground.TabStop = false;
+            // 
+            // btnPlugins
+            // 
+            this.btnPlugins.ActiveControl = null;
+            this.btnPlugins.Location = new System.Drawing.Point(455, 246);
+            this.btnPlugins.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPlugins.Name = "btnPlugins";
+            this.btnPlugins.Size = new System.Drawing.Size(142, 88);
+            this.btnPlugins.TabIndex = 15;
+            this.btnPlugins.Text = "Plugins";
+            this.btnPlugins.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.btnPlugins.UseSelectable = true;
+            this.btnPlugins.Click += new System.EventHandler(this.btnPlugins_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 343);
+            this.ClientSize = new System.Drawing.Size(620, 372);
+            this.Controls.Add(this.btnPlugins);
             this.Controls.Add(this.bApply);
             this.Controls.Add(this.bResetAll);
             this.Controls.Add(this.btnSave);
@@ -283,5 +298,6 @@
         internal MetroFramework.Controls.MetroButton bResetAll;
         internal MetroFramework.Controls.MetroButton bApply;
         private System.Windows.Forms.PictureBox picBackground;
+        private MetroFramework.Controls.MetroTile btnPlugins;
     }
 }
