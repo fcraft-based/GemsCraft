@@ -928,7 +928,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI
 
             for (int x = 0; x <= SectionClasses.PluginConfig.listPlugins.Items.Count - 1; x++)
             {
-                IPlugin plugin = PluginManager.Plugins[x];
+                IPlugin plugin = PluginManager.Plugins[x].Load();
                 string file = $"plugins/{plugin.Name}.json";
                 var writer = File.CreateText(file);
                 string json = JsonConvert.SerializeObject(writer, Formatting.Indented);

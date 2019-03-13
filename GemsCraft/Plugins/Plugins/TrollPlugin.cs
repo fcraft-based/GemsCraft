@@ -1,75 +1,80 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GemsCraft;
+using System.ComponentModel;
 using GemsCraft.Commands;
 using GemsCraft.fSystem;
 using GemsCraft.Players;
-using GemsCraft.Plugins;
 using GemsCraft.Utils;
-using Version = GemsCraft.Utils.Version;
+using Version = GemsCraft.Utils.Version; // Making sure we are using GemsCraft's Version class rather than the System's
 
-namespace TrollPlugin
+namespace GemsCraft.Plugins.Plugins // This can be anything
 {
-    public class Init : IPlugin
+    public class Init : IPlugin // Reference IPlugin!
     {
-        public string FileName { get; set; }
-        public Version SoftwareVersion { get; set; }
-        public bool Enabled { get; set; }
+        public string Name { get; set; } = "TrollPlugin"; // Your plugin name
+        public string Version { get; set; } = "1.0"; // Your plugin version
+        public string Author { get; set; } = "Unknown"; // Your name goes here
+        public DateTime ReleaseDate { get; set; } = DateTime.Parse("01/01/2019");
+        public string FileName { get; set; } = "TrollPlugin.dll"; // Recommended that this is the same name
+        public Version SoftwareVersion { get; set; } = new Version("Alpha", 0, 3, -1, -1, false); // The GemsCraft Version its available for
+        public bool Enabled { get; set; } // Don't use, used by the software and the config
 
+        internal static Init Instance { get; set; } // Used for getting/setting properties
+
+        [Description("Tell me all about this"),
+         Category("Some Random Name IDC")]
+        public string CustomSetting { get; set; } = "Default Value";
+
+        // Used to set the instance of the class so that the properties can be saved
+        public void Save()
+        {
+            Instance = this;
+        }
+
+        // Used to get the instance of the clas so that the properties can be read
+        public IPlugin Load()
+        {
+            return Instance;
+        }
+
+        /* This is where you'll tell the server host when you've initialized the plugin
+            and where you'll do all your setting up, like you would in a constructor.
+            Don't forget this is also where you will want to register any commands you
+            may have for your plugin.
+             */
         public void Initialize()
         {
             Logger.Log(LogType.ConsoleOutput, Name + "(v " + Version + "): Registering TrollPlugin");
             CommandManager.RegisterCustomCommand(CdTroll);
         }
 
-        static CommandDescriptor CdTroll = new CommandDescriptor
+        // A sample command descriptor
+        private static readonly CommandDescriptor CdTroll = new CommandDescriptor
         {
-            Name = "Troll",
-            Category = CommandCategory.Chat | CommandCategory.Fun,
-            Permissions = new[] { Permission.Troll },
-            IsConsoleSafe = true,
-            NotRepeatable = false,
-            Usage = "/troll player option [Message]",
-            Help = "Does a little somthin'-somethin'.\n" +
+            Name = "Troll", // What users will use to call your command i.e. /troll
+            Aliases = new [] {"trll", "trollin", "jake"}, // Other ways to call your command rather than just the name, i.e. /trollin
+            Category = CommandCategory.Chat | CommandCategory.Fun, // The categories your plugin will fit in
+            Permissions = new[] { Permission.Troll }, // What permissions will your plugin have?
+            IsConsoleSafe = true, // Can it be executed by console? Is it safe to? (For instance, you should allow world commands in console
+            NotRepeatable = false, // Can your command be repeated? Will people be too immature with it?
+            Usage = "/troll player option [Message]", // How should they use this command?
+            Help = "Does a little somthin'-somethin'.\n" + // What they need to know
             " Available options: st, ac, pm, message or leave",
-            Handler = TrollHandler
+            Handler = TrollHandler // The method to handle the command
         };
-
-        //your plugin name
-        public string Name
+        
+        private static void TrollHandler(Player player, Command cmd)  // Command Handlers should always have these two arguments
         {
-            get => "TrollPlugin";
-            set => throw new NotImplementedException();
-        }
-
-        //your plugin version
-        public string Version
-        {
-            get => "1.0";
-            set => throw new NotImplementedException();
-        }
-
-        public string Author
-        {
-            get => "Unknown";
-            set => throw new NotImplementedException();
-        }
-
-        public DateTime ReleaseDate { get; set; }
-
-        static void TrollHandler(Player player, Command cmd)
-        {
-            string name = cmd.Next();
-            if (name == null)
+            string customSetting = Init.Instance.CustomSetting; // Calling the custom setting
+            Logger.Log(LogType.SystemActivity, customSetting); // Save logs
+            string name = cmd.Next(); // Calling the next command argument
+            if (name == null) // name will be null if they did not specify an argument
             {
-                player.Message("Player not found. Please specify valid name.");
-                return;
+                player.Message("Player not found. Please specify valid name."); // Send the executing player a message
+                return; // Prevent from going onward.
             }
             if (!Player.IsValidName(name))
                 return;
-            Player target = Server.FindPlayerOrPrintMatches(player, name, true, true);
+            Player target = Server.FindPlayerOrPrintMatches(player, name, true, true); // Check to see if a player is real
             if (target == null)
                 return;
             string options = cmd.Next();
@@ -78,8 +83,8 @@ namespace TrollPlugin
                 CdTroll.PrintUsage(player);
                 return;
             }
-            string Message = cmd.NextAll();
-            if (Message.Length < 1 && options.ToLower() != "leave")
+            string message = cmd.NextAll(); // Get the next and any following arguments. Good for message commands
+            if (message.Length < 1 && options.ToLower() != "leave")
             {
                 player.Message("&WError: Please enter a message for {0}.", target.ClassyName);
                 return;
@@ -87,19 +92,19 @@ namespace TrollPlugin
             switch (options.ToLower())
             {
                 case "pm":
-                    if (player.Can(Permission.UseColorCodes) && Message.Contains("%"))
+                    if (player.Can(Permission.UseColorCodes) && message.Contains("%"))
                     {
-                        Message = Color.ReplacePercentCodes(Message);
+                        message = Color.ReplacePercentCodes(message);
                     }
                     Server.Players.Message("&Pfrom {0}: {1}", MessageType.Chat,
-                        target.Name, Message);
+                        target.Name, message);
                     break;
                 case "ac":
-                    Chat.SendAdmin(target, Message);
+                    Chat.SendAdmin(target, message);
                     break;
                 case "st":
                 case "staff":
-                    Chat.SendStaff(target, Message);
+                    Chat.SendStaff(target, message);
                     break;
                 case "i":
                 case "impersonate":
@@ -107,7 +112,7 @@ namespace TrollPlugin
                 case "message":
                 case "m":
                     Server.Message("{0}&S&F: {1}",
-                                      target.ClassyName, Message);
+                                      target.ClassyName, message);
                     break;
                 case "leave":
                 case "disconnect":

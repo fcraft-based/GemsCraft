@@ -28,6 +28,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.Sections
         {
             int index = listPlugins.SelectedIndex;
             PluginManager.Plugins[index] = (IPlugin)propertyGrid3.SelectedObject;
+            PluginManager.Plugins[index].Save();
         }
 
         private void PluginConfig_Load(object sender, System.EventArgs e)

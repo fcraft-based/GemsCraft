@@ -43,5 +43,9 @@ namespace GemsCraft.Plugins
         #endregion
 
         void Initialize();
+
+        void Save();
+
+        IPlugin Load();
     }
 }
