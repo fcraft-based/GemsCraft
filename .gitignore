@@ -15,8 +15,8 @@ local.properties
 .classpath
 .settings/
 .loadpath
-fCraft/Resources/terrain.png
-fCraft/Network/Discord/DiscordKey.cs
+GemsCraft/Resources/terrain.png
+WritePlugin/
 # External tool builders
 .externalToolBuilders/
 
