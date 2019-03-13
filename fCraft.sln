@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GemsCraftGUI", "GemsCraftGU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WritePlugin", "WritePlugin\WritePlugin.csproj", "{3F3F17DF-D3AF-4E5F-8B87-C3CD6B593505}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WackyBot", "WackyBot\HelperBot\WackyBot.csproj", "{23662F36-98A4-4865-9205-B89410D4CF94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		DEBUG_BLOCKDB|Any CPU = DEBUG_BLOCKDB|Any CPU
@@ -111,6 +113,18 @@ Global
 		{3F3F17DF-D3AF-4E5F-8B87-C3CD6B593505}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F3F17DF-D3AF-4E5F-8B87-C3CD6B593505}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F3F17DF-D3AF-4E5F-8B87-C3CD6B593505}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23662F36-98A4-4865-9205-B89410D4CF94}.DEBUG_BLOCKDB|Any CPU.ActiveCfg = Debug|Any CPU
+		{23662F36-98A4-4865-9205-B89410D4CF94}.DEBUG_BLOCKDB|Any CPU.Build.0 = Debug|Any CPU
+		{23662F36-98A4-4865-9205-B89410D4CF94}.Debug_Events|Any CPU.ActiveCfg = Debug|Any CPU
+		{23662F36-98A4-4865-9205-B89410D4CF94}.Debug_Events|Any CPU.Build.0 = Debug|Any CPU
+		{23662F36-98A4-4865-9205-B89410D4CF94}.Debug_IRC|Any CPU.ActiveCfg = Debug|Any CPU
+		{23662F36-98A4-4865-9205-B89410D4CF94}.Debug_IRC|Any CPU.Build.0 = Debug|Any CPU
+		{23662F36-98A4-4865-9205-B89410D4CF94}.Debug_Scheduler|Any CPU.ActiveCfg = Debug|Any CPU
+		{23662F36-98A4-4865-9205-B89410D4CF94}.Debug_Scheduler|Any CPU.Build.0 = Debug|Any CPU
+		{23662F36-98A4-4865-9205-B89410D4CF94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23662F36-98A4-4865-9205-B89410D4CF94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23662F36-98A4-4865-9205-B89410D4CF94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23662F36-98A4-4865-9205-B89410D4CF94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

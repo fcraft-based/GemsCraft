@@ -17,6 +17,7 @@ local.properties
 .loadpath
 GemsCraft/Resources/terrain.png
 WritePlugin/
+WackyBot/
 # External tool builders
 .externalToolBuilders/
 
