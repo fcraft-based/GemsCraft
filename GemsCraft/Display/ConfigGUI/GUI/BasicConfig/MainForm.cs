@@ -50,6 +50,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig {
         {
             int index = listPlugins.SelectedIndex;
             PluginManager.Plugins[index] = (IPlugin) propertyGrid1.SelectedObject;
+            PluginManager.Plugins[index].Save();
         }
 
         private void Init( object sender, EventArgs e ) {

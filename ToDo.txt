@@ -1,5 +1,5 @@
 ----------------GEMSCRAFT TODO---------------
 For Alpha 0.3
 - Exit Messages (DONE!)
-- Plugin Property Config Page ( IN PROGRESS )
+- Plugin Property Config Page ( DONE! )
 - Remote Control

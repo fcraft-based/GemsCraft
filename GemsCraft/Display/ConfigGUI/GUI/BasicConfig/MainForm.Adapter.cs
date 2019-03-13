@@ -22,7 +22,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
     {
         #region Loading & Applying Config
 
-        void LoadConfig()
+        private void LoadConfig()
         {
             string missingFileMsg = null;
             if (!File.Exists(Paths.WorldListFileName) && !File.Exists(Paths.ConfigFileName))
@@ -822,7 +822,7 @@ namespace GemsCraft.Display.ConfigGUI.GUI.BasicConfig
 
             for (int x = 0; x <= listPlugins.Items.Count - 1; x++)
             {
-                IPlugin plugin = PluginManager.Plugins[x];
+                IPlugin plugin = PluginManager.Plugins[x].Load();
                 string file = $"plugins/{plugin.Name}.json";
                 var writer = File.CreateText(file);
                 string json = JsonConvert.SerializeObject(writer, Formatting.Indented);
