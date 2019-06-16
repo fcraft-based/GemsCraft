@@ -1,4 +1,12 @@
 GemsCraft Changelog
+Alpha 0.2
+- Improved the look of the GUI
+- Mono Support for Linux/Mac
+- Linux/Mac Users who use the GUI's will have a "Basic" Version
+- ClickDistance CPE Config
+- HeldBlock CPE Config
+- Texture Packs
+
 Alpha 0.1.2
 - Fixed Announcement Bug
 - Hidden unused config

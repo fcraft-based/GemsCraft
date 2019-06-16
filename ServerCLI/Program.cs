@@ -35,7 +35,7 @@ using System.Reflection;
 using System.Linq;
 using GemsCraft.Events;
 using GemsCraft.fSystem;
-using GemsCraft.fSystem.Config;
+using GemsCraft.Configuration;
 using GemsCraft.Network;
 using GemsCraft.Players;
 using GemsCraft.Utils;
@@ -183,7 +183,7 @@ namespace GemsCraft.ServerCLI {
 
         static void CheckForUpdates()
         {
-            VersionResult vr = Updater.CheckUpdates();
+            VersionResult vr = Updater.CheckUpdates(true);
             Console.WriteLine("Checking for GemsCraft updates...");
             try
             {

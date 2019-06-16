@@ -1,4 +1,0 @@
-﻿namespace GemsCraft.fSystem.Config
-{
-    
-}
